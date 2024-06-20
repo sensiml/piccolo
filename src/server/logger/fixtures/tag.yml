@@ -1,0 +1,45 @@
+- fields:
+    name: "Logout"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 1
+- fields:
+    name: "Launch"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 2
+- fields:
+    name: "Login"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 3
+- fields:
+    name: "Launch Error"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 4
+- fields:
+    name: "Login Error"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 5
+- fields:
+    name: "Application Error"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 6
+- fields:
+    name: "Permission Error"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 7
+- fields:
+    name: "Unhandled Exception"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 8
+- fields:
+    name: "Application Updated"
+    created_at: "2019-12-04T17:21:28Z"
+  model: logger.tag  
+  pk: 9

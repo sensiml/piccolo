@@ -1,0 +1,39 @@
+- fields:
+    id: 1
+    name: ARM
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 2
+    name: x86
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 3
+    name: RISC-V
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 4
+    name: Tensilica
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 5
+    name: AVR
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 6
+    name: ARC
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 7
+    name: Android
+  model: library.ArchitectureDescription
+
+- fields:
+    id: 8
+    name: dsPIC
+  model: library.ArchitectureDescription

@@ -1,0 +1,178 @@
+{
+  "name": "sensiml_web",
+  "version": "2023.8.0",
+  "private": true,
+  "engines": {
+    "node": "~16"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@monaco-editor/react": "^4.5.0",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/lab": "^5.0.0-alpha.124",
+    "@mui/material": "^5.11.15",
+    "@mui/styles": "^5.11.13",
+    "@mui/x-date-pickers": "^6.0.4",
+    "@uiw/react-monacoeditor": "^3.5.3",
+    "axios": "^0.19.0",
+    "clsx": "^1.1.1",
+    "connected-react-router": "^6.9.1",
+    "d3": "^7.6.1",
+    "d3fc": "^15.2.6",
+    "env-cmd": "^10.0.1",
+    "http-proxy-middleware": "^0.20.0",
+    "i18next": "^19.9.1",
+    "js-file-download": "^0.4.10",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.15",
+    "lodash.isequal": "^4.5.0",
+    "material-css": "^0.7.0",
+    "node-sass": "^6.0.1",
+    "plotly.js": "^2.11.1",
+    "plotly.js-cartesian-dist-min": "^2.11.1",
+    "prop-types": "^15.7.2",
+    "qs": "^6.11.2",
+    "react": "^17.0.2",
+    "react-color": "^2.19.3",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^17.0.2",
+    "react-flow-renderer": "^5.9.3",
+    "react-highlight.js": "^1.0.7",
+    "react-i18next": "^11.8.9",
+    "react-images-uploading": "^3.1.2",
+    "react-loader-spinner": "^4.0.0",
+    "react-markdown": "^5.0.3",
+    "react-plotly.js": "^2.4.0",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^5.0.1",
+    "react-stickynode": "^4.0.0",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3",
+    "redux-persist": "^6.0.0",
+    "redux-promise-middleware": "^6.1.2",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.3",
+    "start-server-and-test": "^1.11.0",
+    "uuid": "^8.3.2",
+    "wavefile": "^11.0.0"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironmentOptions": {
+      "url": "http://localhost/"
+    },
+    "testEnvironment": "jest-environment-jsdom",
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/cypress"
+    ],
+    "unmockedModulePathPatterns": [
+      "node_modules/react/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "bower_components",
+      "src"
+    ],
+    "setupFilesAfterEnv": [
+      "./setupJest.js"
+    ]
+  },
+  "proxy": "http://localhost:8000",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "lint-staged": {
+    "./src/**/*.{js,jsx}": [
+      "prettier --write",
+      "npx eslint . --ext .js,.jsx --fix",
+      "gid add"
+    ]
+  },
+  "lint-prepush": {
+    "./src/**/*.{js,jsx}": [
+      "prettier --write",
+      "npx eslint . --ext .js,.jsx --fix",
+      "yarn test",
+      "gid add"
+    ]
+  },
+  "scripts": {
+    "start": "react-scripts --max_old_space_size=6144 start",
+    "build": "react-scripts --max_old_space_size=6144 build",
+    "build:develop": "env-cmd -f .env.development react-scripts --max_old_space_size=6144 build",
+    "build:staging": "env-cmd -f .env.staging react-scripts --max_old_space_size=6144 build",
+    "build:docker_server": "PUBLIC_URL=/static/webui env-cmd -f .env.docker react-scripts --max_old_space_size=6144 build",
+    "build:docker": "env-cmd -f .env.docker react-scripts --max_old_space_size=6144 build",
+    "test": "jest",
+    "eslint": "eslint . --ext .js,.jsx",
+    "eslint-table": "eslint . --ext .js,.jsx --format table",
+    "eject": "react-scripts eject",
+    "test:watch": "yarn test --watch",
+    "cypress": "cypress open",
+    "cyheadless": "./node_modules/.bin/cypress run --headless --browser chrome",
+    "test-e2e": "start-server-and-test start http://localhost:3000 cyheadless",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-react": "^7.7.4",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/node-logger": "^6.4.9",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.4.9",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^14.4.3",
+    "axios-mock-adapter": "^1.19.0",
+    "babel-eslint": "^10.1.0",
+    "cypress": "^7.7.0",
+    "cypress-promise": "^1.1.0",
+    "eslint": "7.28.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "27",
+    "jest-react-hooks-shallow": "^1.5.1",
+    "lint-staged": "^12.0.2",
+    "prettier": "^2.4.1",
+    "start-server-and-test": "^1.11.0",
+    "storybook-addon-i18n": "^5.1.13"
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  }
+}

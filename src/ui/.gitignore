@@ -1,0 +1,35 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# test api
+*.http
+
+# cypress
+cypress/screenshots/*
+cypress/screenshots
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.vscode
+.vscode/*
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+
+mochawesome-report/*
+mochawesome-report

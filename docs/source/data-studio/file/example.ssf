@@ -1,0 +1,78 @@
+{
+    "uuid": "00000000-0000-0000-0000-000000000000",
+    "device_name": "QuickFeather",
+    "device_manufacturer": "QuickLogic",
+    "plugin_developer": "SensiML",
+    "firmware_download_links": [
+        {
+            "title": "Data Collection Firmware",
+            "description": "",
+            "link": "https://sensiml.com/documentation/firmware/quicklogic-quickfeather/quicklogic-quickfeather.html"
+        }
+    ],
+    "documentation_links": [
+        {
+            "title": "SensiML Getting Started Guide",
+            "description": "",
+            "link": "https://sensiml.com/documentation/guides/getting-started/overview.html"
+        }
+    ],
+    "device_connections": [
+        {
+            "display_name": "Serial Port",
+            "value": 1,
+            "is_default": true,
+            "serial_port_configuration": {
+                "baud": 460800,
+                "stop_bits": 1,
+                "parity": 0,
+                "handshake": 0
+            }
+        },
+        {
+            "display_name": "Wi-Fi",
+            "value": 2,
+            "is_default": false
+        }
+    ],
+    "capture_sources": [
+        {
+            "name": "Motion",
+            "part": "MC3635",
+            "sample_rates": [
+                333,
+                250,
+                200,
+                100,
+                50
+            ],
+            "sensors": [
+                {
+                    "type": "Accelerometer",
+                    "is_default": true,
+                    "column_count": 3,
+                    "column_suffixes": [
+                        "X",
+                        "Y",
+                        "Z"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Audio",
+            "part": "Default",
+            "sample_rates": [
+                16000
+            ],
+            "sensors": [
+                {
+                    "column_count": 1,
+                    "type": "Microphone",
+                    "is_default": true
+                }
+            ]
+        }
+    ],
+    "is_little_endian": true
+}

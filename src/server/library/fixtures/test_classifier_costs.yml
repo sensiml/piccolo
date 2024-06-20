@@ -1,0 +1,197 @@
+- fields:
+    id: 1
+    name: ARM
+  model: library.ArchitectureDescription
+
+- fields:
+    uuid: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    architecture: 1
+    display_name: "Cortex M4"
+    manufacturer: "ARM"
+    compiler_cpu_flag: "-mcpu=cortex-m4"
+    clock_speed_mhz: 80
+    float_options:
+      {
+        "None": "-mfloat-abi=soft",
+        "Soft FP": "-mfloat-abi=softfp -mfpu=fpv4-sp-d16",
+        "Hard FP": "-mfloat-abi=hard -mfpu=fpv4-sp-d16",
+      }
+    profiling_enabled: true
+  model: library.ProcessorDescription
+
+- fields:
+    core: True
+    name: PME
+    version: 1
+    type: Classifier
+    subtype: Clustering
+    path: core_functions/mg_contracts.py
+    function_in_file: pme
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Stratified K-Fold Cross-Validation
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: k_fold_strat
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: fc013141-ccd8-4838-98e9-fd2466d542a3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Decision Tree Ensemble
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: decision_tree_ensemble
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 33875688-5aec-470b-b599-88c85df77412
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Boosted Tree Ensemble
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: boosted_tree_ensemble
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 6bbc8c35-2fb9-4196-8d7c-a5bf7a4976c7
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Bonsai
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: bonsai
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 56468471-da19-4673-ab0b-37867537afb8
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: TensorFlow Lite for Microcontrollers
+    version: 1
+    type: Classifier
+    subtype: NN
+    path: core_functions/mg_contracts.py
+    function_in_file: tf_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: db4dcc87-5446-4353-8a9b-1ab178b0e9f1
+    automl_available: False
+  model: library.transform
+
+- fields:
+    c_function_name: decision_tree_ensemble
+    cycle_count: 75
+    flash: 512
+    flash_dependencies: []
+    function: 33875688-5aec-470b-b599-88c85df77412
+    function_type: classifier
+    latency: 1
+    processor: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    sram: 0
+    stack: 160
+    stack_dependencies: ["kbtoplevel", "kbfeaturegen"]
+    uuid: 6a28716f-501b-4baf-8743-5ab32d3bc789
+  model: library.functioncost
+
+- fields:
+    c_function_name: bonsai
+    cycle_count: 75
+    flash: 100+(5*4*num_classes)+(4*num_nodes)
+    flash_dependencies: []
+    function: 56468471-da19-4673-ab0b-37867537afb8
+    function_type: classifier
+    latency: 1
+    processor: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    sram: (3*4*num_classes)+(4*projection_dimension)+(4*num_nodes)
+    stack: 384
+    stack_dependencies: ["kbtoplevel", "kbfeaturegen"]
+    uuid: 22d0d4ce-e92c-4422-81be-fa7414e68d23
+  model: library.functioncost
+
+- fields:
+    c_function_name: tf_micro
+    cycle_count: 75
+    flash: 100
+    flash_dependencies: []
+    function: db4dcc87-5446-4353-8a9b-1ab178b0e9f1
+    function_type: classifier
+    latency: 1
+    processor: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    sram: 128
+    stack: 384
+    stack_dependencies: ["kbtoplevel", "kbfeaturegen"]
+    uuid: dc3a0c60-ce9c-4892-96c6-e8bf292e1bd7
+  model: library.functioncost
+
+- fields:
+    c_function_name: boosted_tree_ensemble
+    cycle_count: 75
+    flash: 400
+    flash_dependencies: []
+    function: 6bbc8c35-2fb9-4196-8d7c-a5bf7a4976c7
+    function_type: classifier
+    latency: 1
+    processor: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    sram: 0
+    stack: 160
+    stack_dependencies: ["kbtoplevel", "kbfeaturegen"]
+    uuid: 8f2e3ec8-c4e4-47c1-a8fd-f61eaaa44469
+  model: library.functioncost
+
+- fields:
+    c_function_name: neurons
+    function: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    flash: 124+(num_neurons*number_of_features)+(15*num_neurons)
+    flash_dependencies: []
+    function_type: pme
+    latency: 0
+    processor: 241a03d2-3e13-4087-9d7b-07a3f96e6dff
+    sram: 120
+    stack: 0
+    stack_dependencies: []
+    cycle_count: 1100*number_of_features
+    uuid: 925c8b2f-9162-4538-9300-53d409b34f6b
+  model: library.functioncost

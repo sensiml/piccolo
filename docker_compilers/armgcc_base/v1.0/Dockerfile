@@ -1,0 +1,15 @@
+FROM sensiml/base_image:v3.0
+
+ARG ARM_GCC_DOWNLOAD_LINK
+ARG ARM_GCC_FOLDER_NAME
+ARG ARM_GCC_VERSION
+ARG ARM_GCC_ZIP_NAME
+ARG EXTRACT_FLAGS
+
+LABEL Description="Image for building arm-gcc project using ARM-gcc $ARM_GCC_VERSION"
+COPY $ARM_GCC_ZIP_NAME /usr/local
+RUN cd /usr/local && tar $EXTRACT_FLAGS $ARM_GCC_ZIP_NAME && rm $ARM_GCC_ZIP_NAME
+
+ENV PATH="/usr/local/$ARM_GCC_FOLDER_NAME/bin:${PATH}"
+ENV TC_PATH="/usr/local/$ARM_GCC_FOLDER_NAME/bin"
+ENV GNU_INSTALL_ROOT="/usr/local/$ARM_GCC_FOLDER_NAME"

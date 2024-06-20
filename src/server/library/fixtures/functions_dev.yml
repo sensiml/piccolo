@@ -1,0 +1,118 @@
+- fields:
+    core: True
+    name: Normalize
+    version: 1
+    type: Transform
+    subtype: Feature Vector
+    path: core_functions/feature_transforms.py
+    function_in_file: normalize
+    has_c_version: True
+    c_file_name: tr_normalize.c
+    c_function_name: normalize
+    deprecated: False
+    dcl_executable: False
+    uuid: c200e1e5-a0bf-421f-963d-49382d24eb01
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Quantize254
+    version: 1
+    type: Transform
+    subtype: Feature Vector
+    path: core_functions/feature_transforms.py
+    function_in_file: quantize_254
+    has_c_version: True
+    c_file_name: tr_quantize254.c
+    c_function_name: quantize_254
+    deprecated: False
+    dcl_executable: False
+    uuid: 6c7d2227-6600-4a53-affc-e9adaed6ca31
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Iterate Neural Network
+    version: 1
+    type: Training Algorithm
+    subtype: Neural Network
+    path: core_functions/mg_contracts.py
+    function_in_file: train_iterate_neural_network
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 1e563312-2fb2-453f-a806-5f346884b0cd
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Change Point Detection
+    version: 1
+    type: Transform
+    subtype: Feature Vector
+    path: core_functions_python/segmenters/sg_change_point_detection.py
+    function_in_file: change_point_detection
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 10f52ea6-1885-4b45-8e5e-4c74e7e2cddf
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: First Derivative
+    version: 1
+    type: Transform
+    subtype: Sensor
+    path: core_functions_python/sensor_transforms.py
+    function_in_file: tr_first_derivative
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 895e80b3-a2e2-4308-adf6-d5041c161b6c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Second Derivative
+    version: 1
+    type: Transform
+    subtype: Sensor
+    path: core_functions_python/sensor_transforms.py
+    function_in_file: tr_second_derivative
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 220b89c7-67c5-4a4d-8c5e-8954b9974659
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Horizontal AutoScale Segment
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_horizontal_scale
+    has_c_version: True
+    c_file_name: tr_segment_horizontal_scale.c
+    c_function_name: tr_segment_horizontal_scale
+    deprecated: False
+    dcl_executable: False
+    uuid: 3112a76a-6449-4c69-bd93-945d068d4b4b
+    automl_available: True
+  model: library.transform

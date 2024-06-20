@@ -1,0 +1,4 @@
+[submodule "sml_server"]
+	path = sml_server
+	url = git@bitbucket.org:sensimldevteam/sml_server.git
+	shallow = true

@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  web:
+    image: webui
+    build:
+      context: .
+    volumes:
+      - "./src:/sml_webui/src"
+      - "./public:/sml_webui/public"
+      - ".env.development.local:/sml_webui/.env.development.local"
+    ports:
+      - "3001:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    working_dir: /sml_webui
+    command: yarn start

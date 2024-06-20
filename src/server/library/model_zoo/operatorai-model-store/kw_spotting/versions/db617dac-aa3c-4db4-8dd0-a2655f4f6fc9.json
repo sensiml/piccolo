@@ -1,0 +1,45 @@
+{
+    "model": {
+        "domain": "kw_spotting",
+        "model_id": "db617dac-aa3c-4db4-8dd0-a2655f4f6fc9",
+        "model_type": {
+            "library": "tensorflow",
+            "type": "Functional"
+        },
+        "parameters": {
+            "name": "Adam",
+            "learning_rate": 0.0002500000118743628,
+            "decay": 0,
+            "beta_1": 0.8999999761581421,
+            "beta_2": 0.9990000128746033,
+            "epsilon": 1e-7,
+            "amsgrad": false
+        },
+        "data": {}
+    },
+    "storage": {
+        "type": "file_system",
+        "path": "./library/model_zoo/operatorai-model-store/kw_spotting/2023.08.02-04.39.29/artifacts.tar.gz"
+    },
+    "code": {
+        "runtime": "python:3.9.7",
+        "user": "sml-app",
+        "created": "2023/08/02/04:39:24",
+        "dependencies": {
+            "h5py": "3.1.0",
+            "numpy": "1.22.4",
+            "scipy": "1.8.0",
+            "tensorflow": "2.10.0",
+            "pip": "23.1.2",
+            "setuptools": "59.6.0",
+            "pandas": "1.4.1"
+        },
+        "git": {
+            "repository": "sml_server",
+            "sha": "ea0a4333ccf83cac18f08ab6decf96996e428652",
+            "local_changes": true,
+            "branch": "kws/model16"
+        }
+    },
+    "modelstore": "0.0.73"
+}

@@ -1,0 +1,98 @@
+- fields:
+    uuid: 217cb8ce-cdc7-4ba7-ab41-5655c762aec3
+    name: GNU Arm Embedded (none-eabi)
+    compiler_version: 4.9.3
+    supported_arch: 1
+    docker_image_base: "sml_thingy"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: ea1593a1-f1c9-4929-ab22-18d3ff77c86b
+    name: GNU Arm Embedded (none-eabi)
+    compiler_version: 4.9.3
+    supported_arch: 1
+    docker_image_base: "sml_nordic_sdk_13"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 2e8bdcf0-557a-41bd-a41d-64e443ec97a9
+    name: GNU Arm Embedded (none-eabi)
+    compiler_version: 10.3.1
+    supported_arch: 1
+    docker_image_base: "sml_armgcc_generic"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 5fb8c1d8-66a6-46a5-b4ca-2c5b2ec7b152
+    name: GNU Arm Linux (none-linux-gnueabihf)
+    compiler_version: 10.3.1
+    supported_arch: 1
+    docker_image_base: "arm_none_linux_gnueabihf_base"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 14233b4e-161d-4ff7-b90a-5a2b5509058b
+    name: MPLAB XC8
+    compiler_version: 2.45
+    supported_arch: 1
+    docker_image_base: "sml_microchip_xc8"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: a4884a3c-ebf4-11ec-8ea0-0242ac120002
+    name: MPLAB XC16
+    compiler_version: "2.10"
+    supported_arch: 1
+    docker_image_base: "sml_microchip_xc16"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: f2fec03f-1c6e-4089-a225-c6ba2a7b0845
+    name: MPLAB XC32
+    compiler_version: "4.35"
+    supported_arch: 1
+    docker_image_base: "sml_microchip_xc32"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: ff5e8134-1e71-480b-a5e5-686e7e61e482
+    name: ESP-IDF
+    compiler_version: "5.0"
+    supported_arch: 1
+    docker_image_base: "esp-idf"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 62aabe7e-4f5d-4167-a786-072e4a8dc158
+    name: GCC x86_64
+    compiler_version: 9.3.0
+    supported_arch: 2
+    docker_image_base: "sml_x86_generic"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 9beaa79e-b383-411c-b6f2-f11828debf5c
+    name: Android NDK
+    compiler_version: 21.0.6113669
+    supported_arch: 7
+    docker_image_base: "sml_android_ndk"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
+
+- fields:
+    uuid: 24308768-a59d-468b-b65f-cde6071ae2b2
+    name: mingw-64
+    compiler_version: 9.3
+    supported_arch: 2
+    docker_image_base: "sml_x86mingw_generic"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription

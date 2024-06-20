@@ -1,0 +1,14 @@
+- fields:
+    username: unittest@piccolo.com
+    first_name: ""
+    last_name: TinyML4Life
+    is_active: true
+    is_superuser: true
+    is_staff: true
+    last_login: "2015-03-19T20:00:25.642Z"
+    user_permissions: []
+    password: pbkdf2_sha256$260000$rrXeXG0JRqZuLra8D9COCy$F+kvGhDAzsKy7wJApmcan3TMU3ew4arLU+E7IOH5Dvs=
+    email: unittest@piccolo.com
+    date_joined: "2014-12-24T01:25:32Z"
+  model: auth.user
+  pk: 1

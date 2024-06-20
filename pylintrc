@@ -1,0 +1,15 @@
+[MASTER]
+init-hook='import sys; sys.path.append("kbclient"); sys.path.append("server")'
+load-plugins=pylint_django
+max-line-length=120
+ignore=migrations,tests,files
+extension-pkg-whitelist=numpy,pandas,six
+unsafe-load-any-extensions=yes
+
+[MESSAGES CONTROL]
+disable=line-to-long,bad-continuation,fixme,missing-docstring,wrong-import-order
+
+[TYPECHECK]
+generated-members=REQUEST,acl_users,aq_parent,_meta,id,DoesNotExist,ix,force_authenticate,credentials,
+ignored-modules=numpy,pandas,pytest,six
+ignored-classes=WSGIRequest,numpy,pandas

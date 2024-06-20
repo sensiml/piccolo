@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  sml_docs:
+    image: sensiml/auto-docs:latest
+    working_dir: /home/sml-app/docs
+    volumes:
+      - type: bind
+        source: ${SML_SERVER_DATADIR}
+        target: /home/sml-app/data/
+      - type: bind
+        source: ${SML_SERVER_DIR}/src/server/
+        target: /home/sml-app/install/server/
+      - type: bind
+        source: ${SML_SERVER_DIR}/src/server/config/
+        target: /home/sml-app/install/config/
+      - type: bind
+        source: ${SML_SERVER_DIR}/src/embedded_ml_sdk/
+        target: /home/sml-app/install/embedded_ml_sdk/
+      - type: bind
+        source: ${SML_SERVER_DATADIR}/lib/
+        target: /home/sml-app/install/lib/
+      - type: bind
+        source: ./
+        target: /home/sml-app/docs/
+    ports:
+      - "8001:8001"
+    environment:
+      - DJANGO_ENV=docker
+      - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+      - SENSIML_SERVER_DEPLOY_HOME=/home/sml-app/install
+    command: sphinx-autobuild --port 8001 --host 0.0.0.0 source _build/html

@@ -1,0 +1,24 @@
+[
+    {
+        "repository": "sensiml/arm_gcc_none_eabi_base",
+        "tag": "10.3.1",
+        "build_args": {
+            "ARM_GCC_DOWNLOAD_LINK": "https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2",
+            "ARM_GCC_ZIP_NAME": "gcc-arm-none-eabi-10.3.2021.10-x86_64-linux.tar.bz2",
+            "ARM_GCC_FOLDER_NAME": "gcc-arm-none-eabi-10.3-2021.10",
+            "ARM_GCC_VERSION": "10.3.10",
+            "EXTRACT_FLAGS": "-xvjf"
+        }
+    },
+    {
+        "repository": "sensiml/arm_none_linux_gnueabihf_base",
+        "tag": "10.3.1",
+        "build_args": {
+            "ARM_GCC_DOWNLOAD_LINK": "https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.bz2",
+            "EXTRACT_FLAGS": "-xf",
+            "ARM_GCC_ZIP_NAME": "gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf.tar.xz",
+            "ARM_GCC_FOLDER_NAME": "gcc-arm-10.3-2021.07-x86_64-arm-none-linux-gnueabihf",
+            "ARM_GCC_VERSION": "10.3.1"
+        }
+    }
+]

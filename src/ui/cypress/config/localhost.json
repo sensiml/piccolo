@@ -1,0 +1,13 @@
+{
+  "baseUrl": "http://localhost:3000/",
+  "video": false,
+  "env": {
+    "name": "localhost",
+    "user": "piccolo@sensiml.com",
+    "password": "piccolo",
+    "headerTitle": "Piccolo AI",
+    "mktUrl": "https://sensiml.com",
+    "apiUrl": "http://localhost:8000",
+    "selectedProject": "Fan_Demo_400Hz"
+  }
+}

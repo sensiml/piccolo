@@ -1,0 +1,1578 @@
+{
+  "pipeline": [
+    {
+      "name": "CDK_ALL_TYPES",
+      "use_session_preprocessor": true,
+      "type": "query",
+      "outputs": ["temp.raw"]
+    },
+    {
+      "name": "Magnitude",
+      "type": "transform",
+      "outputs": ["temp.Magnitude0"],
+      "inputs": {
+        "input_columns": ["GyroscopeX", "GyroscopeY", "GyroscopeZ"],
+        "input_data": "temp.raw"
+      }
+    },
+    {
+      "name": "Strip",
+      "type": "transform",
+      "outputs": ["temp.Strip0"],
+      "inputs": {
+        "type": "mean",
+        "group_columns": ["segment_uuid", "Type", "Subject", "Punch", "SegmentID"],
+        "input_columns": [
+          "GyroscopeX",
+          "GyroscopeY",
+          "GyroscopeZ",
+          "AccelerometerX",
+          "AccelerometerY",
+          "AccelerometerZ"
+        ],
+        "input_data": "temp.raw"
+      }
+    },
+    {
+      "name": "generator_set",
+      "type": "generatorset",
+      "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+      "inputs": {
+        "input_data": "temp.Strip0",
+        "group_columns": ["segment_uuid", "Type", "Subject", "Punch", "SegmentID"]
+      },
+      "set": [
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["GyroscopeX"]
+          }
+        },
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Linear Regression Stats",
+          "inputs": {
+            "columns": ["AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "25th Percentile",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Second Sigma Crossing Rate",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Min Max Difference",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Abs Max Column",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak Location Difference",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Absolute Mean",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Max Column",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing Rate",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Dominant Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Mean Difference",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Absolute Area of Spectrum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100
+          }
+        },
+        {
+          "function_name": "Minimum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Zero Crossing Rate",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Total Area of Low Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100,
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Mean",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Negative Zero Crossings",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "threshold": 100
+          }
+        },
+        {
+          "function_name": "Sum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Positive Zero Crossings",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "threshold": 100
+          }
+        },
+        {
+          "function_name": "Global Peak to Peak",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Peak Frequencies",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "num_peaks": 2,
+            "threshold": 0.2,
+            "sample_rate": 100,
+            "window_type": "hanning",
+            "max_frequency": 500,
+            "min_frequency": 0
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Median Difference",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Skewness",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Absolute Area of Low Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100,
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Global Peak to Peak of Low Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Mean Difference",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Max Peak to Peak of first half of High Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Standard Deviation",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "75th Percentile",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Min Column",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Two Column Peak To Peak Difference",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Kurtosis",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeY"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeX", "GyroscopeZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerX"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerY"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeX", "AccelerometerZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeY", "GyroscopeZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerX"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerY"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeY", "AccelerometerZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerX"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerY"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["GyroscopeZ", "AccelerometerZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerY"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["AccelerometerX", "AccelerometerZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Cross Column Correlation",
+          "inputs": {
+            "columns": ["AccelerometerY", "AccelerometerZ"],
+            "sample_frequency": 1
+          }
+        },
+        {
+          "function_name": "Total Area of High Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100,
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Spectral Entropy",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeX", "GyroscopeY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeX", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeX", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeY", "GyroscopeZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeY", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeY", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeZ", "AccelerometerX"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeZ", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["GyroscopeZ", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["AccelerometerX", "AccelerometerY"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["AccelerometerX", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Cross Column Mean Crossing with Offset",
+          "inputs": {
+            "offset": 0,
+            "columns": ["AccelerometerY", "AccelerometerZ"]
+          }
+        },
+        {
+          "function_name": "Absolute Area",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100
+          }
+        },
+        {
+          "function_name": "Maximum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Mean Crossing Rate",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Median",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["GyroscopeX"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["GyroscopeY"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["GyroscopeZ"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["AccelerometerX"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["AccelerometerY"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "MFCC",
+          "inputs": {
+            "columns": ["AccelerometerZ"],
+            "sample_rate": 16000,
+            "cepstra_count": 23
+          }
+        },
+        {
+          "function_name": "Global Min Max Sum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Total Area",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100
+          }
+        },
+        {
+          "function_name": "Absolute Area of High Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "sample_rate": 100,
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Zero Crossings",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "threshold": 100
+          }
+        },
+        {
+          "function_name": "Interquartile Range",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "100th Percentile",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Variance",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Global Peak to Peak of High Frequency",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "smoothing_factor": 5
+          }
+        },
+        {
+          "function_name": "Sigma Crossing Rate",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        },
+        {
+          "function_name": "Threshold With Offset Crossing Rate",
+          "inputs": {
+            "offset": 0,
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "threshold": 0
+          }
+        },
+        {
+          "function_name": "Threshold Crossing Rate",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ],
+            "threshold": 0
+          }
+        },
+        {
+          "function_name": "Absolute Sum",
+          "inputs": {
+            "columns": [
+              "GyroscopeX",
+              "GyroscopeY",
+              "GyroscopeZ",
+              "AccelerometerX",
+              "AccelerometerY",
+              "AccelerometerZ"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Isolation Forest Filtering",
+      "type": "sampler",
+      "outputs": ["temp.Isolation_Forest_Filtering0", "temp.features.Isolation_Forest_Filtering0"],
+      "inputs": {
+        "label_column": "Punch",
+        "assign_unknown": false,
+        "filtering_label": ["Uppercut", "Overhand", "Jab", "Hook", "Cross"],
+        "outliers_fraction": 0.05,
+        "input_data": "temp.generator_set0"
+      },
+      "feature_table": "temp.features.generator_set0"
+    },
+    {
+      "name": "Min Max Scale",
+      "type": "transform",
+      "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+      "inputs": {
+        "pad": 0,
+        "max_bound": 255,
+        "min_bound": 0,
+        "passthrough_columns": ["segment_uuid", "Type", "Subject", "Punch", "SegmentID"],
+        "feature_min_max_defaults": null,
+        "feature_min_max_parameters": {},
+        "input_data": "temp.Isolation_Forest_Filtering0"
+      },
+      "feature_table": "temp.features.Isolation_Forest_Filtering0"
+    },
+    {
+      "name": "selector_set",
+      "type": "selectorset",
+      "outputs": ["temp.selector_set0", "temp.features.selector_set0"],
+      "refinement": {},
+      "inputs": {
+        "number_of_features": 10,
+        "remove_columns": [],
+        "cost_function": "sum",
+        "label_column": "Punch",
+        "passthrough_columns": ["segment_uuid", "Type", "Subject", "Punch", "SegmentID"],
+        "feature_table": "temp.features.Min_Max_Scale0",
+        "input_data": "temp.Min_Max_Scale0"
+      },
+      "set": [
+        {
+          "function_name": "Variance Threshold",
+          "inputs": {
+            "threshold": 0.15
+          }
+        },
+        {
+          "function_name": "Correlation Threshold",
+          "inputs": {
+            "threshold": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sample Features by Metadata",
+      "type": "sampler",
+      "outputs": [
+        "temp.Sample_Features_by_Metadata0",
+        "temp.features.Sample_Features_by_Metadata0"
+      ],
+      "inputs": {
+        "metadata_name": "segment_uuid",
+        "metadata_values": ["Unknown", "Uppercut", "Overhand", "Jab", "Hook", "Cross"],
+        "input_data": "temp.selector_set0"
+      },
+      "feature_table": "temp.features.selector_set0"
+    },
+    {
+      "name": "tvo",
+      "type": "tvo",
+      "outputs": ["temp.tvo0", "temp.features.tvo0"],
+      "feature_table": "temp.features.Sample_Features_by_Metadata0",
+      "validation_seed": 0,
+      "label_column": "Punch",
+      "ignore_columns": ["segment_uuid", "Type", "Subject", "SegmentID"],
+      "input_data": "temp.Sample_Features_by_Metadata0",
+      "validation_methods": [
+        {
+          "name": "Stratified Shuffle Split",
+          "inputs": {
+            "test_size": 0,
+            "number_of_folds": 1,
+            "validation_size": 0.2
+          }
+        }
+      ],
+      "classifiers": [
+        {
+          "name": "Decision Tree Ensemble",
+          "inputs": {}
+        }
+      ],
+      "optimizers": [
+        {
+          "name": "RBF with Neuron Allocation Optimization",
+          "inputs": {
+            "turbo": true,
+            "ranking_metric": "f1_score",
+            "remove_unknown": false,
+            "number_of_neurons": 128,
+            "number_of_iterations": 100,
+            "aggressive_neuron_creation": true
+          }
+        }
+      ]
+    }
+  ]
+}

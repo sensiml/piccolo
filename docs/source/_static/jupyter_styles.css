@@ -1,0 +1,34 @@
+.jp-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+.jp-box {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.warning {
+    border-color: #eceb9b;
+    background-color: rgba(231, 111, 81, 0.1);
+}
+
+.tip {
+    border-color: #2A9D8F;
+    background-color: rgba(42, 157, 143, 0.1);
+}
+
+.note {
+    border-color: #0096C7;
+    background-color: rgba(0, 150, 199, 0.1);
+}
+
+.danger {
+    border-color: #e28c79;
+    background-color: rgba(0, 179, 83, 0.1);
+}

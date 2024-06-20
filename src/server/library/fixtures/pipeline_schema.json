@@ -1,0 +1,359 @@
+[
+    {
+        "Name": "Input Query",
+        "Next Step": [
+            "Sensor Transform",
+            "Sensor Filter",
+            "Segmenter",
+            "Sampling Filter",
+            "Augmentation"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Query",
+                "Subtype": "Query"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": 1
+    },
+    {
+        "Name": "Input Data",
+        "Next Step": [
+            "Sensor Transform",
+            "Sensor Filter",
+            "Segmenter",
+            "Sampling Filter",
+            "Augmentation"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Input Data",
+                "Subtype": "Input Data"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": 1
+    },
+    {
+        "Name": "Sensor Filter",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Transform",
+                "Subtype": "Sensor Filter"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Sensor Transform",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Transform",
+                "Subtype": "Sensor"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Segment Sampling",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Sampler",
+                "Subtype": "Segment"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Segmenter",
+        "Next Step": [
+            "Segment Transform",
+            "Segment Filter",
+            "Augmentation",
+            "Sampling Filter",
+            "Feature Generator"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Segmenter",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": 1
+    },
+    {
+        "Name": "Augmentation",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Augmentation",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Segment Filter",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Transform",
+                "Subtype": "Segment Filter"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Segment Transform",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Transform",
+                "Subtype": "Segment"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Feature Generator",
+        "Next Step": [
+            "Data Balancing",
+            "Feature Selector",
+            "Feature Transform",
+            "Outlier Filter",
+            "Feature Quantization"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Feature Generator",
+                "Subtype": null
+            }
+        ],
+        "Set": true,
+        "TransformList": null,
+        "Exclude": null,
+        "Limit": 1
+    },
+    {
+        "Name": "Data Balancing",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Sampler",
+                "Subtype": "Balance Data"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Outlier Filter",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Sampler",
+                "Subtype": "Outlier Filter"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Feature Grouping",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Sampler",
+                "Subtype": "Feature Grouping"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": null,
+        "Limit": null
+    },
+    {
+        "Name": "Feature Transform",
+        "Next Step": [
+            "Data Balancing",
+            "Feature Selector",
+            "Feature Transform",
+            "Outlier Filter",
+            "Feature Grouping"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Transform",
+                "Subtype": "Feature Vector"
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": [
+            "Min Max Scale"
+        ]
+    },
+    {
+        "Name": "Feature Quantization",
+        "Next Step": [
+            "Data Balancing",
+            "Feature Selector",
+            "Feature Transform",
+            "Outlier Filter",
+            "Training Algorithm",
+            "Feature Grouping"
+        ],
+        "Mandatory": true,
+        "Set": false,
+        "Exclude": null,
+        "TransformFilter": null,
+        "TransformList": [
+            "Min Max Scale"
+        ],
+        "Limit": 1
+    },
+    {
+        "Name": "Feature Selector",
+        "Next Step": [
+            "Parent"
+        ],
+        "Mandatory": false,
+        "TransformFilter": [
+            {
+                "Type": "Feature Selector",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": true,
+        "Limit": 1,
+        "Exclude": [
+            "Custom Feature Selection",
+            "Custom Feature Selection By Index"
+        ]
+    },
+    {
+        "Name": "Classifier",
+        "Next Step": [
+            "Training Algorithm"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Classifier",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": [
+            "TF Micro"
+        ],
+        "Limit": 1
+    },
+    {
+        "Name": "Training Algorithm",
+        "Next Step": [
+            "Validation"
+        ],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Training Algorithm",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": [
+            "Load Model PME",
+            "Load Model TF Micro",
+            "Load Model TensorFlow Lite for Microcontrollers",
+            "Load Neuron Array"
+        ],
+        "Limit": 1
+    },
+    {
+        "Name": "Validation",
+        "Next Step": [],
+        "Mandatory": true,
+        "TransformFilter": [
+            {
+                "Type": "Validation Method",
+                "Subtype": null
+            }
+        ],
+        "TransformList": null,
+        "Set": false,
+        "Exclude": [
+            "Leave-One-Subject-Out",
+            "Set Sample Validation"
+        ],
+        "Limit": 1
+    }
+]

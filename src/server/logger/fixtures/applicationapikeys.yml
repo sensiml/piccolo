@@ -1,0 +1,45 @@
+- fields:
+    name: "Python Client"
+    revoked: false
+    hashed_key: pbkdf2_sha256$120000$HjK8A28eqTlx$K8hHOUxeGje98iAYb8dEx8kb4p7b5Ve3ia6zqPmQ2T4=
+    prefix: Urh08PQZ
+    created: "2019-12-06T17:21:28Z"
+    #Urh08PQZ.puQv325aU4z6EPCm4tEzEcGu6NuRPbwh
+  model: rest_framework_api_key.apikey
+  pk: Urh08PQZ.pbkdf2_sha256$120000$HjK8A28eqTlx$K8hHOUxeGje98iAYb8dEx8kb4p7b5Ve3ia6zqPmQ2T4=
+- fields:
+    name: "Data Capture Lab - Windows"
+    revoked: false
+    hashed_key: pbkdf2_sha256$120000$Oy6EEW1Dm2zb$jDtNv0AR0sFhLPU+JFwLj5TVQyVU1Y5j8cQrfHBCypg=
+    prefix: ISOxdZQT
+    created: "2019-12-06T17:21:28Z"
+    #ISOxdZQT.3HMLyElHpC8o6PinYV9Xy33kPc4uagLo
+  model: rest_framework_api_key.apikey
+  pk: ISOxdZQT.pbkdf2_sha256$120000$Oy6EEW1Dm2zb$jDtNv0AR0sFhLPU+JFwLj5TVQyVU1Y5j8cQrfHBCypg=
+- fields:
+    name: "Data Capture Lab - Android"
+    revoked: false
+    hashed_key: pbkdf2_sha256$120000$2qJVGfWswPTN$OFUKgTZ/MQHQX3Ukauk075HNuQlgjKCdqfqwni6iO/o=
+    prefix: 4MTYLaN2
+    created: "2019-12-06T17:21:28Z"
+    #4MTYLaN2.RLm8Zp72eOt7u4jljaICLM52qmS2grzf
+  model: rest_framework_api_key.apikey
+  pk: 4MTYLaN2.pbkdf2_sha256$120000$2qJVGfWswPTN$OFUKgTZ/MQHQX3Ukauk075HNuQlgjKCdqfqwni6iO/o=
+- fields:
+    name: "Web Client"
+    revoked: false
+    hashed_key: pbkdf2_sha256$120000$RuOnRFJxlFie$b87fqT9vF0BNhItQVasXdVJEFAtMYjakfomV6Fn8ohM=
+    prefix: ysv3GpOq
+    created: "2019-12-06T17:21:28Z"
+    #ysv3GpOq.62QgI0V4p2i4s7zc1RkBiaBiynPTpixj
+  model: rest_framework_api_key.apikey
+  pk: ysv3GpOq.pbkdf2_sha256$120000$RuOnRFJxlFie$b87fqT9vF0BNhItQVasXdVJEFAtMYjakfomV6Fn8ohM=
+- fields:
+    name: "Data Studio - Windows"
+    revoked: false
+    hashed_key: pbkdf2_sha256$260000$D2WMFoSPioVxgBA4gZ491U$71JzMUpaSL3iaoOCULOE31Fat2DQ0qvvHcKqufjpf3M=
+    prefix: 3RtIkUqw
+    created: "2024-03-11T20:45:36Z"
+    #3RtIkUqw.NrrtJ1PDV5sJlBf6J4sNPEUR2b4uYLKl
+  model: rest_framework_api_key.apikey
+  pk: 3RtIkUqw.pbkdf2_sha256$260000$D2WMFoSPioVxgBA4gZ491U$71JzMUpaSL3iaoOCULOE31Fat2DQ0qvvHcKqufjpf3M=

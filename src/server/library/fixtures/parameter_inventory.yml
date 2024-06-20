@@ -1,0 +1,324 @@
+- fields:
+    uuid: d45730e6-7db8-47f7-a6aa-347f0bae0c03
+    function: 8c5b0667-d0ed-4aba-9799-f7ca4533a77e
+    function_name: Information Gain
+    pipeline_key: selectorset
+    variable_name: feature_number
+    variable_type: int
+    variable_values: "[1,2,3,4,8,12]"
+    classifiers_optimizers_group: 0
+    binary_classifiers:
+    allow_unknown:
+  model: library.parameterinventory
+
+- fields:
+    uuid: f6bcd6f3-71ce-4242-8a23-bd71092e9983
+    function: a96aa2da-a344-4db5-b0dc-67db473d091b
+    function_name: t-Test Feature Selector
+    pipeline_key: selectorset
+    variable_name: feature_number
+    variable_type: int
+    variable_values: "[1,2,3,4,8,12]"
+    classifiers_optimizers_group: 0
+    binary_classifiers:
+    allow_unknown:
+  model: library.parameterinventory
+
+- fields:
+    uuid: efd740ac-1c12-46b3-bb1c-c578004a0ff6
+    function: 323ea9a0-b6bb-4d4e-b6c8-9b026a85c28d
+    function_name: Univariate Selection
+    pipeline_key: selectorset
+    variable_name: number_of_features
+    variable_type: int
+    variable_values: "[2,4,8,16,24]"
+    classifiers_optimizers_group: 0
+    binary_classifiers:
+    allow_unknown:
+  model: library.parameterinventory
+
+- fields:
+    uuid: 4e5a5ab0-77a6-4422-b580-bc1d8f722cca
+    function: e991c17e-1857-4cb2-a3d1-079b03450d8c
+    function_name: Tree-based Selection
+    pipeline_key: selectorset
+    variable_name: number_of_features
+    variable_type: int
+    variable_values: "[1,2,3,4,8,12]"
+    classifiers_optimizers_group: 0
+    binary_classifiers:
+    allow_unknown:
+  model: library.parameterinventory
+
+- fields:
+    uuid: 4fe4db45-6c1a-438a-9076-6faf9a086777
+    function: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    function_name: PME
+    pipeline_key: classifiers
+    variable_name: max_aif
+    variable_type: int
+    variable_values: "[100,150,200,250]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 9a89fa3f-8301-4e3d-ab71-2d5dc2313014
+    function: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    function_name: PME
+    pipeline_key: classifiers
+    variable_name: min_aif
+    variable_type: int
+    variable_values: "[20,40,80]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 5d73ddb2-8c19-447f-a65d-ab339939b954
+    function: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    function_name: PME
+    pipeline_key: classifiers
+    variable_name: distance_mode
+    variable_type: str
+    variable_values: '["L1","Lsup"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 5dcaad2f-a38f-440c-b86f-6e6525f38f47
+    function: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    function_name: PME
+    pipeline_key: classifiers
+    variable_name: classification_mode
+    variable_type: str
+    variable_values: '["KNN"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 37f77c58-25af-4e82-966f-b502d37574e2
+    function: 33875688-5aec-470b-b599-88c85df77412
+    function_name: Decision Tree Ensemble
+    pipeline_key: classifiers
+    variable_name: null
+    variable_type: null
+    variable_values: null
+    classifiers_optimizers_group: 2
+    binary_classifiers: 0
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: 7cdb79d0-0b64-41d0-b814-add7ef1cb2db
+    function: 6bbc8c35-2fb9-4196-8d7c-a5bf7a4976c7
+    function_name: Boosted Tree Ensemble
+    pipeline_key: classifiers
+    variable_name: null
+    variable_type: null
+    variable_values: null
+    classifiers_optimizers_group: 3
+    binary_classifiers: 1
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: d8e6158a-e15d-417b-b7ad-2a1984040faf
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: aif_method
+    variable_type: str
+    variable_values: '["max","robust","median"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: d4a74e2c-dd8b-46b9-b0e7-f2c22fa323b9
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: min_number_of_dominant_vector
+    variable_type: int
+    variable_values: "[3,5,7,10,15,20]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 3480531c-359e-44a3-a6fc-366eb9a757b0
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: max_number_of_weak_vector
+    variable_type: int
+    variable_values: "[2,4,8]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 528acd6f-1443-40e5-bdc4-f2aecb044017
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: number_of_neurons
+    variable_type: int
+    variable_values: "[10,25,50,75]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 8dc56a6e-dba4-4d03-adf5-c6eb58110588
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: linkage_method
+    variable_type: str
+    variable_values: '["average","complete"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: 70ec3ac4-e676-45b8-92cf-c32afc811945
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: centroid_calculation
+    variable_type: str
+    variable_values: '["robust","median"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: f8b9692f-94b1-4e34-9d15-1d1aff90f651
+    function: ff7adad0-248e-4db1-90f2-4492491a2726
+    function_name: Hierarchical Clustering with Neuron Optimization
+    pipeline_key: optimizers
+    variable_name: cluster_method
+    variable_type: str
+    variable_values: '["kmeans"]'
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: cb90b997-6860-46e8-8333-66bfb7070d6e
+    function: c1706d2a-b854-4eec-a33b-8394b962114d
+    function_name: RBF with Neuron Allocation Optimization
+    pipeline_key: optimizers
+    variable_name: number_of_iterations
+    variable_type: int
+    variable_values: "[50]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: f779de4e-3f27-40fc-8c3f-403038166393
+    function: a68de605-c556-4b7f-8615-4f6af76ddebc
+    function_name: Random Forest
+    pipeline_key: optimizers
+    variable_name: max_depth
+    variable_type: int
+    variable_values: "[2,3,4,5]"
+    classifiers_optimizers_group: 2
+    binary_classifiers: 0
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: d4acd03e-ca76-431a-b5b8-aa1af8875aa4
+    function: a68de605-c556-4b7f-8615-4f6af76ddebc
+    function_name: Random Forest
+    pipeline_key: optimizers
+    variable_name: n_estimators
+    variable_type: int
+    variable_values: "[20,30,50,60,70]"
+    classifiers_optimizers_group: 2
+    binary_classifiers: 0
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: 29195783-188a-430d-b1f1-a5e59d9b79c8
+    function: b9017fce-a93e-4cb7-9c6f-76caa6822fe5
+    function_name: xGBoost
+    pipeline_key: optimizers
+    variable_name: max_depth
+    variable_type: int
+    variable_values: "[2,3,4,5]"
+    classifiers_optimizers_group: 3
+    binary_classifiers: 1
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: c411c5b5-5021-484b-b10c-78a7b9bad8e0
+    function: b9017fce-a93e-4cb7-9c6f-76caa6822fe5
+    function_name: xGBoost
+    pipeline_key: optimizers
+    variable_name: n_estimators
+    variable_type: int
+    variable_values: "[20,30,50,60,70]"
+    classifiers_optimizers_group: 3
+    binary_classifiers: 1
+    allow_unknown: 0
+  model: library.parameterinventory
+
+- fields:
+    uuid: 6ac58f13-de20-434d-b733-921a931af307
+    function: c1706d2a-b854-4eec-a33b-8394b962114d
+    function_name: RBF with Neuron Allocation Optimization
+    pipeline_key: optimizers
+    variable_name: number_of_neurons
+    variable_type: int
+    variable_values: "[10,25,50,75]"
+    classifiers_optimizers_group: 1
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: a2e87e47-2a4a-4890-82a9-a5cca112f337
+    function: d1b6b0c9-c935-42fb-8349-1737192f9c65
+    function_name: Train Fully Connected Neural Network
+    pipeline_key: optimizers
+    variable_name: learning_rate
+    variable_type: float
+    variable_values: "[0.01,0.005,0.001]"
+    classifiers_optimizers_group: 4
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory
+
+- fields:
+    uuid: e90c3697-2cdc-4c08-97de-58e7a16efce0
+    function: db4dcc87-5446-4353-8a9b-1ab178b0e9f1
+    function_name: TensorFlow Lite for Microcontrollers
+    pipeline_key: classifiers
+    variable_name: null
+    variable_type: null
+    variable_values: null
+    classifiers_optimizers_group: 4
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory

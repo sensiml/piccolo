@@ -1,0 +1,22 @@
+{
+  "name": "SensiML ",
+  "description": "",
+  "homepage": "https://sensiml.com",
+  "repository": {
+    "type": "git",
+    "url": "support@sensiml.com"
+  },
+  "version": "1.0.0",
+  "authors": {
+    "name": "SensiML",
+    "email": "support@sensiml.com"
+  },
+  "frameworks": "arduino",
+  "platforms": "*",
+  "build": {
+    "includeDir": "src/inc",
+    "extraScript": "extra_script.py"
+  },
+  "examples": [
+  ]
+}

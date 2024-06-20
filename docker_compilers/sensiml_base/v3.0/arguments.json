@@ -1,0 +1,7 @@
+[
+    {
+        "repository": "sensiml/base_image",
+        "tag": "",
+        "build_args": {}
+    }
+]

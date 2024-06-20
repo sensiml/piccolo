@@ -1,0 +1,47 @@
+{
+  "captures-screen": {
+    "import-btn": "Import File"
+  },
+  "capture-screen": {
+    "panel-title": "File: {{captureName}}",
+    "panel-btn-download": "Download",
+    "panel-btn-change": "Change File",
+    "panel-btn-label": "Label Group",
+    "panel-btn-session": "Session",
+    "panel-btn-import-tooltip": "Import capture file ",
+    "panel-btn-import-text": "Import Capture",
+    "error-label-dublicates": "Cannot have duplicate segment labels in the same location",
+    "label-goup": "Label Group",
+    "session": "Session",
+    "alert-auto-session": "The segment positions were generated using an auto session. You are only able to update the label values."
+  },
+  "dialog-select-label": {
+    "title": "Select Label Group",
+    "header-name": "Group",
+    "header-labels": "Labels",
+    "title-name": "Group",
+    "title-labels": "Labels"
+  },
+  "dialog-session-select": {
+    "title": "Select Session",
+    "header-name": "Group",
+    "header-labels": "Labels",
+    "title-name": "Group",
+    "title-labels": "Labels"
+  },
+  "capture-chart-panel": {
+    "btn-add-label": "Create New Label",
+    "btn-create-label": "Create",
+    "btn-create-label-tooltip": "Create Segment",
+    "btn-delete-label": "Delete",
+    "btn-delete-label-tooltip": "Delete Selected Segment",
+    "btn-discard": "Discard",
+    "btn-discard-tooltip": "Discard Changes",
+    "btn-save": "Save",
+    "btn-save-tooltip": "Save Changes",
+    "dialog-create-label-title": "Create New Label",
+    "btn-create-cancel": "Cancel",
+    "alert-info-editing-label": "Select an area to create a new segment",
+    "alert-info-creating-label": "Select a segment to edit or click the create button for a new segment."
+  }
+}

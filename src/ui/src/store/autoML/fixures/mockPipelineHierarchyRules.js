@@ -1,0 +1,426 @@
+/*
+Copyright 2017-2024 SensiML Corporation
+
+This file is part of SensiML™ Piccolo AI™.
+
+SensiML Piccolo AI is free software: you can redistribute it and/or
+modify it under the terms of the GNU Affero General Public License
+as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+SensiML Piccolo AI is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public
+License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+export default {
+  data: [
+    {
+      name: "Input Query",
+      customName: null,
+      nextSteps: [
+        "Sensor Transform",
+        "Sensor Filter",
+        "Segmenter",
+        "Sampling Filter",
+        "Augmentation",
+      ],
+      mandatory: true,
+      type: "Query",
+      subtype: ["Query"],
+      transformFilter: [
+        {
+          Type: "Query",
+          Subtype: "Query",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: 1,
+      set: false,
+      id: "b356b450-17f6-4f25-b713-7fef24b7b52e",
+    },
+    {
+      name: "Input Data",
+      customName: null,
+      nextSteps: [
+        "Sensor Transform",
+        "Sensor Filter",
+        "Segmenter",
+        "Sampling Filter",
+        "Augmentation",
+      ],
+      mandatory: true,
+      type: "Input Data",
+      subtype: ["Input Data"],
+      transformFilter: [
+        {
+          Type: "Input Data",
+          Subtype: "Input Data",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: 1,
+      set: false,
+      id: "f8cd4ab1-12ca-43a3-b35d-6450ac0cc36f",
+    },
+    {
+      name: "Sensor Filter",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Transform",
+      subtype: ["Sensor Filter"],
+      transformFilter: [
+        {
+          Type: "Transform",
+          Subtype: "Sensor Filter",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "1482d7fe-3bc9-4af1-96b1-3fabb98b7128",
+    },
+    {
+      name: "Sensor Transform",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Transform",
+      subtype: ["Sensor"],
+      transformFilter: [
+        {
+          Type: "Transform",
+          Subtype: "Sensor",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "95624db4-09b9-4507-8dd7-e478932acd6a",
+    },
+    {
+      name: "Segment Sampling",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Sampler",
+      subtype: ["Segment"],
+      transformFilter: [
+        {
+          Type: "Sampler",
+          Subtype: "Segment",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "d6bc0cf1-5016-44d9-898a-e8e7eb531926",
+    },
+    {
+      name: "Segmenter",
+      customName: null,
+      nextSteps: [
+        "Segment Transform",
+        "Segment Filter",
+        "Augmentation",
+        "Sampling Filter",
+        "Feature Generator",
+      ],
+      mandatory: true,
+      type: "Segmenter",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Segmenter",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: 1,
+      set: false,
+      id: "02a8b4c5-e007-4aaa-a3df-11da0121cf64",
+    },
+    {
+      name: "Augmentation",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Augmentation",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Augmentation",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "8362e080-3fd2-4aa7-95fe-2e1b859a3081",
+    },
+    {
+      name: "Segment Filter",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Transform",
+      subtype: ["Segment Filter"],
+      transformFilter: [
+        {
+          Type: "Transform",
+          Subtype: "Segment Filter",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "e4494aca-cf4f-4bcc-9842-a4a4454b7ffd",
+    },
+    {
+      name: "Segment Transform",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Transform",
+      subtype: ["Segment"],
+      transformFilter: [
+        {
+          Type: "Transform",
+          Subtype: "Segment",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "7f9613cd-e94f-4c7b-a433-9185e4884cb0",
+    },
+    {
+      name: "Feature Generator",
+      customName: null,
+      nextSteps: [
+        "Data Balancing",
+        "Feature Selector",
+        "Feature Transform",
+        "Outlier Filter",
+        "Feature Quantization",
+      ],
+      mandatory: true,
+      type: "Feature Generator",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Feature Generator",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: 1,
+      set: true,
+      id: "bf9bc984-b7b0-47c4-8c64-3afa490289a3",
+    },
+    {
+      name: "Data Balancing",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Sampler",
+      subtype: ["Balance Data"],
+      transformFilter: [
+        {
+          Type: "Sampler",
+          Subtype: "Balance Data",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "de5020ed-b704-4561-b0b7-b479e40bb7cf",
+    },
+    {
+      name: "Outlier Filter",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Sampler",
+      subtype: ["Outlier Filter"],
+      transformFilter: [
+        {
+          Type: "Sampler",
+          Subtype: "Outlier Filter",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "b96f9ce6-50dd-4aee-ad25-53e699d65916",
+    },
+    {
+      name: "Feature Grouping",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Sampler",
+      subtype: ["Feature Grouping"],
+      transformFilter: [
+        {
+          Type: "Sampler",
+          Subtype: "Feature Grouping",
+        },
+      ],
+      transformList: [],
+      excludeTransform: [],
+      limit: null,
+      set: false,
+      id: "988cb70c-17a8-4f47-9cb3-4e18c81c50e1",
+    },
+    {
+      name: "Feature Transform",
+      customName: null,
+      nextSteps: [
+        "Data Balancing",
+        "Feature Selector",
+        "Feature Transform",
+        "Outlier Filter",
+        "Feature Grouping",
+      ],
+      mandatory: false,
+      type: "Transform",
+      subtype: ["Feature Vector"],
+      transformFilter: [
+        {
+          Type: "Transform",
+          Subtype: "Feature Vector",
+        },
+      ],
+      transformList: [],
+      excludeTransform: ["Min Max Scale"],
+      limit: null,
+      set: false,
+      id: "6180cbbb-dee5-472f-bd1d-f4ba0aeb8869",
+    },
+    {
+      name: "Feature Quantization",
+      customName: null,
+      nextSteps: [
+        "Data Balancing",
+        "Feature Selector",
+        "Feature Transform",
+        "Outlier Filter",
+        "Training Algorithm",
+        "Feature Grouping",
+      ],
+      mandatory: true,
+      type: "",
+      subtype: [],
+      transformFilter: [],
+      transformList: ["Min Max Scale"],
+      excludeTransform: [],
+      limit: 1,
+      set: false,
+      id: "dd99acd7-730e-449c-a1a0-b47dde13d2c1",
+    },
+    {
+      name: "Feature Selector",
+      customName: null,
+      nextSteps: ["Parent"],
+      mandatory: false,
+      type: "Feature Selector",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Feature Selector",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: ["Custom Feature Selection", "Custom Feature Selection By Index"],
+      limit: 1,
+      set: true,
+      id: "64a81b36-5d01-4637-8814-fc4d5564c045",
+    },
+    {
+      name: "Classifier",
+      customName: null,
+      nextSteps: ["Training Algorithm"],
+      mandatory: true,
+      type: "Classifier",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Classifier",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: ["TF Micro"],
+      limit: 1,
+      set: false,
+      id: "5ec5b0d9-5d84-4747-96f9-bec74c79c3fe",
+    },
+    {
+      name: "Training Algorithm",
+      customName: null,
+      nextSteps: ["Validation"],
+      mandatory: true,
+      type: "Training Algorithm",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Training Algorithm",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: [
+        "Load Model PME",
+        "Load Model TF Micro",
+        "Load Model TensorFlow Lite for Microcontrollers",
+        "Load Neuron Array",
+      ],
+      limit: 1,
+      set: false,
+      id: "1ee99da2-b26f-49a6-b2fc-88c2d83975c2",
+    },
+    {
+      name: "Validation",
+      customName: null,
+      nextSteps: [],
+      mandatory: true,
+      type: "Validation Method",
+      subtype: [],
+      transformFilter: [
+        {
+          Type: "Validation Method",
+          Subtype: null,
+        },
+      ],
+      transformList: [],
+      excludeTransform: [
+        "Leave-One-Subject-Out",
+        "Set Sample Validation",
+        "Split by Metadata Value",
+      ],
+      limit: 1,
+      set: false,
+      id: "03e816f6-9fa4-416f-8648-1c68faff28f3",
+    },
+  ],
+  isFetching: false,
+};

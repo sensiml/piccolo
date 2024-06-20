@@ -1,0 +1,9 @@
+[
+    {
+        "repository": "arm_none_linux_gnueabihf_base",
+        "tag": "10.3.1",
+        "build_args": {
+            "BASE_VERSION": "10.3.1-v1.0"
+        }
+    }
+]

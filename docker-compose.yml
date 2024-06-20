@@ -1,0 +1,180 @@
+services:
+  db:
+    mem_limit: "250M"
+    image: postgres
+    environment:
+      - POSTGRES_DB=piccolodb
+      - POSTGRES_USER=piccoloadmin
+      - POSTGRES_PASSWORD=piccoloadmin3
+    ports:
+      - "5432:5432"
+  redis:
+    mem_limit: "250M"
+    image: redis
+  helper:
+    image: sensiml/base
+    command: sh -c "chown -R sml-app:sml-app /home/sml-app/install/lib/; chown -R sml-app:sml-app /home/sml-app/data/"
+    volumes:
+      - server_data:/home/sml-app/data/
+      - server_libs:/home/sml-app/install/lib/
+  sensiml.databse.initalize:
+    mem_limit: "2000M"
+    image: sensiml/base
+    working_dir: /home/sml-app/install/
+    user: sml-app
+    volumes:
+      - server_data:/home/sml-app/data/
+      - server_libs:/home/sml-app/install/lib/
+      - type: bind
+        source: ./src/server/
+        target: /home/sml-app/install/server/
+      - type: bind
+        source: ./src/embedded_ml_sdk/
+        target: /home/sml-app/install/embedded_ml_sdk/
+      - type: bind
+        source: ./scripts/
+        target: /home/sml-app/install/scripts/
+
+      - type: bind
+        source: ./src/server/config/
+        target: /home/sml-app/install/config/
+    environment:
+      - DJANGO_ENV=docker
+      - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+      - HOMEDIR=/home/sml-app/install/
+    command: /bin/bash scripts/setup.sh
+    depends_on:
+      - db
+      - redis
+      - helper
+  sensiml.cloud:
+    user: sml-app
+    mem_limit: "2000M"
+    image: sensiml/base
+    working_dir: /home/sml-app/install/server/
+    volumes:
+      - server_data:/home/sml-app/data/
+      - server_libs:/home/sml-app/install/lib/
+      - type: bind
+        source: ./src/server/
+        target: /home/sml-app/install/server/
+      - type: bind
+        source: ./src/embedded_ml_sdk/
+        target: /home/sml-app/install/embedded_ml_sdk/
+      - type: bind
+        source: ./src/server/config/
+        target: /home/sml-app/install/config/
+    environment:
+      - DJANGO_ENV=docker
+      - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+      - DJANGO_DEBUGGER=True
+      - PORT_PTVSD=8005
+    command: python manage.py runserver 0.0.0.0:8000 --noreload
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - sensiml.databse.initalize
+  sensiml.pipelines:
+    mem_limit: "2000M"
+    image: sensiml/base
+    working_dir: /home/sml-app/install/server/
+    user: sml-app
+    volumes:
+      - server_data:/home/sml-app/data/
+      - server_libs:/home/sml-app/install/lib/
+      - type: bind
+        source: ./src/server/
+        target: /home/sml-app/install/server/
+      - type: bind
+        source: ./src/embedded_ml_sdk
+        target: /home/sml-app/install/embedded_ml_sdk/
+      - type: bind
+        source: ./src/server/config/
+        target: /home/sml-app/install/config/
+      - type: bind
+        source: //var/run/docker.sock
+        target: /var/run/docker.sock
+    environment:
+      - DJANGO_ENV=docker
+      - DJANGO_DEBUGGER=True
+      - PORT_PTVSD=6902
+      - CELERY_RDB_PORT=6900
+      - CELERY_RDB_HOST=0.0.0.0
+      - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+      - DOCKER_HOST_SML_DATA_DIR=${DOCKER_HOST_SML_DATA_DIR}
+    command: bash -c "sudo chown sml-app:sml-app /var/run/docker.sock && celery --app=server.celery:app worker --loglevel=INFO -O fair --without-mingle --without-gossip  --concurrency 1 -Q pipelines,file_upload,knowledgepack -n pipelines"
+    depends_on:
+      - db
+      - redis
+      - sensiml.databse.initalize
+  sensiml.steps:
+    mem_limit: "2000M"
+    image: sensiml/base
+    working_dir: /home/sml-app/install/server/
+    user: sml-app
+    deploy:
+      mode: replicated
+      replicas: 2
+    volumes:
+      - server_data:/home/sml-app/data/
+      - server_libs:/home/sml-app/install/lib/
+      - type: bind
+        source: ./src/server/
+        target: /home/sml-app/install/server/
+      - type: bind
+        source: ./src/embedded_ml_sdk/
+        target: /home/sml-app/install/embedded_ml_sdk/
+      - type: bind
+        source: ./src/server/config/
+        target: /home/sml-app/install/config/
+    environment:
+      - DJANGO_ENV=docker
+      - CELERY_RDB_PORT=6950
+      - CELERY_RDB_HOST=0.0.0.0
+      - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+    command: celery --app=server.celery:app worker --loglevel=INFO -O fair --without-mingle --without-gossip  --concurrency 1 -Q pipeline_steps -n steps
+    depends_on:
+      - db
+      - redis
+      - sensiml.databse.initalize
+
+volumes:
+  server_data:
+  server_libs:
+  # attach to container and enter shell
+  #
+  # docker exec -it <container-id> /bin/bash
+  #
+  # Uncomment if you would like celery frower to start as well
+  #
+  # flower:
+  #  image: sensiml/base
+  #  working_dir: /home/sml-app/install/server/
+  #  volumes:
+  #    - type: bind
+  #      source: ${SML_SERVER_DATADIR}
+  #      target: /home/sml-app/data/
+  #    - type: bind
+  #      source: ./server/
+  #      target: /home/sml-app/install/server/
+  #    - type: bind
+  #      source: ./config/
+  #      target: /home/sml-app/install/config/
+  #    - type: bind
+  #      source: ./embedded_ml_sdk/
+  #      target: /home/sml-app/install/embedded_ml_sdk/
+  #    - type: bind
+  #      source: ${SML_SERVER_DATADIR}/lib/
+  #      target: /home/sml-app/install/lib/
+  #  environment:
+  #    - DJANGO_ENV=docker
+  #  - DJANGO_ENV_PATH=/home/sml-app/install/config/env
+  #  command: celery flower --broker=redis://localhost:6379
+  #  ports:
+  #    - "5555:5555"
+  #  depends_on:
+  #    - db
+  #    - redis
+  #    - sensiml.databse.initalize

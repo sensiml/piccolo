@@ -1,0 +1,24 @@
+.wy-nav-content {
+  max-width: 1000px !important;
+}
+
+/* override table width restrictions */
+@media screen and (min-width: 767px) {
+  .wy-table-responsive table td {
+    /* !important prevents the common CSS stylesheets from overriding
+          this as on RTD they are loaded after this stylesheet */
+    white-space: normal !important;
+  }
+
+  .wy-table-responsive {
+    overflow: visible !important;
+  }
+}
+
+.rst-content .align-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+  margin-bottom: 24px;
+}

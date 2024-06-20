@@ -1,0 +1,61 @@
+{
+  "variables": {
+    "artifact_path": "./sml-artifact.zip",
+    "docker_image_version": "latest",
+    "repository": "sensiml/server-image",
+    "env_path": "../config/env/.env.docker"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "sensiml/base",
+      "commit": true,
+      "changes": [
+        "ENV DJANGO_ENV sml",
+        "ENTRYPOINT [\"/home/sml-app/install/server/entrypoint.sh\"]"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{user `artifact_path`}}",
+      "destination": "/home/sml-app/artifacts.zip"
+    },
+    {
+      "type": "file",
+      "source": "{{user `env_path`}}",
+      "destination": "/home/sml-app/.env.sml"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/setup_database.sh",
+      "destination": "/home/sml-app/setup_database.sh"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/unpack_server.sh"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/entrypoint.sh",
+      "destination": "/home/sml-app/install/server/entrypoint.sh"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "chown -R sml-app:sml-app /home/sml-app/install/server/entrypoint.sh",
+        "chmod +x /home/sml-app/install/server/entrypoint.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `repository`}}",
+        "tag": "{{user `docker_image_version`}}"
+      }
+    ]
+  ]
+}

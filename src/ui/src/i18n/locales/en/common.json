@@ -1,0 +1,34 @@
+{
+  "Cancel": "Cancel",
+  "Confirm": "Confirm",
+  "Save": "Save",
+  "Discard": "Discard",
+  "Add": "Add",
+  "Stop": "Stop",
+  "Restart": "Restart",
+  "Delete": "Delete",
+  "logo-text": "SensiML™ Analytics Studio",
+  "tooltip-info": "Information",
+  "tooltip-edit": "Edit",
+  "tooltip-open": "Open",
+  "tooltip-close": "Close",
+  "tooltip-delete": "Delete",
+  "flow-builder": {
+    "card-step-help-info": "Step Information",
+    "card-step-export-cache-info": "Download Step Cached Data",
+    "card-step-edit-info": "Edit Step Parameters",
+    "card-step-open-cache": "Show Data Distribution",
+    "card-step-delete-info": "Delete Step",
+    "card-step-required-info": "Required",
+    "card-step-custom-info": "Custom Step",
+    "arrow-add-info": "Add New Step"
+  },
+  "dialog-confirm-delete": {
+    "delete": "Yes, delete",
+    "cancel": "Cancel"
+  },
+  "dialog-confirm-close": {
+    "cancel": "Back",
+    "confirm": "Yes, close"
+  }
+}

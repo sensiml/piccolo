@@ -1,0 +1,9 @@
+sphinx
+Pygments
+sphinx-rtd-theme
+sphinx-autobuild
+nbsphinx
+rstcheck
+docutils
+sphinx-reredirects
+ipython

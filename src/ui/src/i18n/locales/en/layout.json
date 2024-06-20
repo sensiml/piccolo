@@ -1,0 +1,43 @@
+{
+  "app-name": "SensiML™ Analytics Studio",
+  "app-version": "version {{ appVersion }}",
+  "btn-close-app-version": "Close",
+  "header": {
+    "title-home": "SensiML™ Analytics Studio {{ appENV }}",
+    "project-title": "{{ projectName }}",
+    "tooltip-project-change": "Change Project"
+  },
+  "header-menu": {
+    "account-credits": "Account Credits",
+    "home": "Home",
+    "subscription-usage-description": "Subscription usage",
+    "account-settings": "Account Settings",
+    "account-subscription": "Account Subscription",
+    "account-api-keys": "Account API Keys",
+    "about": "About",
+    "upgrade-to-proto": "Upgrade to Proto",
+    "log-out": "Log out"
+  },
+  "nav-drawer": {
+    "tooltip-collapse": "Collapse Navbar",
+    "tooltip-expand": "Expand Navbar",
+    "menu-item-home": "Projects",
+    "menu-item-project-summary": "Project Summary",
+    "menu-item-data-manager": "Data Manager",
+    "menu-item-prepare-data": "Prepare Data",
+    "menu-item-build-model": "Build Model",
+    "menu-item-explore-model": "Explore Model",
+    "menu-item-test-model": "Test Model",
+    "menu-item-download-model": "Download Model"
+  },
+  "menu-external": {
+    "get-started-title": "Get Started",
+    "get-started-tooltip": "Get Started",
+    "demo-title": "Demo",
+    "demo-tooltip": "See read only demo application examples.",
+    "documentation-title": "Documentation",
+    "documentation-tooltip": "Documentation",
+    "support-title": "Support",
+    "support-tooltip": "Support"
+  }
+}

@@ -1,0 +1,6 @@
+this code generates the kbalgorithms.h, fg_algorithms.c, fg_algorithms.py and pywrapper/Makefile
+these are generated off the templates, the src, and the functions_to_loads.csv and functions_to_load_defelop.csv
+
+the function to load are considered the ground truth for which functions should be included.
+
+Note: this only includes the toplevel function, all sublevel should still be added to kbutils.h and pywrapper/makefile
