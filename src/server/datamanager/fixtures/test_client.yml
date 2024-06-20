@@ -1,0 +1,12 @@
+- model: oauth2_provider.application
+  pk: 1
+  fields:
+    name: Python Client
+    client_id: f7J0QNKkKcIkHMpk5lvq0wGZtBEpw1YcJ8Bea9Pv
+    client_secret: 4OxQzkEnVc6OmTMKHgi77o8uFhEDz1QCuyKsNFm2Jo84r0TlGBXli0NrZ5uHTI769P3UurvDVB86awZkrEikCUJ7RM333BTS5oajO32BRwsNkPcOzA3JlBkPblvKM0l0
+    client_type: public
+    redirect_uris: ''
+    authorization_grant_type: password
+    user_id: null
+    created: 2017-10-01 12:11:21
+    updated: 2017-10-01 12:11:22

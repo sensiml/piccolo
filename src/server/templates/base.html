@@ -1,0 +1,79 @@
+{% load i18n %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+</head>
+
+<body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.button-collapse').sideNav({
+                menuWidth: 300, // Default is 300
+                edge: 'left', // Choose the horizontal origin
+                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                draggable: true, // Choose whether you can drag to open on touch screens,
+            }
+            );
+            $(".dropdown-button").dropdown();
+        });
+    </script>
+
+    <div id="header">
+        <nav style="height: 90px; background-color: #093556">
+            <div class=" nav-wrapper">
+                <div class="container">
+                    <a href="#" data-activates="mobile-menu" class="button-collapse medium left-align">
+                        <span style="color:#0075c1">
+                            <i class="large material-icons left">menu</i>
+                        </span>
+                    </a>
+
+                    <a href="https://sensiml.com" class="brand-logo ">
+                        <img style="height: 80px; padding-top: 10px;"
+                            src="{% static 'images/logo_lrg_transparent.png' %}" />
+                    </a>
+
+                    <ul id="nav-mobile" class="right hide-on-med-and-down" style="align-items: baseline">
+                        <li>
+                            <a href="https://sensiml.com/documentation/">
+                                <span class="white-text" style="font-weight: bold;">Documentation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://sensiml.com/support/">
+                                <span class="white-text" style="font-weight: bold;">Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-menu">
+                        <li>
+                            <a href="https://sensiml.com/documentation/">
+                                <span style="font-weight: bold;">Documentation</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://sensiml.com/support/">
+                                <span style="font-weight: bold;">Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %} {% endblock %}
+    </div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Getting Started with the SensiML Python SDK.ipynb",
+        "notebook_path": "sensiml-python-sdk/getting-started-with-the-sensiml-python-sdk.ipynb"
+    },
+    {
+        "name": "SensiML Basics - Using Segmentation Algoirthms.ipynb",
+        "notebook_path": "sensiml-python-sdk/additional-tutorials/using-segmentation-algorithms.ipynb",
+        "data_files": [
+            "sensiml-python-sdk/additional-tutorials/data/pause_detection_data.csv"
+        ]
+    },
+    {
+        "name": "Loading a custom trained PME model.ipynb",
+        "notebook_path": "sensiml-python-sdk/additional-tutorials/loading-a-trained-neuron-array.ipynb",
+        "data_files": [
+            "sensiml-python-sdk/additional-tutorials/data/activity_data_medium.csv"
+        ]
+    },
+    {
+        "name": "Selecting Parameters for Segmentation Algorithms.ipynb",
+        "notebook_path": "sensiml-python-sdk/additional-tutorials/selecting-parameters-for-segmentation-algorithms.ipynb"
+    },
+    {
+        "name": "Applying Labels from Ground Truth.ipynb",
+        "notebook_path": "sensiml-python-sdk/additional-tutorials/applying-labels-from-ground-truth.ipynb"
+    },
+    {
+        "name": "Loading a custom trained TensorFlow Lite for Microcontrollers Model.ipynb",
+        "notebook_path": "sensiml-python-sdk/additional-tutorials/tensorflow-lite-tutorial.ipynb"
+    }
+]

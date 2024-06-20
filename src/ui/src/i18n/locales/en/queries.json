@@ -1,0 +1,30 @@
+{
+  "cache": {
+    "cache": "To optimize model building, this query has been cached. Even if you modify the training data labels or add new data, this query will still return the cached results. To update the query with the lastest changes to your data set, use the rebuild button.",
+    "no-cache": "The cache for this query has not been built. Build it now using the rebuild button, or it will build when you first run the pipeline.",
+    "building-cache": "The query is currently being generated, wait to run pipelines against this query until the cache has been built. Click the refresh button to see changes to this status.",
+    "failed-building-cache": "The query failed to build. Update the query to continue using it.",
+    "no-cache-status-text": "NOT BUILT",
+    "button-cache-rebuild": "Build Cache",
+    "button-cache-dismiss": "Dismiss"
+  },
+  "validation": {
+    "no-segments": "The dataset with the query {{queryName}} doesn't have any labels. AutoML can only build models with multi-class datasets. You can either add more labels, or 'Unknown' label.",
+    "not-enough-segments": "The dataset with the query {{queryName}} has only one label, {{segments}}. AutoML can only build models with multi-class datasets. You can either add more labels, or 'Unknown' label.",
+    "too-large-window-size": "The Segmenter step parameter window_size is set to {{ windowSize }}, which is larger than the size of the input segments in your Query. This will cause the training data to be filtered out. Reduce the size of the window_size parameter in the Segmenter step.",
+    "possible-too-large-window-size": "The Segmenter step parameter window_size is set to {{ windowSize }}, which might remove many labels from your data. This could leave the dataset with very few segments for analysis. Consider choosing a smaller window size for a more detailed segmentation."
+  },
+  "help": {
+    "unknow": "The 'Unknown' label is a special label that can be used to represent data points that do not belong to any of the known classes. This can be useful in cases where the data is not perfectly labeled, or where there are new classes that have not yet been observed."
+  },
+  "create-form": {
+    "message-info": "Please enter a name for the query, select the attributes and click on save to save the new query"
+  },
+  "table": {
+    "title": "Queries",
+    "dialog-delete-title": "Delete Query",
+    "dialog-delete-text": "Are you sure you want to delete the Query {{selectedQueryName}}?",
+    "dialog-delete-multi-text": "Are you sure you want to delete {{count}} queries?",
+    "msg-success-delete": "Successfully deleted {{count}} queries"
+  }
+}

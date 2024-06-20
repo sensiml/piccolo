@@ -1,0 +1,11 @@
+<super-manifest>
+  <board-manifest-list>
+  </board-manifest-list>
+  <app-manifest-list>
+    <app-manifest>
+      <uri>file:///PATH_TO_sensiml-psoc-6-manifest.xml</uri>
+    </app-manifest>
+  </app-manifest-list>
+  <middleware-manifest-list>
+  </middleware-manifest-list>
+</super-manifest>

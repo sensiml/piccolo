@@ -1,0 +1,107 @@
+
+THIS_DIR          := $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
+OUT               := $(abspath $(THIS_DIR))
+
+IFLAGS := -I../include -I. -I../../server/codegen/templates/common/
+CFLAGS += -std=c99 -fPIC -fno-builtin -Werror $(IFLAGS)
+
+fgsrc_path := ../src/
+fgsrc := \
+fftr.c \
+imfcc.c \
+fixlog.c \
+fg_algorithms.c \
+rb.c \
+crossing_rate.c \
+std.c \
+mean.c \
+sorted_copy.c \
+sortarray.c \
+sum.c \
+stat_mean.c \
+stat_moment.c \
+fftr_utils.c \
+utils_array.c \
+utils_buffer_mean.c \
+utils_buffer_median.c \
+utils_buffer_argmax.c \
+utils_buffer_std.c \
+utils_buffer_min_max.c \
+utils_buffer_max.c \
+utils_bitwise_abs_val.c \
+utils_buffer_pass_threshold.c \
+utils_buffer_abs_max.c \
+utils_buffer_cumsum.c \
+utils_buffer_min.c \
+utils_buffer_variance.c \
+utils_buffer_absmean.c \
+utils_buffer_abssum.c \
+utils_buffer_autoscale.c \
+utils_model_total_area.c \
+utils_model_cross_column.c \
+utils_model_cross_difference.c \
+utils_model_mean_crossing_rate.c \
+utils_model_total_energy.c \
+utils_model_stats_max_min.c \
+utils_model_pct_time_over_sigma.c \
+utils_model_pct_time_over_threshold.c \
+utils_model_crossing_rate.c \
+dsp_dtw_distance.c \
+ma_symmetric.c \
+array_contains.c \
+ratio_diff_impl.c \
+max_min_high_low_freq.c \
+stats_percentile_presorted.c \
+// FILL_SRC_FILES
+
+
+fgsrc_full := $(addprefix $(fgsrc_path), $(fgsrc))
+fgobjs_full := $(patsubst %.c, %.o, $(fgsrc_full))
+fgobjs_local := $(patsubst %.c, %.o, $(fgsrc))
+
+SRC := $(fgsrc_full)
+OBJS := $(patsubst %.c, %.o, $(fgobjs_local))
+COBJS := $(patsubst %.c, %.o, $(SRC))
+
+LIB = $(OUT)/fg_algorithms.a
+
+define copyofiles
+#   ex1 := $(foreach of1,$(srcofiles1),cp -f $(of1) src/ &&)
+#   ex1 += $(foreach of2,$(srcofiles2),cp -f $(of2) src/sensiml_sdk/ &&)
+
+    for of1 in $(fgobjs_full); do \
+        mv $$of1 ./; \
+    done
+
+endef
+
+$(OUT)/%.o:$(SRC)
+	@echo "what am i doing"
+	@echo $(ANSI_RED)"[cPP]"$(ANSI_OFF) $@ $^
+	@echo $(COBJS)
+	$(AT)$(CC) $(CFLAGS) -c -o $@ $^
+
+
+
+$(LIB): $(COBJS)
+	@echo "making lib"
+	$(call copyofiles)
+	@echo $(LDFLAGS)
+	$(AT)$(AR) rcs $@ $(OBJS)
+	$(AT)$(CC) -shared -Wl,-soname,libfg_algorithms.so -o libfg_algorithms.so *.o
+	# use this on mac
+	#$(AT)$(CC) -shared -Wl,-install_name,libfg_algorithms.so -o libfg_algorithms.so *.o
+
+
+clean:
+	@echo $(ANSI_RED)"[CLEAN]"$(ANSI_OFF) $@
+	rm -f $(OBJS) $(LIB)
+	rm -f *.so
+
+main: $(LIB)
+
+
+all: lib
+
+.PHONY:	lib all clean installofiles
+

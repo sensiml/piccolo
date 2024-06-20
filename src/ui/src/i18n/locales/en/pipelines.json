@@ -1,0 +1,39 @@
+{
+  "form-import": {
+    "error-validation-json": "Imported pipeline JSON should be either an object with a pipeline or a pipeline array",
+    "error-required-json": "Needs to upload pipeline json",
+    "error-required-query-name": "Query should be selected",
+    "error-required-sensors": "Replacement for all sensors should be selected",
+    "from-import-alert-msg": "This form allows building a pipeline from json file. That can be imported from other projects, pipelines, or models. Upload the file and confirm import to start review data before build a model.",
+    "import-btn": "Confirm Import",
+    "create-btn": "Create pipeline",
+    "crate-label-new-name": "New name",
+    "alert-info-sensor-replace": "The imported pipeline and the query {{queryName}} have different sensor columns. To import this pipeline, please, select how to replace them.",
+    "alert-warning-sensor-replace": "Some of the columns from the imported pipeline have not been mapped. This may affect your model results. But you can select how to replace some of them.",
+    "alert-waring-select-metadata-params": "Review the values for the parameter: {{paramNameLabel}}"
+  },
+  "form-create": {
+    "step-select-params": "Select parameters",
+    "step-create-pipeline": "Create pipeline",
+    "parameter-form-classification-desc": "Select a Machine Learning Classification Algorithm",
+    "parameter-form-is-automl-label": "Use SensiML AutoML to find the best machine learning algorithm",
+    "parameter-form-button": "Next",
+    "create-new-pipeline-decs-automl": "AutoML is used to create a set of models within the desired statistical (accuracy, f1-score, sensitivity, etc.) and classifier size (neurons, features) parameters. As the algorithm iterates each optimization step, it narrow downs the searching space to find a desired number of models. The optimization terminates when the desired model is found or the number of iterations reaches the max number of iterations."
+  },
+  "form-template-create": {
+    "step-info-btn": "Next",
+    "step-parameters-btn": "Next",
+    "alert-msg-parameters": "Select pipeline that best fits your project.",
+    "form-parameter-label-sensor": "Expected Sensors: {{sensors}}"
+  },
+  "table": {
+    "title": "Pipelines",
+    "header-download": "",
+    "tooltip-download": "Export the pipeline as a JSON, python, or IPython Notebook file",
+    "tooltip-cpu-time": "Cloud computing service CPU time has been used CPU to execute the pipeline and generate models",
+    "dialog-delete-title": "Delete Pipeline",
+    "dialog-delete-model-counts-text": "There are {{modelCounts}} Knowledge Packs on this pipeline. Deleting the pipeline will also delete the Knowledge Packs created with this pipeline.",
+    "dialog-delete-text": "Are you sure you want to delete the Pipeline {{selectedPipelineName}}?",
+    "dialog-delete-multi-text": "Are you sure you want to delete  {{count}} pipelines?"
+  }
+}

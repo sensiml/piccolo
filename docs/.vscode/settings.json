@@ -1,0 +1,8 @@
+{
+  "restructuredtext.builtDocumentationPath": "${workspaceFolder}/build",
+  "restructuredtext.sourcePath": "${workspaceFolder}/source",
+  "restructuredtext.confPath": "${workspaceFolder}\\source",
+  "esbonio.sphinx.confDir": "${workspaceFolder}\\source",
+  "esbonio.sphinx.buildDir": "${workspaceFolder}/build",
+  "esbonio.sphinx.srcDir": "${workspaceFolder}/source"
+}

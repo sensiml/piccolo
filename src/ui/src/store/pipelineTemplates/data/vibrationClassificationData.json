@@ -1,0 +1,661 @@
+{
+    "name": "Vibration Classification",
+    "brief": "This is a template for using machine learning to classify machine states based on vibrations sensors.",
+    "summary": "Using a combination of frequency feature and supervised machine learning classifiers you can classify the signature of time series sensor data. This pipeline uses a sliding window to segment data for classification. For best performance each segment should contain multiple cycles. Using this approach enables a variety of applications such as predictive maintenance and condition monitoring.",
+    "img": "",
+    "pipelines": [
+        {
+            "sensors": [
+                "AccelerometerX"
+            ],
+            "info": "This pipeline uses frequency based feature extractors combined with supervised machine learning classification algorithms to classify different states of machines based on their vibration signatures.",
+            "pipeline": [
+                {
+                    "name": "VibrationQuery",
+                    "use_session_preprocessor": false,
+                    "type": "query",
+                    "outputs": [
+                        "temp.raw"
+                    ]
+                },
+                {
+                    "name": "Windowing",
+                    "type": "segmenter",
+                    "outputs": [
+                        "temp.Windowing0"
+                    ],
+                    "inputs": {
+                        "window_size": 100,
+                        "delta": 100,
+                        "train_delta": 0,
+                        "return_segment_index": false,
+                        "group_columns": [
+                            "segment_uuid",
+                            "Label"
+                        ],
+                        "input_data": "temp.raw"
+                    },
+                    "options": {
+                        "is_should_be_reviewed": true,
+                        "reviewed_steps_params": [
+                            "Step: Windowing",
+                            "Parameters: window_size, delta"
+                        ],
+                        "message": "The window size determines how much data is used to perform feature extraction an classification. For vibration monitoring, the window size should typically be set to a time frame that is multiples of the cycles of the machine you are working on. "
+                    }
+                },
+                {
+                    "name": "generator_set",
+                    "type": "generatorset",
+                    "outputs": [
+                        "temp.generator_set0",
+                        "temp.features.generator_set0"
+                    ],
+                    "inputs": {
+                        "input_data": "temp.Windowing0",
+                        "group_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ]
+                    },
+                    "set": [
+                        {
+                            "function_name": "MFE",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "num_filters": 23
+                            }
+                        },
+                        {
+                            "function_name": "Spectral Entropy",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ]
+                            }
+                        },
+                        {
+                            "function_name": "MFCC",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "sample_rate": 16000,
+                                "cepstra_count": 23
+                            }
+                        },
+                        {
+                            "function_name": "Global Peak to Peak of High Frequency",
+                            "inputs": {
+                                "smoothing_factor": 5,
+                                "columns": [
+                                    "AccelerometerX"
+                                ]
+                            }
+                        },
+                        {
+                            "function_name": "Peak Frequencies",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "sample_rate": 100,
+                                "min_frequency": 0,
+                                "max_frequency": 500,
+                                "threshold": 0.2,
+                                "num_peaks": 2,
+                                "window_type": "hanning"
+                            }
+                        },
+                        {
+                            "function_name": "Dominant Frequency",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "sample_rate": 100
+                            }
+                        },
+                        {
+                            "function_name": "Global Peak to Peak of Low Frequency",
+                            "inputs": {
+                                "smoothing_factor": 5,
+                                "columns": [
+                                    "AccelerometerX"
+                                ]
+                            }
+                        },
+                        {
+                            "function_name": "Global Peak to Peak",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ]
+                            }
+                        },
+                        {
+                            "function_name": "Power Spectrum",
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "number_of_bins": 16,
+                                "window_type": "hanning"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "selector_set",
+                    "type": "selectorset",
+                    "outputs": [
+                        "temp.selector_set0",
+                        "temp.features.selector_set0"
+                    ],
+                    "refinement": {},
+                    "inputs": {
+                        "number_of_features": 10,
+                        "remove_columns": [],
+                        "cost_function": "sum",
+                        "label_column": "Label",
+                        "passthrough_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ],
+                        "feature_table": "temp.features.generator_set0",
+                        "input_data": "temp.generator_set0"
+                    },
+                    "set": [
+                        {
+                            "function_name": "Variance Threshold",
+                            "inputs": {
+                                "threshold": 0.15
+                            }
+                        },
+                        {
+                            "function_name": "Correlation Threshold",
+                            "inputs": {
+                                "threshold": 0.95
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Isolation Forest Filtering",
+                    "type": "sampler",
+                    "outputs": [
+                        "temp.Isolation_Forest_Filtering0",
+                        "temp.features.Isolation_Forest_Filtering0"
+                    ],
+                    "inputs": {
+                        "label_column": "Label",
+                        "filtering_label": [],
+                        "outliers_fraction": 0.05,
+                        "assign_unknown": false,
+                        "input_data": "temp.selector_set0"
+                    },
+                    "feature_table": "temp.features.selector_set0"
+                },
+                {
+                    "name": "Min Max Scale",
+                    "type": "transform",
+                    "outputs": [
+                        "temp.Min_Max_Scale0",
+                        "temp.features.Min_Max_Scale0"
+                    ],
+                    "inputs": {
+                        "passthrough_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ],
+                        "min_bound": 0,
+                        "max_bound": 255,
+                        "pad": 0,
+                        "feature_min_max_parameters": {},
+                        "feature_min_max_defaults": null,
+                        "input_data": "temp.Isolation_Forest_Filtering0"
+                    },
+                    "feature_table": "temp.features.Isolation_Forest_Filtering0"
+                },
+                {
+                    "name": "tvo",
+                    "type": "tvo",
+                    "outputs": [
+                        "temp.tvo0",
+                        "temp.features.tvo0"
+                    ],
+                    "feature_table": "temp.features.Min_Max_Scale0",
+                    "validation_seed": 0,
+                    "label_column": "Label",
+                    "ignore_columns": [
+                        "segment_uuid",
+                        "SegmentID"
+                    ],
+                    "input_data": "temp.Min_Max_Scale0",
+                    "validation_methods": [
+                        {
+                            "name": "Stratified Shuffle Split",
+                            "inputs": {
+                                "test_size": 0,
+                                "validation_size": 0.2,
+                                "number_of_folds": 1
+                            }
+                        }
+                    ],
+                    "classifiers": [
+                        {
+                            "name": "PME",
+                            "inputs": {
+                                "distance_mode": "L1",
+                                "classification_mode": "KNN",
+                                "max_aif": 400,
+                                "min_aif": 25,
+                                "num_channels": 1,
+                                "reserved_patterns": 0,
+                                "reinforcement_learning": false
+                            }
+                        }
+                    ],
+                    "optimizers": [
+                        {
+                            "name": "RBF with Neuron Allocation Optimization",
+                            "inputs": {
+                                "remove_unknown": false,
+                                "number_of_iterations": 100,
+                                "turbo": true,
+                                "ranking_metric": "f1_score",
+                                "number_of_neurons": 128,
+                                "aggressive_neuron_creation": true
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hyper_params": {
+                "seed": "Custom",
+                "params": {
+                    "reset": true,
+                    "set_training_algorithm": {
+                        "Hierarchical Clustering with Neuron Optimization": {},
+                        "RBF with Neuron Allocation Optimization": {},
+                        "Random Forest": {},
+                        "xGBoost": {},
+                        "Train Fully Connected Neural Network": {}
+                    },
+                    "set_selectorset": {
+                        "Information Gain": {},
+                        "t-Test Feature Selector": {},
+                        "Univariate Selection": {},
+                        "Tree-based Selection": {}
+                    },
+                    "disable_automl": false,
+                    "prediction_target(%)": {
+                        "f1_score": 100
+                    },
+                    "hardware_target": {
+                        "classifiers_sram": 32000
+                    },
+                    "iterations": 2,
+                    "allow_unknown": false,
+                    "population_size": 40,
+                    "single_model": true,
+                    "hierarchical_multi_model": false,
+                    "search_steps": [
+                        "tvo",
+                        "selectorset"
+                    ]
+                }
+            }
+        },
+        {
+            "sensors": [
+                "AccelerometerX",
+                "AccelerometerY",
+                "AccelerometerZ"
+            ],
+            "info": "This pipeline uses frequency based feature extractors combined with supervised machine learning classification algorithms to classify different states of machines based on their vibration signatures.",
+            "pipeline": [
+                {
+                    "name": "Vibration Classification",
+                    "use_session_preprocessor": false,
+                    "type": "query",
+                    "outputs": [
+                        "temp.raw"
+                    ]
+                },
+                {
+                    "name": "Windowing",
+                    "type": "segmenter",
+                    "inputs": {
+                        "delta": 100,
+                        "input_data": "temp.raw",
+                        "train_delta": 0,
+                        "window_size": 100,
+                        "group_columns": [
+                            "segment_uuid",
+                            "Label"
+                        ],
+                        "return_segment_index": false
+                    },
+                    "outputs": [
+                        "temp.Windowing0"
+                    ]
+                },
+                {
+                    "set": [
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ"
+                                ],
+                                "sample_rate": 100
+                            },
+                            "function_name": "Dominant Frequency"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ"
+                                ]
+                            },
+                            "function_name": "Global Peak to Peak"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "sample_rate": 16000,
+                                "cepstra_count": 23
+                            },
+                            "function_name": "MFCC"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerY"
+                                ],
+                                "sample_rate": 16000,
+                                "cepstra_count": 23
+                            },
+                            "function_name": "MFCC"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerZ"
+                                ],
+                                "sample_rate": 16000,
+                                "cepstra_count": 23
+                            },
+                            "function_name": "MFCC"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "num_filters": 23
+                            },
+                            "function_name": "MFE"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerY"
+                                ],
+                                "num_filters": 23
+                            },
+                            "function_name": "MFE"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerZ"
+                                ],
+                                "num_filters": 23
+                            },
+                            "function_name": "MFE"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ"
+                                ],
+                                "num_peaks": 2,
+                                "threshold": 0.2,
+                                "sample_rate": 100,
+                                "window_type": "hanning",
+                                "max_frequency": 500,
+                                "min_frequency": 0
+                            },
+                            "function_name": "Peak Frequencies"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX"
+                                ],
+                                "window_type": "hanning",
+                                "number_of_bins": 16
+                            },
+                            "function_name": "Power Spectrum"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerY"
+                                ],
+                                "window_type": "hanning",
+                                "number_of_bins": 16
+                            },
+                            "function_name": "Power Spectrum"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerZ"
+                                ],
+                                "window_type": "hanning",
+                                "number_of_bins": 16
+                            },
+                            "function_name": "Power Spectrum"
+                        },
+                        {
+                            "inputs": {
+                                "columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ"
+                                ]
+                            },
+                            "function_name": "Spectral Entropy"
+                        }
+                    ],
+                    "name": "generator_set",
+                    "type": "generatorset",
+                    "inputs": {
+                        "input_data": "temp.Windowing0",
+                        "group_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ]
+                    },
+                    "outputs": [
+                        "temp.generator_set0",
+                        "temp.features.generator_set0"
+                    ]
+                },
+                {
+                    "set": [
+                        {
+                            "inputs": {
+                                "threshold": 0.15
+                            },
+                            "function_name": "Variance Threshold"
+                        },
+                        {
+                            "inputs": {
+                                "threshold": 0.95
+                            },
+                            "function_name": "Correlation Threshold"
+                        },
+                        {
+                            "function_name": "Information Gain",
+                            "inputs": {
+                                "feature_number": 4
+                            }
+                        }
+                    ],
+                    "name": "selector_set",
+                    "type": "selectorset",
+                    "inputs": {
+                        "input_data": "temp.generator_set0",
+                        "label_column": "Label",
+                        "cost_function": "sum",
+                        "feature_table": "temp.features.generator_set0",
+                        "remove_columns": [],
+                        "number_of_features": 10,
+                        "passthrough_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ]
+                    },
+                    "outputs": [
+                        "temp.selector_set0",
+                        "temp.features.selector_set0"
+                    ],
+                    "refinement": {}
+                },
+                {
+                    "name": "Isolation Forest Filtering",
+                    "type": "sampler",
+                    "inputs": {
+                        "input_data": "temp.selector_set0",
+                        "label_column": "Label",
+                        "assign_unknown": false,
+                        "filtering_label": [],
+                        "outliers_fraction": 0.05
+                    },
+                    "outputs": [
+                        "temp.Isolation_Forest_Filtering0",
+                        "temp.features.Isolation_Forest_Filtering0"
+                    ],
+                    "feature_table": "temp.features.selector_set0"
+                },
+                {
+                    "name": "Min Max Scale",
+                    "type": "transform",
+                    "inputs": {
+                        "pad": 0,
+                        "max_bound": 255,
+                        "min_bound": 0,
+                        "input_data": "temp.Isolation_Forest_Filtering0",
+                        "passthrough_columns": [
+                            "segment_uuid",
+                            "Label",
+                            "SegmentID"
+                        ],
+                        "feature_min_max_defaults": null,
+                        "feature_min_max_parameters": {}
+                    },
+                    "outputs": [
+                        "temp.Min_Max_Scale0",
+                        "temp.features.Min_Max_Scale0"
+                    ],
+                    "feature_table": "temp.features.Isolation_Forest_Filtering0"
+                },
+                {
+                    "name": "tvo",
+                    "type": "tvo",
+                    "outputs": [
+                        "temp.tvo0",
+                        "temp.features.tvo0"
+                    ],
+                    "input_data": "temp.Min_Max_Scale0",
+                    "optimizers": [
+                        {
+                            "name": "RBF with Neuron Allocation Optimization",
+                            "inputs": {
+                                "turbo": true,
+                                "ranking_metric": "f1_score",
+                                "remove_unknown": false,
+                                "number_of_neurons": 128,
+                                "number_of_iterations": 100,
+                                "aggressive_neuron_creation": true
+                            }
+                        }
+                    ],
+                    "classifiers": [
+                        {
+                            "name": "PME",
+                            "inputs": {
+                                "max_aif": 400,
+                                "min_aif": 25,
+                                "num_channels": 1,
+                                "distance_mode": "L1",
+                                "reserved_patterns": 0,
+                                "classification_mode": "KNN",
+                                "reinforcement_learning": false
+                            }
+                        }
+                    ],
+                    "label_column": "Label",
+                    "feature_table": "temp.features.Min_Max_Scale0",
+                    "ignore_columns": [
+                        "segment_uuid",
+                        "capture_uuid",
+                        "set",
+                        "SegmentID"
+                    ],
+                    "validation_seed": 0,
+                    "validation_methods": [
+                        {
+                            "name": "Stratified Shuffle Split",
+                            "inputs": {
+                                "test_size": 0,
+                                "number_of_folds": 1,
+                                "validation_size": 0.2
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hyper_params": {
+                "seed": "Custom",
+                "params": {
+                    "reset": true,
+                    "iterations": 2,
+                    "search_steps": [
+                        "tvo",
+                        "selectorset"
+                    ],
+                    "single_model": true,
+                    "allow_unknown": false,
+                    "disable_automl": false,
+                    "hardware_target": {
+                        "classifiers_sram": 32000
+                    },
+                    "population_size": 40,
+                    "prediction_target(%)": {
+                        "f1_score": 100
+                    },
+                    "hierarchical_multi_model": false
+                }
+            }
+        }
+    ]
+}

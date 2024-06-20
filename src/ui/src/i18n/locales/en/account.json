@@ -1,0 +1,28 @@
+{
+  "account-info": {
+    "title": "Account Info",
+    "description": "Manage your account settings",
+    "basic-info-header": "Basic Info",
+    "password-header": "Password",
+    "change-password-btn": "Change Password",
+    "basic-info-email": "Email",
+    "basic-info-team": "Team"
+  },
+  "account-subscription": {
+    "title": "Subscriptions",
+    "description": "Manage your account subscriptions",
+    "plan-header": "Current Plan",
+    "plan-btn": "Manage Subscription",
+    "credits-plan-title": "Included Clould Resources",
+    "credits-plan-description": "Default cloud resources in your subscription",
+    "credits-purchased-title": "Purchased Cloud Resources",
+    "credits-purchased-description": "Additional cloud resources that you purchased"
+  },
+  "account-api-keys": {
+    "title": "API Keys",
+    "description": "API Keys allow authenticating a python SDK accessing the cloud resources",
+    "header": "API Keys",
+    "create-btn": "Generate API Key",
+    "create-title": "Create API Key"
+  }
+}

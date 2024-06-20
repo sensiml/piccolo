@@ -1,0 +1,525 @@
+- fields:
+    uuid: e9f53dfa-f434-4f24-9577-839c190f74da
+    name: ARM GCC Generic
+    description: Use the ARM-GCC compiler to build libraries for ARM Cortex-M/A devices.
+    processors:
+      [
+        241a03d2-3e13-4087-9d7b-07a3f96e6dff,
+        530e1a45-22d3-429b-ae03-90b28040c54d,
+        de848043-c284-4647-8364-7cc1a8582e68,
+        3cc7739d-b218-4946-9366-3ab2293d42d6,
+        b003c819-90cc-4ec0-9c67-1986a74e90da,
+        5192eb71-8831-474e-97b3-5f0a825303cb,
+        a7aa7320-c6a3-4f00-a429-b300ff38613e
+      ]
+    can_build_binary: false
+    codegen_file_location: ["arm-none-eabi"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters: { "codegen_class": "ARMGCCGenericCodeGenerator" }
+    supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "2e8bdcf0-557a-41bd-a41d-64e443ec97a9",
+        "processor": "241a03d2-3e13-4087-9d7b-07a3f96e6dff",
+        "float": "Hard FP",
+        "hardware_accelerator": "cmsis_nn",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application that feeds sensor data into a SensiML Knowledge Pack model",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "testdata_runner",
+          },
+        "Arduino Model Runner":
+          {
+            "description": "A SensiML model library that can be imported into an Arduino project",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "arduino",
+          },
+      }
+    platform_type: "compiler"
+    documentation: "https://sensiml.com/documentation/firmware/arm-cortex-generic/cortex-arm-generic-platforms.html"
+    manufacturer: ARM
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: 26eef4c2-6317-4094-8013-08503dcd4bc5
+    name: x86 GCC Generic
+    description: Use the GCC Compiler to build libraries for x86(and x86-64) devices.
+    processors: [822581d2-8845-4692-bcac-4446d341d4a0]
+    can_build_binary: false
+    codegen_file_location: ["x86gcc_generic"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters: { "codegen_class": "GCCGenericCodeGenerator" }
+    supported_compilers: [62aabe7e-4f5d-4167-a786-072e4a8dc158]
+    hardware_accelerators: {}
+    default_selections:
+      {
+        "compiler": "62aabe7e-4f5d-4167-a786-072e4a8dc158",
+        "processor": "822581d2-8845-4692-bcac-4446d341d4a0",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application that feeds sensor data into a SensiML Knowledge Pack model",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "testdata_runner",
+          },
+      }
+    platform_type: "compiler"
+    documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
+    manufacturer: x86 GCC
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: 4e75fa7a-8f67-11ec-b909-0242ac120002
+    name: Silicon Labs xG24 Dev Kit
+    description: Build libraries and Audio/IMU applications for Silicon Labs Silicon Labs xG24 Dev Kit.
+    docker_image: "sml_xg24_dev_board"
+    platform_versions: ["10.2.1"]
+    docker_image_version: "v1.0"
+    processors: [1b2955ac-8e65-11ec-b909-0242ac120002]
+    can_build_binary: False
+    codegen_file_location: ["arm-none-eabi"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application binary (or example code) that implements SensiML Simple Streaming interface for reporting Knowledge Pack results",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "sensiml_recognition",
+            "codegen_app_location": "platforms/silicon-labs/xg24-dev-board",
+          },
+      }
+    codegen_parameters:
+      {
+        "codegen_class": "ARMGCCGenericCodeGenerator",
+        "uses_sensiml_interface": False,
+        "uses_simple_streaming": True,
+        "app_environment":
+          {
+            "SML_APP_CONFIG_FILE": "/build/sensiml_recognition_motion/app_sensor_imu.h",
+          },
+      }
+    supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "siliconlabs":
+          {
+            "display_name": "Silicon Labs MVP AI Accelerator",
+            "description": "Use the Silicon Labs Matrix Vector Processor (MVP) to accelerate NN",
+            "kernel": "siliconlabs",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "2e8bdcf0-557a-41bd-a41d-64e443ec97a9",
+        "processor": "1b2955ac-8e65-11ec-b909-0242ac120002",
+        "float": "Hard FP",
+        "hardware_accelerator": "siliconlabs",
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/silicon-labs-xg24/silicon-labs-xg24.html"
+    manufacturer: Silicon Labs
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: ef8777a0-17c4-414a-88f8-09734308bacf
+    name: Raspberry Pi
+    description: Build libraries for Raspberry Pi devices.
+    processors:
+      [
+        1b8bcfbd-7a6e-4292-8ccc-bf808e7658fc,
+        e3d6cdb6-3d30-4efe-9201-592d20668c58,
+      ]
+    can_build_binary: false
+    codegen_file_location: ["arm-none-linux-gnueabihf"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters:
+      {
+        "codegen_class": "ARMGCCGenericCodeGenerator",
+        "uses_sensiml_interface": False,
+        "uses_simple_streaming": False,
+        "application": "testdata_runner",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application which feed sensor data into a SensiML Knowledge Pack model",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "testdata_runner",
+            "codegen_app_location": "platforms/raspberry_pi",
+          },
+      }
+    supported_compilers: [5fb8c1d8-66a6-46a5-b4ca-2c5b2ec7b152]
+    default_selections:
+      {
+        "compiler": "5fb8c1d8-66a6-46a5-b4ca-2c5b2ec7b152",
+        "processor": "e3d6cdb6-3d30-4efe-9201-592d20668c58",
+        "float": "Hard FP",
+      }
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/raspberry-pi/raspberry-pi.html"
+    manufacturer: Raspberry Pi Foundation
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: 1183f67c-c279-4612-87eb-877d4063d75a
+    name: TensorfLow Lite Micro
+    docker_image: "sensiml_tensorflow"
+    description: Build a TensorFlow Lite library
+    processors:
+      [
+        241a03d2-3e13-4087-9d7b-07a3f96e6dff,
+        530e1a45-22d3-429b-ae03-90b28040c54d,
+      ]
+    can_build_binary: false
+    platform_versions: ["0a4bec2a"]
+    docker_image_version: "v4.0"
+    codegen_file_location: ["tensorflowlite_micro"]
+    permissions: { "developer": false, "enterprise": false, "starter": false }
+    supported_source_drivers: {}
+    codegen_parameters: {}
+    supported_compilers: []
+    hardware_accelerators: {}
+    default_selections: {}
+    platform_type: "compiler"
+    documentation: "https://www.tensorflow.org/lite/microcontrollers"
+    manufacturer: null
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: 442f90db-d718-4304-8540-22cf3cbacc91
+    name: SparkFun Thing Plus - QuickLogic EOS S3
+    description: Platform to build for the SparkFun Thing Plus - QuickLogic EOS S3 device.
+    docker_image: "sml_qorc_sdk"
+    platform_versions: ["1.10.0"]
+    docker_image_version: "v1.0"
+    processors: [4746fe1d-6f32-4611-962b-0318ba0e5215]
+    can_build_binary: false
+    codegen_file_location: ["arm-none-eabi"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application that implements SensiML Simple Streaming interface for reporting Knowledge Pack results",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "qt_ssi_ai_app",
+            "codegen_app_location": "platforms/quickthingplus",
+          },
+      }
+    codegen_parameters:
+      {
+        "codegen_class": "QuickLogicS3CodeGenerator",
+        "board": "quickthingplus",
+      }
+    supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "2e8bdcf0-557a-41bd-a41d-64e443ec97a9",
+        "processor": "4746fe1d-6f32-4611-962b-0318ba0e5215",
+        "float": "Hard FP",
+        "hardware_accelerator": "cmsis_nn",
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/sparkfun-thing-plus-quicklogic-eos-s3/sparkfun-thing-plus-quicklogic-eos-s3.html"
+    manufacturer: QuickLogic
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: aaf098cb-7a11-4653-b1d3-e71800610208
+    name: Arduino Nano33 BLE Sense
+    description: Build libraries and example application for Arduino Nano33 BLE Sense development board.
+    platform_versions: ["nrf52"]
+    processors: [cafbed02-09b3-494e-8c07-966fe71e9727]
+    can_build_binary: false
+    codegen_file_location: ["arm-none-eabi"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "Example application which feeds sensor data into a Knowledge Pack model and reports the result.",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "recognition_run",
+            "codegen_app_location": "platforms/arduino/nano_33_ble_sense",
+          },
+      }
+    codegen_parameters:
+      {
+        "codegen_class": "ARMGCCGenericCodeGenerator",
+        "uses_simple_streaming": True,
+        "uses_sensiml_interface": False,
+        "app_environment":
+          {
+            "EXTRA_LIBS_DIR": "/build",
+            "SML_KP_DIR": "/build/libsensiml",
+            "SML_KP_OUTPUT_DIR": "/build/libsensiml/_build",
+            "SML_APP_BUILD_DIR": "/build/",
+            "SML_APP_DIR": "/build/src",
+            "SML_APP_CONFIG_FILE": "/build/inc/sensor_config.h",
+            "SML_APP_LIB_DIR": "/build/lib/sensiml",
+            "SML_APP_OUTPUT_BIN_DIR": "/build/.pio/build/",
+          },
+      }
+    supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "processor": "cafbed02-09b3-494e-8c07-966fe71e9727",
+        "compiler": "2e8bdcf0-557a-41bd-a41d-64e443ec97a9",
+        "float": "Soft FP",
+        "hardware_accelerator": "cmsis_nn",
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/arduino-nano33/arduino-nano33.html"
+    manufacturer: Arduino
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: 865e322e-a180-48e3-b8be-8844d08821d8
+    name: Windows x86_64
+    description: Platform to build libraries for x86(and x86-64) devices with mingw-64 for running on Windows.
+    processors: [822581d2-8845-4692-bcac-4446d341d4a0]
+    can_build_binary: false
+    codegen_file_location: ["x86mingw64_generic"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters: { "codegen_class": "MINGW64GenericCodeGenerator" }
+    supported_compilers: [24308768-a59d-468b-b65f-cde6071ae2b2]
+    hardware_accelerators: {}
+    default_selections:
+      {
+        "compiler": "24308768-a59d-468b-b65f-cde6071ae2b2",
+        "processor": "822581d2-8845-4692-bcac-4446d341d4a0",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "Example application which feeds sensor data into a Knowledge Pack model and reports the result.",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "testdata_runner",
+          },
+      }
+    platform_type: "compiler"
+    documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
+    manufacturer: MinGW
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    uuid: c2dd2830-1271-40d7-8652-76e4b427479e
+    name: Arduino Nicla Sense ME
+    description: Platform to build libraries for Bosch/Arduino Pro Nicla Sense ME board.
+    processors: [2af7e581-22c6-4cdf-ae2c-21a47ac780a3]
+    can_build_binary: false
+    codegen_file_location: ["arm-none-eabi"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters:
+      {
+        "codegen_class": "ARMGCCGenericCodeGenerator",
+        "uses_simple_streaming": True,
+        "uses_sensiml_interface": False,
+        "app_environment":
+          {
+            "EXTRA_LIBS_DIR": "/build",
+            "SML_KP_DIR": "/build/libsensiml",
+            "SML_KP_OUTPUT_DIR": "/build/libsensiml/_build",
+            "SML_APP_BUILD_DIR": "/build/",
+            "SML_APP_CONFIG_FILE": "/build/recognition_run/sensor_stream.h",
+          },
+      }
+    supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
+    hardware_accelerators:
+      {
+        "cmsis_nn":
+          {
+            "display_name": "CMSIS",
+            "kernel": "cmsis_nn",
+            "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
+          },
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "2e8bdcf0-557a-41bd-a41d-64e443ec97a9",
+        "processor": "2af7e581-22c6-4cdf-ae2c-21a47ac780a3",
+        "float": "Soft FP",
+        "hardware_accelerator": "cmsis_nn",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "Example application which feeds sensor data into a Knowledge Pack model and reports the result.",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "recognition_run",
+            "codegen_app_location": "platforms/bosch/nicla-sense-me",
+          },
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/arduino-nicla-sense-me/arduino-nicla-sense-me.html"
+    manufacturer: Arduino
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    applications:
+      AI Model Runner:
+        codegen_app_name: testdata_runner
+        description:
+          A Library that implements SensiML Simple Streaming interface
+          for reporting Knowledge Pack results
+        supported_outputs:
+          - - Serial
+      Arduino Model Runner:
+        codegen_app_name: arduino
+        description: A SensiML model library that can be imported into an Arduino project
+        supported_outputs:
+          - - Serial
+    can_build_binary: false
+    codegen_file_location:
+      - espressif
+    codegen_parameters:
+      codegen_class: EspressifCodeGenerator
+    default_selections:
+      compiler: ff5e8134-1e71-480b-a5e5-686e7e61e482
+      float: Hard FP
+      processor: cf65817e-154f-42b1-83e0-dc70f276d945
+    description: Build Library for Espressif ESP32
+    documentation: https://sensiml.com/documentation/firmware/espressif/espressif.html
+    hardware_accelerators: {}
+    manufacturer: Espressif
+    name: Espressif ESP-IDF
+    permissions:
+      developer: true
+      enterprise: true
+      starter: true
+    platform_type: compiler
+    processors:
+      - cf65817e-154f-42b1-83e0-dc70f276d945
+    supported_compilers:
+      - ff5e8134-1e71-480b-a5e5-686e7e61e482
+    uuid: 6409f946-09c8-4a81-958c-cf0aaa19f694
+  model: library.PlatformDescriptionVersion2
+
+- fields:
+    applications:
+      Arduino Model Runner:
+        codegen_app_name: arduino
+        description: A SensiML model library that can be imported into an Arduino project
+        supported_outputs:
+          - - Serial
+    can_build_binary: false
+    codegen_file_location:
+      - espressif
+    codegen_parameters:
+      codegen_class: EspressifCodeGenerator
+    default_selections:
+      compiler: ff5e8134-1e71-480b-a5e5-686e7e61e482
+      float: Hard FP
+      processor: cf65817e-154f-42b1-83e0-dc70f276d945
+    description: Build Library for M5StickC PLUS ESP32-PICO Development Kit
+    documentation: https://sensiml.com/documentation/firmware/m5stack-m5stickc-plus/m5stickc-plus.html
+    hardware_accelerators: {}
+    manufacturer: M5Stack
+    name: M5StickC PLUS ESP32-PICO Development Kit
+    permissions:
+      developer: true
+      enterprise: true
+      starter: true
+    platform_type: devkit
+    processors:
+      - cf65817e-154f-42b1-83e0-dc70f276d945
+    supported_compilers:
+      - ff5e8134-1e71-480b-a5e5-686e7e61e482
+    uuid: 7b5f3d48-debe-4bba-a02e-16024989045d
+  model: library.PlatformDescriptionVersion2

@@ -1,0 +1,13 @@
+__old*
+*.test.js
+test.js
+test
+fixtures
+cypress
+__mocks__
+tmp*
+*Jest.js
+*jest.js
+node_modules/**
+*stories*
+*d3fcAdjustedBrush*

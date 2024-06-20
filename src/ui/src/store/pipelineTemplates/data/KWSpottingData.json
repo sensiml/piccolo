@@ -1,0 +1,716 @@
+{
+  "name": "Keyword Spotting",
+  "brief": "Templates to do keyword spotting for human voice",
+  "summary": "Templates to build classification models to detect keywords from human voice. These algorithms take the transfer learning approach to train base neural networks that have been pre-trained using the Google keyword dataset.",
+  "img": "",
+  "pipelines": [
+    {
+      "sensors": ["channel_0"],
+      "info": "Model Size: ~47 KB. Model Latency: ~300 ms at 100 MHz. Expected Segment Size: 16000 samples (1 second)",
+      "pipeline": [
+        {
+          "name": "Keyword Spotting",
+          "use_session_preprocessor": false,
+          "type": "query",
+          "outputs": ["temp.raw"]
+        },
+        {
+          "name": "Windowing",
+          "type": "segmenter",
+          "outputs": ["temp.Windowing0"],
+          "inputs": {
+            "delta": 320,
+            "train_delta": 0,
+            "window_size": 480,
+            "group_columns": ["segment_uuid", "Label"],
+            "return_segment_index": false,
+            "input_data": "temp.raw"
+          }
+        },
+        {
+          "name": "Segment Energy Threshold Filter",
+          "type": "transform",
+          "outputs": ["temp.Segment_Energy_Threshold_Filter0"],
+          "inputs": {
+            "backoff": 0,
+            "threshold": 200,
+            "delay": 25,
+            "input_column": "channel_0",
+            "disable_train": true,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Windowing0"
+          },
+          "options": {
+            "is_should_be_reviewed": true,
+            "reviewed_steps_params": [
+              "Step: Segment Energy Threshold Filter",
+              "Parameters: backoff, threshold, delay"
+            ],
+            "message": "The segment filter energy threshold is used as a trigger to start classification. Set this value so that you ignore sounds that are below the threshold."
+          }
+        },
+        {
+          "name": "generator_set",
+          "type": "generatorset",
+          "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+          "inputs": {
+            "input_data": "temp.Segment_Energy_Threshold_Filter0",
+            "group_columns": ["segment_uuid", "Label", "SegmentID"]
+          },
+          "set": [
+            {
+              "function_name": "MFCC",
+              "inputs": {
+                "columns": ["channel_0"],
+                "sample_rate": 16000,
+                "cepstra_count": 23
+              }
+            }
+          ]
+        },
+        {
+          "name": "Min Max Scale",
+          "type": "transform",
+          "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+          "inputs": {
+            "pad": 0,
+            "max_bound": 255,
+            "min_bound": 0,
+            "passthrough_columns": ["segment_uuid", "Label", "SegmentID"],
+            "feature_min_max_defaults": {
+              "maximum": 500000,
+              "minimum": -500000
+            },
+            "is_use_feature_min_max_defaults": true,
+            "feature_min_max_parameters": {},
+            "input_data": "temp.selector_set0"
+          },
+          "feature_table": "temp.features.selector_set0"
+        },
+        {
+          "name": "Feature Cascade",
+          "type": "transform",
+          "outputs": ["temp.Feature_Cascade0", "temp.features.Feature_Cascade0"],
+          "inputs": {
+            "slide": false,
+            "training_slide": true,
+            "training_delta": 49,
+            "num_cascades": 49,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Min_Max_Scale0"
+          },
+          "options": {},
+          "feature_table": "temp.features.Min_Max_Scale0"
+        },
+        {
+          "name": "tvo",
+          "type": "tvo",
+          "outputs": ["temp.tvo0", "temp.features.tvo0"],
+          "feature_table": "temp.features.Feature_Cascade0",
+          "validation_seed": 0,
+          "label_column": "Label",
+          "ignore_columns": ["segment_uuid", "SegmentID", "CascadeID"],
+          "input_data": "temp.Feature_Cascade0",
+          "validation_methods": [
+            {
+              "name": "Stratified Shuffle Split",
+              "inputs": {
+                "test_size": 0,
+                "number_of_folds": 1,
+                "validation_size": 0.2
+              }
+            }
+          ],
+          "classifiers": [
+            {
+              "name": "TensorFlow Lite for Microcontrollers",
+              "inputs": {}
+            }
+          ],
+          "optimizers": [
+            {
+              "name": "Transfer Learning",
+              "inputs": {
+                "epochs": 30,
+                "metrics": "accuracy",
+                "threshold": 0.6,
+                "batch_size": 32,
+                "learning_rate": 0.001,
+                "loss_function": "categorical_crossentropy",
+                "estimator_type": "classification",
+                "final_activation": "softmax",
+                "batch_normalization": true,
+                "tensorflow_optimizer": "adam",
+                "base_model": "ab1cf826-69de-11ed-a1eb-0242ac120002",
+                "early_stopping_threshold": 0.9,
+                "early_stopping": true,
+                "random_frequency_mask": true,
+                "random_time_mask": true,
+                "random_bias_noise": true,
+                "training_size_limit": 10000,
+                "validation_size_limit": 5000,
+                "number_of_trainable_base_layer_blocks": 9999,
+                "auxiliary_augmentation": true,
+                "random_sparse_noise": true
+              }
+            }
+          ]
+        }
+      ],
+      "hyper_params": {
+        "seed": "Custom",
+        "params": {
+          "reset": true,
+          "iterations": 2,
+          "single_model": true,
+          "allow_unknown": false,
+          "disable_automl": true,
+          "hardware_target": {
+            "classifiers_sram": 32000
+          },
+          "population_size": 40,
+          "prediction_target(%)": {
+            "f1_score": 100
+          },
+          "hierarchical_multi_model": false,
+          "search_steps": ["tvo"]
+        }
+      }
+    },
+    {
+      "sensors": ["channel_0"],
+      "info": "Model Size: ~25 KB. Model Latency: ~130 ms at 100 MHz. Expected Segment Size: 16000 samples (1 second)",
+      "pipeline": [
+        {
+          "name": "Keyword",
+          "use_session_preprocessor": false,
+          "type": "query",
+          "outputs": ["temp.raw"]
+        },
+        {
+          "name": "Windowing",
+          "type": "segmenter",
+          "outputs": ["temp.Windowing0"],
+          "inputs": {
+            "delta": 320,
+            "train_delta": 0,
+            "window_size": 480,
+            "group_columns": ["segment_uuid", "Label"],
+            "return_segment_index": false,
+            "input_data": "temp.raw"
+          }
+        },
+        {
+          "name": "Segment Energy Threshold Filter",
+          "type": "transform",
+          "outputs": ["temp.Segment_Energy_Threshold_Filter0"],
+          "inputs": {
+            "backoff": 0,
+            "threshold": 200,
+            "delay": 25,
+            "input_column": "channel_0",
+            "disable_train": true,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Windowing0"
+          },
+          "options": {
+            "is_should_be_reviewed": true,
+            "reviewed_steps_params": [
+              "Step: Segment Energy Threshold Filter",
+              "Parameters: backoff, threshold, delay"
+            ],
+            "message": "The segment filter energy threshold is used as a trigger to start classification. Set this value so that you ignore sounds that are below the threshold."
+          }
+        },
+        {
+          "name": "generator_set",
+          "type": "generatorset",
+          "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+          "inputs": {
+            "input_data": "temp.Segment_Energy_Threshold_Filter0",
+            "group_columns": ["segment_uuid", "Label", "SegmentID"]
+          },
+          "set": [
+            {
+              "function_name": "MFCC",
+              "inputs": {
+                "columns": ["channel_0"],
+                "sample_rate": 16000,
+                "cepstra_count": 23
+              }
+            }
+          ]
+        },
+        {
+          "name": "Min Max Scale",
+          "type": "transform",
+          "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+          "inputs": {
+            "pad": 0,
+            "max_bound": 255,
+            "min_bound": 0,
+            "passthrough_columns": ["segment_uuid", "Label", "SegmentID"],
+            "feature_min_max_defaults": {
+              "maximum": 500000,
+              "minimum": -500000
+            },
+            "is_use_feature_min_max_defaults": true,
+            "feature_min_max_parameters": {},
+            "input_data": "temp.selector_set0"
+          },
+          "feature_table": "temp.features.selector_set0"
+        },
+        {
+          "name": "Feature Cascade",
+          "type": "transform",
+          "outputs": ["temp.Feature_Cascade0", "temp.features.Feature_Cascade0"],
+          "inputs": {
+            "slide": false,
+            "training_slide": true,
+            "num_cascades": 49,
+            "training_delta": 49,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Min_Max_Scale0"
+          },
+          "options": {},
+          "feature_table": "temp.features.Min_Max_Scale0"
+        },
+        {
+          "name": "tvo",
+          "type": "tvo",
+          "outputs": ["temp.tvo0", "temp.features.tvo0"],
+          "feature_table": "temp.features.Feature_Cascade0",
+          "validation_seed": 0,
+          "label_column": "Label",
+          "ignore_columns": ["segment_uuid", "SegmentID", "CascadeID"],
+          "input_data": "temp.Feature_Cascade0",
+          "validation_methods": [
+            {
+              "name": "Stratified Shuffle Split",
+              "inputs": {
+                "test_size": 0,
+                "number_of_folds": 1,
+                "validation_size": 0.2
+              }
+            }
+          ],
+          "classifiers": [
+            {
+              "name": "TensorFlow Lite for Microcontrollers",
+              "inputs": {}
+            }
+          ],
+          "optimizers": [
+            {
+              "name": "Transfer Learning",
+              "inputs": {
+                "epochs": 30,
+                "metrics": "accuracy",
+                "threshold": 0.6,
+                "batch_size": 32,
+                "learning_rate": 0.001,
+                "loss_function": "categorical_crossentropy",
+                "estimator_type": "classification",
+                "final_activation": "softmax",
+                "batch_normalization": true,
+                "tensorflow_optimizer": "adam",
+                "base_model": "06364704-6a2e-11ed-a1eb-0242ac120002",
+                "early_stopping_threshold": 0.9,
+                "early_stopping": true,
+                "random_frequency_mask": true,
+                "random_time_mask": true,
+                "random_bias_noise": true,
+                "auxiliary_augmentation": true,
+                "random_sparse_noise": true,
+                "training_size_limit": 10000,
+                "validation_size_limit": 5000,
+                "number_of_trainable_base_layer_blocks": 9999
+              }
+            }
+          ]
+        }
+      ],
+      "hyper_params": {
+        "seed": "Custom",
+        "params": {
+          "reset": true,
+          "iterations": 2,
+          "single_model": true,
+          "allow_unknown": false,
+          "disable_automl": true,
+          "hardware_target": {
+            "classifiers_sram": 32000
+          },
+          "population_size": 40,
+          "prediction_target(%)": {
+            "f1_score": 100
+          },
+          "hierarchical_multi_model": false,
+          "search_steps": ["tvo"]
+        }
+      }
+    },
+    {
+      "sensors": ["channel_0"],
+      "info": "Model Size: ~13 KB. Model Latency: ~42 ms at 100 MHz. Expected Segment Size: 16000 samples (1 second)",
+      "pipeline": [
+        {
+          "name": "Keyword Spotting",
+          "type": "query",
+          "outputs": ["temp.raw"],
+          "use_session_preprocessor": false
+        },
+        {
+          "name": "Windowing",
+          "type": "segmenter",
+          "inputs": {
+            "delta": 320,
+            "input_data": "temp.augmentation_set1",
+            "train_delta": 0,
+            "window_size": 480,
+            "group_columns": ["segment_uuid", "Set", "Label"],
+            "return_segment_index": false
+          },
+          "outputs": ["temp.Windowing0"]
+        },
+        {
+          "name": "Segment Energy Threshold Filter",
+          "type": "transform",
+          "inputs": {
+            "delay": 25,
+            "backoff": 0,
+            "threshold": 200,
+            "input_data": "temp.Windowing0",
+            "input_column": "channel_0",
+            "disable_train": true,
+            "group_columns": ["segment_uuid", "Set", "Label", "SegmentID"]
+          },
+          "outputs": ["temp.Segment_Energy_Threshold_Filter0"]
+        },
+        {
+          "set": [
+            {
+              "inputs": {
+                "columns": ["channel_0"],
+                "sample_rate": 16000,
+                "cepstra_count": 23
+              },
+              "function_name": "MFCC"
+            }
+          ],
+          "name": "generator_set",
+          "type": "generatorset",
+          "inputs": {
+            "input_data": "temp.Segment_Energy_Threshold_Filter0",
+            "group_columns": ["segment_uuid", "Set", "Label", "SegmentID"]
+          },
+          "outputs": ["temp.generator_set0", "temp.features.generator_set0"]
+        },
+        {
+          "set": [
+            {
+              "inputs": {
+                "custom_feature_selection": {
+                  "1": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                }
+              },
+              "function_name": "Custom Feature Selection By Index"
+            }
+          ],
+          "name": "selector_set",
+          "type": "selectorset",
+          "inputs": {
+            "input_data": "temp.generator_set0",
+            "label_column": "Label",
+            "cost_function": "sum",
+            "feature_table": "temp.features.generator_set0",
+            "remove_columns": [],
+            "number_of_features": 10,
+            "passthrough_columns": ["segment_uuid", "Set", "Label", "SegmentID"]
+          },
+          "outputs": ["temp.selector_set0", "temp.features.selector_set0"],
+          "refinement": {}
+        },
+        {
+          "name": "Min Max Scale",
+          "type": "transform",
+          "inputs": {
+            "pad": 0,
+            "max_bound": 255,
+            "min_bound": 0,
+            "input_data": "temp.selector_set0",
+            "passthrough_columns": ["segment_uuid", "Set", "Label", "SegmentID"],
+            "feature_min_max_defaults": {
+              "maximum": 500000,
+              "minimum": -500000
+            },
+            "feature_min_max_parameters": {}
+          },
+          "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+          "feature_table": "temp.features.selector_set0"
+        },
+        {
+          "name": "Feature Cascade",
+          "type": "transform",
+          "inputs": {
+            "slide": false,
+            "input_data": "temp.Min_Max_Scale0",
+            "num_cascades": 49,
+            "group_columns": ["segment_uuid", "Set", "Label", "SegmentID"],
+            "training_delta": 49,
+            "training_slide": true
+          },
+          "outputs": ["temp.Feature_Cascade0", "temp.features.Feature_Cascade0"],
+          "feature_table": "temp.features.Min_Max_Scale0"
+        },
+        {
+          "name": "tvo",
+          "type": "tvo",
+          "outputs": ["temp.tvo0", "temp.features.tvo0"],
+          "input_data": "temp.Feature_Cascade0",
+          "optimizers": [
+            {
+              "name": "Transfer Learning",
+              "inputs": {
+                "epochs": 30,
+                "metrics": "accuracy",
+                "drop_out": 0.1,
+                "threshold": 0.6,
+                "base_model": "db617dac-aa3c-4db4-8dd0-a2655f4f6fc9",
+                "batch_size": 32,
+                "input_type": "int8",
+                "dense_layers": [],
+                "learning_rate": 0.001,
+                "loss_function": "categorical_crossentropy",
+                "estimator_type": "classification",
+                "final_activation": "softmax",
+                "random_time_mask": true,
+                "random_bias_noise": true,
+                "batch_normalization": true,
+                "random_sparse_noise": true,
+                "training_size_limit": 10000,
+                "tensorflow_optimizer": "adam",
+                "random_frequency_mask": true,
+                "validation_size_limit": 5000,
+                "auxiliary_augmentation": true,
+                "early_stopping_patience": 2,
+                "early_stopping_threshold": 0.9,
+                "number_of_trainable_base_layer_blocks": 9999
+              }
+            }
+          ],
+          "classifiers": [
+            {
+              "name": "TensorFlow Lite for Microcontrollers",
+              "inputs": {}
+            }
+          ],
+          "label_column": "Label",
+          "feature_table": "temp.features.Feature_Cascade0",
+          "ignore_columns": ["segment_uuid", "Set", "SegmentID", "CascadeID"],
+          "validation_methods": [
+            {
+              "name": "Stratified Shuffle Split",
+              "inputs": {
+                "test_size": 0,
+                "number_of_folds": 1,
+                "validation_size": 0.2
+              }
+            }
+          ]
+        }
+      ],
+      "hyper_params": {
+        "seed": "Custom",
+        "params": {
+          "reset": true,
+          "iterations": 2,
+          "search_steps": ["tvo"],
+          "single_model": true,
+          "allow_unknown": false,
+          "disable_automl": true,
+          "hardware_target": {
+            "classifiers_sram": 32000
+          },
+          "population_size": 40,
+          "prediction_target(%)": {
+            "f1_score": 100
+          },
+          "hierarchical_multi_model": false
+        }
+      }
+    },
+    {
+      "sensors": ["channel_0"],
+      "info": "Model Size: ~47 KB. Model Latency: ~300 ms at 100 MHz. Expected Segment Size: 8000 samples (1/2 second)",
+      "pipeline": [
+        {
+          "name": "Keyword Spotting",
+          "use_session_preprocessor": false,
+          "type": "query",
+          "outputs": ["temp.raw"]
+        },
+        {
+          "name": "Windowing",
+          "type": "segmenter",
+          "outputs": ["temp.Windowing0"],
+          "inputs": {
+            "delta": 320,
+            "train_delta": 0,
+            "window_size": 480,
+            "group_columns": ["segment_uuid", "Label"],
+            "return_segment_index": false,
+            "input_data": "temp.raw"
+          }
+        },
+        {
+          "name": "Segment Energy Threshold Filter",
+          "type": "transform",
+          "outputs": ["temp.Segment_Energy_Threshold_Filter0"],
+          "inputs": {
+            "backoff": 0,
+            "threshold": 500,
+            "delay": 25,
+            "input_column": "channel_0",
+            "disable_train": true,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Windowing0"
+          },
+          "options": {
+            "is_should_be_reviewed": true,
+            "reviewed_steps_params": [
+              "Step: Segment Energy Threshold Filter",
+              "Parameters: backoff, threshold, delay"
+            ],
+            "message": "The segment filter energy threshold is used as a trigger to start classification. Set this value so that you ignore sounds that are below the threshold."
+          }
+        },
+        {
+          "name": "generator_set",
+          "type": "generatorset",
+          "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+          "inputs": {
+            "input_data": "temp.Segment_Energy_Threshold_Filter0",
+            "group_columns": ["segment_uuid", "Label", "SegmentID"]
+          },
+          "set": [
+            {
+              "function_name": "MFE",
+              "inputs": {
+                "columns": ["channel_0"],
+                "sample_rate": 16000,
+                "num_filters": 23
+              }
+            }
+          ]
+        },
+        {
+          "name": "Min Max Scale",
+          "type": "transform",
+          "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+          "inputs": {
+            "pad": 0,
+            "max_bound": 255,
+            "min_bound": 0,
+            "passthrough_columns": ["segment_uuid", "Label", "SegmentID"],
+            "feature_min_max_defaults": {
+              "maximum": 175000,
+              "minimum": 0
+            },
+            "is_use_feature_min_max_defaults": true,
+            "feature_min_max_parameters": {},
+            "input_data": "temp.selector_set0"
+          },
+          "feature_table": "temp.features.selector_set0"
+        },
+        {
+          "name": "Feature Cascade",
+          "type": "transform",
+          "outputs": ["temp.Feature_Cascade0", "temp.features.Feature_Cascade0"],
+          "inputs": {
+            "slide": false,
+            "training_slide": true,
+            "num_cascades": 24,
+            "training_delta": 24,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Min_Max_Scale0"
+          },
+          "options": {},
+          "feature_table": "temp.features.Min_Max_Scale0"
+        },
+        {
+          "name": "tvo",
+          "type": "tvo",
+          "outputs": ["temp.tvo0", "temp.features.tvo0"],
+          "feature_table": "temp.features.Feature_Cascade0",
+          "validation_seed": 0,
+          "label_column": "Label",
+          "ignore_columns": ["segment_uuid", "SegmentID", "CascadeID"],
+          "input_data": "temp.Feature_Cascade0",
+          "validation_methods": [
+            {
+              "name": "Stratified Shuffle Split",
+              "inputs": {
+                "test_size": 0,
+                "number_of_folds": 1,
+                "validation_size": 0.2
+              }
+            }
+          ],
+          "classifiers": [
+            {
+              "name": "TensorFlow Lite for Microcontrollers",
+              "inputs": {}
+            }
+          ],
+          "optimizers": [
+            {
+              "name": "Transfer Learning",
+              "inputs": {
+                "epochs": 30,
+                "metrics": "accuracy",
+                "threshold": 0.6,
+                "batch_size": 32,
+                "learning_rate": 0.001,
+                "loss_function": "categorical_crossentropy",
+                "estimator_type": "classification",
+                "final_activation": "softmax",
+                "batch_normalization": true,
+                "tensorflow_optimizer": "adam",
+                "base_model": "64fd2662-8628-4a2b-8515-c76918573f20",
+                "early_stopping_threshold": 0.9,
+                "early_stopping": true,
+                "random_frequency_mask": true,
+                "random_time_mask": true,
+                "random_bias_noise": true,
+                "auxiliary_augmentation": true,
+                "random_sparse_noise": true,
+                "training_size_limit": 10000,
+                "validation_size_limit": 5000
+              }
+            }
+          ]
+        }
+      ],
+      "hyper_params": {
+        "seed": "Custom",
+        "params": {
+          "reset": true,
+          "iterations": 2,
+          "single_model": true,
+          "allow_unknown": false,
+          "disable_automl": true,
+          "hardware_target": {
+            "classifiers_sram": 32000
+          },
+          "population_size": 40,
+          "prediction_target(%)": {
+            "f1_score": 100
+          },
+          "hierarchical_multi_model": false,
+          "search_steps": ["tvo"]
+        }
+      }
+    }
+  ]
+}

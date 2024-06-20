@@ -1,0 +1,51 @@
+- model: oauth2_provider.application
+  pk: 1
+  fields:
+    name: Piccolo AI SensiML Python Client
+    client_id: qQ3hZ1VIn8xsHIg4ci5Kugyfj68SrJGi2pJM2rPt
+    client_secret: 0W1wyEPLzTt38Zdq0Ky2odibE2KTWs7vHwzqBDoO9pU97Bp764BEBAlmDXX28dCPloDx0hcjMKBaPJTyH2jYEZ80sHeIX9SsMIvIcGnRcqcbHIyxSA96mDeSQJ7tKjh2
+    client_type: public
+    redirect_uris: ""
+    authorization_grant_type: password
+    user_id: null
+    created: 2024-06-24 12:11:21
+    updated: 2024-06-24 12:11:22
+
+- model: oauth2_provider.application
+  pk: 2
+  fields:
+    name: Piccolo AI Data Studio
+    client_id: f7BuqpT9Pi1rU9U94nHRRvbItMKuRDW9mMIufgJM
+    client_secret: gVOzUQDz3KyfAuWZ8f7lhF00AJWi2kje0jAZSTc2axvwUFInX3JRE71VYjfsCoLtW1VF9BU3BlcjoVwyzUwFISWzPKC30fo6Wnk4QZiFYtvnJBLanqI23RDv4jKKAWu0
+    client_type: public
+    redirect_uris: ""
+    authorization_grant_type: password
+    user_id: null
+    created: 2024-06-24 12:11:21
+    updated: 2024-06-24 12:11:22
+
+- model: oauth2_provider.application
+  pk: 3
+  fields:
+    name: Piccolo AI Analytics Studio UI
+    client_id: XyHQ0fSNxoi3vydnjaqXKCMXg1AYdpvBPqtFdR5U
+    client_secret: sxRICnPzZncZxBMXJMXMYfa9OJr0p7eAvcHj1C7yzQr5HJsB4blWfyYpb78bHGfzhW1Kmv4JpUNpjl4P0nhZFer3PaZEgi9e7zQJjsSUNBQYkE1ffpk0yGgoC7TZGCrY
+    client_type: public
+    redirect_uris: ""
+    authorization_grant_type: password
+    user_id: null
+    created: 2024-06-24 12:11:21
+    updated: 2024-06-24 12:11:22
+
+- model: oauth2_provider.application
+  pk: 4
+  fields:
+    name: SensiML Analytics Studio UI
+    client_id: cEJR6P7BzASf3n8ydVpbshRj66UbMWjCjTUbqkRk
+    client_secret: aKAv1v2FmazLRsE5taKpxqO3RMqtWhTWz8MO5MOvKo31OE3KXlvtrBSCWC6VlTVKBqYzdsdCwvzOsMYZLB9UX99du1cc93xb2GfYFrDFiBFYCyqg0Rq5FRxuPHDpNxy0
+    client_type: public
+    redirect_uris: ""
+    authorization_grant_type: password
+    user_id: null
+    created: 2024-06-01 12:11:21
+    updated: 2024-06-01 12:11:22

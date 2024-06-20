@@ -1,0 +1,17 @@
+<apps version="2.0">
+  <app keywords="psoc6, audio, ai, motion, sensiml, demo">
+    <name>SensiML Template Application</name>
+    <category>Machine Learning</category>
+    <id>sensiml-demo-psoc6</id>
+    <uri>https://github.com/sensiml/psoc6-template-fw</uri>
+    <description><![CDATA[This package contains a demo project for the CY8CKIT-062S2-43012 kit using the SensiML platform.
+    <br><br>For more details, see the <a href="https://github.com/sensiml/psoc6-template-fw/README.md">README on GitHub</a>.]]></description>
+    <req_capabilities>psoc6 pdm rgb_led</req_capabilities>
+    <versions>
+      <version flow_version="2.0" tools_min_version="2.2.0" req_capabilities_per_version="bsp_gen2">
+        <num>Main</num>
+        <commit>main</commit>
+      </version>
+    </versions>
+  </app>
+</apps>

@@ -1,0 +1,217 @@
+{
+  "name": "Audio Classification",
+  "brief": "This is an example project to demonstrate how to perform audio classification using the SensiML Toolkit. It is meant as the hello world of audio classification. ",
+  "summary": "This is a simple example project to demonstrate how to perform audio classification using the SensiML Toolkit. It is meant as the hello world of audio classification. ",
+  "img": "",
+  "pipelines": [
+    {
+      "sensors": ["channel_0"],
+      "info": "This pipeline stacks features from multiple consecutive segments to create a single feature vector for classification. The features are stored in a ring buffer so that classification can be continuously performed without needing to rebuild the entire feature vector as new data arrives.",
+      "pipeline": [
+        {
+          "name": "Audio Classification",
+          "use_session_preprocessor": false,
+          "type": "query",
+          "outputs": ["temp.raw"]
+        },
+        {
+          "name": "Windowing",
+          "type": "segmenter",
+          "outputs": ["temp.Windowing0"],
+          "inputs": {
+            "delta": 400,
+            "train_delta": 0,
+            "window_size": 400,
+            "group_columns": ["segment_uuid", "Label"],
+            "return_segment_index": false,
+            "input_data": "temp.raw"
+          }
+        },
+        {
+          "name": "Segment Energy Threshold Filter",
+          "type": "transform",
+          "outputs": ["temp.Segment_Energy_Threshold_Filter0"],
+          "inputs": {
+            "backoff": 5,
+            "threshold": 275,
+            "input_column": "channel_0",
+            "disable_train": false,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Windowing0"
+          },
+          "options": {
+            "is_should_be_reviewed": true,
+            "reviewed_steps_params": [
+              "Step: Segment Energy Threshold Filter",
+              "Parameters: backoff, threshold"
+            ],
+            "message": "The segment filter energy threshold is used as a trigger to start classification. Set this value so that you ignore sounds that are below the threshold."
+          }
+        },
+        {
+          "name": "generator_set",
+          "type": "generatorset",
+          "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+          "inputs": {
+            "input_data": "temp.Segment_Energy_Threshold_Filter0",
+            "group_columns": ["segment_uuid", "Label", "SegmentID"]
+          },
+          "set": [
+            {
+              "function_name": "MFCC",
+              "inputs": {
+                "columns": ["channel_0"],
+                "sample_rate": 16000,
+                "cepstra_count": 23
+              }
+            },
+            {
+              "function_name": "Threshold Crossing Rate",
+              "inputs": {
+                "columns": ["channel_0"],
+                "threshold": 200
+              }
+            }
+          ]
+        },
+        {
+          "name": "selector_set",
+          "type": "selectorset",
+          "outputs": ["temp.selector_set0", "temp.features.selector_set0"],
+          "refinement": {},
+          "inputs": {
+            "number_of_features": 10,
+            "remove_columns": [],
+            "cost_function": "sum",
+            "label_column": "Label",
+            "passthrough_columns": ["segment_uuid", "Label", "SegmentID"],
+            "feature_table": "temp.features.generator_set0",
+            "input_data": "temp.generator_set0"
+          },
+          "set": [
+            {
+              "function_name": "Correlation Threshold",
+              "inputs": {
+                "threshold": 0.95
+              }
+            },
+            {
+              "function_name": "Variance Threshold",
+              "inputs": {
+                "threshold": 0.01
+              }
+            },
+            {
+              "function_name": "Information Gain",
+              "inputs": {
+                "feature_number": 4
+              }
+            }
+          ]
+        },
+        {
+          "name": "Min Max Scale",
+          "type": "transform",
+          "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+          "inputs": {
+            "pad": 0,
+            "max_bound": 255,
+            "min_bound": 0,
+            "passthrough_columns": ["segment_uuid", "Label", "SegmentID"],
+            "feature_min_max_defaults": {
+              "maximum": 200000,
+              "minimum": -200000
+            },
+            "is_use_feature_min_max_defaults": true,
+            "feature_min_max_parameters": {},
+            "input_data": "temp.selector_set0"
+          },
+          "feature_table": "temp.features.selector_set0"
+        },
+        {
+          "name": "Feature Cascade",
+          "type": "transform",
+          "outputs": ["temp.Feature_Cascade0", "temp.features.Feature_Cascade0"],
+          "inputs": {
+            "slide": true,
+            "training_slide": false,
+            "training_delta": 1,
+            "num_cascades": 5,
+            "group_columns": ["segment_uuid", "Label", "SegmentID"],
+            "input_data": "temp.Min_Max_Scale0"
+          },
+          "options": {
+            "is_should_be_reviewed": true,
+            "reviewed_steps_params": ["Step: Feature Cascade", "Parameters: num_cascades"],
+            "message": "Use the feature cascade to select the amount of data that will be classified"
+          },
+          "feature_table": "temp.features.Min_Max_Scale0"
+        },
+        {
+          "name": "tvo",
+          "type": "tvo",
+          "outputs": ["temp.tvo0", "temp.features.tvo0"],
+          "feature_table": "temp.features.Feature_Cascade0",
+          "validation_seed": 0,
+          "label_column": "Label",
+          "ignore_columns": ["segment_uuid", "SegmentID", "CascadeID"],
+          "input_data": "temp.Feature_Cascade0",
+          "validation_methods": [
+            {
+              "name": "Stratified Shuffle Split",
+              "inputs": {
+                "test_size": 0,
+                "number_of_folds": 1,
+                "validation_size": 0.2
+              }
+            }
+          ],
+          "classifiers": [
+            {
+              "name": "TensorFlow Lite for Microcontrollers",
+              "inputs": {}
+            }
+          ],
+          "optimizers": [
+            {
+              "name": "Train Fully Connected Neural Network",
+              "inputs": {
+                "epochs": 10,
+                "metrics": "accuracy",
+                "drop_out": 0.1,
+                "threshold": 0,
+                "batch_size": 32,
+                "dense_layers": [64, 32, 16, 8],
+                "learning_rate": 0.01,
+                "loss_function": "categorical_crossentropy",
+                "estimator_type": "classification",
+                "final_activation": "softmax",
+                "batch_normalization": true,
+                "tensorflow_optimizer": "adam"
+              }
+            }
+          ]
+        }
+      ],
+      "hyper_params": {
+        "seed": "Custom",
+        "params": {
+          "reset": true,
+          "iterations": 2,
+          "single_model": true,
+          "allow_unknown": false,
+          "disable_automl": true,
+          "hardware_target": {
+            "classifiers_sram": 32000
+          },
+          "population_size": 40,
+          "prediction_target(%)": {
+            "f1_score": 100
+          },
+          "hierarchical_multi_model": false,
+          "search_steps": ["tvo"]
+        }
+      }
+    }
+  ]
+}

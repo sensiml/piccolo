@@ -1,0 +1,48 @@
+{
+  "variables": {
+    "artifact_path": "./webui.zip",
+    "docker_image_version": "latest",
+    "repository": "sensiml/webui"
+  },
+  "builders": [
+    {
+      "type": "docker",
+      "image": "node:latest",
+      "commit": true,
+      "changes": [
+        "ENTRYPOINT [\"/entrypoint.sh\"]"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "{{user `artifact_path`}}",
+      "destination": "/webui.zip"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/unpack_webui.sh"
+    },
+    {
+      "type": "file",
+      "source": "./scripts/entrypoint.sh",
+      "destination": "/entrypoint.sh"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "chmod +x /entrypoint.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "{{user `repository`}}",
+        "tag": "{{user `docker_image_version`}}"
+      }
+    ]
+  ]
+}

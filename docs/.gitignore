@@ -1,0 +1,8 @@
+_build/
+.vscode/
+logger.log
+usage_logs.log
+server.log
+*.pyc
+*.env
+client_logs.log

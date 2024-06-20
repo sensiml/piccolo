@@ -1,0 +1,2940 @@
+- fields:
+    core: True
+    name: Magnitude
+    version: 1
+    type: Transform
+    subtype: Sensor
+    path: core_functions/sensor_transforms.py
+    function_in_file: tr_magnitude
+    has_c_version: True
+    c_file_name: tr_sensor_magnitude.c
+    c_function_name: tr_sensor_magnitude
+    deprecated: False
+    dcl_executable: False
+    uuid: 2d2545a6-9bfd-4d77-b098-875cc19954d2
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sensor Absolute Average
+    version: 1
+    type: Transform
+    subtype: Sensor
+    path: core_functions/sensor_transforms.py
+    function_in_file: tr_absolute_average
+    has_c_version: True
+    c_file_name: st_absolute_average.c
+    c_function_name: st_sensor_abs_average
+    deprecated: False
+    dcl_executable: False
+    uuid: d5aa5f41-1038-4475-951f-cf2b5066699d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sensor Average
+    version: 1
+    type: Transform
+    subtype: Sensor
+    path: core_functions/sensor_transforms.py
+    function_in_file: tr_average
+    has_c_version: True
+    c_file_name: st_average.c
+    c_function_name: st_sensor_average
+    deprecated: False
+    dcl_executable: False
+    uuid: 51ab0fb2-cdc6-400a-a878-b2f6f465395d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Moving Average Sensor Transform
+    version: 1
+    type: Transform
+    subtype: Sensor Filter
+    path: core_functions/sensor_filters.py
+    function_in_file: st_moving_average
+    has_c_version: True
+    c_file_name: st_moving_average.c
+    c_function_name: streaming_moving_average
+    deprecated: False
+    dcl_executable: False
+    uuid: 94c609da-c439-433f-9bf4-44589992fa7a
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Streaming Downsample
+    version: 1
+    type: Transform
+    subtype: Sensor Filter
+    path: core_functions/sensor_filters.py
+    function_in_file: streaming_downsample_by_averaging
+    has_c_version: True
+    c_file_name: sf_downsample_by_averaging.c
+    c_function_name: streaming_downsample_by_averaging
+    deprecated: False
+    dcl_executable: False
+    uuid: 975e49e0-96d0-41bf-bd65-99f401646e2e
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Streaming Downsample by Decimation
+    version: 1
+    type: Transform
+    subtype: Sensor Filter
+    path: core_functions/sensor_filters.py
+    function_in_file: streaming_downsample_by_decimation
+    has_c_version: True
+    c_file_name: sf_downsample_by_decimation.c
+    c_function_name: streaming_downsample_by_decimation
+    deprecated: False
+    dcl_executable: False
+    uuid: aed157ed-61e9-4e1d-8b44-389c05b09585
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: High Pass Filter
+    version: 1
+    type: Transform
+    subtype: Sensor Filter
+    path: core_functions/sensor_filters.py
+    function_in_file: tr_high_pass_filter
+    has_c_version: True
+    c_file_name: st_high_pass_filter.c
+    c_function_name: streaming_high_pass_filter
+    deprecated: False
+    dcl_executable: False
+    uuid: a6bb2350-4ee0-4096-8528-ee9a74a58476
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Univariate Selection
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: univariate_select
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 323ea9a0-b6bb-4d4e-b6c8-9b026a85c28d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Recursive Feature Elimination
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: rfe_select
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 3c9efb7e-5f54-4f9d-adf1-439e708c7f1c
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Tree-based Selection
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: tree_select
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: e991c17e-1857-4cb2-a3d1-079b03450d8c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Information Gain
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: information_gain
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 8c5b0667-d0ed-4aba-9799-f7ca4533a77e
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Custom Feature Selection
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: custom_feature_selection
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: c87b87bc-c930-4d1c-94ff-7104d6d2c557
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Custom Feature Selection By Index
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: custom_feature_selection_by_index
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: fa5a9887-f555-4117-8b1a-27f20355a27c
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: t-Test Feature Selector
+    version: 1
+    type: Feature Selector
+    subtype: Supervised
+    path: core_functions/selectors.py
+    function_in_file: ttest_select
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: a96aa2da-a344-4db5-b0dc-67db473d091b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Variance Threshold
+    version: 1
+    type: Feature Selector
+    subtype: Unsupervised
+    path: core_functions/selectors.py
+    function_in_file: vt_select
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 508f3eb6-53ad-42fb-8534-8276afc93287
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Correlation Threshold
+    version: 1
+    type: Feature Selector
+    subtype: Unsupervised
+    path: core_functions/selectors.py
+    function_in_file: correlation_select_remove_most_corr_first
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 13705fcc-703b-48b8-8bc3-aa0ca8b7b4a5
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Windowing Threshold Segmentation
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_windowing_threshold.py
+    function_in_file: windowing_threshold
+    has_c_version: True
+    c_file_name: sg_windowing_threshold.c
+    c_function_name: windowing_threshold_segmenter
+    deprecated: False
+    dcl_executable: True
+    uuid: 8a4c1b01-240e-423c-a80d-dcbd78561fce
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Use Labels
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_manual.py
+    function_in_file: sg_manual
+    has_c_version: True
+    c_file_name: sg_manual.c
+    c_function_name: sg_manual
+    deprecated: False
+    dcl_executable: False
+    uuid: 54473e26-b55d-4c20-a1b3-d3516dba20cc
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Windowing
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_windowing.py
+    function_in_file: sg_windowing
+    has_c_version: True
+    c_file_name: sg_windowing.c
+    c_function_name: sg_windowing
+    deprecated: False
+    dcl_executable: False
+    uuid: ee0464cb-cf22-42a1-a203-e406d3f9ca40
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Adaptive Windowing Segmentation
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_p2p_threshold_segmenter.py
+    function_in_file: peak_to_peak_segmenter_with_thresholding
+    has_c_version: True
+    c_file_name: sg_p2p_threshold.c
+    c_function_name: p2p_threshold
+    deprecated: False
+    dcl_executable: True
+    uuid: 5f8cf01a-a3b9-4fda-844f-4a40f557bd79
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Max Min Threshold Segmentation
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_max_min_threshold.py
+    function_in_file: max_min_threshold
+    has_c_version: True
+    c_file_name: sg_max_min_threshold.c
+    c_function_name: max_min_threshold_segmenter
+    deprecated: False
+    dcl_executable: True
+    uuid: 0b49d80a-5a6a-4cf3-b5ef-73f125b1991c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: General Threshold Segmentation
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_general_threshold.py
+    function_in_file: general_threshold
+    has_c_version: True
+    c_file_name: sg_general_threshold.c
+    c_function_name: general_threshold_segmenter
+    deprecated: False
+    dcl_executable: True
+    uuid: 5d685c61-26d7-4298-b309-615732d7fb62
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Double Peak Key Segmentation
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_double_peak.py
+    function_in_file: double_peak_key_segmenter
+    has_c_version: True
+    c_file_name: sg_double_peak.c
+    c_function_name: double_peak_key_segmenter
+    deprecated: False
+    dcl_executable: True
+    uuid: c7782ccb-5bce-4e9c-8555-9bcb4468cefe
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Cascade Windowing
+    version: 1
+    type: Segmenter
+    subtype: Sensor
+    path: core_functions/segmenters/sg_cascade_windowing.py
+    function_in_file: tr_cascade_windowing
+    has_c_version: True
+    c_file_name: sg_cascade_windowing.c
+    c_function_name: sg_cascade_windowing
+    deprecated: True
+    dcl_executable: False
+    uuid: 15c901ef-2743-4a96-8ef6-eaa8c8117d98
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Scale Factor
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_scale_factor
+    has_c_version: True
+    c_file_name: tr_segment_scale_factor.c
+    c_function_name: tr_segment_scale_factor
+    deprecated: False
+    dcl_executable: False
+    uuid: 51ff1aca-343f-4285-b8ba-e372725672ff
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Offset Factor
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_offset_factor
+    has_c_version: True
+    c_file_name: tr_segment_offset_factor.c
+    c_function_name: tr_segment_offset_factor
+    deprecated: False
+    dcl_executable: False
+    uuid: c1023796-6016-479e-bf8a-4289df61db59
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Strip
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_strip
+    has_c_version: True
+    c_file_name: tr_segment_strip.c
+    c_function_name: tr_segment_strip
+    deprecated: False
+    dcl_executable: False
+    uuid: c16961e9-5d48-46e6-bf79-62d926f8ca50
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Pre-emphasis Filter
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_pre_emphasis_filter
+    has_c_version: True
+    c_file_name: tr_segment_pre_emphasis_filter.c
+    c_function_name: tr_segment_pre_emphasis_filter
+    deprecated: False
+    dcl_executable: False
+    uuid: edf25974-e583-408b-9de0-df8c8859fd05
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Filter MSE
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_mse
+    has_c_version: True
+    c_file_name: sg_filter_mse.c
+    c_function_name: sg_filter_mse
+    deprecated: False
+    dcl_executable: False
+    uuid: d5491aa2-379c-4488-aec7-64a6b2fe66d5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Filter Threshold
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_threshold
+    has_c_version: True
+    c_file_name: sg_filter_threshold.c
+    c_function_name: sg_filter_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 2f22cec6-adf6-4278-9044-ea30667b8fab
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Pad Segment
+    version: 1
+    type: Sampler
+    subtype: Segment
+    path: core_functions/samplers.py
+    function_in_file: augment_pad_segment
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: d1b6b0c9-c935-42fb-8349-1737192f9c62
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Undersample Majority Classes
+    version: 1
+    type: Sampler
+    subtype: Balance Data
+    path: core_functions/samplers.py
+    function_in_file: undersample_majority_classes
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 52b24500-df46-4b5f-a27f-da5afb672544
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Combine Labels
+    version: 1
+    type: Sampler
+    subtype: Feature Grouping
+    path: core_functions/samplers.py
+    function_in_file: sample_combine_labels
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 43551a11-5f2d-4a96-b979-574c7b9e8350
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: AutoGroup Labels
+    version: 1
+    type: Sampler
+    subtype: Feature Grouping
+    path: core_functions/samplers.py
+    function_in_file: sample_autogroup_labels
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 5a179eb6-cf66-47e3-969c-169ffc2d989f
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Zscore Filter
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: sample_zscore_filter
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 637c5b92-aa29-4912-be38-be9e15e4f472
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sigma Outliers Filtering
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: sigma_outliers_filtering
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 4640f392-c40e-46d8-88fb-3b96fb1e3fd5
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Local Outlier Factor Filtering
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: local_outlier_factor_filtering
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 74c10378-0815-4f5f-a9d6-46965db722c8
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Isolation Forest Filtering
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: isolation_forest_filtering
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 4c609bb9-dd16-41b6-b179-8a511efe83b2
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Robust Covariance Filtering
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: robust_covariance_filtering
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: c3e45cb6-47d5-4641-8220-400bb4f556d4
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: One Class SVM filtering
+    version: 1
+    type: Sampler
+    subtype: Outlier Filter
+    path: core_functions/samplers.py
+    function_in_file: one_class_SVM_filtering
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 166cd33f-ad83-4c76-b78b-724f4460e2d9
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sample By Metadata
+    version: 1
+    type: Sampler
+    subtype: Feature Grouping
+    path: core_functions/samplers.py
+    function_in_file: sample_by_metadata
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 79c588bb-33e9-496b-a539-dc3c994a2e16
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sample Features by Metadata
+    version: 1
+    type: Sampler
+    subtype: Feature Grouping
+    path: core_functions/samplers.py
+    function_in_file: sample_by_metadata
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 79c588bb-33e9-496b-a539-dc3c994a2216
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Resampling by Majority Vote
+    version: 1
+    type: Sampler
+    subtype: Feature Grouping
+    path: core_functions/samplers.py
+    function_in_file: sample_metadata_max_pool
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: True
+    dcl_executable: False
+    uuid: 27b5f5e7-40f2-4fa9-99e2-3de2e91b5f55
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: PME
+    version: 1
+    type: Classifier
+    subtype: Clustering
+    path: core_functions/mg_contracts.py
+    function_in_file: pme
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 3a3646cc-cd51-499c-a580-7cfcb540ff5b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Decision Tree Ensemble
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: decision_tree_ensemble
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 33875688-5aec-470b-b599-88c85df77412
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Boosted Tree Ensemble
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: boosted_tree_ensemble
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 6bbc8c35-2fb9-4196-8d7c-a5bf7a4976c7
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Bonsai
+    version: 1
+    type: Classifier
+    subtype: Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: bonsai
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 56468471-da19-4673-ab0b-37867537afb8
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: TF Micro
+    version: 1
+    type: Classifier
+    subtype: NN
+    path: core_functions/mg_contracts.py
+    function_in_file: tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: d1b6b0c9-c935-42fb-8349-1737192f9c64
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: TensorFlow Lite for Microcontrollers
+    version: 1
+    type: Classifier
+    subtype: NN
+    path: core_functions/mg_contracts.py
+    function_in_file: tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: db4dcc87-5446-4353-8a9b-1ab178b0e9f1
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Load Model TensorFlow Lite for Microcontrollers
+    version: 1
+    type: Training Algorithm
+    subtype: Load
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 59918065-8a23-4c65-921a-471abcba36b9
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Bonsai Tree Optimizer
+    version: 1
+    type: Training Algorithm
+    subtype: Bonsai
+    path: core_functions/mg_contracts.py
+    function_in_file: train_bonsai
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: a52f6c8f-ab5e-4ecb-9ba8-66c4fcc9e232
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: xGBoost
+    version: 1
+    type: Training Algorithm
+    subtype: Boosted Tree Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: train_gradient_boosting
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: b9017fce-a93e-4cb7-9c6f-76caa6822fe5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Random Forest
+    version: 1
+    type: Training Algorithm
+    subtype: Decision Tree Ensemble
+    path: core_functions/mg_contracts.py
+    function_in_file: train_random_forest
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: a68de605-c556-4b7f-8615-4f6af76ddebc
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Load Model TF Micro
+    version: 1
+    type: Training Algorithm
+    subtype: Load
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: d1b6b0c9-c935-42fb-8349-1737192f9c63
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Train Fully Connected Neural Network
+    version: 1
+    type: Training Algorithm
+    subtype: Neural Network
+    path: core_functions/mg_contracts.py
+    function_in_file: train_fully_connected_neural_network
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: d1b6b0c9-c935-42fb-8349-1737192f9c65
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Train Temporal Convolutional Neural Network
+    version: 1
+    type: Training Algorithm
+    subtype: Neural Network
+    path: core_functions/mg_contracts.py
+    function_in_file: train_temporal_convolutional_neural_network
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 0c8f69d5-5b12-4aa3-b1d7-f494560087b5
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: RBF with Neuron Allocation Optimization
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: vanilla_burlington
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: efffc5cb-2629-4b2e-a787-3ecb127bacb9
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Hierarchical Clustering with Neuron Optimization
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: cluster_learn
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: ff7adad0-248e-4db1-90f2-4492491a2726
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: RBF with Neuron Allocation Limit
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: train_n_prune
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: c1706d2a-b854-4eec-a33b-8394b962114d
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Neuron Optimization
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: neuron_optimize
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 8c079a50-bb2b-4796-8501-b1773ea9ecd4
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Load Model PME
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_pme
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 461f62aa-f922-471b-9f4a-902f7b1f608c
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Load Neuron Array
+    version: 1
+    type: Training Algorithm
+    subtype: PME
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_pme
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 9045c36b-b0e0-4414-8b7c-c04c4e06d1ae
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Leave-One-Subject-Out
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: leave_one_subject_out
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: bffa231a-2dbc-4b0d-bdab-87b9c8fc09ad
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Stratified K-Fold Cross-Validation
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: k_fold_strat
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: fc013141-ccd8-4838-98e9-fd2466d542a3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Set Sample Validation
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: set_sampler
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 809affe8-ab74-4911-b5e3-cc203f194eef
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Stratified Shuffle Split
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: stratified_shuffle_split
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 8b588f08-49a4-4338-9b19-260ee8328513
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Split by Metadata Value
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: split_by_metadata_value
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 969f333e-e079-45dc-ab4b-ab501d8a6ee5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Recall
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: recall
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 504991dd-d247-44b4-92eb-d29b2612431c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Stratified Metadata k-fold
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: metadata_and_label_k_fold
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 9fe66f29-4c0f-4ba4-964c-3bd1b867d893
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Metadata k-fold
+    version: 1
+    type: Validation Method
+    subtype:
+    path: core_functions/mg_contracts.py
+    function_in_file: metadata_k_fold
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: d1b6b0c9-c935-42fb-8349-1737192f9c66
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Min Max Scale
+    version: 1
+    type: Transform
+    subtype: Feature Vector
+    path: core_functions/feature_transforms.py
+    function_in_file: min_max_scale
+    has_c_version: True
+    c_file_name: tr_min_max_scale.c
+    c_function_name: min_max_scale
+    deprecated: False
+    dcl_executable: False
+    uuid: e58e18f1-8c8e-4c9c-8cc0-720fe41f2556
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Transpose Signal
+    version: 1
+    type: Feature Generator
+    subtype: Transpose
+    path: core_functions/feature_generators/fg_transpose.py
+    function_in_file: fg_transpose_signal
+    has_c_version: True
+    c_file_name: fg_transpose_signal.c
+    c_function_name: fg_transpose_signal
+    deprecated: False
+    dcl_executable: True
+    uuid: 134bf758-0806-42b6-8e08-05a90560c143
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Interleave Signal
+    version: 1
+    type: Feature Generator
+    subtype: Transpose
+    path: core_functions/feature_generators/fg_transpose.py
+    function_in_file: fg_interleave_signal
+    has_c_version: True
+    c_file_name: fg_interleave_signal.c
+    c_function_name: fg_interleave_signal
+    deprecated: False
+    dcl_executable: True
+    uuid: 134bf758-0822-42b6-8e08-05a90560c143
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Duration of the Signal
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_signal_duration
+    has_c_version: True
+    c_file_name: fg_time_signal_duration.c
+    c_function_name: fg_time_signal_duration
+    deprecated: False
+    dcl_executable: False
+    uuid: b9bd8029-731f-4db1-8825-7e0c166d8e1b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Percent Time Over Zero
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_pct_time_over_zero
+    has_c_version: True
+    c_file_name: fg_time_pct_time_over_zero.c
+    c_function_name: fg_time_pct_time_over_zero
+    deprecated: False
+    dcl_executable: False
+    uuid: 38712cff-3321-4d90-8808-b146b3048249
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Percent Time Over Sigma
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_pct_time_over_sigma
+    has_c_version: True
+    c_file_name: fg_time_pct_time_over_sigma.c
+    c_function_name: fg_time_pct_time_over_sigma
+    deprecated: False
+    dcl_executable: False
+    uuid: cac0ee90-6735-4596-9819-fc85f6ae6d31
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Percent Time Over Second Sigma
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_pct_time_over_second_sigma
+    has_c_version: True
+    c_file_name: fg_time_pct_time_over_second_sigma.c
+    c_function_name: fg_time_pct_time_over_second_sigma
+    deprecated: False
+    dcl_executable: False
+    uuid: 0e5794e1-e61d-49a1-b18b-cc11efe3862a
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Percent Time Over Threshold
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_pct_time_over_threshold
+    has_c_version: True
+    c_file_name: fg_time_pct_time_over_threshold.c
+    c_function_name: fg_time_pct_time_over_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 93af61c0-3a5e-46bd-a682-ce838b1bded2
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Abs Percent Time Over Threshold
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_abs_pct_time_over_threshold
+    has_c_version: True
+    c_file_name: fg_time_abs_pct_time_over_threshold.c
+    c_function_name: fg_time_abs_pct_time_over_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 692f128e-5529-4dc8-b22c-0da3c8f35db5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Average Time Over Threshold
+    version: 1
+    type: Feature Generator
+    subtype: Time
+    path: core_functions/feature_generators/fg_time.py
+    function_in_file: fg_time_avg_time_over_threshold
+    has_c_version: True
+    c_file_name: fg_time_average_time_over_threshold.c
+    c_function_name: fg_time_avg_time_over_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 54d039a2-e9ef-4435-91a7-23398fb37daa
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Mean
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_mean
+    has_c_version: True
+    c_file_name: fg_stats_mean.c
+    c_function_name: fg_stats_mean
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f2f95e9-e7e5-4cc9-9272-03721b529e75
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Zero Crossings
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_zero_crossings
+    has_c_version: True
+    c_file_name: fg_stats_zero_crossings.c
+    c_function_name: fg_stats_zero_crossings
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f2f95e9-e7e5-4cc9-9272-03721b529e73
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Positive Zero Crossings
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_positive_zero_crossings
+    has_c_version: True
+    c_file_name: fg_stats_positive_zero_crossings.c
+    c_function_name: fg_stats_positive_zero_crossings
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f2f95e9-e7e5-4cc9-9272-03721b529e76
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Negative Zero Crossings
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_negative_zero_crossings
+    has_c_version: True
+    c_file_name: fg_stats_negative_zero_crossings.c
+    c_function_name: fg_stats_negative_zero_crossings
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f2f95e9-e7e5-4cc9-9272-03721b529e74
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Median
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_median
+    has_c_version: True
+    c_file_name: fg_stats_median.c
+    c_function_name: fg_stats_median
+    deprecated: False
+    dcl_executable: False
+    uuid: 1baeb851-5a4a-4df4-9549-038ae71f0d6a
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Linear Regression Stats
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_linear_regression
+    has_c_version: True
+    c_file_name: fg_stats_linear_regression.c
+    c_function_name: fg_stats_linear_regression
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f8cc0ba-ebda-11ea-b33b-080027b304c0
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Standard Deviation
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_stdev
+    has_c_version: True
+    c_file_name: fg_stats_stdev.c
+    c_function_name: fg_stats_stdev
+    deprecated: False
+    dcl_executable: False
+    uuid: 8adfd68a-8ac9-4b4d-9d45-1b52362d1dfb
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Skewness
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_skewness
+    has_c_version: True
+    c_file_name: fg_stats_skewness.c
+    c_function_name: fg_stats_skewness
+    deprecated: False
+    dcl_executable: False
+    uuid: 145a8e6a-25ec-4f41-badf-a8b95767d9e5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Kurtosis
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_kurtosis
+    has_c_version: True
+    c_file_name: fg_stats_kurtosis.c
+    c_function_name: fg_stats_kurtosis
+    deprecated: False
+    dcl_executable: False
+    uuid: 937e22e8-2449-4fcd-9255-34704bb6cfd5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Interquartile Range
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_iqr
+    has_c_version: True
+    c_file_name: fg_stats_iqr.c
+    c_function_name: fg_stats_iqr
+    deprecated: False
+    dcl_executable: False
+    uuid: cebcac42-7ef4-421e-b501-0d7ea5e8468f
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: 25th Percentile
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_pct025
+    has_c_version: True
+    c_file_name: fg_stats_pct025.c
+    c_function_name: fg_stats_pct025
+    deprecated: False
+    dcl_executable: False
+    uuid: c9a0a586-2581-4dca-9ee6-6d874e0f071c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: 75th Percentile
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_pct075
+    has_c_version: True
+    c_file_name: fg_stats_pct075.c
+    c_function_name: fg_stats_pct075
+    deprecated: False
+    dcl_executable: False
+    uuid: ad723f6a-40f6-49e8-b500-35c780c6bcac
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: 100th Percentile
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_pct100
+    has_c_version: True
+    c_file_name: fg_stats_pct100.c
+    c_function_name: fg_stats_pct100
+    deprecated: False
+    dcl_executable: False
+    uuid: 1133919d-8d30-4154-bb1b-0ccf7caa2bca
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Minimum
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_minimum
+    has_c_version: True
+    c_file_name: fg_stats_minimum.c
+    c_function_name: fg_stats_minimum
+    deprecated: False
+    dcl_executable: False
+    uuid: b27d1290-d4cf-4c9b-8ff9-aff889368fa0
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Maximum
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_maximum
+    has_c_version: True
+    c_file_name: fg_stats_maximum.c
+    c_function_name: fg_stats_maximum
+    deprecated: False
+    dcl_executable: False
+    uuid: 1f60221b-7ecc-4545-88ed-f38403d6baec
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sum
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_sum
+    has_c_version: True
+    c_file_name: fg_stats_sum.c
+    c_function_name: fg_stats_sum
+    deprecated: False
+    dcl_executable: False
+    uuid: 4f820fff-0f9b-41d9-81c2-4beb213f631c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Sum
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_abs_sum
+    has_c_version: True
+    c_file_name: fg_stats_abs_sum.c
+    c_function_name: fg_stats_abs_sum
+    deprecated: False
+    dcl_executable: False
+    uuid: be77cfa2-fa93-4d0c-8dc4-14a1caf2e772
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Mean
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_abs_mean
+    has_c_version: True
+    c_file_name: fg_stats_abs_mean.c
+    c_function_name: fg_stats_abs_mean
+    deprecated: False
+    dcl_executable: False
+    uuid: 46a37652-1e88-4a3d-b566-7cf4d48c28bb
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Variance
+    version: 1
+    type: Feature Generator
+    subtype: Statistical
+    path: core_functions/feature_generators/fg_stats.py
+    function_in_file: fg_stats_variance
+    has_c_version: True
+    c_file_name: fg_stats_variance.c
+    c_function_name: fg_stats_variance
+    deprecated: False
+    dcl_executable: False
+    uuid: 0494165a-0c3d-4c17-a68a-710796d412b8
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Global Peak to Peak of Low Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Amplitude
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_amplitude_global_p2p_low_frequency
+    has_c_version: True
+    c_file_name: fg_amplitude_global_p2p_low_frequency.c
+    c_function_name: fg_amplitude_global_p2p_low_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: dabc426d-99de-416c-a548-fbc8f28c5012
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Global Peak to Peak of High Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Amplitude
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_amplitude_global_p2p_high_frequency
+    has_c_version: True
+    c_file_name: fg_amplitude_global_p2p_high_frequency.c
+    c_function_name: fg_amplitude_global_p2p_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: 6260e942-0427-4ee8-a999-c9b897881443
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Max Peak to Peak of first half of High Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Amplitude
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_amplitude_max_p2p_half_high_frequency
+    has_c_version: True
+    c_file_name: fg_amplitude_max_p2p_half_high_frequency.c
+    c_function_name: fg_amplitude_max_p2p_half_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: b8ccf6a3-35f3-4409-8e62-7af50af69ee4
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Global Peak to Peak
+    version: 1
+    type: Feature Generator
+    subtype: Amplitude
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_amplitude_peak_to_peak
+    has_c_version: True
+    c_file_name: fg_amplitude_peak_to_peak.c
+    c_function_name: fg_amplitude_peak_to_peak
+    deprecated: False
+    dcl_executable: False
+    uuid: f926150c-3b8e-4a12-8895-3a598e7dc1a3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Global Min Max Sum
+    version: 1
+    type: Feature Generator
+    subtype: Amplitude
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_amplitude_min_max_sum
+    has_c_version: True
+    c_file_name: fg_amplitude_min_max_sum.c
+    c_function_name: fg_amplitude_min_max_sum
+    deprecated: False
+    dcl_executable: False
+    uuid: 68b5d1f6-f4fd-4a9e-8e53-aee51eddbb49
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Ratio of Peak to Peak of High Frequency between two halves
+    version: 1
+    type: Feature Generator
+    subtype: Shape
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_shape_ratio_high_frequency
+    has_c_version: True
+    c_file_name: fg_shape_ratio_high_freq.c
+    c_function_name: fg_shape_ratio_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: e81959cf-6ea0-476d-90ed-ae61afc88607
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Difference of Peak to Peak of High Frequency between two halves
+    version: 1
+    type: Feature Generator
+    subtype: Shape
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_shape_difference_high_frequency
+    has_c_version: True
+    c_file_name: fg_shape_difference_high_freq.c
+    c_function_name: fg_shape_difference_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: a6cdad7e-9a7b-445d-84c8-a61d3b8f2d93
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Shape Median Difference
+    version: 1
+    type: Feature Generator
+    subtype: Shape
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_shape_median_difference
+    has_c_version: True
+    c_file_name: fg_shape_median_difference.c
+    c_function_name: fg_shape_median_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: e81959cf-6ea0-476d-90ed-ae61afc88602
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Shape Absolute Median Difference
+    version: 1
+    type: Feature Generator
+    subtype: Shape
+    path: core_functions/feature_generators/fg_shape_amplitude.py
+    function_in_file: fg_shape_absolute_median_difference
+    has_c_version: True
+    c_file_name: fg_shape_absolute_median_difference.c
+    c_function_name: fg_shape_absolute_median_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: e81959cf-6ea0-476d-90ed-ae61afc88604
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Mean Difference
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_mean_difference
+    has_c_version: True
+    c_file_name: fg_roc_mean_difference.c
+    c_function_name: fg_roc_mean_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: 4172c18e-3307-45b5-85f7-9e4f9242ef71
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Mean Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_mean_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_mean_crossing_rate.c
+    c_function_name: fg_roc_mean_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 250f1952-62b2-472f-9486-ff33f1d0d3a3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Zero Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_zero_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_zero_crossing_rate.c
+    c_function_name: fg_roc_zero_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 24a2af8f-5347-4add-993f-61472a476be5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Sigma Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_sigma_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_sigma_crossing_rate.c
+    c_function_name: fg_roc_sigma_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 92ea6874-b8e7-4424-a23e-c30b3168ed78
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Second Sigma Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_second_sigma_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_second_sigma_crossing_rate.c
+    c_function_name: fg_roc_second_sigma_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: b47ce2ce-e05b-475d-8c95-cd84a575414b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Threshold Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_threshold_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_threshold_crossing_rate.c
+    c_function_name: fg_roc_threshold_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 5c2a69e3-c831-43d0-8401-1ba26eeddc50
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Threshold With Offset Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Rate of Change
+    path: core_functions/feature_generators/fg_rate_of_change.py
+    function_in_file: fg_roc_threshold_with_offset_crossing_rate
+    has_c_version: True
+    c_file_name: fg_roc_threshold_with_offset_crossing_rate.c
+    c_function_name: fg_roc_threshold_with_offset_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 66ffffcc-106a-47a1-a4c6-96f85afaa21a
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Average of Movement Intensity
+    version: 1
+    type: Feature Generator
+    subtype: Physical
+    path: core_functions/feature_generators/fg_physical.py
+    function_in_file: fg_physical_average_movement_intensity
+    has_c_version: True
+    c_file_name: fg_physical_average_movement_intensity.c
+    c_function_name: fg_physical_average_movement_intensity
+    deprecated: False
+    dcl_executable: False
+    uuid: e144859b-6d65-4bd1-93fc-3542a364cf39
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Variance of Movement Intensity
+    version: 1
+    type: Feature Generator
+    subtype: Physical
+    path: core_functions/feature_generators/fg_physical.py
+    function_in_file: fg_physical_variance_movement_intensity
+    has_c_version: True
+    c_file_name: fg_physical_variance_movement_intensity.c
+    c_function_name: fg_physical_variance_movement_intensity
+    deprecated: False
+    dcl_executable: False
+    uuid: c2d5036f-1077-412b-96d2-4a2efbe5edb7
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Average Signal Magnitude Area
+    version: 1
+    type: Feature Generator
+    subtype: Physical
+    path: core_functions/feature_generators/fg_physical.py
+    function_in_file: fg_physical_average_signal_magnitude_area
+    has_c_version: True
+    c_file_name: fg_physical_average_signal_magnitude_area.c
+    c_function_name: fg_physical_average_signal_magnitude_area
+    deprecated: False
+    dcl_executable: False
+    uuid: 00780f99-45c9-4056-990a-ea8339076757
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: MFCC
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_mfcc
+    has_c_version: True
+    c_file_name: fg_frequency_mfcc.c
+    c_function_name: fg_frequency_mfcc
+    deprecated: False
+    dcl_executable: False
+    uuid: e3b0f26c-0508-4a0d-8cab-c706d72bcd97
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: MFE
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_mfe
+    has_c_version: True
+    c_file_name: fg_frequency_mfe.c
+    c_function_name: fg_frequency_mfe
+    deprecated: False
+    dcl_executable: False
+    uuid: a2a89056-00cc-4beb-b197-fad3cbdc9fb9
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Histogram
+    version: 1
+    type: Feature Generator
+    subtype: Histogram
+    path: core_functions/feature_generators/fg_histogram.py
+    function_in_file: fg_fixed_width_histogram
+    has_c_version: True
+    c_file_name: fg_histogram.c
+    c_function_name: fg_fixed_width_histogram
+    deprecated: False
+    dcl_executable: False
+    uuid: 41f90002-d669-4215-8393-06f771eb3912
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Histogram Auto Scale Range
+    version: 1
+    type: Feature Generator
+    subtype: Histogram
+    path: core_functions/feature_generators/fg_histogram.py
+    function_in_file: fg_min_max_scaled_histogram
+    has_c_version: True
+    c_file_name: fg_min_max_scaled_histogram.c
+    c_function_name: fg_min_max_scaled_histogram
+    deprecated: False
+    dcl_executable: False
+    uuid: 3b7ab03e-81fc-4d4d-afd8-42cc1c6c2e42
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Dominant Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_dominant_frequency
+    has_c_version: True
+    c_file_name: fg_frequency_dominant_frequency.c
+    c_function_name: fg_frequency_dominant_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: 1809c4f9-141c-47ca-9574-64f760d7f30d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Spectral Entropy
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_spectral_entropy
+    has_c_version: True
+    c_file_name: fg_frequency_spectral_entropy.c
+    c_function_name: fg_frequency_spectral_entropy
+    deprecated: False
+    dcl_executable: False
+    uuid: f80c4992-b71b-4a67-a141-020c9d0233ce
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Power Spectrum
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_power_spectrum
+    has_c_version: True
+    c_file_name: fg_frequency_power_spectrum.c
+    c_function_name: fg_frequency_power_spectrum
+    deprecated: False
+    dcl_executable: False
+    uuid: 19b2fe3c-3c29-4e74-bb15-e1c7cfcd23b4
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Average Energy
+    version: 1
+    type: Feature Generator
+    subtype: Energy
+    path: core_functions/feature_generators/fg_energy.py
+    function_in_file: fg_energy_average_energy
+    has_c_version: True
+    c_file_name: fg_energy_average_energy.c
+    c_function_name: fg_energy_average_energy
+    deprecated: False
+    dcl_executable: False
+    uuid: dd390934-a435-4517-8290-3ba4cee64ef4
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Total Energy
+    version: 1
+    type: Feature Generator
+    subtype: Energy
+    path: core_functions/feature_generators/fg_energy.py
+    function_in_file: fg_energy_total_energy
+    has_c_version: True
+    c_file_name: fg_energy_total_energy.c
+    c_function_name: fg_energy_total_energy
+    deprecated: False
+    dcl_executable: False
+    uuid: 0e555c6e-6a39-40fa-a847-795211c208b8
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Average Demeaned Energy
+    version: 1
+    type: Feature Generator
+    subtype: Energy
+    path: core_functions/feature_generators/fg_energy.py
+    function_in_file: fg_energy_average_demeaned_energy
+    has_c_version: True
+    c_file_name: fg_energy_average_demeaned_energy.c
+    c_function_name: fg_energy_average_demeaned_energy
+    deprecated: False
+    dcl_executable: False
+    uuid: 09b101ba-8d80-44e1-ad17-0898308e02eb
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Downsample
+    version: 1
+    type: Feature Generator
+    subtype: Sampling
+    path: core_functions/feature_generators/fg_sampling.py
+    function_in_file: fg_sampling_downsample
+    has_c_version: True
+    c_file_name: fg_sampling_downsample.c
+    c_function_name: fg_sampling_downsample
+    deprecated: False
+    dcl_executable: False
+    uuid: b81badac-bf39-4d27-8df2-3357cd4e976b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Max Column
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_max_column
+    has_c_version: True
+    c_file_name: fg_cross_max_column.c
+    c_function_name: fg_cross_column_max_column
+    deprecated: False
+    dcl_executable: False
+    uuid: 5daf8892-9b39-42dd-b982-341cad992adb
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Min Column
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_min_column
+    has_c_version: True
+    c_file_name: fg_cross_min_column.c
+    c_function_name: fg_cross_column_min_column
+    deprecated: False
+    dcl_executable: False
+    uuid: e1c3f7a2-734d-489f-96e1-b918778035fc
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Two Column Min Max Difference
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_min_max_difference_two_columns
+    has_c_version: True
+    c_file_name: fg_cross_min_max_difference.c
+    c_function_name: fg_cross_column_min_max_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: 267e32e6-5a23-4103-944b-d995ca11ec34
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Two Column Mean Difference
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_mean_difference
+    has_c_version: True
+    c_file_name: fg_cross_mean_difference.c
+    c_function_name: fg_cross_column_mean_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: 9d0aa12f-ffee-4937-89f6-efe581254fa0
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Two Column Peak To Peak Difference
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_p2p_difference
+    has_c_version: True
+    c_file_name: fg_cross_p2p_difference.c
+    c_function_name: fg_cross_column_p2p_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: e78929d5-24da-4719-8950-09aec5a83eb5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Abs Max Column
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_abs_max_column
+    has_c_version: True
+    c_file_name: fg_cross_abs_max_column.c
+    c_function_name: fg_cross_column_abs_max_column
+    deprecated: False
+    dcl_executable: False
+    uuid: 2d27386e-3804-43ff-a0a6-63c710fe27ea
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Cross Column Correlation
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_correlation
+    has_c_version: True
+    c_file_name: fg_cross_column_corr.c
+    c_function_name: fg_cross_column_correlation
+    deprecated: False
+    dcl_executable: False
+    uuid: 877a55c6-54b9-40ec-863d-4c08f9e34567
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Cross Column Mean Crossing Rate
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_mean_crossing_rate
+    has_c_version: True
+    c_file_name: fg_cross_column_mean_crossing_rate.c
+    c_function_name: fg_cross_column_mean_crossing_rate
+    deprecated: False
+    dcl_executable: False
+    uuid: 5fd2f3fb-ad13-4d1f-9e6c-f103c9ba927c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Cross Column Mean Crossing with Offset
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_mean_crossing_rate_with_offset
+    has_c_version: True
+    c_file_name: fg_cross_column_mean_crossing_rate_with_offset.c
+    c_function_name: fg_cross_column_mean_crossing_rate_with_offset
+    deprecated: False
+    dcl_executable: False
+    uuid: f262ae18-8a55-47cc-b6da-699d00e4b59f
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Two Column Median Difference
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_median_difference
+    has_c_version: True
+    c_file_name: fg_cross_median_difference.c
+    c_function_name: fg_cross_column_median_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: 9d0aa12f-ffee-4937-89f6-efe581254fa2
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Two Column Peak Location Difference
+    version: 1
+    type: Feature Generator
+    subtype: Column Fusion
+    path: core_functions/feature_generators/fg_cross_column.py
+    function_in_file: fg_cross_column_peak_location_difference
+    has_c_version: True
+    c_file_name: fg_cross_peak_location_difference.c
+    c_function_name: fg_cross_column_peak_location_difference
+    deprecated: False
+    dcl_executable: False
+    uuid: 91d6b642-b157-45a0-aa6d-c12276da6c41
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Downsample Average with Normalization
+    version: 1
+    type: Feature Generator
+    subtype: Sampling
+    path: core_functions/feature_generators/fg_sampling.py
+    function_in_file: fg_sampling_downsample_avg_with_normalization
+    has_c_version: True
+    c_file_name: fg_sampling_downsample_avg_with_normalization.c
+    c_function_name: fg_sampling_downsample_avg_with_normalization
+    deprecated: False
+    dcl_executable: False
+    uuid: 3c1fadcb-7e6a-4765-8672-5810da8976a3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Downsample Max With Normaliztion
+    version: 1
+    type: Feature Generator
+    subtype: Sampling
+    path: core_functions/feature_generators/fg_sampling.py
+    function_in_file: fg_sampling_downsample_max_with_normalization
+    has_c_version: True
+    c_file_name: fg_sampling_downsample_max_with_normalization.c
+    c_function_name: fg_sampling_downsample_max_with_normalization
+    deprecated: False
+    dcl_executable: False
+    uuid: 3eac2f77-5a8b-4e17-bb18-869fe83880a0
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Total Area
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_total_area
+    has_c_version: True
+    c_file_name: fg_area_total_area.c
+    c_function_name: fg_area_total_area
+    deprecated: False
+    dcl_executable: False
+    uuid: 1d24719f-40e7-40d5-abbb-fb965c4f0a69
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Area
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_absolute_area
+    has_c_version: True
+    c_file_name: fg_area_absolute_area.c
+    c_function_name: fg_area_absolute_area
+    deprecated: False
+    dcl_executable: False
+    uuid: db7330db-2d02-4848-9e14-223677a5d800
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Total Area of Low Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_total_area_low_frequency
+    has_c_version: True
+    c_file_name: fg_area_total_area_low_frequency.c
+    c_function_name: fg_area_total_area_low_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: 3bd70e49-a685-47b3-8dc1-f0d52ea51f6e
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Area of Low Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_absolute_area_low_frequency
+    has_c_version: True
+    c_file_name: fg_area_absolute_area_low_frequency.c
+    c_function_name: fg_area_absolute_area_low_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: e4416c26-e513-4f51-beea-9166b6559acc
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Total Area of High Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_total_area_high_frequency
+    has_c_version: True
+    c_file_name: fg_area_total_area_high_frequency.c
+    c_function_name: fg_area_total_area_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: 19a14ce0-d182-4c6c-acaf-62a89ca6805b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Area of High Frequency
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_absolute_area_high_frequency
+    has_c_version: True
+    c_file_name: fg_area_absolute_area_high_frequency.c
+    c_function_name: fg_area_absolute_area_high_frequency
+    deprecated: False
+    dcl_executable: False
+    uuid: dec45628-cdc3-4be3-abab-67b08d78da76
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Absolute Area of Spectrum
+    version: 1
+    type: Feature Generator
+    subtype: Area
+    path: core_functions/feature_generators/fg_area.py
+    function_in_file: fg_area_power_spectrum_density
+    has_c_version: True
+    c_file_name: fg_area_power_spectrum_density.c
+    c_function_name: fg_area_power_spectrum_density
+    deprecated: False
+    dcl_executable: False
+    uuid: 0b6aaf26-21cf-4626-b64f-50d6412cc843
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Feature Cascade
+    version: 1
+    type: Transform
+    subtype: Feature Vector
+    path: core_functions/feature_cascade.py
+    function_in_file: feature_cascade
+    has_c_version: True
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 069e9c7b-ab5e-442b-b2c6-853cb08d9a42
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Peak Frequencies
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_peak_frequencies
+    has_c_version: True
+    c_file_name: fg_peak_frequencies.c
+    c_function_name: fg_frequency_peak_frequencies
+    deprecated: False
+    dcl_executable: False
+    uuid: f81d7808-2ca2-425f-8bc3-173c610af57b
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Normalize Segment
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_normalize
+    has_c_version: True
+    c_file_name: tr_segment_normalize.c
+    c_function_name: tr_segment_normalize
+    deprecated: False
+    dcl_executable: False
+    uuid: c16961e9-5d48-46e6-bf79-62d926f8cae3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Vertical AutoScale Segment
+    version: 1
+    type: Transform
+    subtype: Segment
+    path: core_functions/segment_transforms.py
+    function_in_file: tr_segment_vertical_scale
+    has_c_version: True
+    c_file_name: tr_segment_vertical_scale.c
+    c_function_name: tr_segment_vertical_scale
+    deprecated: False
+    dcl_executable: False
+    uuid: f29cf61c-bda7-495c-9df6-fb629012d6cd
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Energy Threshold Filter
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_energy_threshold
+    has_c_version: True
+    c_file_name: sg_filter_energy_threshold.c
+    c_function_name: sg_filter_energy_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 9b58bb6c-ec39-426b-8905-39fe246a6f3d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Energy Peak Ratio Filter
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_peak_ratio_energy_threshold
+    has_c_version: True
+    c_file_name: sg_filter_peak_ratio_energy_threshold.c
+    c_function_name: sg_filter_peak_ratio_energy_threshold
+    deprecated: False
+    dcl_executable: False
+    uuid: 7b3f5886-7db4-4a5a-8552-b98d566f577e
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Feature Selector By Family
+    version: 1
+    type: Feature Selector
+    subtype: Unsupervised
+    path: core_functions/selectors.py
+    function_in_file: feature_selector_by_family
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 88aa51ea-21e4-11ed-861d-0242ac120002
+    automl_available: false
+  model: library.transform
+
+- fields:
+    core: True
+    name: Transfer Learning
+    version: 1
+    type: Training Algorithm
+    subtype: Neural Network
+    path: core_functions/mg_contracts.py
+    function_in_file: train_transfer_learning_neural_network
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 43a94d26-46bc-4758-b012-a669edb175b1
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Add Noise
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: add_noise
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 459d484c-be53-11ed-afa1-0242ac120002
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Scale Amplitude
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: scale_amplitude
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: b01a6361-d1e3-4204-95bc-628fdd669bc5
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Time Stretch
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: time_stretch
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 88cc3080-bd99-4291-b665-b45a14250c85
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Pitch Shift
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: pitch_shift
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 3d63ae90-b90c-490b-9f51-7f19ff74309e
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Random Crop
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: random_crop
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: a6235848-cf8e-4cfc-867d-757d65910ad4
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Time Shift
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: time_shift
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 0b402a96-8ff1-43c7-8087-e1608a2d4a96
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Resize Segment
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: resize_segment
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: c4b41b9f-5342-4dfc-9509-adc9c354b72c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Time Flip
+    version: 1
+    type: Augmentation
+    subtype: Augmentation
+    path: core_functions/augmentation.py
+    function_in_file: time_flip
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 8a5d33f7-1041-4270-9027-06f2273df072
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Filter VAD Silk
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_vad_silk
+    has_c_version: True
+    c_file_name: sg_filter_vad_silk.c
+    c_function_name: sg_filter_vad_silk
+    deprecated: False
+    dcl_executable: False
+    uuid: 6f6d4b05-a351-4c04-910f-a19bee7104a7
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Segment Filter VAD WebRTC
+    version: 1
+    type: Transform
+    subtype: Segment Filter
+    path: core_functions/segment_filters.py
+    function_in_file: sg_filter_vad_webrtc
+    has_c_version: True
+    c_file_name: sg_filter_vad_webrtc.c
+    c_function_name: sg_filter_vad_webrtc
+    deprecated: False
+    dcl_executable: False
+    uuid: f35499c2-d287-4aa7-bb56-7f9630ce88f4
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Linear Regression
+    version: 1
+    type: Regression
+    subtype: Regression
+    path: core_functions/mg_contracts.py
+    function_in_file: linear_regression
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 77c7f528-8e73-4404-a519-53db66bb7dc3
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Ordinary Least Squares
+    version: 1
+    type: Training Algorithm
+    subtype: Regression
+    path: core_functions/mg_contracts.py
+    function_in_file: train_linear_regression_ols
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 24396d83-54cb-45f4-88e9-ed85942fbd9c
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: L1 Lasso
+    version: 1
+    type: Training Algorithm
+    subtype: Regression
+    path: core_functions/mg_contracts.py
+    function_in_file: train_linear_regression_l1_lasso
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: b63b342a-3a59-4fd4-8b16-89f65a9cbb89
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: L2 Ridge
+    version: 1
+    type: Training Algorithm
+    subtype: Regression
+    path: core_functions/mg_contracts.py
+    function_in_file: train_linear_regression_l2_ridge
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: bbd85a73-de2e-477c-8020-34c34bb7eb9d
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Harmonic Product Spectrum
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_harmonic_product_spectrum
+    has_c_version: True
+    c_file_name: fg_frequency_harmonic_product_spectrum.c
+    c_function_name: fg_frequency_harmonic_product_spectrum
+    deprecated: False
+    dcl_executable: False
+    uuid: 4c9bd9d3-9f54-4f2a-9be7-3b8931160708
+    automl_available: True
+  model: library.transform
+
+- fields:
+    core: True
+    name: Peak Harmonic Product Spectrum
+    version: 1
+    type: Feature Generator
+    subtype: Frequency
+    path: core_functions/feature_generators/fg_frequency.py
+    function_in_file: fg_frequency_peak_harmonic_product_spectrum
+    has_c_version: True
+    c_file_name: fg_frequency_peak_harmonic_product_spectrum.c
+    c_function_name: fg_frequency_peak_harmonic_product_spectrum
+    deprecated: False
+    dcl_executable: False
+    uuid: fd0b194e-a920-473e-8174-194527c63343
+    automl_available: True
+  model: library.transform

@@ -1,0 +1,1 @@
+https://sensiml.com/documentation/firmware/silicon-labs-xg24/silicon-labs-xg24.html

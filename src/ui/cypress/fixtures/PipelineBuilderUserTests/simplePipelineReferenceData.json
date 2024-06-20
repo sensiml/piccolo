@@ -1,0 +1,359 @@
+[
+  {
+    "name": "Pipeline Settings",
+    "customName": "Pipeline Settings",
+    "nextSteps": null,
+    "mandatory": true,
+    "type": "AUTOML_PARAMS",
+    "subtype": [],
+    "transformList": [],
+    "excludeTransform": [],
+    "data": {
+      "reset": true,
+      "iterations": 15,
+      "selectorset": {
+        "Information Gain": {},
+        "Tree-based Selection": {},
+        "Univariate Selection": {},
+        "t-Test Feature Selector": {}
+      },
+      "tvo": true,
+      "hardware_target": {
+        "classifiers_sram": 32000
+      },
+      "population_size": 10,
+      "prediction_target(%)": {},
+      "single_model": true,
+      "hierarchical_multi_model": false
+    },
+    "limit": 1,
+    "set": false,
+    "id": "20"
+  },
+  {
+    "name": "Input Data",
+    "customName": "dogcommand.csv",
+    "nextSteps": [
+      "Sensor Transform",
+      "Sensor Filter",
+      "Segmenter",
+      "Sampling Filter",
+      "Augmentation"
+    ],
+    "mandatory": true,
+    "type": "Input Data",
+    "subtype": ["Input Data"],
+    "transformFilter": [
+      {
+        "Type": "Input Data",
+        "Subtype": "Input Data"
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": 1,
+    "set": false,
+    "id": "2",
+    "data": {
+      "name": "dogcommand.csv",
+      "label_column": "Label",
+      "data_columns": [
+        "AccelerometerX",
+        "AccelerometerY",
+        "AccelerometerZ",
+        "GyroscopeX",
+        "GyroscopeY",
+        "GyroscopeZ"
+      ],
+      "group_columns": ["Label", "SegmentID"]
+    },
+    "options": {}
+  },
+  {
+    "name": "Segmenter",
+    "customName": "Windowing",
+    "nextSteps": [
+      "Segment Transform",
+      "Segment Filter",
+      "Augmentation",
+      "Sampling Filter",
+      "Feature Generator"
+    ],
+    "mandatory": true,
+    "type": "Segmenter",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Segmenter",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": 1,
+    "set": false,
+    "id": "6",
+    "data": {
+      "delta": 250,
+      "input_data": "temp.raw",
+      "train_delta": 0,
+      "window_size": 250,
+      "group_columns": [],
+      "return_segment_index": false,
+      "transform": "Windowing"
+    },
+    "options": {}
+  },
+  {
+    "index": 2,
+    "name": "Augmentation",
+    "customName": "Add Quantize",
+    "nextSteps": ["Parent"],
+    "mandatory": false,
+    "type": "Augmentation",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Augmentation",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": null,
+    "set": false,
+    "id": "20",
+    "data": {
+      "transform": "Add Quantize",
+      "label_column": "Label",
+      "target_sensors": [
+        "AccelerometerX",
+        "AccelerometerY",
+        "AccelerometerZ",
+        "GyroscopeX",
+        "GyroscopeY",
+        "GyroscopeZ"
+      ],
+      "percent": 0.2,
+      "n_levels": [10],
+      "group_columns": ["Label", "SegmentID"],
+      "target_labels": []
+    },
+    "options": {}
+  },
+  {
+    "name": "Feature Generator",
+    "customName": "Feature Generator",
+    "nextSteps": [
+      "Data Balancing",
+      "Feature Selector",
+      "Feature Transform",
+      "Outlier Filter",
+      "Feature Quantization"
+    ],
+    "mandatory": true,
+    "type": "Feature Generator",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Feature Generator",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": 1,
+    "set": true,
+    "id": "10",
+    "data": [
+      {
+        "name": "Downsample",
+        "params": {
+          "columns": [
+            "AccelerometerX",
+            "AccelerometerY",
+            "AccelerometerZ",
+            "GyroscopeX",
+            "GyroscopeY",
+            "GyroscopeZ"
+          ],
+          "new_length": 12,
+          "group_columns": ["Label", "SegmentID"]
+        }
+      }
+    ],
+    "options": {}
+  },
+  {
+    "index": 4,
+    "name": "Feature Selector",
+    "customName": "Feature Selector",
+    "nextSteps": ["Parent"],
+    "mandatory": false,
+    "type": "Feature Selector",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Feature Selector",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": 1,
+    "set": true,
+    "id": "22",
+    "data": [
+      {
+        "name": "Variance Threshold",
+        "params": {
+          "threshold": 0.05
+        }
+      },
+      {
+        "name": "Correlation Threshold",
+        "params": {
+          "threshold": 0.95
+        }
+      }
+    ],
+    "options": {}
+  },
+  {
+    "index": 4,
+    "name": "Outlier Filter",
+    "customName": "Isolation Forest Filtering",
+    "nextSteps": ["Parent"],
+    "mandatory": false,
+    "type": "Sampler",
+    "subtype": ["Outlier Filter"],
+    "transformFilter": [
+      {
+        "Type": "Sampler",
+        "Subtype": "Outlier Filter"
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": [],
+    "limit": null,
+    "set": false,
+    "id": "21",
+    "data": {
+      "transform": "Isolation Forest Filtering",
+      "label_column": "Label",
+      "outliers_fraction": 0.05,
+      "assign_unknown": false,
+      "filtering_label": [],
+      "feature_columns": []
+    },
+    "options": {}
+  },
+  {
+    "name": "Feature Quantization",
+    "customName": "Min Max Scale",
+    "nextSteps": [
+      "Data Balancing",
+      "Feature Selector",
+      "Feature Transform",
+      "Outlier Filter",
+      "Training Algorithm"
+    ],
+    "mandatory": true,
+    "type": "",
+    "subtype": [],
+    "transformFilter": [],
+    "transformList": ["Min Max Scale"],
+    "excludeTransform": [],
+    "limit": 1,
+    "set": false,
+    "id": "15",
+    "data": {
+      "pad": 2,
+      "input_data": "temp.Isolation_Forest_Filtering0",
+      "passthrough_columns": ["Label", "SegmentID"],
+      "transform": "Min Max Scale"
+    },
+    "options": {}
+  },
+  {
+    "name": "Classifier",
+    "customName": "PME",
+    "nextSteps": ["Training Algorithm"],
+    "mandatory": true,
+    "type": "Classifier",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Classifier",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": ["TF Micro"],
+    "limit": 1,
+    "set": false,
+    "id": "17",
+    "data": {
+      "max_aif": 16384,
+      "min_aif": 2,
+      "num_channels": 1,
+      "distance_mode": "L1",
+      "reserved_patterns": 0,
+      "classification_mode": "RBF",
+      "reinforcement_learning": false,
+      "transform": "PME"
+    },
+    "options": {}
+  },
+  {
+    "name": "Training Algorithm",
+    "customName": "RBF with Neuron Allocation Optimization",
+    "nextSteps": ["Validation"],
+    "mandatory": true,
+    "type": "Training Algorithm",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Training Algorithm",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": ["Load Model PME", "Load Model TF Micro", "Load Neuron Array"],
+    "limit": 1,
+    "set": false,
+    "id": "18",
+    "data": {
+      "turbo": true,
+      "ranking_metric": "f1_score",
+      "number_of_neurons": 32,
+      "number_of_iterations": 100,
+      "aggressive_neuron_creation": true,
+      "transform": "RBF with Neuron Allocation Optimization"
+    },
+    "options": {}
+  },
+  {
+    "name": "Validation",
+    "customName": "Recall",
+    "nextSteps": [],
+    "mandatory": true,
+    "type": "Validation Method",
+    "subtype": [],
+    "transformFilter": [
+      {
+        "Type": "Validation Method",
+        "Subtype": null
+      }
+    ],
+    "transformList": [],
+    "excludeTransform": ["Leave-One-Subject-Out", "Set Sample Validation"],
+    "limit": 1,
+    "set": false,
+    "id": "19",
+    "data": {
+      "transform": "Recall"
+    },
+    "options": {}
+  }
+]

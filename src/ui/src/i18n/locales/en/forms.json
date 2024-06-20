@@ -1,0 +1,23 @@
+{
+  "array-field": {
+    "error-validation": "The array is not valid starting from the point: {{point}}",
+    "errot-out-of-range": "Values: {{values}} are not between {{startRange}} and {{endRange}}",
+    "helper-text-range": "The values should be between {{startRange}} and {{endRange}}",
+    "helper-text-limit-beetween": "The array size should be between {{minElements}} and {{maxElements}}",
+    "helper-text-limit-equal": "The array size should be {{minElements}}",
+    "helper-text-limit-max": "The allowed maximum array size is {{maxElements}}",
+    "helper-text-limit-min": "The allowed minimum array size is {{minElements}}"
+  },
+  "dict-field": {
+    "error-unique-keys": "Keys should be unique",
+    "error-fill-field": "Fill this field before add a new one",
+    "btn-add": "Add new item"
+  },
+  "upload-json": {
+    "error-validation-type-json": "Uploaded file should has JSON type",
+    "error-validation-invalid-json": "Uploaded JSON file has invalid syntax",
+    "error-reader": "Can not reads the file",
+    "btn-upload": "Choose file",
+    "text-drag": "Or drag it here"
+  }
+}

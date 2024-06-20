@@ -1,0 +1,16 @@
+{
+	"NumModels": 1,
+	"ModelIndexes": {
+		"ModelName": 0
+	},
+	"ModelDescriptions": [
+		{
+			"Name": 0,
+			"ClassMaps": {
+				"0": "Unknown",
+				"1": "Movement",
+				"2": "Resting"
+			}
+		}
+	]
+}

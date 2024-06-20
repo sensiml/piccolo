@@ -1,0 +1,29 @@
+### Compile the Knowledge Pack and run it in one line
+
+```bash
+mkdir build
+
+# Regular
+
+make clean && make -j && mv _build/libsensiml.a . && cd ../application/ && g++ main.c -o a.out -L../libsensiml -lsensiml  -lm -I../libsensiml && ./a.out && cd ../libsensiml/
+
+# with TensorFlow Lite for Microcontrollers
+
+make clean && make -j && mv _build/libsensiml.a . && cd ../application/ && g++ main.c -o a.out -L../libsensiml -lsensiml -ltensorflow-microlite -lm -I../libsensiml && ./a.out && cd ../libsensiml/
+```
+
+
+## CODE FORMATTING
+
+black==21.9b0
+
+
+## Run the SensiML Server in Docker
+
+ sudo chmod 666 /var/run/docker.sock
+
+# copy the .env to a .env.local file and update the variables
+
+SML_SERVER_DATADIR="<path-to-shared-data-dir>"
+
+docker-compose --env-file=.env.local up

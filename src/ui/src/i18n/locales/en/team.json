@@ -1,0 +1,26 @@
+{
+  "cpu_usage_subscription": "CPU Time",
+  "cpu_usage_purchased": "CPU Time",
+  "cpu_usage_total": "CPU Time",
+  "storage_usage_subscription": "Storage",
+  "storage_usage_purchased": "Storage",
+  "dialog-account-credits": {
+    "name": "",
+    "description-plan": "Current Plan",
+    "description-text": "For more information about subscriptions go to",
+    "header-credits": "Credits",
+    "header-credits-used": "Credits Used",
+    "header-usage": "Usage",
+    "type-subscription": "Subscription",
+    "type-purchased": "Purchased"
+  },
+  "subscriptions": {
+    "STARTER": "Community Edition",
+    "ENTERPRISE": "Premium",
+    "DEVELOPER": "Developer",
+    "STANDARD": "Advanced",
+    "UNSUBSCRIBED": "UNSUBSCRIBED",
+    "BASIC": "Proto",
+    "FREE": "Demo"
+  }
+}

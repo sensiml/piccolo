@@ -1,0 +1,24 @@
+- fields:
+    name: CRITICAL
+  model: logger.loglevel
+  pk: 1
+- fields:
+    name: ERROR
+  model: logger.loglevel
+  pk: 2
+- fields:
+    name: WARNING
+  model: logger.loglevel
+  pk: 3
+- fields:
+    name: INFO
+  model: logger.loglevel
+  pk: 4
+- fields:
+    name: DEBUG
+  model: logger.loglevel
+  pk: 5
+- fields:
+    name: INVALID
+  model: logger.loglevel
+  pk: 6

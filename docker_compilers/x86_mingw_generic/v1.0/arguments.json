@@ -1,0 +1,7 @@
+[
+    {
+        "repository": "sml_x86mingw_generic",
+        "tag": "9.3",
+        "build_args": {}
+    }
+]

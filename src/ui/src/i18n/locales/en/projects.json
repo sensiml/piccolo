@@ -1,0 +1,18 @@
+{
+  "project-control-panel": {
+    "header": "Project: {{ projectName }}",
+    "small-header": "{{ projectName }}"
+  },
+  "project-summary": {
+    "change-project-btn": "Change Project"
+  },
+  "table": {
+    "title": "Open Project",
+    "dialog-delete-title": "Delete Project",
+    "dialog-delete-text": "Are you sure you want to delete the Project {{deletingProjectName}}?",
+    "dialog-create-title": "Create Project",
+    "btn-create": "Create Project",
+    "success-msg-delete-project": "Successfully deleted the Project {{name}}",
+    "success-msg-create-project": "Successfully created the Project {{name}}"
+  }
+}

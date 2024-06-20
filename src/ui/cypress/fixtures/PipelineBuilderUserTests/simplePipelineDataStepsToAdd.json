@@ -1,0 +1,16 @@
+[
+  {
+    "parent_type": "Segmenter",
+    "type": "Augmentation",
+    "transform": "Add Quantize"
+  },
+  {
+    "parent_type": "Feature Generator",
+    "type": "Outlier Filter",
+    "transform": "Isolation Forest Filtering"
+  },
+  {
+    "parent_type": "Feature Generator",
+    "type": "Feature Selector"
+  }
+]

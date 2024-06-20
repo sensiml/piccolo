@@ -1,0 +1,7 @@
+.vscode/
+*_filled
+*.report.txt
+sensiml_base/v3.0/CMSIS-DSP
+sensiml_base/v3.0/CMSIS-NN
+sensiml_base/v3.0/CMSIS_5
+*__pycache__*

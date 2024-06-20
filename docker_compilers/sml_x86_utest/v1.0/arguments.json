@@ -1,0 +1,7 @@
+[
+    {
+        "repository": "sml_x86_utest",
+        "tag": "latest",
+        "build_args": {}
+    }
+]

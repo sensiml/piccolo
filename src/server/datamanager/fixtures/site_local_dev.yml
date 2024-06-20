@@ -1,0 +1,4 @@
+# Change site from example.com to sensiml.com
+- model: sites.site
+  pk: 1
+  fields: {domain: '127.0.0.1:8000', name: "SensiML Dev"}

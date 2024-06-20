@@ -1,0 +1,49 @@
+/*
+Copyright 2017-2024 SensiML Corporation
+
+This file is part of SensiML™ Piccolo AI™.
+
+SensiML Piccolo AI is free software: you can redistribute it and/or
+modify it under the terms of the GNU Affero General Public License
+as published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+SensiML Piccolo AI is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public
+License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+
+
+
+#include "kbalgorithms.h"
+
+int32_t fg_stats_iqr(kb_model_t *kb_model, int16_data_t *cols_to_use, float_data_t *params, FLOAT *pFV)
+{
+#define stats_iqr_num_params 0
+	FLOAT q1, q3;
+	int32_t i;
+	int16_t *temp;
+
+#if SML_DEBUG
+	if (!kb_model || kb_model->sg_length <= 0 || !cols_to_use || cols_to_use->size <= 0 || !pFV)
+		return 0;
+#endif
+
+	for (i = 0; i < cols_to_use->size; i++)
+	{
+		temp = sorted_copy(kb_model->pdata_buffer->data + cols_to_use->data[i], kb_model->sg_index, kb_model->sg_length, 0);
+		if (temp)
+		{
+			q1 = stats_percentile_presorted(temp, kb_model->sg_length, 0.25);
+			q3 = stats_percentile_presorted(temp, kb_model->sg_length, 0.75);
+			*(pFV + i) = q3 - q1;
+		}
+	}
+
+	return cols_to_use->size;
+}

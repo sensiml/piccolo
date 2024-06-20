@@ -1,0 +1,8 @@
+{
+  "home": "Home",
+  "log-out": "Log out",
+  "alert-change-project": {
+    "title": "Change project",
+    "text": "Are you sure you want to change project?"
+  }
+}

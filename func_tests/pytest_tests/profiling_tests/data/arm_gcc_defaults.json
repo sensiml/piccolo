@@ -1,0 +1,1389 @@
+[
+    {
+        "fields": {
+            "c_function_name": "fg_area_absolute_area",
+            "flash": 194,
+            "flash_dependencies": "calc_area",
+            "function": "db7330db-2d02-4848-9e14-223677a5d800",
+            "function_type": "core",
+            "latency": 21,
+            "sram": 0,
+            "stack": 80,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "d19ef60f-39f3-490b-9bca-b7669e8f3615"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_absolute_area_high_frequency",
+            "flash": 194,
+            "flash_dependencies": "calc_area",
+            "function": "dec45628-cdc3-4be3-abab-67b08d78da76",
+            "function_type": "core",
+            "latency": 0.010540039,
+            "sram": 0,
+            "stack": 152,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "0f16f911-6954-4225-a273-d4477e9bf018"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_absolute_area_low_frequency",
+            "flash": 172,
+            "flash_dependencies": "calc_area",
+            "function": "e4416c26-e513-4f51-beea-9166b6559acc",
+            "function_type": "core",
+            "latency": 0.007044922,
+            "sram": 0,
+            "stack": 152,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "7ef7f2eb-819f-4942-960b-76aa5a58ef68"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "aratg",
+            "flash": 48,
+            "flash_dependencies": null,
+            "function_type": "disabled",
+            "latency": 1,
+            "sram": 0,
+            "stack": 84,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "0c15c111-d533-4bd8-b45d-5a1969065cb0"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_energy_average_energy",
+            "flash": 216,
+            "flash_dependencies": null,
+            "function": "dd390934-a435-4517-8290-3ba4cee64ef4",
+            "function_type": "core",
+            "latency": 2,
+            "sram": 0,
+            "stack": 76,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "2a359bd6-6ec3-40a4-9769-7b04f2feca3c"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_physical_average_movement_intensity",
+            "flash": 270,
+            "flash_dependencies": null,
+            "function": "e144859b-6d65-4bd1-93fc-3542a364cf39",
+            "function_type": "core",
+            "latency": 6,
+            "sram": 0,
+            "stack": 96,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "9c82ee45-f339-4f11-8d70-5efa63908548"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_physical_average_signal_magnitude_area",
+            "flash": 140,
+            "flash_dependencies": null,
+            "function": "00780f99-45c9-4056-990a-ea8339076757",
+            "function_type": "disabled",
+            "latency": 9,
+            "sram": 0,
+            "stack": 76,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "391bdf27-5e3b-447b-8abf-8995d25258ab"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "cagh",
+            "flash": 748,
+            "flash_dependencies": null,
+            "function_type": "disabled",
+            "latency": 15,
+            "sram": 0,
+            "stack": 168,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "355f4646-ecc5-4153-b437-95e3b3fd1bdf"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "calc_area",
+            "flash": 398,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 104,
+            "stack_dependencies": null,
+            "uuid": "966043c6-9fa1-49ad-b470-9ebc39075921"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "calc_dominant_frequency",
+            "flash": 320,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 144,
+            "stack_dependencies": null,
+            "uuid": "c142baca-9312-4e1d-8ade-56a9abfd19bc"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "calc_spectral_entropy",
+            "flash": 368,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 132,
+            "stack_dependencies": null,
+            "uuid": "52427d64-23a8-4c6c-bad3-6b4cb72bdd07"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "columns",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": "4*num_sensor_streams",
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "ea6e437c-50da-40ab-b608-a9447120b200"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "crossing_rate",
+            "flash": 130,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 60,
+            "stack_dependencies": null,
+            "uuid": "4c407af9-a9c6-478d-91e6-87d7da1864c8"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "defined_sample_rate",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 4,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "b2c3b63d-fd16-4e6a-9672-d6dfcb22cd4a"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_shape_difference_high_frequency",
+            "flash": 140,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "a6cdad7e-9a7b-445d-84c8-a61d3b8f2d93",
+            "function_type": "core",
+            "latency": 42,
+            "sram": 0,
+            "stack": 146,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "b73e85a7-58ac-423e-8867-1783192619f9"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_frequency_dominant_frequency",
+            "flash": 348,
+            "flash_dependencies": "calc_dominant_frequency",
+            "function": "1809c4f9-141c-47ca-9574-64f760d7f30d",
+            "function_type": "core",
+            "latency": 100,
+            "sram": 0,
+            "stack": 196,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "875f524b-013f-4eb8-9cea-eeb46ac2574e"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_sampling_downsample",
+            "flash": 256,
+            "flash_dependencies": null,
+            "function": "b81badac-bf39-4d27-8df2-3357cd4e976b",
+            "function_type": "core",
+            "latency": 13,
+            "sram": 0,
+            "stack": 102,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "9c7cb15d-dfd6-421b-94ce-793660e47906"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_fixed_width_histogram",
+            "flash": 476,
+            "flash_dependencies": null,
+            "function": "41f90002-d669-4215-8393-06f771eb3912",
+            "function_type": "core",
+            "latency": 23.95,
+            "sram": 0,
+            "stack": 112,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "be8e2a7a-2874-43cb-87bd-842b08beb7a1"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "general_threshold_segmenter",
+            "flash": 504,
+            "flash_dependencies": "utils_buffer_functions",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 8,
+            "stack": 140,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "9fe7af0c-0bfd-4f8e-8515-465811a9df99",
+            "function": "5d685c61-26d7-4298-b309-615732d7fb62"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_pct100",
+            "flash": 116,
+            "flash_dependencies": "sorted_copy, sortarray",
+            "function": "1133919d-8d30-4154-bb1b-0ccf7caa2bca",
+            "function_type": "core",
+            "latency": 0.017648438,
+            "sram": 0,
+            "stack": 104,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "d701ff14-8d0e-4cbe-b8a9-479b170ed05b"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_pct025",
+            "flash": 162,
+            "flash_dependencies": "sorted_copy, sortarray",
+            "function": "c9a0a586-2581-4dca-9ee6-6d874e0f071c",
+            "function_type": "core",
+            "latency": 0.017668945,
+            "sram": 0,
+            "stack": 104,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "a6edf7f2-2095-45eb-a09e-e6f4d77252c9"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_pct075",
+            "flash": 116,
+            "flash_dependencies": "sorted_copy, sortarray",
+            "function": "ad723f6a-40f6-49e8-b500-35c780c6bcac",
+            "function_type": "core",
+            "latency": 0.017668945,
+            "sram": 0,
+            "stack": 104,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "9803c1ab-c22c-4077-9a29-9111ef73a822"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_iqr",
+            "flash": 180,
+            "flash_dependencies": "sorted_copy, sortarray",
+            "function": "cebcac42-7ef4-421e-b501-0d7ea5e8468f",
+            "function_type": "core",
+            "latency": 3,
+            "sram": 0,
+            "stack": 120,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "b1abdcbd-73ac-4b81-895c-5d2a34509600"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_kurtosis",
+            "flash": 208,
+            "flash_dependencies": "stat_moment, stat_mean",
+            "function": "937e22e8-2449-4fcd-9255-34704bb6cfd5",
+            "function_type": "core",
+            "latency": 409.9,
+            "sram": 0,
+            "stack": 176,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "7fcc64ce-9754-4eae-989c-476186562af2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_mean",
+            "flash": 124,
+            "flash_dependencies": "mean",
+            "function": "4f2f95e9-e7e5-4cc9-9272-03721b529e75",
+            "function_type": "core",
+            "latency": 0.003110352,
+            "sram": 0,
+            "stack": 80,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "5feb7c1d-7e27-4622-befb-9c050f3d969a"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_median",
+            "flash": 284,
+            "flash_dependencies": "sorted_copy, sortarray, get_median",
+            "function": "1baeb851-5a4a-4df4-9549-038ae71f0d6a",
+            "function_type": "core",
+            "latency": 0.017645508,
+            "sram": 0,
+            "stack": 172,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "1cd9a1a5-fa55-4ce1-9227-6055642b8bc0"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_percentile_presorted",
+            "flash": 200,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 64,
+            "stack_dependencies": null,
+            "uuid": "2462ad9f-6fed-4758-9931-693a1d98977c"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_skewness",
+            "flash": 228,
+            "flash_dependencies": "stat_moment, stat_mean",
+            "function": "145a8e6a-25ec-4f41-badf-a8b95767d9e5",
+            "function_type": "core",
+            "latency": 410.3,
+            "sram": 0,
+            "stack": 176,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "c0ea2bcc-0f87-4038-82ca-5ec1bb654597"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_stdev",
+            "flash": 148,
+            "flash_dependencies": "mean, std",
+            "function": "8adfd68a-8ac9-4b4d-9d45-1b52362d1dfb",
+            "function_type": "core",
+            "latency": 0.010263672,
+            "sram": 0,
+            "stack": 136,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "8d673e5b-90fa-46ca-a05c-77202c701f4a"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_sum",
+            "flash": 88,
+            "flash_dependencies": null,
+            "function": "4f820fff-0f9b-41d9-81c2-4beb213f631c",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 80,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "595f09c9-fbb9-4f40-973c-e35f992b55a3"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_variance",
+            "flash": 290,
+            "flash_dependencies": null,
+            "function": "0494165a-0c3d-4c17-a68a-710796d412b8",
+            "function_type": "disabled",
+            "latency": 22,
+            "sram": 0,
+            "stack": 94,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "5e2a041f-c8f3-44a9-aa2c-927132c21fec"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "get_median",
+            "flash": 64,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 32,
+            "stack_dependencies": null,
+            "uuid": "f83a1bc7-ebfa-460e-9b7c-c8df3d09fb4b"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_amplitude_global_p2p_high_frequency",
+            "flash": 128,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "6260e942-0427-4ee8-a999-c9b897881443",
+            "function_type": "core",
+            "latency": 0.010521484,
+            "sram": 0,
+            "stack": 170,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "c86b61f8-f9c0-4269-803b-0f3494646806"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_amplitude_global_p2p_low_frequency",
+            "flash": 112,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "dabc426d-99de-416c-a548-fbc8f28c5012",
+            "function_type": "core",
+            "latency": 0.007026367,
+            "sram": 0,
+            "stack": 170,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "87a91c1a-9f84-4fce-a900-57601c5d2b66"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "kb_result_buf",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 2,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "fb745e95-bc2b-4f63-a246-bf4d349641c4"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "kbfeaturegen",
+            "flash": 48,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 1,
+            "sram": 8,
+            "stack": 32,
+            "stack_dependencies": null,
+            "uuid": "e9cf6b3c-7585-43aa-a899-79f33cc59072"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "KBSensorData",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "buffer",
+            "latency": "max_segment_length * (1000000/sample_rate)",
+            "sram": "2*num_sensor_streams*max_segment_length",
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "f19ec9cd-ecb6-4510-9717-a575421586a0"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "kbtoplevel",
+            "flash": 1250,
+            "flash_dependencies": "utils_tr_sensor",
+            "function_type": "framework",
+            "latency": "40/6*num_sensor_streams*max_segment_length",
+            "sram": 248,
+            "stack": 76,
+            "stack_dependencies": null,
+            "uuid": "78a5d983-42c5-4159-aa65-1d1ed07b405a"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "kbtrainedneurons",
+            "flash": 644,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 46,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "067a4fd9-7ff0-4c82-981b-01e11c48a317"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "max_min_high_low_freq",
+            "flash": 684,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 128,
+            "stack_dependencies": null,
+            "uuid": "86a84678-9d87-4933-93d9-02cd84caa213"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "max_min_threshold_segmenter",
+            "flash": 588,
+            "flash_dependencies": "utils_buffer_functions",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 8,
+            "stack": 156,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "f0098f38-77ea-46d8-aaaa-d3a5cda24144",
+            "function": "0b49d80a-5a6a-4cf3-b5ef-73f125b1991c"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_amplitude_max_p2p_half_high_frequency",
+            "flash": 136,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "b8ccf6a3-35f3-4409-8e62-7af50af69ee4",
+            "function_type": "core",
+            "latency": 0.005292969,
+            "sram": 0,
+            "stack": 170,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "acef000f-30e0-4942-86ee-5aed1b6f6383"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "mean",
+            "flash": 256,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 44,
+            "stack_dependencies": null,
+            "uuid": "b663598a-7488-4b1a-a234-e80bb6fdfbe2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_roc_mean_crossing_rate",
+            "flash": 140,
+            "flash_dependencies": "crossing_rate",
+            "function": "250f1952-62b2-472f-9486-ff33f1d0d3a3",
+            "function_type": "core",
+            "latency": 0.006074219,
+            "sram": 0,
+            "stack": 124,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "1e40c616-5d6d-42ee-8ca0-a93db740d1a7"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_roc_mean_difference",
+            "flash": 256,
+            "flash_dependencies": "crossing_rate",
+            "function": "4172c18e-3307-45b5-85f7-9e4f9242ef71",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 76,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "ccd0931f-b697-4e71-9b17-9656056fd370"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "min_max_scale",
+            "flash": 312,
+            "flash_dependencies": null,
+            "function": "e58e18f1-8c8e-4c9c-8cc0-720fe41f2556",
+            "function_type": "core",
+            "latency": 17,
+            "sram": 0,
+            "stack": 68,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "c55d45b6-d575-4cca-92b1-8cb2b91b1382"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_amplitude_min_max_sum",
+            "flash": 100,
+            "flash_dependencies": null,
+            "function": "68b5d1f6-f4fd-4a9e-8e53-aee51eddbb49",
+            "function_type": "core",
+            "latency": 0,
+            "sram": 0,
+            "stack": 184,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "a5bc166c-8d2d-4208-8475-18277b1a9ecf"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "neurons",
+            "flash": 124,
+            "flash_dependencies": null,
+            "function_type": "pme",
+            "latency": 0,
+            "sram": 120,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "925c8b2f-9162-4538-9300-53d409b34f6b"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "normalize",
+            "flash": 116,
+            "flash_dependencies": null,
+            "function": "c200e1e5-a0bf-421f-963d-49382d24eb01",
+            "function_type": "core",
+            "latency": 22,
+            "sram": 0,
+            "stack": 36,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "8326aff9-d1bf-47cb-980e-67ca43901b76"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_time_pct_time_over_second_sigma",
+            "flash": 306,
+            "flash_dependencies": "mean, std",
+            "function": "0e5794e1-e61d-49a1-b18b-cc11efe3862a",
+            "function_type": "core",
+            "latency": 27,
+            "sram": 0,
+            "stack": 152,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "acad4279-3aef-40c4-97e2-e25cff530081"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_time_pct_time_over_sigma",
+            "flash": 252,
+            "flash_dependencies": "mean, std",
+            "function": "cac0ee90-6735-4596-9819-fc85f6ae6d31",
+            "function_type": "core",
+            "latency": 26,
+            "sram": 0,
+            "stack": 152,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "5fb67841-6f6a-45fd-a851-590bd7bd2306"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_time_pct_time_over_zero",
+            "flash": 196,
+            "flash_dependencies": "mean, std",
+            "function": "38712cff-3321-4d90-8808-b146b3048249",
+            "function_type": "core",
+            "latency": 0.003143555,
+            "sram": 0,
+            "stack": 68,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "d73c8694-c58d-4178-aa42-0d61bf70ead5"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_amplitude_peak_to_peak",
+            "flash": 114,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "f926150c-3b8e-4a12-8895-3a598e7dc1a3",
+            "function_type": "core",
+            "latency": 40,
+            "sram": 0,
+            "stack": 184,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "b3c7ffd9-3d83-4742-841a-69a076ac1ce8"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "qrk_functions",
+            "flash": 632,
+            "flash_dependencies": null,
+            "function_type": "pme",
+            "latency": 0,
+            "sram": 0,
+            "stack": 28,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "fe052fa2-9f00-4ca9-a851-c4f7bdf34ed9"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "quantize_254",
+            "flash": 80,
+            "flash_dependencies": null,
+            "function": "6c7d2227-6600-4a53-affc-e9adaed6ca31",
+            "function_type": "core",
+            "latency": 24,
+            "sram": 0,
+            "stack": 28,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "00b6b676-8d4e-4557-a716-7c4b99d38662"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_shape_ratio_high_frequency",
+            "flash": 148,
+            "flash_dependencies": "max_min_high_low_freq",
+            "function": "e81959cf-6ea0-476d-90ed-ae61afc88607",
+            "function_type": "core",
+            "latency": 42,
+            "sram": 0,
+            "stack": 146,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "f58f813b-eccd-4b36-bb13-f195b9e9b894"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "raw_data_buf_len",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 4,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "c0564ad3-9d55-4ca0-ba8a-c46654a83ab7"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "rbuffers",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": "20*num_sensor_streams",
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "bdcbe7e5-8d22-4965-a700-97a2a53e65a0"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "tr_segment_scale_factor",
+            "flash": 184,
+            "flash_dependencies": null,
+            "function": "51ff1aca-343f-4285-b8ba-e372725672ff",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 70,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "fc33ed20-55ba-4e71-a085-0716b6453c07"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_roc_second_sigma_crossing_rate",
+            "flash": 136,
+            "flash_dependencies": "crossing_rate",
+            "function": "b47ce2ce-e05b-475d-8c95-cd84a575414b",
+            "function_type": "core",
+            "latency": 29,
+            "sram": 0,
+            "stack": 204,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "d65500ec-3b5e-4b12-b474-ef2940a8b434"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "senslen",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 4,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "375adfc3-0d96-4df6-a8e8-dae80214ecd2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_roc_sigma_crossing_rate",
+            "flash": 164,
+            "flash_dependencies": "crossing_rate",
+            "function": "92ea6874-b8e7-4424-a23e-c30b3168ed78",
+            "function_type": "core",
+            "latency": 31,
+            "sram": 0,
+            "stack": 204,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "1b28de81-ad1d-4045-a731-1bd5bb943a97"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_time_signal_duration",
+            "flash": 84,
+            "flash_dependencies": null,
+            "function": "b9bd8029-731f-4db1-8825-7e0c166d8e1b",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 52,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "6ab2e439-e860-4c77-b410-396de17115b0"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sortarray",
+            "flash": 172,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 32,
+            "stack_dependencies": null,
+            "uuid": "c5cd3b9e-27e2-4193-8720-71da4ac559a3"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sorted_copy",
+            "flash": 88,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 4,
+            "stack": 44,
+            "stack_dependencies": null,
+            "uuid": "754aa3b3-aee6-4eb9-8a58-331d42cf1602"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sorted_data_len",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": 4,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "d2370465-df7a-4dc4-b353-424546f72f86"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sortedData",
+            "flash": 0,
+            "flash_dependencies": null,
+            "function_type": "framework",
+            "latency": 0,
+            "sram": "2*max_segment_length",
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "dc260ec7-d0ca-4050-83cf-ec33525172d1"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_frequency_spectral_entropy",
+            "flash": 552,
+            "flash_dependencies": "calc_spectral_entropy",
+            "function": "f80c4992-b71b-4a67-a141-020c9d0233ce",
+            "function_type": "core",
+            "latency": 130.3,
+            "sram": 0,
+            "stack": 172,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "4c0f16ca-20bd-444f-b170-1334dea427ba"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "stat_mean",
+            "flash": 92,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 76,
+            "stack_dependencies": null,
+            "uuid": "b73d91ab-9225-4338-a005-37a4d620f0d1"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "stat_moment",
+            "flash": 856,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 116,
+            "stack_dependencies": null,
+            "uuid": "5d8b2b08-7ac4-45fe-9019-b62e647af51f"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "std",
+            "flash": 174,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 92,
+            "stack_dependencies": null,
+            "uuid": "95061f5f-0195-49fa-9fb5-2ecafc060551"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sum",
+            "flash": 88,
+            "flash_dependencies": null,
+            "function_type": "disabled",
+            "latency": 1,
+            "sram": 0,
+            "stack": 40,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "958eb666-6c19-4c5d-b620-c1b4e2eb4531"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_total_area",
+            "flash": 224,
+            "flash_dependencies": "calc_area",
+            "function": "1d24719f-40e7-40d5-abbb-fb965c4f0a69",
+            "function_type": "core",
+            "latency": 17.5,
+            "sram": 0,
+            "stack": 80,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "a42b57f0-6883-4c48-8faa-7cd48aa42268"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_total_area_high_frequency",
+            "flash": 172,
+            "flash_dependencies": "calc_area",
+            "function": "19a14ce0-d182-4c6c-acaf-62a89ca6805b",
+            "function_type": "core",
+            "latency": 0.010541992,
+            "sram": 0,
+            "stack": 182,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "8814ae13-81fd-4d5c-8541-1c3d65524280"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_total_area_low_frequency",
+            "flash": 172,
+            "flash_dependencies": "calc_area",
+            "function": "3bd70e49-a685-47b3-8dc1-f0d52ea51f6e",
+            "function_type": "core",
+            "latency": 0.007045898,
+            "sram": 0,
+            "stack": 182,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "9f609752-c596-461b-9f34-00941c8d5860"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_energy_total_energy",
+            "flash": 190,
+            "flash_dependencies": null,
+            "function": "0e555c6e-6a39-40fa-a847-795211c208b8",
+            "function_type": "core",
+            "latency": 0.00271875,
+            "sram": 0,
+            "stack": 74,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "3f37c320-74f1-431e-8a3e-04279bb1d813"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sg_filter_mse",
+            "flash": 196,
+            "flash_dependencies": null,
+            "function": "d5491aa2-379c-4488-aec7-64a6b2fe66d5",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 96,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "dd03e1a7-0a27-45c2-b513-b1cc177e5cce"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "tr_segment_offset_factor",
+            "flash": 184,
+            "flash_dependencies": null,
+            "function": "c1023796-6016-479e-bf8a-4289df61db59",
+            "function_type": "core",
+            "latency": 3,
+            "sram": 0,
+            "stack": 72,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "13f4f681-709f-4711-a87c-fd26501fe2ce"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "tr_sensor_magnitude",
+            "flash": 96,
+            "flash_dependencies": null,
+            "function_type": "core",
+            "latency": 6,
+            "sram": 0,
+            "stack": 36,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "e4d99bd4-a749-407b-adb6-f846ce865f14",
+            "function": "2d2545a6-9bfd-4d77-b098-875cc19954d2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "tr_segment_strip",
+            "flash": 356,
+            "flash_dependencies": null,
+            "function": "c16961e9-5d48-46e6-bf79-62d926f8ca50",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 0,
+            "stack": 98,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "08deaafa-ec4f-4f99-8ef9-548ceb2b6814"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "sg_windowing",
+            "flash": 132,
+            "flash_dependencies": null,
+            "function": "ee0464cb-cf22-42a1-a203-e406d3f9ca40",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 8,
+            "stack": 76,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "13133611-f72c-44bf-b1ff-60660eca057e"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "utils_buffer_functions",
+            "flash": 252,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "f14d2af7-9f60-46af-9c6f-22b2708db072"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "utils_tr_sensor",
+            "flash": 78,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 0,
+            "stack_dependencies": null,
+            "uuid": "e2d5c774-abe3-4998-8157-739139a22a23"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "variance_based_segmenter",
+            "flash": 2048,
+            "flash_dependencies": null,
+            "function_type": "disabled",
+            "latency": 58,
+            "sram": 1832,
+            "stack": 120,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "be7d7499-ea8c-4ee2-a53c-695c8e494444"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "variance_movement_intensity",
+            "flash": 486,
+            "flash_dependencies": null,
+            "function_type": "disabled",
+            "latency": 12,
+            "sram": 0,
+            "stack": 112,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "71cf5073-8df0-4b0c-bd74-300130c6105e"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "windowing_threshold_segmenter",
+            "flash": 396,
+            "flash_dependencies": "utils_buffer_functions",
+            "function_type": "core",
+            "latency": 1,
+            "sram": 4,
+            "stack": 144,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "1ed5ca30-5044-4223-9525-599a9e73ff94",
+            "function": "8a4c1b01-240e-423c-a80d-dcbd78561fce"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_roc_zero_crossing_rate",
+            "flash": 130,
+            "flash_dependencies": "crossing_rate",
+            "function": "24a2af8f-5347-4add-993f-61472a476be5",
+            "function_type": "core",
+            "latency": 0.003331055,
+            "sram": 0,
+            "stack": 88,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "822d2df2-90d5-41aa-97d3-772264f3bbb5"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "tr_segment_pre_emphasis_filter",
+            "flash": 128,
+            "flash_dependencies": null,
+            "function": "edf25974-e583-408b-9de0-df8c8859fd05",
+            "function_type": "core",
+            "latency": 0.5,
+            "sram": 0,
+            "stack": 78,
+            "stack_dependencies": "kbtoplevel",
+            "uuid": "d437670a-ce4b-471d-8fd7-806c49ea5ec2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_abs_sum",
+            "flash": 186,
+            "flash_dependencies": null,
+            "function": "be77cfa2-fa93-4d0c-8dc4-14a1caf2e772",
+            "function_type": "core",
+            "latency": 10.72,
+            "sram": 0,
+            "stack": 52,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "9d0b45f1-e63f-4b6b-8f68-74a29f1b0bf3"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_stats_abs_mean",
+            "flash": 200,
+            "flash_dependencies": null,
+            "function": "46a37652-1e88-4a3d-b566-7cf4d48c28bb",
+            "function_type": "core",
+            "latency": 0.003110352,
+            "sram": 0,
+            "stack": 52,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "f7deb5be-ff1c-483d-8146-bc062e8a1717"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_area_power_spectrum_density",
+            "flash": 136,
+            "flash_dependencies": null,
+            "function": "0b6aaf26-21cf-4626-b64f-50d6412cc843",
+            "function_type": "core",
+            "latency": 16,
+            "sram": 0,
+            "stack": 76,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "776077e3-877d-4035-80eb-189ae3033934"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fg_mfcc",
+            "flash": 2798,
+            "flash_dependencies": "imfcc, fftr, fixlog",
+            "function": "e3b0f26c-0508-4a0d-8cab-c706d72bcd97",
+            "function_type": "core",
+            "latency": 6.84,
+            "sram": 0,
+            "stack": 270,
+            "stack_dependencies": "kbtoplevel, kbfeaturegen",
+            "uuid": "df7fd718-20b0-4696-99e8-1b38182802f2"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "imfcc",
+            "flash": 3902,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 226,
+            "stack_dependencies": null,
+            "uuid": "acd0b00b-6856-4417-bcfe-10b8d726f450"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fftr",
+            "flash": 640,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 2,
+            "stack": 132,
+            "stack_dependencies": null,
+            "uuid": "41223c1e-8d61-4e2e-9441-8bba13fe2c60"
+        },
+        "model": "library.functioncost"
+    },
+    {
+        "fields": {
+            "c_function_name": "fixlog",
+            "flash": 2112,
+            "flash_dependencies": null,
+            "function_type": "support",
+            "latency": 0,
+            "sram": 0,
+            "stack": 32,
+            "stack_dependencies": null,
+            "uuid": "99276d99-e81f-4276-aa83-f5169568bab9"
+        }
+    }
+]
