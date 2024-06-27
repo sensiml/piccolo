@@ -1,4 +1,4 @@
-## Piccolo AI(TM) 
+## Piccolo AI™
 
 Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/) intended for individual developers, researchers, and AI enthusiasts. For enterprise teams contact SensiML for a licensed enterprise version of the software.
 
