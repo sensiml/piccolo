@@ -527,6 +527,7 @@ def get_docker_runner(docker_type: str):
         DockerRunnerBaseMixin = DockerRunnerLocal
 
     if docker_type == "tensorflow":
+
         class DockerRunner(DockerRunnerLibTensorflowMixin, DockerRunnerBaseMixin):
             pass
 

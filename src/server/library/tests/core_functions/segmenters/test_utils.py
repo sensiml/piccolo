@@ -18,7 +18,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 """
 
 
-
 import pandas as pd
 from datamanager.datasegments import datasegments_equal
 from library.core_functions.segmenters.utils import process_segment_results

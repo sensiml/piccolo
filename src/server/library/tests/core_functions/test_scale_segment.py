@@ -18,7 +18,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 """
 
 
-
 from copy import deepcopy
 
 import pytest

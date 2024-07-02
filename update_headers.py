@@ -24,39 +24,46 @@ copyright_header_python = f'''"""
 """
 '''
 
-copyright_header_c = f'''/*
+copyright_header_c = f"""/*
 {notice}
 */
-'''
+"""
 
-copyright_header_js = f'''/*
+copyright_header_js = f"""/*
 {notice}
 */
-'''
+"""
 
-#TODO MAKEFILE
+# TODO MAKEFILE
+
 
 def prepend_header_to_file(file_path, header):
-    with open(file_path, 'r+') as file:
+    with open(file_path, "r+") as file:
         content = file.read()
         file.seek(0, 0)
-        file.write(header + '\n' + content)
+        file.write(header + "\n" + content)
+
 
 def traverse_and_prepend_header(directory):
     for root, dirs, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)
-            if file.endswith('.py'):
+            if file.endswith(".py"):
                 prepend_header_to_file(file_path, copyright_header_python)
-            elif file.endswith('.c') or file.endswith('.h'):
+            elif file.endswith(".c") or file.endswith(".h"):
                 prepend_header_to_file(file_path, copyright_header_c)
-            elif file.endswith('.js') or file.endswith('.jsx'):
+            elif file.endswith(".js") or file.endswith(".jsx"):
                 prepend_header_to_file(file_path, copyright_header_js)
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Prepend copyright notice header to Python and C source code files.')
-    parser.add_argument('directory_path', type=str, help='The path to the directory to traverse')
-    
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Prepend copyright notice header to Python and C source code files."
+    )
+    parser.add_argument(
+        "directory_path", type=str, help="The path to the directory to traverse"
+    )
+
     args = parser.parse_args()
     directory_path = args.directory_path
     traverse_and_prepend_header(directory_path)

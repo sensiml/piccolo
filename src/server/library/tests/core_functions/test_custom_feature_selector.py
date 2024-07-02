@@ -18,7 +18,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 """
 
 
-
 import pandas as pd
 
 from library.core_functions.selectors import (

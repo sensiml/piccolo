@@ -32,11 +32,11 @@ class Command(BaseCommand):
     help = "Pull latest docker images to local machine"
 
     def add_arguments(self, parser):
-            parser.add_argument(
-                "platform_name",
-                nargs="+",
-                type=str,
-            )
+        parser.add_argument(
+            "platform_name",
+            nargs="+",
+            type=str,
+        )
 
     def handle(self, *args, **options):
         os.system("aws ecr get-login --no-include-email | bash")

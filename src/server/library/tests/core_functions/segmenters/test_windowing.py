@@ -18,7 +18,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 """
 
 
-
 import numpy as np
 import pandas as pd
 from datamanager.datasegments import DataSegments, dataframe_to_datasegments

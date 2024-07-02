@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
+
 def segment_index_spotted_to_dict(spotted_data):
     result = {"Seg_Begin": {}, "Seg_End": {}}
     for seg in spotted_data:

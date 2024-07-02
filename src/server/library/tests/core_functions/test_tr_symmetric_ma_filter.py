@@ -18,7 +18,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 """
 
 
-
 from datamanager.datasegments import dataframe_to_datasegments
 from library.core_functions.sensor_filters import st_moving_average
 from numpy import array

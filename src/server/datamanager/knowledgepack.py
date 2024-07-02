@@ -52,11 +52,11 @@ from library.models import (
     PlatformDescriptionVersion2,
     ProcessorDescription,
 )
-from codegen import ARMGCCGenericCodeGenerator 
-from codegen import GCCGenericCodeGenerator 
-from codegen import QuickLogicS3CodeGenerator 
-from codegen import MINGW64GenericCodeGenerator 
-from codegen import EspressifCodeGenerator 
+from codegen import ARMGCCGenericCodeGenerator
+from codegen import GCCGenericCodeGenerator
+from codegen import QuickLogicS3CodeGenerator
+from codegen import MINGW64GenericCodeGenerator
+from codegen import EspressifCodeGenerator
 from logger.log_handler import LogHandler
 from rest_framework import generics, permissions, views
 from rest_framework.response import Response
@@ -67,12 +67,13 @@ from server.celery import UNREADY_STATES
 
 logger = LogHandler(logging.getLogger(__name__))
 
-CODEGEN_PLATFORMS  = {"ARMGCCGenericCodeGenerator": ARMGCCGenericCodeGenerator,
-                      "GCCGenericCodeGenerator":GCCGenericCodeGenerator,
-                      "QuickLogicS3CodeGenerator":QuickLogicS3CodeGenerator,
-                      "MINGW64GenericCodeGenerator":MINGW64GenericCodeGenerator,
-                      "EspressifCodeGenerator":EspressifCodeGenerator
-                    }
+CODEGEN_PLATFORMS = {
+    "ARMGCCGenericCodeGenerator": ARMGCCGenericCodeGenerator,
+    "GCCGenericCodeGenerator": GCCGenericCodeGenerator,
+    "QuickLogicS3CodeGenerator": QuickLogicS3CodeGenerator,
+    "MINGW64GenericCodeGenerator": MINGW64GenericCodeGenerator,
+    "EspressifCodeGenerator": EspressifCodeGenerator,
+}
 
 
 def _check_parents(user, project_id, sandbox_id):
@@ -185,9 +186,9 @@ def get_generator(
             )
         return generator
     else:
-        logger.info({"message":CODEGEN_PLATFORMS,"log_type": "datamanager"})
+        logger.info({"message": CODEGEN_PLATFORMS, "log_type": "datamanager"})
         raise KnowledgePackInvalidDeviceError(
-            f'Target {codegen_class} not found in globals'
+            f"Target {codegen_class} not found in globals"
         )
 
 
@@ -215,7 +216,7 @@ def make_knowledgepack(
     pipeline_summary,
     knowledgepack_summary,
     name="",
-    **kwargs
+    **kwargs,
 ):
     """Generate the knowledgepack.
 
