@@ -98,7 +98,7 @@ urlpatterns = [
         get_iteration_results,
         name="iteration_results",
     ),
-    path("oauth/", include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path("oauth/", include("oauth2_provider.urls", namespace="oauth2_provider")),
     # YOUR PATTERNS
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     # Optional UI:

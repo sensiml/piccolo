@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
+
 class FunctionCalls(object):
     """Collection of function calls"""
 

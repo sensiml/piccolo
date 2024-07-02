@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
+
 def filter_extreme_values(
     input_data, input_columns, min_bound, max_bound, signal_min_max_parameters={}
 ):

@@ -93,10 +93,10 @@ class LocalDataStoreService:
             raise Exception("INVALID PATH HERE")
 
         if self._folder and "('/hom" in self._folder:
-                raise Exception("INVALID PATH HERE")
+            raise Exception("INVALID PATH HERE")
 
         if folder and "('/hom" in folder:
-                raise Exception("INVALID PATH HERE")
+            raise Exception("INVALID PATH HERE")
 
         if folder:
             return os.path.join(self._bucket, folder, key)
