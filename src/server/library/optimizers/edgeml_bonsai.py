@@ -81,7 +81,7 @@ class EdgemlBonsai:
         self.treeDepth = treeDepth
         self.sigma = sigma
 
-        self.internalNodes = 2 ** self.treeDepth - 1
+        self.internalNodes = 2**self.treeDepth - 1
         self.totalNodes = 2 * self.internalNodes + 1
 
         self.W = self.initW(W)

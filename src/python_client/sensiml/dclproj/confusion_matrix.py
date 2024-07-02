@@ -212,7 +212,6 @@ class ConfusionMatrix(object):
     def __insert_horizontal_line_table(
         self, table: list, pos: int, alignment: list
     ) -> list:
-
         """add a horizontal breaker line into a table
         Args:
             table (list): table in the form of a list of lists
@@ -402,7 +401,6 @@ class ConfusionMatrix(object):
         pospred_dict: dict,
         sum_total: int,
     ) -> list:
-
         """list of lists containing the confusion matrix data
         Args:
             pred_cts (dict): Dictionary containing the segment prediction data
@@ -447,7 +445,6 @@ class ConfusionMatrix(object):
     def __compare_predictions(
         self, pred_segments: list, ground_truth_segments: list
     ) -> list:
-
         """compare segments from predicted file(s) and ground truth file(s) and return a confusion matrix from the results. The number of prediction files and ground truth files MUST match.
         Args:
             pred_segments (list): list of segments from prediction file each set of segments in dataframe format

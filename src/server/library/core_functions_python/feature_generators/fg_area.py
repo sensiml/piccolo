@@ -159,7 +159,7 @@ def calculate_abs_area_spec(data, fs):
 def nextpow2(n):
     m_f = log2(n)
     m_i = ceil(m_f)
-    return 2 ** m_i
+    return 2**m_i
 
 
 def spectrum(data, fs):

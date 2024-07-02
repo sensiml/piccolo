@@ -109,9 +109,11 @@ def print_list(func: Callable):
                 "Name": name,
                 "UUID": item.uuid,
                 "Created": item.created_at,
-                "Last Modified": item.created_at
-                if not hasattr(item, "last_modified")
-                else item.last_modified,
+                "Last Modified": (
+                    item.created_at
+                    if not hasattr(item, "last_modified")
+                    else item.last_modified
+                ),
             }
             for name, item in result.items()
         ]
@@ -296,9 +298,11 @@ class Client(object):
                     {
                         "NAME": f.name,
                         "TYPE": f.type,
-                        "DESCRIPTION": f.description.lstrip("\n").lstrip(" ")
-                        if f.description
-                        else "",
+                        "DESCRIPTION": (
+                            f.description.lstrip("\n").lstrip(" ")
+                            if f.description
+                            else ""
+                        ),
                         "SUBTYPE": f.subtype,
                         "KP FUNCTION": f.has_c_version,
                         "UUID": f.uuid,

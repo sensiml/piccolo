@@ -179,23 +179,23 @@ class ModelGenerator(object):
 
         if train_data is not None and train_data.shape[0] > 0:
             self.results["models"][key]["metrics"]["train"] = self._test(train_data)
-            self.results["models"][key]["feature_statistics"][
-                "train"
-            ] = compute_feature_stats(train_data)
+            self.results["models"][key]["feature_statistics"]["train"] = (
+                compute_feature_stats(train_data)
+            )
 
         if validate_data is not None and validate_data.shape[0] > 0:
             self.results["models"][key]["metrics"]["validation"] = self._test(
                 validate_data
             )
-            self.results["models"][key]["feature_statistics"][
-                "validation"
-            ] = compute_feature_stats(validate_data)
+            self.results["models"][key]["feature_statistics"]["validation"] = (
+                compute_feature_stats(validate_data)
+            )
 
         if test_data is not None and test_data.shape[0] > 0:
             self.results["models"][key]["metrics"]["test"] = self._test(test_data)
-            self.results["models"][key]["feature_statistics"][
-                "test"
-            ] = compute_feature_stats(test_data)
+            self.results["models"][key]["feature_statistics"]["test"] = (
+                compute_feature_stats(test_data)
+            )
 
     def run(self):
         """calls the algorithm, runs validation, stores results"""

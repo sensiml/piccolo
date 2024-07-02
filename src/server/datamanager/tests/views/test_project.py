@@ -197,7 +197,7 @@ class TestProject:
         assert result["models"] == 4
         assert result["videos"] == 1
         assert result["video_size_mb"] == round(
-            test_capture_video.file_size / (1024 ** 2), 2
+            test_capture_video.file_size / (1024**2), 2
         )
 
         assert result["segments"] == 12

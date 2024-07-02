@@ -167,9 +167,11 @@ class GCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
             df_ordered["ClassificationName"] = df_ordered[
                 ["ModelName", "Classification"]
             ].apply(
-                lambda x: self.class_map[x[0]][str(x[1])]
-                if self.class_map.get(x[0])
-                else self.class_map[int(x[0])][str(x[1])],
+                lambda x: (
+                    self.class_map[x[0]][str(x[1])]
+                    if self.class_map.get(x[0])
+                    else self.class_map[int(x[0])][str(x[1])]
+                ),
                 axis=1,
             )
         else:
@@ -187,9 +189,9 @@ class GCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
         # TODO: make the make files more generic so they are easier to maintain
         # TODO: These options should be settable by the user
         ret = {}
-        ret[
-            "readme_compile_string"
-        ] = "`gcc main.c -o a.out -L../libsensiml -lsensiml -lm -I../libsensiml`"
+        ret["readme_compile_string"] = (
+            "`gcc main.c -o a.out -L../libsensiml -lsensiml -lm -I../libsensiml`"
+        )
         return ret
 
     def update_tensor_arena_size(self, kb_models, size=100000):

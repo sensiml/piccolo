@@ -653,7 +653,7 @@ def test_mutation(df_ga_inventory):
                 "inputs": {
                     "classification_mode": "RBF",
                     "distance_mode": "L1",
-                    u"max_aif": 50,
+                    "max_aif": 50,
                     "min_aif": 10,
                 },
                 "name": "PME",
@@ -662,7 +662,7 @@ def test_mutation(df_ga_inventory):
                 "inputs": {
                     "classification_mode": "xxx",
                     "distance_mode": "xxx",
-                    u"max_aif": 0,
+                    "max_aif": 0,
                     "min_aif": 0,
                 },
                 "name": "PME",
@@ -768,7 +768,7 @@ def test_read_validation_algorithms(validation_method):
 
     result = po.read_validation_algorithms(validation_method)
 
-    expected_result = [{"inputs": {}, "name": u"Recall"}]
+    expected_result = [{"inputs": {}, "name": "Recall"}]
 
     assert result == expected_result
 

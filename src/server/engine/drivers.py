@@ -437,9 +437,9 @@ def feature_selection_driver(
 
         for key in eliminated.keys():
             feature_table.loc[feature_table["Feature"] == key, "Selected"] = False
-            feature_table.loc[
-                feature_table["Feature"] == key, "EliminatedBy"
-            ] = eliminated[key]
+            feature_table.loc[feature_table["Feature"] == key, "EliminatedBy"] = (
+                eliminated[key]
+            )
 
         num_feat = selected_data.shape[1] - len(passthrough_columns)
         if num_feat <= step["inputs"]["number_of_features"]:
@@ -821,10 +821,10 @@ def tvo_driver(
     if is_classification(tvo_config):
         for model in model_stats["models"]:
             for metric in ["train", "validation", "test"]:
-                model_stats["models"][model]["metrics"][
-                    metric
-                ] = return_labels_to_original_values(
-                    model_stats["models"][model]["metrics"][metric], reverse_map
+                model_stats["models"][model]["metrics"][metric] = (
+                    return_labels_to_original_values(
+                        model_stats["models"][model]["metrics"][metric], reverse_map
+                    )
                 )
 
         tvo_results["class_map"] = reverse_map

@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import os
 
 from library.core_functions.selectors import correlation_select_remove_most_corr_first

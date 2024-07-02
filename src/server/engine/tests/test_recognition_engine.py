@@ -89,7 +89,8 @@ class TestLSup:
     def test_lsup_write_and_recognize(self, knowledgepack):
         """Tests LSup recognition.
 
-        Ensures correct predictions given a set of neurons and known ground data predictions."""
+        Ensures correct predictions given a set of neurons and known ground data predictions.
+        """
 
         user = User.objects.get(email="unittest@piccolo.com")
         validation_method = get_validation_method(self.config, self.train)
@@ -153,7 +154,8 @@ class TestLSup:
     def test_lsup_train_and_recognize(self, knowledgepack):
         """Tests LSup learning and recognition.
 
-        Ensures that Burlington learning with aggressive neuron creation gives correct predictions."""
+        Ensures that Burlington learning with aggressive neuron creation gives correct predictions.
+        """
         # print(self.train)
 
         user = User.objects.get(email="unittest@piccolo.com")

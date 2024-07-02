@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import pandas as pd
 from datamanager.datasegments import datasegments_equal
 from library.core_functions.segmenters.utils import process_segment_results
@@ -35,7 +34,7 @@ def test_process_segment_results():
     input_data = pd.DataFrame(
         {
             "ax": combine([[x] * seg_length for x in range(num_segments)]) + ["0"],
-            "ay": combine([[x ** 2] * seg_length for x in range(num_segments)]) + ["0"],
+            "ay": combine([[x**2] * seg_length for x in range(num_segments)]) + ["0"],
             "label": ["A"] * seg_length * num_segments + ["0"],
             "metadata_1": ["B"] * seg_length * num_segments + ["0"],
         }
@@ -67,7 +66,7 @@ def test_process_segment_results_return_segment_index():
     input_data = pd.DataFrame(
         {
             "ax": combine([[x] * seg_length for x in range(num_segments)]) + ["0"],
-            "ay": combine([[x ** 2] * seg_length for x in range(num_segments)]) + ["0"],
+            "ay": combine([[x**2] * seg_length for x in range(num_segments)]) + ["0"],
             "label": ["A"] * seg_length * num_segments + ["0"],
             "metadata_1": ["B"] * seg_length * num_segments + ["0"],
         }

@@ -357,12 +357,10 @@ def pre_emphasis_filter(data_stream, alpha=0.97, prior=0):
 
     # what is the range of alpha? for now assuming it to be less than or equal to 1
     Q = 15
-    alpha_Q = round(alpha / 1 * (2 ** Q - 1))
+    alpha_Q = round(alpha / 1 * (2**Q - 1))
 
     for i in range(0, data_stream.shape[0]):
-        y[i] = np.floor(
-            (data_stream[i] * (2 ** Q) - (alpha_Q * prior)) / (2 ** (Q + 1))
-        )
+        y[i] = np.floor((data_stream[i] * (2**Q) - (alpha_Q * prior)) / (2 ** (Q + 1)))
         prior = data_stream[i]
 
     return y

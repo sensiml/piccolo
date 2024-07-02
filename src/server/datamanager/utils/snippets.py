@@ -133,9 +133,11 @@ class Snippets:
                 ].SUBTYPE.unique():
                     setattr(
                         self,
-                        subtype.replace(" ", "_")
-                        if "Filter" in subtype
-                        else subtype.replace(" ", "_") + "_Transform",
+                        (
+                            subtype.replace(" ", "_")
+                            if "Filter" in subtype
+                            else subtype.replace(" ", "_") + "_Transform"
+                        ),
                         self._attach_functions(subtype=subtype),
                     )
             else:

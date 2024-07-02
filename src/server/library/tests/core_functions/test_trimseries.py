@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import pytest
 from pandas import DataFrame
 
@@ -31,7 +30,7 @@ class TestTrim:
     def setup(self):
         self.data = DataFrame(
             {
-                u"Subject": {
+                "Subject": {
                     0: 7,
                     1: 7,
                     2: 7,
@@ -45,7 +44,7 @@ class TestTrim:
                     30: 9,
                     31: 9,
                 },
-                u"accelx": {
+                "accelx": {
                     0: -1535,
                     1: -1535,
                     2: -1539,
@@ -59,7 +58,7 @@ class TestTrim:
                     30: -2815,
                     31: -2821,
                 },
-                u"accely": {
+                "accely": {
                     0: -3577,
                     1: -3580,
                     2: -3587,
@@ -73,7 +72,7 @@ class TestTrim:
                     30: -16,
                     31: -18,
                 },
-                u"accelz": {
+                "accelz": {
                     0: 961,
                     1: 960,
                     2: 953,

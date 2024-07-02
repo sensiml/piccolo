@@ -203,9 +203,9 @@ class CustomTransformSerializerBase(serializers.ModelSerializer):
                 param["type"] = "list"
                 param["element_type"] = "str"
                 if not param.get("description", ""):
-                    param[
-                        "description"
-                    ] = "Set of columns on which to apply the transform"
+                    param["description"] = (
+                        "Set of columns on which to apply the transform"
+                    )
                 if param.get("num_columns", None) is None:
                     raise Exception(
                         "Must define a num_columns property for this feature generator!"
@@ -268,7 +268,6 @@ class CustomTransformSerializerBase(serializers.ModelSerializer):
         return valid_value
 
     def validate_output_contract(self, value):
-
         """
 
         output_contract defaults to

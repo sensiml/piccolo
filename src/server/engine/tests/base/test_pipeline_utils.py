@@ -331,84 +331,84 @@ class TestPipelineUtilityFunctions:
     def test_parse_recognition_pipeline(self):
         inputs = [
             {
-                u"feature_table": None,
-                u"inputs": {
-                    u"input_columns": [
-                        u"AccelerometerX",
-                        u"AccelerometerY",
-                        u"AccelerometerZ",
+                "feature_table": None,
+                "inputs": {
+                    "input_columns": [
+                        "AccelerometerX",
+                        "AccelerometerY",
+                        "AccelerometerZ",
                     ],
-                    u"input_data": "temp.raw",
+                    "input_data": "temp.raw",
                 },
-                u"name": u"Magnitude",
-                u"outputs": [u"temp.Magnitude0"],
-                u"type": u"transform",
+                "name": "Magnitude",
+                "outputs": ["temp.Magnitude0"],
+                "type": "transform",
             },
             {
-                u"feature_table": None,
-                u"inputs": {
-                    u"delta": 100,
-                    u"group_columns": [u"Label"],
-                    u"input_data": u"temp.Magnitude0",
-                    u"return_segment_index": False,
-                    u"window_size": 100,
+                "feature_table": None,
+                "inputs": {
+                    "delta": 100,
+                    "group_columns": ["Label"],
+                    "input_data": "temp.Magnitude0",
+                    "return_segment_index": False,
+                    "window_size": 100,
                 },
-                u"name": u"Windowing",
-                u"outputs": [u"temp.Windowing0"],
-                u"type": u"segmenter",
+                "name": "Windowing",
+                "outputs": ["temp.Windowing0"],
+                "type": "segmenter",
             },
             {
-                u"inputs": {
-                    u"group_columns": [u"Label", u"SegmentID"],
-                    u"input_data": u"temp.Windowing0",
+                "inputs": {
+                    "group_columns": ["Label", "SegmentID"],
+                    "input_data": "temp.Windowing0",
                 },
-                u"name": u"generator_set",
-                u"outputs": [u"temp.generator_set0", u"temp.features.generator_set0"],
-                u"set": [
+                "name": "generator_set",
+                "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+                "set": [
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"AccelerometerY"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["AccelerometerY"]},
                         "outputs": [0],
                     },
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"AccelerometerZ"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["AccelerometerZ"]},
                         "outputs": [0],
                     },
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"Magnitude_ST_0000"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["Magnitude_ST_0000"]},
                         "outputs": [0],
                     },
                 ],
-                u"type": u"generatorset",
+                "type": "generatorset",
             },
             {
-                u"feature_table": u"temp.features.generator_set0",
-                u"inputs": {
-                    u"feature_min_max_parameters": {
-                        u"maximums": {
-                            u"gen_0001_AccelerometerYSum": 79952.0,
-                            u"gen_0002_AccelerometerZSum": 119928.0,
-                            u"gen_0003_Magnitude_ST_0000Sum": 149580.0,
+                "feature_table": "temp.features.generator_set0",
+                "inputs": {
+                    "feature_min_max_parameters": {
+                        "maximums": {
+                            "gen_0001_AccelerometerYSum": 79952.0,
+                            "gen_0002_AccelerometerZSum": 119928.0,
+                            "gen_0003_Magnitude_ST_0000Sum": 149580.0,
                         },
-                        u"minimums": {
-                            u"gen_0001_AccelerometerYSum": -86.0,
-                            u"gen_0002_AccelerometerZSum": -129.0,
-                            u"gen_0003_Magnitude_ST_0000Sum": 872.0,
+                        "minimums": {
+                            "gen_0001_AccelerometerYSum": -86.0,
+                            "gen_0002_AccelerometerZSum": -129.0,
+                            "gen_0003_Magnitude_ST_0000Sum": 872.0,
                         },
                     },
-                    u"input_data": u"temp.generator_set0",
-                    u"max_bound": 255,
-                    u"min_bound": 0,
-                    u"passthrough_columns": [u"Label", u"SegmentID"],
+                    "input_data": "temp.generator_set0",
+                    "max_bound": 255,
+                    "min_bound": 0,
+                    "passthrough_columns": ["Label", "SegmentID"],
                 },
-                u"name": u"Min Max Scale",
-                u"outputs": [u"temp.Min_Max_Scale0", u"temp.features.Min_Max_Scale0"],
-                u"type": u"transform",
+                "name": "Min Max Scale",
+                "outputs": ["temp.Min_Max_Scale0", "temp.features.Min_Max_Scale0"],
+                "type": "transform",
             },
         ]
 
@@ -416,91 +416,91 @@ class TestPipelineUtilityFunctions:
 
         expected_result = {
             "Feature Generators": {
-                u"inputs": {
-                    u"group_columns": [u"Label", u"SegmentID"],
-                    u"input_data": u"temp.Windowing0",
+                "inputs": {
+                    "group_columns": ["Label", "SegmentID"],
+                    "input_data": "temp.Windowing0",
                 },
-                u"name": u"generator_set",
-                u"outputs": [u"temp.generator_set0", u"temp.features.generator_set0"],
-                u"set": [
+                "name": "generator_set",
+                "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
+                "set": [
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"AccelerometerY"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["AccelerometerY"]},
                         "outputs": [0],
                     },
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"AccelerometerZ"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["AccelerometerZ"]},
                         "outputs": [0],
                     },
                     {
                         "family": None,
-                        "function_name": u"Sum",
-                        "inputs": {"columns": [u"Magnitude_ST_0000"]},
+                        "function_name": "Sum",
+                        "inputs": {"columns": ["Magnitude_ST_0000"]},
                         "outputs": [0],
                     },
                 ],
-                u"type": u"generatorset",
+                "type": "generatorset",
             },
             "Feature Transforms": [
                 {
-                    u"feature_table": u"temp.features.generator_set0",
-                    u"inputs": {
-                        u"feature_min_max_parameters": {
-                            u"maximums": {
-                                u"gen_0001_AccelerometerYSum": 79952.0,
-                                u"gen_0002_AccelerometerZSum": 119928.0,
-                                u"gen_0003_Magnitude_ST_0000Sum": 149580.0,
+                    "feature_table": "temp.features.generator_set0",
+                    "inputs": {
+                        "feature_min_max_parameters": {
+                            "maximums": {
+                                "gen_0001_AccelerometerYSum": 79952.0,
+                                "gen_0002_AccelerometerZSum": 119928.0,
+                                "gen_0003_Magnitude_ST_0000Sum": 149580.0,
                             },
-                            u"minimums": {
-                                u"gen_0001_AccelerometerYSum": -86.0,
-                                u"gen_0002_AccelerometerZSum": -129.0,
-                                u"gen_0003_Magnitude_ST_0000Sum": 872.0,
+                            "minimums": {
+                                "gen_0001_AccelerometerYSum": -86.0,
+                                "gen_0002_AccelerometerZSum": -129.0,
+                                "gen_0003_Magnitude_ST_0000Sum": 872.0,
                             },
                         },
-                        u"input_data": u"temp.generator_set0",
-                        u"max_bound": 255,
-                        u"min_bound": 0,
-                        u"passthrough_columns": [u"Label", u"SegmentID"],
+                        "input_data": "temp.generator_set0",
+                        "max_bound": 255,
+                        "min_bound": 0,
+                        "passthrough_columns": ["Label", "SegmentID"],
                     },
-                    u"name": u"Min Max Scale",
-                    u"outputs": [
-                        u"temp.Min_Max_Scale0",
-                        u"temp.features.Min_Max_Scale0",
+                    "name": "Min Max Scale",
+                    "outputs": [
+                        "temp.Min_Max_Scale0",
+                        "temp.features.Min_Max_Scale0",
                     ],
-                    u"type": u"transform",
+                    "type": "transform",
                 }
             ],
             "Segment Transforms": [],
             "Segmenter": {
-                u"feature_table": None,
-                u"inputs": {
-                    u"delta": 100,
-                    u"group_columns": [u"Label"],
-                    u"input_data": u"temp.Magnitude0",
-                    u"return_segment_index": False,
-                    u"window_size": 100,
+                "feature_table": None,
+                "inputs": {
+                    "delta": 100,
+                    "group_columns": ["Label"],
+                    "input_data": "temp.Magnitude0",
+                    "return_segment_index": False,
+                    "window_size": 100,
                 },
-                u"name": u"Windowing",
-                u"outputs": [u"temp.Windowing0"],
-                u"type": u"segmenter",
+                "name": "Windowing",
+                "outputs": ["temp.Windowing0"],
+                "type": "segmenter",
             },
             "Sensor Transforms": [
                 {
-                    u"feature_table": None,
-                    u"inputs": {
-                        u"input_columns": [
-                            u"AccelerometerX",
-                            u"AccelerometerY",
-                            u"AccelerometerZ",
+                    "feature_table": None,
+                    "inputs": {
+                        "input_columns": [
+                            "AccelerometerX",
+                            "AccelerometerY",
+                            "AccelerometerZ",
                         ],
-                        u"input_data": "temp.raw",
+                        "input_data": "temp.raw",
                     },
-                    u"name": u"Magnitude",
-                    u"outputs": [u"temp.Magnitude0"],
-                    u"type": u"transform",
+                    "name": "Magnitude",
+                    "outputs": ["temp.Magnitude0"],
+                    "type": "transform",
                 }
             ],
         }
@@ -554,15 +554,15 @@ class TestPipelineUtilityFunctions:
                 "pipeline_json": {
                     "Sensor Transforms": [
                         {
-                            u"inputs": {
-                                u"input_columns": [
-                                    u"AccelerometerX",
-                                    u"AccelerometerY",
-                                    u"AccelerometerZ",
+                            "inputs": {
+                                "input_columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ",
                                 ]
                             },
-                            u"name": u"Magnitude",
-                            u"type": u"transform",
+                            "name": "Magnitude",
+                            "type": "transform",
                         }
                     ],
                 },
@@ -582,15 +582,15 @@ class TestPipelineUtilityFunctions:
                 "pipeline_json": {
                     "Sensor Transforms": [
                         {
-                            u"inputs": {
-                                u"input_columns": [
-                                    u"AccelerometerX",
-                                    u"AccelerometerY",
-                                    u"AccelerometerZ",
+                            "inputs": {
+                                "input_columns": [
+                                    "AccelerometerX",
+                                    "AccelerometerY",
+                                    "AccelerometerZ",
                                 ]
                             },
-                            u"name": u"Magnitude",
-                            u"type": u"transform",
+                            "name": "Magnitude",
+                            "type": "transform",
                         }
                     ],
                 },
@@ -606,15 +606,15 @@ class TestPipelineUtilityFunctions:
 
         expected_result_1 = [
             {
-                u"inputs": {
-                    u"input_columns": [
-                        u"AccelerometerX",
-                        u"AccelerometerY",
-                        u"AccelerometerZ",
+                "inputs": {
+                    "input_columns": [
+                        "AccelerometerX",
+                        "AccelerometerY",
+                        "AccelerometerZ",
                     ]
                 },
-                u"name": u"Magnitude",
-                u"type": u"transform",
+                "name": "Magnitude",
+                "type": "transform",
             }
         ]
 
@@ -646,11 +646,11 @@ class TestPipelineUtilityFunctions:
                 "pipeline_json": {
                     "Sensor Transforms": [
                         {
-                            u"inputs": {
-                                u"input_columns": [u"AccelerometerY", u"AccelerometerZ"]
+                            "inputs": {
+                                "input_columns": ["AccelerometerY", "AccelerometerZ"]
                             },
-                            u"name": u"Magnitude",
-                            u"type": u"transform",
+                            "name": "Magnitude",
+                            "type": "transform",
                         }
                     ],
                 },
@@ -673,9 +673,9 @@ class TestPipelineUtilityFunctions:
 
         expected_result_1 = [
             {
-                u"inputs": {u"input_columns": [u"AccelerometerY", u"AccelerometerZ"]},
-                u"name": u"Magnitude",
-                u"type": u"transform",
+                "inputs": {"input_columns": ["AccelerometerY", "AccelerometerZ"]},
+                "name": "Magnitude",
+                "type": "transform",
             }
         ]
 

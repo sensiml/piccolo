@@ -199,9 +199,9 @@ class ModelGraphMixin(object):
             # set the data streaming part of the pipeline json to the new for the
             # top level and remove the rest
             for pipeline_name in model_group:
-                self.knowledgepacks[pipeline_name][
-                    "data_column_map"
-                ] = model_data_column_map[pipeline_name]
+                self.knowledgepacks[pipeline_name]["data_column_map"] = (
+                    model_data_column_map[pipeline_name]
+                )
                 # the first is always the parent
                 if self.knowledgepacks[pipeline_name]["parent"] is None:
                     self.knowledgepacks[pipeline_name]["pipeline_json"][
@@ -359,13 +359,13 @@ class ModelGraphMixin(object):
         Returns: Dictionary containing lists of strings for boilerplate replacement
         """
         return_data = {}
-        return_data[
-            "sensor_column_names"
-        ] = []  # defines for the sensors pulled from the device
+        return_data["sensor_column_names"] = (
+            []
+        )  # defines for the sensors pulled from the device
         return_data["number_of_sensors"] = []
-        return_data[
-            "data_column_names"
-        ] = []  # defines for the data columns used in the pipeline
+        return_data["data_column_names"] = (
+            []
+        )  # defines for the data columns used in the pipeline
 
         return_data["segmenter_call"] = []
         return_data["segmenter_reset"] = []
@@ -486,10 +486,10 @@ class ModelGraphMixin(object):
                         buff_length, return_data["raw_sbuffer_length"]
                     )
                     return_data["number_of_sbuffs"] += 1
-                    return_data[
-                        "streaming_filter_length"
-                    ] = self.get_streaming_transform_sensor_filter_length(
-                        function, step
+                    return_data["streaming_filter_length"] = (
+                        self.get_streaming_transform_sensor_filter_length(
+                            function, step
+                        )
                     )
 
                 elif function.subtype == "Segment Filter":

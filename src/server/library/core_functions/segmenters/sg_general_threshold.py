@@ -379,9 +379,11 @@ def general_threshold_segmentation_start_end(
 
     segment_indexes = []
     start_index = windowed_threshold_segmenter(
-        input_data[:, 0]
-        if keep_partial_segment
-        else input_data[:-max_segment_length, 0],
+        (
+            input_data[:, 0]
+            if keep_partial_segment
+            else input_data[:-max_segment_length, 0]
+        ),
         index=0,
         threshold_type=first_comparison,
         vt_threshold=first_vt_threshold,
@@ -412,9 +414,11 @@ def general_threshold_segmentation_start_end(
                 segment_indexes.append([start_index, end_index])
 
         start_index = windowed_threshold_segmenter(
-            input_data[:, 0]
-            if keep_partial_segment
-            else input_data[:-max_segment_length, 0],
+            (
+                input_data[:, 0]
+                if keep_partial_segment
+                else input_data[:-max_segment_length, 0]
+            ),
             index=end_index + 1,
             threshold_type=first_comparison,
             vt_threshold=first_vt_threshold,

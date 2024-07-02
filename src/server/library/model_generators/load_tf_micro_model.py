@@ -64,9 +64,9 @@ class LoadTensorFlowMicroModel(ModelGenerator):
         model_profile = self._classifier.get_model_profile(
             decode_tflite(model_parameters)
         )
-        model_parameters[
-            "tensor_arena_size"
-        ] = self._classifier.compute_tensor_arena_size(model_profile)
+        model_parameters["tensor_arena_size"] = (
+            self._classifier.compute_tensor_arena_size(model_profile)
+        )
         model_parameters["size"] = model_profile["summary"]["tflite_size"]
         model_parameters.update(
             self._classifier.get_input_output_details(model_parameters)

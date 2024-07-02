@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import pytest
 from pandas import DataFrame
 
@@ -31,7 +30,7 @@ class TestCorrSelectMostCorr:
     def setup(self):
 
         df_dict = {
-            u"gen_0002_accely_3": {
+            "gen_0002_accely_3": {
                 0: 827.019165039,
                 1: 646.515136719,
                 2: 458.467132568,
@@ -42,7 +41,7 @@ class TestCorrSelectMostCorr:
                 7: -4009.10400391,
                 8: -4064.70361328,
             },
-            u"gen_0002_accely_2": {
+            "gen_0002_accely_2": {
                 0: 884.166137695,
                 1: 554.7843017580001,
                 2: 455.253967285,
@@ -53,7 +52,7 @@ class TestCorrSelectMostCorr:
                 7: -4029.36621094,
                 8: -4085.73168945,
             },
-            u"gen_0002_accely_1": {
+            "gen_0002_accely_1": {
                 0: 862.607055664,
                 1: 557.2834472659999,
                 2: 199.48753356900002,
@@ -64,7 +63,7 @@ class TestCorrSelectMostCorr:
                 7: -3995.64868164,
                 8: -4073.91992188,
             },
-            u"gen_0002_accely_0": {
+            "gen_0002_accely_0": {
                 0: 1016.71246338,
                 1: 628.616760254,
                 2: -332.48980712900004,
@@ -75,7 +74,7 @@ class TestCorrSelectMostCorr:
                 7: -4024.11083984,
                 8: -4068.20825195,
             },
-            u"gen_0002_accely_4": {
+            "gen_0002_accely_4": {
                 0: 861.546325684,
                 1: 668.117675781,
                 2: 469.693878174,
@@ -86,7 +85,7 @@ class TestCorrSelectMostCorr:
                 7: -3996.37304688,
                 8: -4063.69702148,
             },
-            u"gen_0003_accelz_3": {
+            "gen_0003_accelz_3": {
                 0: 3943.37377930,
                 1: 3913.5703125,
                 2: 3810.61669922,
@@ -97,7 +96,7 @@ class TestCorrSelectMostCorr:
                 7: 722.66619873,
                 8: -116.588783264,
             },
-            u"gen_0003_accelz_2": {
+            "gen_0003_accelz_2": {
                 0: 3899.03515625,
                 1: 3858.36181641,
                 2: 3851.16088867,
@@ -108,7 +107,7 @@ class TestCorrSelectMostCorr:
                 7: 670.53918457,
                 8: -114.34980011,
             },
-            u"gen_0003_accelz_1": {
+            "gen_0003_accelz_1": {
                 0: 3881.03833008,
                 1: 3821.51342773,
                 2: 3896.34912109,
@@ -119,7 +118,7 @@ class TestCorrSelectMostCorr:
                 7: 658.902709961,
                 8: -87.6128158569,
             },
-            u"gen_0003_accelz_0": {
+            "gen_0003_accelz_0": {
                 0: 3977.54003906,
                 1: 3889.81640625,
                 2: 3972.05444336,
@@ -130,7 +129,7 @@ class TestCorrSelectMostCorr:
                 7: 730.0297241210001,
                 8: -138.078765869,
             },
-            u"gen_0003_accelz_4": {
+            "gen_0003_accelz_4": {
                 0: 3900.73486328,
                 1: 3896.3762206999995,
                 2: 3889.29711914,
@@ -141,7 +140,7 @@ class TestCorrSelectMostCorr:
                 7: 669.394592285,
                 8: -98.73564910889999,
             },
-            u"gen_0001_accelx_4": {
+            "gen_0001_accelx_4": {
                 0: 111.987220764,
                 1: 323.65774536099997,
                 2: 542.170043945,
@@ -152,7 +151,7 @@ class TestCorrSelectMostCorr:
                 7: 391.77432251,
                 8: 353.17089843800005,
             },
-            u"gen_0001_accelx_3": {
+            "gen_0001_accelx_3": {
                 0: 153.923324585,
                 1: 83.9857406616,
                 2: 494.031738281,
@@ -163,7 +162,7 @@ class TestCorrSelectMostCorr:
                 7: 385.25405883800005,
                 8: 325.496673584,
             },
-            u"gen_0001_accelx_2": {
+            "gen_0001_accelx_2": {
                 0: 208.34185791,
                 1: 91.9714813232,
                 2: 200.26303100599998,
@@ -174,7 +173,7 @@ class TestCorrSelectMostCorr:
                 7: 374.443237305,
                 8: 283.627502441,
             },
-            u"gen_0001_accelx_1": {
+            "gen_0001_accelx_1": {
                 0: 372.25878906199995,
                 1: 224.231735229,
                 2: 503.27664184599996,
@@ -185,7 +184,7 @@ class TestCorrSelectMostCorr:
                 7: 413.259460449,
                 8: 317.618164062,
             },
-            u"gen_0001_accelx_0": {
+            "gen_0001_accelx_0": {
                 0: 347.88177490199996,
                 1: 347.713012695,
                 2: 545.664428711,

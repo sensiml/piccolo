@@ -85,9 +85,9 @@ class SaveKnowledgepackMixin:
             models_object["configurations"][name]["models"] = {
                 name: models["model_stats"]["models"][recall_fold]
             }
-            models_object["configurations"][name]["models"][name][
-                "KnowledgePackID"
-            ] = str(knowledgepack.uuid)
+            models_object["configurations"][name]["models"][name]["KnowledgePackID"] = (
+                str(knowledgepack.uuid)
+            )
 
         return fitted_population, models_object
 

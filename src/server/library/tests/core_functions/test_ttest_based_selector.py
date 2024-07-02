@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import pytest
 from pandas import DataFrame
 
@@ -31,8 +30,8 @@ class TestTTestSelect:
     def setup(self):
         """Create a dataset"""
         columns = [
-            u"Class",
-            u"Subject",
+            "Class",
+            "Subject",
             0,
             1,
             2,
@@ -52,8 +51,8 @@ class TestTTestSelect:
 
         data_list = [
             [
-                u"Crawling",
-                u"s01",
+                "Crawling",
+                "s01",
                 347,
                 372,
                 208,
@@ -71,8 +70,8 @@ class TestTTestSelect:
                 3900,
             ],
             [
-                u"Crawling",
-                u"s02",
+                "Crawling",
+                "s02",
                 347,
                 224,
                 91,
@@ -90,8 +89,8 @@ class TestTTestSelect:
                 3896,
             ],
             [
-                u"Crawling",
-                u"s03",
+                "Crawling",
+                "s03",
                 545,
                 503,
                 200,
@@ -109,8 +108,8 @@ class TestTTestSelect:
                 3889,
             ],
             [
-                u"Running",
-                u"s01",
+                "Running",
+                "s01",
                 -21,
                 -23,
                 -16,
@@ -128,8 +127,8 @@ class TestTTestSelect:
                 605,
             ],
             [
-                u"Running",
-                u"s02",
+                "Running",
+                "s02",
                 422,
                 453,
                 431,
@@ -147,8 +146,8 @@ class TestTTestSelect:
                 846,
             ],
             [
-                u"Running",
-                u"s03",
+                "Running",
+                "s03",
                 350,
                 366,
                 360,
@@ -166,8 +165,8 @@ class TestTTestSelect:
                 234,
             ],
             [
-                u"Walking",
-                u"s01",
+                "Walking",
+                "s01",
                 -10,
                 -46,
                 0,
@@ -185,8 +184,8 @@ class TestTTestSelect:
                 558,
             ],
             [
-                u"Walking",
-                u"s02",
+                "Walking",
+                "s02",
                 375,
                 413,
                 374,
@@ -204,8 +203,8 @@ class TestTTestSelect:
                 669,
             ],
             [
-                u"Walking",
-                u"s03",
+                "Walking",
+                "s03",
                 353,
                 317,
                 283,
@@ -231,5 +230,5 @@ class TestTTestSelect:
         results, eliminated_featues = ttest_select(
             self.data, "Class", 2, ["Subject", "Class"]
         )
-        assert results.columns.tolist() == [u"Subject", u"Class", 6, 7, 9, 11, 14]
+        assert results.columns.tolist() == ["Subject", "Class", 6, 7, 9, 11, 14]
         assert eliminated_featues == [0, 1, 2, 3, 4, 5, 8, 10, 12, 13]

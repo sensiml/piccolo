@@ -112,8 +112,8 @@ def cart2sph(x, y, z):
         r, theta, phi - spherical co-ordinates
     """
 
-    rho = x ** 2 + y ** 2
-    r = math.sqrt(rho + z ** 2)
+    rho = x**2 + y**2
+    r = math.sqrt(rho + z**2)
     theta = math.atan2(z, math.sqrt(rho))
     phi = math.atan2(y, x)
     return r, theta, phi
@@ -139,7 +139,7 @@ def CSCC(x, m, q, p):
     ind_L = range(1, L)
     # Computing Fourier coefficents to collect PSD coefficents
     x_f = abs(fft(x))
-    p_f = [k ** 2 for k in x_f]  # Power Spectral Density of x
+    p_f = [k**2 for k in x_f]  # Power Spectral Density of x
 
     t1 = range(0, L / 2)
     w1 = []

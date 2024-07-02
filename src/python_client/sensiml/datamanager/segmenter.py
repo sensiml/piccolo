@@ -183,7 +183,6 @@ class Segmenter(Base):
 
 
 class SegmenterSet(BaseSet):
-
     """Base class for a segmenter object."""
 
     def __init__(

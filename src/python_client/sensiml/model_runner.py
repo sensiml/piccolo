@@ -677,9 +677,9 @@ class ModelRunner:
                 }
 
                 if get_unscaled_feature_vector:
-                    output_columns[
-                        "unscaled_feature_vector"
-                    ] = self.get_unscaled_feature_vector(model_index)
+                    output_columns["unscaled_feature_vector"] = (
+                        self.get_unscaled_feature_vector(model_index)
+                    )
 
                 if get_feature_vector:
                     output_columns["feature_vector"] = self.get_feature_vector(

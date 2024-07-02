@@ -48,9 +48,9 @@ class CodeGenMixin(TrainMixin):
 
         for model in kb_models:
             classifier_types.add(model["classifier_config"]["classifier"])
-            self.platform.execution_parameters[
-                "sample_rate"
-            ] = self.get_model_sample_rate(model)
+            self.platform.execution_parameters["sample_rate"] = (
+                self.get_model_sample_rate(model)
+            )
             self.platform.execution_parameters.update(self.get_model_ranges(model))
             self.platform.execution_parameters.update(
                 self.get_model_enabled_sensors(model)
@@ -59,12 +59,12 @@ class CodeGenMixin(TrainMixin):
         kb_data = dict()
 
         kb_data["embedded_sdk_license"] = settings.EMBEDDED_SDK_LICENSE
-        kb_data[
-            "makefile_library_name_main"
-        ] = f"MAIN = $(OUT)/{settings.KNOWLEDGEPACK_LIBRARY_NAME}.a"
-        kb_data[
-            "makefile_dll_library_name_main"
-        ] = f"MAIN = $(OUT)/{settings.KNOWLEDGEPACK_LIBRARY_NAME}.dll"
+        kb_data["makefile_library_name_main"] = (
+            f"MAIN = $(OUT)/{settings.KNOWLEDGEPACK_LIBRARY_NAME}.a"
+        )
+        kb_data["makefile_dll_library_name_main"] = (
+            f"MAIN = $(OUT)/{settings.KNOWLEDGEPACK_LIBRARY_NAME}.dll"
+        )
 
         # Get the Total model count.
 
@@ -124,13 +124,13 @@ class CodeGenMixin(TrainMixin):
         # Generate Classifier Trained Models and Temp Parameters Settings
         kb_data.update(self.create_classifier_structures(classifier_types, kb_models))
 
-        kb_data[
-            "classification_result_info"
-        ] = self.create_sml_classification_result_info(kb_models)
+        kb_data["classification_result_info"] = (
+            self.create_sml_classification_result_info(kb_models)
+        )
 
-        kb_data[
-            "classification_result_info_print"
-        ] = self.create_sml_classification_result_print_info(kb_models)
+        kb_data["classification_result_info_print"] = (
+            self.create_sml_classification_result_print_info(kb_models)
+        )
 
         # CLASSIFIER INIT AND INCLUDE FILLS
         kb_data["kb_classifiers"] = self.create_classifier_calls(kb_models)
@@ -140,9 +140,9 @@ class CodeGenMixin(TrainMixin):
         kb_data["kb_classifier_includes"] = self.create_kb_classifier_headers(
             classifier_types
         )
-        kb_data[
-            "classifier_header_calls"
-        ] = self.create_kb_classifier_header_calls_only(classifier_types)
+        kb_data["classifier_header_calls"] = (
+            self.create_kb_classifier_header_calls_only(classifier_types)
+        )
 
         # ON DEVICE MODEL MANIPULATION
         kb_data["add_last_pattern"] = self.create_kb_add_last_pattern(kb_models)
@@ -165,13 +165,13 @@ class CodeGenMixin(TrainMixin):
             # this is MQTT / SensiML interface spec
             kb_data["sensiml_interface_sensor_config"] = sis_config_list
             # First and last lines don't count in structure definition.
-            kb_data[
-                "sensiml_interface_config_num_msgs"
-            ] = self.create_sis_configuration_count(sis_config_list)
+            kb_data["sensiml_interface_config_num_msgs"] = (
+                self.create_sis_configuration_count(sis_config_list)
+            )
 
-        kb_data[
-            "custom_feature_generators"
-        ] = self.create_custom_feature_generator_header_include()
+        kb_data["custom_feature_generators"] = (
+            self.create_custom_feature_generator_header_include()
+        )
 
         kb_data["tensorflow_build_flags"] = self.create_tensorflow_build_flags(
             kb_models
@@ -216,16 +216,16 @@ endif
 
     def create_sml_classification_result_info(self, models_data):
         model_fill = {}
-        model_fill[
-            "TF Micro"
-        ] = "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
-        model_fill[
-            "TensorFlow Lite for Microcontrollers"
-        ] = "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        model_fill["TF Micro"] = (
+            "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        )
+        model_fill["TensorFlow Lite for Microcontrollers"] = (
+            "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        )
 
-        model_fill[
-            "Decision Tree Ensemble"
-        ] = "{\n\ttree_ensemble_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        model_fill["Decision Tree Ensemble"] = (
+            "{\n\ttree_ensemble_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        )
 
         return self.create_case_fill_template_classifier_type(models_data, model_fill)
 
@@ -271,15 +271,15 @@ endif
         tmp_data["model_results_info_init"] = []
 
         for classifier in formated_classifier_types:
-            tmp_data[
-                f"{classifier}_classifier_structs"
-            ] = model_gen.create_classifier_structures(classifier, kb_models)
-            tmp_data[
-                f"{classifier}_max_tmp_parameters"
-            ] = model_gen.create_max_tmp_parameters(classifier, kb_models)
-            tmp_data[
-                f"{classifier}_trained_model_header"
-            ] = model_gen.create_trained_model_header_fills(classifier, kb_models)
+            tmp_data[f"{classifier}_classifier_structs"] = (
+                model_gen.create_classifier_structures(classifier, kb_models)
+            )
+            tmp_data[f"{classifier}_max_tmp_parameters"] = (
+                model_gen.create_max_tmp_parameters(classifier, kb_models)
+            )
+            tmp_data[f"{classifier}_trained_model_header"] = (
+                model_gen.create_trained_model_header_fills(classifier, kb_models)
+            )
             tmp_data.update(
                 model_gen.create_direct_model_updates(classifier, kb_models)
             )
@@ -698,9 +698,9 @@ endif
                 ].extend(build_run_call(models, model["name"]))
 
             sensor_plugin_name = model["sensor_plugin_name"].replace(" ", "_").upper()
-            self.platform.execution_parameters[
-                "sensor_plugin_name"
-            ] = sensor_plugin_name
+            self.platform.execution_parameters["sensor_plugin_name"] = (
+                sensor_plugin_name
+            )
             reset_string = """if ({0}==sensor_id) kb_flush_model_buffer({1});"""
             reset_string = reset_string.format(
                 sensor_macro_from_plugin_name(sensor_plugin_name),

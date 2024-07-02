@@ -38,6 +38,7 @@ from library.core_functions.augmentation import (
     random_crop_contracts,
 )
 
+
 ##########################################################
 def load_datasegments(path):
 
@@ -84,6 +85,7 @@ step = {
     "outputs": ["temp.augmentation_set0.data_0"],
     "feature_table_value": None,
 }
+
 
 ##########################################################
 def run_augmentation_drive(input_data, step_set):

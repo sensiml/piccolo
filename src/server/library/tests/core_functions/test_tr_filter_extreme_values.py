@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import pytest
 from numpy.testing import assert_array_almost_equal
 from pandas import DataFrame

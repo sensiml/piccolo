@@ -118,7 +118,6 @@ def augment_feature_with_unknown(
 
 
 def get_data_aux_indices(train_data, auxiliary_fv, class_map):
-
     """returning the indices of keywords and unknown
 
     Args:

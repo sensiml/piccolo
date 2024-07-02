@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import copy
 import sys
 
@@ -196,7 +195,7 @@ def findPeaksBasedOnCorr(xaxisRange, windowSize, xVector, templateSignal, rThres
             sortedTemp = sorted(temp, key=itemgetter(1), reverse=True)
 
             temp = sortedTemp[0][0] + halfWindowSize
-            print >>sys.stderr, "temp " + str(temp) + " R " + str(sortedTemp[0][1])
+            print >> sys.stderr, "temp " + str(temp) + " R " + str(sortedTemp[0][1])
             peakPoints.append((sortedTemp[0][0] + halfWindowSize, sortedTemp[0][1]))
             i = sortedTemp[0][0] + int(windowSize * 0.8)
         else:
@@ -282,7 +281,7 @@ def recalCorrForEnergyPeaks(xaxisRange, xVector, peakPoints, templateSignal):
         qSignal = xVector[start : start + windowSize]
         z = pearsonr(qSignal, templateSignal)
         newPeaks.append((x[0], z[0], x[1], 1))
-        print >>sys.stderr, "loc " + str(x[0]) + " r " + str(z[0]) + " energy " + str(
+        print >> sys.stderr, "loc " + str(x[0]) + " r " + str(z[0]) + " energy " + str(
             x[1]
         )
         while (
@@ -333,7 +332,7 @@ def recalEngeryForCorrPeaks(xaxisRange, xVector, peakPoints, templateSignal):
 
 
 def execute(myDataList, tempSt, tempEnd, rThreshold):
-    print >>sys.stderr, "execute enter."
+    print >> sys.stderr, "execute enter."
 
     template = myDataList[tempSt:tempEnd]
 
@@ -515,7 +514,7 @@ def template_detect(
 
     if threshold < 0:
         threshold = 0.8
-    print >>sys.stderr, start, end, threshold
+    print >> sys.stderr, start, end, threshold
     found_list = execute(myDataList, start - front, end - front, threshold)
 
     found_list_adjusted = [(x[0] + front, x[1] + front) for x in found_list]

@@ -382,9 +382,9 @@ class ClientPlatformDescription(object):
         ret = {
             "Id": self.uuid,
             "Name": self.name,
-            "Hardware Accelerated": "Yes"
-            if len(self.hardware_accelerators.items()) > 0
-            else "No",
+            "Hardware Accelerated": (
+                "Yes" if len(self.hardware_accelerators.items()) > 0 else "No"
+            ),
             "Processors Supported": self.processors,
             "Compilers Supported": self.supported_compilers,
             "Description": self.description,

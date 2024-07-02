@@ -71,7 +71,8 @@ class TrainNPrune(PMEBase):
     def _train(self, train_data, validate_data=None, test_data=None):
         """Calls the Train-N-Prune learning algorithm within a cross-validation loop.
 
-        Gathers self.results, performs final testing, and makes one or more recommendations."""
+        Gathers self.results, performs final testing, and makes one or more recommendations.
+        """
 
         learning_vector_list = self._package(array(train_data))
         validation_set = self._package(array(validate_data))
