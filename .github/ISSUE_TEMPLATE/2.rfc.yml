@@ -1,0 +1,63 @@
+name: RFC
+description: Request for comments for your proposal.
+title: "[RFC] "
+labels: ["RFC"]
+assignees: ["mkaliberda", "cdknorow"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Please identify RFC type
+      options:
+        - Feature
+        - Enhancement
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: Description
+      description: |
+        Why are we doing this? What use cases does it support? What is the expected outcome?
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: |
+        Why are we doing this? What use cases does it support? What is the expected outcome?
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Design Proposal
+      description: |
+        This is the core of the RFC. Explain the design in enough detail for someone familiar with the codebase to understand.
+    validations:
+      required: true
+  - type: textarea
+    id: performance
+    attributes:
+      label: Performance Implications
+      description: |
+        Describe if any performance changes are expected.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: |
+        Provide any dependencies that should be used.
+    validations:
+      required: true
+  - type: textarea
+    id: user_imp
+    attributes:
+      label: User Impact
+      description: |
+        How it will impact users.
+    validations:
+      required: false
