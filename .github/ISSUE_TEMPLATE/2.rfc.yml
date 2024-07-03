@@ -1,5 +1,5 @@
 name: RFC
-description: Request for comments for your proposal.
+description: Request for comments for a new feature or enhancement proposal.
 title: "[RFC] "
 labels: ["RFC"]
 assignees: ["mkaliberda", "cdknorow"]
@@ -18,7 +18,7 @@ body:
     attributes:
       label: Description
       description: |
-        Why are we doing this? What use cases does it support? What is the expected outcome?
+        Summarize the new feature or enhancement details. What does the new feature do? What does this enhancement improve?
     validations:
       required: true
   - type: textarea
