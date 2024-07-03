@@ -1,0 +1,53 @@
+name: Bug report
+description: Create a bug report.
+labels: ['Bug']
+assignees: ['mkaliberda', 'cdknorow']
+body:
+  - type: textarea
+    id: descr
+    attributes:
+      label: Description
+      description: |
+        Please provide a clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: |
+        How do you trigger this bug? Please walk us through it step by step.
+        Steps to reproduce the behavior:
+      value: |
+        1. Open Google Chrome (v125.0.6422.142, Official Build, 64-bit)
+        2. Go to '...'
+        3. Click on '...'
+        4. Scroll down to '...'
+        5. See error '...'
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: curr
+    attributes:
+      label: Current behavior
+      description: |
+         Describe what happens instead of the expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expt
+    attributes:
+      label: Expected behavior
+      description: |
+        A clear and concise description of what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: screens
+    attributes:
+      label: Additional context and Screenshots
+      description: |
+        If applicable, add screenshots and any other context about the problem here.
+    validations:
+      required: false
