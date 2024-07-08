@@ -5,10 +5,10 @@ Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sens
 
 The Piccolo AI project includes
 
-* SensiML's ML Engine: The engine behind SensiML’s AutoML model building, sensor data management, model tracking, and embedded firmware generation 
-* Embedded ML SDK: SensiML's Inferencing and DSP SDK designed for building and running DSP & ML pipelines on edge devices
-* Analytic Studio UI: An Intuitive web interface for working with the SensiML ML Engine to build TinyML applications
-* SensiML Python Client: Allows programmatic access to the REST API services through Jupyter Notebooks
+* **SensiML's ML Engine**: The engine behind SensiML’s AutoML model building, sensor data management, model tracking, and embedded firmware generation 
+* **Embedded ML SDK**: SensiML's Inferencing and DSP SDK designed for building and running DSP & ML pipelines on edge devices
+* **Analytic Studio UI**: An Intuitive web interface for working with the SensiML ML Engine to build TinyML applications
+* **SensiML Python Client**: Allows programmatic access to the REST API services through Jupyter Notebooks
 
 Piccolo AI is currently optimized for the classification of time-series sensor data. Common use cases enabled by Piccolo AI include:
 
