@@ -127,3 +127,4 @@ ensure someone else hasn't created an issue for the same topic.
 * Need help using Piccolo AI? Reach out on the [forum](https://forum.sensiml.org/),
 fellow community member or SensiML engineer will be happy to help you out.
 
+[![Stargazers repo roster for @sensiml/piccolo](https://reporoster.com/stars/sensiml/piccolo)](https://github.com/sensiml/piccolo/stargazers)
