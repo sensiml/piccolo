@@ -133,9 +133,7 @@ venv/
 # Environ
 .env
 packages
-package-lock.json
 *.pid
-*.lock
 supervisord.conf
 server/latest_installers.json
 server/email_whitelist
