@@ -6,5 +6,6 @@ WORKDIR /sml_webui
 ENV PATH /sml_webui/node_modules/.bin:$PATH
 # install sml_webui dependencies
 COPY package.json ./
+COPY yarn.lock ./
 RUN yarn install
 RUN apk update && apk add -y --no-cache curl zip jq bash aws-cli
