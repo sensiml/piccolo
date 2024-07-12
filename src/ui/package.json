@@ -112,6 +112,7 @@
     ]
   },
   "scripts": {
+    "prestart": "yarn install",
     "start": "react-scripts --max_old_space_size=6144 start",
     "build": "react-scripts --max_old_space_size=6144 build",
     "build:develop": "env-cmd -f .env.development react-scripts --max_old_space_size=6144 build",
