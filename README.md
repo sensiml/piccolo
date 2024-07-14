@@ -4,10 +4,10 @@ Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sens
 
 The Piccolo AI project includes
 
-* SensiML's ML Engine: The engine behind SensiML’s AutoML model building, sensor data management, model tracking, and embedded firmware generation 
-* Embedded ML SDK: SensiML's Inferencing and DSP SDK designed for building and running DSP & ML pipelines on edge devices
-* Analytic Studio UI: An Intuitive web interface for working with the SensiML ML Engine to build TinyML applications
-* SensiML Python Client: Allows programmatic access to the REST API services through Jupyter Notebooks
+* **SensiML's ML Engine**: The engine behind SensiML’s AutoML model building, sensor data management, model tracking, and embedded firmware generation 
+* **Embedded ML SDK**: SensiML's Inferencing and DSP SDK designed for building and running DSP & ML pipelines on edge devices
+* **Analytic Studio UI**: An Intuitive web interface for working with the SensiML ML Engine to build TinyML applications
+* **SensiML Python Client**: Allows programmatic access to the REST API services through Jupyter Notebooks
 
 Piccolo AI is currently optimized for the classification of time-series sensor data. Common use cases enabled by Piccolo AI include:
 
@@ -48,7 +48,7 @@ To try out Piccolo AI on your machine, we recommend using Docker.
    sudo chmod 666 /var/run/docker.sock
    ```
 
-5. By default the repository does not include docker images to generate model/compiler code for devices. You must pull docker images for the compilers you want to use. See docker images:
+5. By default the repository does not include docker images to generate model/compiler code for devices. You'll need to pull docker images for the compilers you want to use. See docker images:
   
    ```
    docker pull sensiml/sml_x86_generic:9.3.0-v1.0
@@ -63,19 +63,18 @@ To try out Piccolo AI on your machine, we recommend using Docker.
 
 2. Open a Ubuntu terminal through Windows Subsystem for Linux
 
-3. Navigate to your piccolo directory
-
    ```
-   cd /mnt/c/Users/my_user/Documents/Repos/piccolo
+   git clone https://github.com/sensiml/piccolo
+   cd piccolo
    ```
 
-4. Run docker compose
+3. Run docker compose to start the services
 
    ```
    docker-compose up
    ```
 
-   Note: You should have the latest version of the sensiml base docker image. If not, you can do a docker pull
+   Note: You should have the latest sensiml base docker image version. If not, you can do a docker pull
 
    ```
    docker pull sensiml/base
