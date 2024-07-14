@@ -56,6 +56,12 @@ To try out Piccolo AI on your machine, we recommend using Docker.
    docker pull sensiml/sml_x86mingw_generic:9.3-v1.0
    docker pull sensiml/sensiml_tensorflow:0a4bec2a-v4.0
    ```
+   
+6. Make sure you have the latest sensiml base docker image version. If not, you can do a docker pull
+
+   ```
+   docker pull sensiml/base
+   ```
 
 ### Start Piccolo AI
 
@@ -68,16 +74,10 @@ To try out Piccolo AI on your machine, we recommend using Docker.
    cd piccolo
    ```
 
-3. Run docker compose to start the services
+3. Use [docker compose](https://docs.docker.com/compose/) to start the services
 
    ```
-   docker-compose up
-   ```
-
-   Note: You should have the latest sensiml base docker image version. If not, you can do a docker pull
-
-   ```
-   docker pull sensiml/base
+   docker compose up
    ```
 
 **Login via the Piccolo UI**
