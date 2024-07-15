@@ -15,6 +15,99 @@ Release Notes
 Current Release
 ---------------
 
+.. _data-studio-release-2024-2-1:
+
+2024.2.1 (07/01/2024)
+`````````````````````
+
+:blue:`What's New`
+
+ * Added new setting 'Connect To Piccolo AI Server' *(Enables connecting to a Piccolo AI server instance)*
+
+.. figure:: /data-studio/img/release-notes/ds-settings-connect-to-piccolo-ai-server.png
+ :align: center
+..
+
+   *Piccolo AI is an open-source version of the SensiML Analytics Studio. You can run your own server for building models. See more about running a Piccolo AI server at https://github.com/sensiml/piccolo*
+
+:blue:`Bug Fixes`
+
+ * Fixed issue where the 'Delete Video Files' confirmation dialog was displayed even when files do not have videos
+
+Past Releases
+-------------
+
+.. _data-studio-release-2024-2-0:
+
+2024.2.0 (06/18/2024)
+`````````````````````
+
+:blue:`What's New`
+
+ * Added the feature to upload and download videos to the cloud
+
+.. figure:: /data-studio/img/release-notes/ds-media-player-video-cloud-update.png
+ :align: center
+..
+
+ * Added 'Continuous Recording' setting to capture mode. This allows a user to automatically record any number of files based on the max record time setting
+
+.. figure:: /data-studio/img/release-notes/ds-settings-continuous-recording-update.png
+ :align: center
+..
+
+ * Added 'Video Size' column and Updated 'Video' column to reflect server status in the Project Explorer
+
+.. figure:: /data-studio/img/release-notes/ds-project-explorer-video-column-update.png
+ :align: center
+..
+
+*Video 'server status' now has 5 states: 'Videos need to be uploaded', 'Videos need to be downloaded', 'Videos need to be uploaded and downloaded', 'Videos are in sync', and 'None'*
+
+ * You can find more information about the video status if you hover your mouse over the any of the video columns
+
+.. figure:: /data-studio/img/release-notes/ds-project-explorer-video-status-tooltip.png
+ :align: center
+..
+
+ * Added options for bulk downloading and bulk uploading videos based on selected files in project
+
+.. figure:: /data-studio/img/release-notes/ds-project-explorer-bulk-video-management-menu-items.png
+ :align: center
+..
+
+ * The *Add Video* screen has been updated to show the videos being added with an option to Auto-Upload the video
+
+.. figure:: /data-studio/img/release-notes/ds-upload-videos-update.png
+ :align: center
+..
+
+ * Added options to remove videos locally, cloud only, or all to the “Remove Videos” screen
+
+.. figure:: /data-studio/img/release-notes/ds-remove-videos-update.png
+ :align: center
+..
+
+ * Added video information to *Open Project* screen
+
+.. figure:: /data-studio/img/release-notes/ds-open-project-video-update.png
+ :align: center
+..
+
+ * Added video total to *Recent Projects* view
+
+.. figure:: /data-studio/img/release-notes/ds-recent-projects-video-update.png
+ :align: center
+..
+
+:blue:`Bug Fixes`
+
+ * Fixed issue where sometimes the time series track for WAV files would not load the first time opening a project
+
+ * Fixed issue where adding or deleting project metadata labels would not properly refresh the Project Explorer column data properly
+
+ * Fixed 'storage credits' calculation in the Account screen
+
 .. _data-studio-release-2024-1-2:
 
 2024.1.2 (05/16/2024)
@@ -27,13 +120,6 @@ Minor Updates
  * Updated the Project Explorer to automatically switch to the Data Explorer when double-clicking a file that is already open
 
  * Added support for new subscriptions
-
-:blue:`Bug Fixes`
-
- * Fixed issue with Python models when importing from a DSPROJ file
-
-Past Releases
--------------
 
 .. _data-studio-release-2024-1-1:
 
@@ -49,6 +135,10 @@ Minor Updates
  * Added additional stack trace information to event logs when running Python transforms or models
 
  * Added validation for invalid segment index locations when running a Python model
+
+:blue:`Bug Fixes`
+
+ * Fixed issue with Python models when importing from a DSPROJ file
 
 .. _data-studio-release-2024-1-0:
 
