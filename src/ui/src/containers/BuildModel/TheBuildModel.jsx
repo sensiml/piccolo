@@ -38,7 +38,7 @@ const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipel
   return (
     <Box>
       <Switch>
-        <Route path={ROUTES.MAIN.MODEL_BUILD.child.BUILDER_SCREEN.path}>
+        <Route path={ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path}>
           <>
             {loadingPipelineSteps.isLoading ? (
               <AppLoader
@@ -62,7 +62,7 @@ const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipel
             <Redirect
               from={ROUTES.MAIN.MODEL_BUILD.path}
               to={{
-                pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.BUILDER_SCREEN.path, {
+                pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
                   projectUUID,
                   pipelineUUID: selectedPipeline,
                 }),

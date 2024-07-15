@@ -43,7 +43,7 @@ const MODELS_SELECTION_MODE = {
   [ROUTES.MAIN.MODEL_SELECT.MODES.SELECT_DOWNLOAD]: "Download Model",
 };
 
-const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks, clearModel }) => {
+const ModelSelect = ({ selectedProject, loadKnowledgepacks, modelData }) => {
   const routersHistory = useHistory();
   const { t } = useTranslation("models");
   const { selectionMode } = useParams();
@@ -62,14 +62,10 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks, clearMode
   }, []);
 
   useEffect(() => {
-    clearModel();
-  }, []);
-
-  useEffect(() => {
     if (state?.message) {
       setIsShowAlertSnackBar(true);
-      loadKnowledgepacks(selectedProject);
     }
+    loadKnowledgepacks(selectedProject);
   }, [state]);
 
   useEffect(() => {
@@ -87,10 +83,14 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks, clearMode
   };
 
   const getChangeModelName = () => {
-    if (state?.parentPath !== undefined) {
-      return MODELS_SELECTION_MODE[state?.parentPath.split("/")[1]];
+    if (modelData.name) {
+      return `Model: ${modelData.name}`;
     }
-    return `Select model: ${modelData?.name}`;
+    if (state?.parentPath !== undefined) {
+      return `Select model to open in ${MODELS_SELECTION_MODE[state?.parentPath.split("/")[1]]}`;
+    }
+
+    return "Select Model";
   };
 
   const handleCloseAlert = () => {
@@ -111,7 +111,7 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks, clearMode
             backTitle={tableOpenData?.title}
           />
         ) : (
-          <ControlPanelSelect title={MODELS_SELECTION_MODE[selectionMode]} />
+          <ControlPanelSelect title={getChangeModelName()} />
         )}
       </Box>
       {/* isShowAlerSnackBar */}

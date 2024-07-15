@@ -93,7 +93,7 @@ const rootReducer = (history) => (state, action) => {
       auth: { loggedIn: false },
       projects: { lastSelectedProjects: state.projects?.lastSelectedProjects },
       // shoudn't keep router info is user click "Log out"
-      ...(action.type !== LOG_OUT && { router: state.router }),
+      router: state.router,
     };
     return { ...updatedState };
   }

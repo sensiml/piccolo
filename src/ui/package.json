@@ -1,6 +1,6 @@
 {
   "name": "sensiml_web",
-  "version": "2023.8.0",
+  "version": "2024.1.0",
   "private": true,
   "engines": {
     "node": "~16"
@@ -130,7 +130,6 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
-
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",

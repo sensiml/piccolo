@@ -36,8 +36,8 @@ import { loadTeamSubscription } from "./loadTeamSubscription";
 
 import { LOG_IN } from "./actionTypes";
 
-const getSuccessRedicectPathName = (state) => {
-  return state.router?.location?.state?.successRedirect || ROUTES.MAIN.HOME.path;
+const getSuccessRedicectPathName = (_state) => {
+  return ROUTES.MAIN.HOME.path;
 };
 
 const getFormData = (data) => {

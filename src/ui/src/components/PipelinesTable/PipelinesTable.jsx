@@ -104,7 +104,7 @@ const PipelinesTable = ({
 
   const handleAction = (pipelineUUID) => {
     routersHistory.push(
-      generatePath(ROUTES.MAIN.MODEL_BUILD.child.BUILDER_SCREEN.path, {
+      generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
         projectUUID: selectedProject,
         pipelineUUID,
       }),

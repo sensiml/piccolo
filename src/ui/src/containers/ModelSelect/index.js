@@ -19,7 +19,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 import { connect } from "react-redux";
 import { setIsMainScreenLoading } from "store/common/actions";
-import { clearModel } from "store/models/actions";
 import { loadKnowledgepacks } from "store/knowledgepacks/actions";
 import ModelSelect from "./ModelSelect";
 
@@ -34,7 +33,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   setIsMainScreenLoading,
   loadKnowledgepacks,
-  clearModel,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModelSelect);
