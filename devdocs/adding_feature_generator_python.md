@@ -124,7 +124,7 @@ Add a unit tests for your function to the library/tests/core\_functions/test\_fg
 Finally, we want to add a functional tests for any new transform to the test_funtions.py functional tests. These test are run after every merge to master and prior to any deployment. The test is run against a live server and allows us to validate that deployed code is working as expected functionally. Functional tests currently take ~2 hours to run.
 
 ## Step 9. Create a Pull Request
-After you have finished testing your transform. Create a PR for it in bitbucket. Make sure to reference the [SDL-#] at the start of the title of the PR. After you create the PR, the unit tests and linters will run. If there are any issues with the build, the PR will be blocked until they are fixed. In addition, you will need to get one person to review and approve the code before you are allowed to merge.
+After you have finished testing your transform. Create a PR for it in github. Make sure to reference the Project Ticket at the start of the title of the PR. After you create the PR, the unit tests and linters will run. If there are any issues with the build, the PR will be blocked until they are fixed. In addition, you will need to get one person to review and approve the code before you are allowed to merge.
 
 ## Step 10. Adding the C code for the embedded SDK
 To have the Codegeneration generate the embedded firmware with the C you need to add the C code to the embedded SDK. This Tutorial continues in the embedded SDK [Adding a feature generator embedded SDK](https://github.com/sensiml/piccolo/blob/main/devdocs/adding_feature_generator_embedded_sdk.md) tutorial, where you will learn how to add the C code for the embedded SDK and then link the two.
