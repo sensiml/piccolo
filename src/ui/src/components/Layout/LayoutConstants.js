@@ -22,17 +22,19 @@ import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import PollOutlinedIcon from "@mui/icons-material/PollOutlined";
 import BuildIcon from "@mui/icons-material/Build";
+import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import StorageIcon from "@mui/icons-material/Storage";
 import SummaryIcon from "@mui/icons-material/Dvr";
-
 import SchoolIcon from "@mui/icons-material/School";
 import HelpIcon from "@mui/icons-material/Help";
 import DriveEtaIcon from "@mui/icons-material/DriveEta";
 import ChromeReaderModeIcon from "@mui/icons-material/ChromeReaderMode";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import DataObjectOutlinedIcon from "@mui/icons-material/DataObjectOutlined";
 
 import i18n from "i18n";
 
@@ -43,90 +45,128 @@ const getMenuProps = (val) => {
   return {
     value: val,
     color: "inherit",
-    fontSize: "medium",
+    fontSize: "small",
   };
 };
 
-const MenuTitles = {
-  Home: i18n.t("layout:nav-drawer.menu-item-home"),
-  Summary: i18n.t("layout:nav-drawer.menu-item-project-summary"),
-  DataManager: i18n.t("layout:nav-drawer.menu-item-data-manager"),
-  PrepareData: i18n.t("layout:nav-drawer.menu-item-prepare-data"),
-  BuildModel: i18n.t("layout:nav-drawer.menu-item-build-model"),
-  ExploreModel: i18n.t("layout:nav-drawer.menu-item-explore-model"),
-  TestModel: i18n.t("layout:nav-drawer.menu-item-test-model"),
-  DownloadModel: i18n.t("layout:nav-drawer.menu-item-download-model"),
-};
-
-const MenuItems = [
-  {
-    title: MenuTitles.Home,
+const MENU_ITEMS_INFO = {
+  HOME: {
+    title: i18n.t("layout:nav-drawer.menu-item-home"),
     id: "navHome",
     orderIndex: 0,
     iconfn: (iconProps) => <HomeIcon {...iconProps} />,
     getPath: (params = {}) => generatePath(ROUTES.MAIN.HOME.path, { ...params }),
   },
-  {
-    title: "Change Project",
+  CHANGE_PROJECT: {
+    title: i18n.t("layout:nav-drawer.menu-item-change-project"),
     tooltip: i18n.t("layout:menu-external.get-started-tooltip"),
     id: "navChangeProject",
     orderIndex: 1,
     iconfn: (iconProps) => <ExitToAppIcon {...iconProps} />,
     getPath: () => ROUTES.MAIN.HOME.path,
   },
-  {
-    title: MenuTitles.Summary,
+  SUMMARY: {
+    title: i18n.t("layout:nav-drawer.menu-item-project-summary"),
     id: "navSummary",
     orderIndex: 2,
     iconfn: (iconProps) => <SummaryIcon {...iconProps} />,
     getPath: (params = {}) => generatePath(ROUTES.MAIN.PROJECT_SUMMARY.path, { ...params }),
   },
-  {
-    title: MenuTitles.DataManager,
+  DATAMANAGER: {
+    title: i18n.t("layout:nav-drawer.menu-item-data-manager"),
     id: "navDataManager",
     orderIndex: 3,
     iconfn: (iconProps) => <StorageIcon {...iconProps} />,
     getPath: (params = {}) => generatePath(ROUTES.MAIN.DATA_MANAGER.path, { ...params }),
   },
-  {
-    title: MenuTitles.PrepareData,
+  PRERARE_DATA: {
+    title: i18n.t("layout:nav-drawer.menu-item-queries"),
     id: "navPrepareData",
     orderIndex: 4,
-
     iconfn: (iconProps) => <PollOutlinedIcon {...iconProps} />,
     getPath: (params = {}) => generatePath(ROUTES.MAIN.DATA_EXPLORER.path, { ...params }),
   },
-  {
-    title: MenuTitles.BuildModel,
+  BUILD_MODEL: {
+    title: i18n.t("layout:nav-drawer.menu-item-build-model"),
     id: "navBuildModel",
     orderIndex: 5,
     iconfn: (iconProps) => <BuildIcon {...iconProps} />,
-    getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_BUILD.path, { ...params }),
+    getPath: (params = {}) =>
+      generatePath(ROUTES.MAIN.MODEL_BUILD.child.SELECT_SCREEN.path, { ...params }),
+    _subItems: [
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-feature-extractor"),
+        id: "navFeatureExtractor",
+        orderIndex: 1,
+        iconfn: (iconProps) => <FilterAltOutlinedIcon {...iconProps} />,
+        getPath: (params = {}) =>
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.FEATURE_EXTRACTOR.path, { ...params }),
+      },
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-pipeline-automl"),
+        id: "navPipelineAutoML",
+        orderIndex: 2,
+        iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
+        getPath: (params = {}) =>
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
+            ...params,
+          }),
+      },
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-pipeline-custom"),
+        id: "navPipelineCustom",
+        orderIndex: 3,
+        iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
+        getPath: (params = {}) =>
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.CUSTOM_BUILDER_SCREEN.path, {
+            ...params,
+          }),
+      },
+    ],
   },
-  {
-    title: MenuTitles.ExploreModel,
-    id: "navExploreModel",
+  MODELS: {
+    title: i18n.t("layout:nav-drawer.menu-item-models"),
+    id: "navOpenModel",
     orderIndex: 6,
-    iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
-    getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_EXPLORE.path, { ...params }),
+    iconfn: (iconProps) => <DataObjectOutlinedIcon {...iconProps} />,
+    getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_SELECT.path, { ...params }),
+    subItems: [
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-explore-model"),
+        id: "navExploreModel",
+        orderIndex: 7,
+        iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
+        getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_EXPLORE.path, { ...params }),
+      },
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-test-model"),
+        id: "navTestModel",
+        orderIndex: 8,
+        iconfn: (iconProps) => <PlaylistAddCheckIcon {...iconProps} />,
+        getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_TEST.path, { ...params }),
+      },
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-download-model"),
+        id: "navDownloadModel",
+        orderIndex: 9,
+        iconfn: (iconProps) => <CloudDownloadIcon {...iconProps} />,
+        getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_DOWNLOAD.path, { ...params }),
+      },
+    ],
   },
-  {
-    title: MenuTitles.TestModel,
-    id: "navTestModel",
-    orderIndex: 7,
-    iconfn: (iconProps) => <PlaylistAddCheckIcon {...iconProps} />,
-    getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_TEST.path, { ...params }),
-  },
-  {
-    title: MenuTitles.DownloadModel,
-    id: "navDownloadModel",
-    orderIndex: 8,
-    iconfn: (iconProps) => <CloudDownloadIcon {...iconProps} />,
-    getPath: (params = {}) => generatePath(ROUTES.MAIN.MODEL_DOWNLOAD.path, { ...params }),
-  },
+};
+
+const MENU_ITEMS = [
+  { ...MENU_ITEMS_INFO.HOME },
+  { ...MENU_ITEMS_INFO.CHANGE_PROJECT },
+  { ...MENU_ITEMS_INFO.SUMMARY },
+  { ...MENU_ITEMS_INFO.DATAMANAGER },
+  { ...MENU_ITEMS_INFO.PRERARE_DATA },
+  { ...MENU_ITEMS_INFO.BUILD_MODEL },
+  { ...MENU_ITEMS_INFO.MODELS },
 ];
 
-const MenuItemsExternal = [
+const MENU_ITEMS_EXTERNAL = [
   {
     title: i18n.t("layout:menu-external.get-started-title"),
     tooltip: i18n.t("layout:menu-external.get-started-tooltip"),
@@ -169,4 +209,4 @@ const MenuItemsExternal = [
   },
 ];
 
-export { MenuItems, MenuTitles, MenuItemsExternal, getMenuProps };
+export { MENU_ITEMS, MENU_ITEMS_INFO, MENU_ITEMS_EXTERNAL, getMenuProps };

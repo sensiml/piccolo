@@ -114,7 +114,7 @@ const useStyles = () =>
       },
     },
     iconButton: {
-      minWidth: 40,
+      minWidth: 25,
     },
     closeChevron: {
       padding: 0,
