@@ -1,5 +1,5 @@
 # **Adding a feature generator**
-This tutorial continues [Transform Contract](file:///C:/wiki/spaces/SEN/pages/2190934020/Transform+Contract) but now also implements the c version of the feature extractor. If you haven’t done that first part of the tutorial go and do that now.
+This tutorial continues [Transform Contract](https://github.com/sensiml/piccolo/blob/main/devdocs/adding_feature_generator_python.md) but now also implements the c version of the feature extractor. If you haven’t done that first part of the tutorial go and do that now.
 
 At the end of the previous tutorial we created the feature generator transform **Sum Columns.** We created the Python code, and the transform contract, added it to our database, added a unit test, and added a functional test. In this tutorial, we are going to write the corresponding C code that will run on the embedded device. After that we will add it to our fg\_algorithms.so library and replace the Python code we wrote in the first tutorial with a call to the C function. We will also add a [gtest](https://github.com/google/googletest) to our embedded SDK testing suite.
 
@@ -40,11 +40,11 @@ model: library.transform
 
 In the folder
 
-**sensiml\_embedded\_sdk/src/**
+**src/embedded_ml_sdk/src/**
 
 create the file
 
-**fg\_stats\_sum\_columns.c**
+**fg_stats_sum_columns.c**
 
 ```c
 // FILL_EMBEDDED_SDK_LICENSE
@@ -129,7 +129,7 @@ Finally, the actual function itself. We loop through the cols\_to\_use indexes w
 ```
 
 ## Step 3. Writing the unit test
-Now that we have created our C code, the next thing to do is write the corresponding unit test. create the file **sensiml_embedded_sdk/utest/test_fg_stats_sum_columns.cpp** and put the following code in.
+Now that we have created our C code, the next thing to do is write the corresponding unit test. create the file **src/utest/test_fg_stats_sum_columns.cpp** and put the following code in.
 
 ```c++
 #include "gtest/gtest.h"
@@ -176,7 +176,7 @@ TEST_F(FGStatsSumColumns, generate_features_test)
 for more information on the testing frame see [gtest unit test overview](file:///C:/wiki/spaces/SEN/pages/197918894/gtest+unit+test+overview) .
 
 ## Step 4. Update the CMAKE test file
-Open the file **sensiml_embedded_sdk/utest/CmakeLists.txt** and ../src/fg_stats_sum_columns.c as the last item in the SENSIML_SDK list
+Open the file **src/embedded_ml_sdk/utest/CmakeLists.txt** and ../src/fg_stats_sum_columns.c as the last item in the SENSIML_SDK list
 
 ```c++
 set( SENSIML_SDK
@@ -201,11 +201,11 @@ test_fg_stats_sum_columns.cpp,
 ```
 
 ## Step 4. Run the code generation for the embedded sdk
-The files kbalgorithms.h, fg\_algorithms.c, fg\_algorithms.py and pywrapper/Makefile
-are generated off the templates, the src, and the functions\_to\_loads.csv files. After you have added a new file, its best to rerun the codegeneration instead of manually updating those files yourself. To run the codegeneration
+The files kbalgorithms.h, fg_algorithms.c, fg_algorithms.py and pywrapper/Makefile
+are generated off the templates, the src, and the functions_to_loads.csv files. After you have added a new file, its best to rerun the codegeneration instead of manually updating those files yourself. To run the codegeneration
 
 ```bash
-cd sensiml_embedded_sdk/codegen
+cd src/embedded_ml_sdk/codegen
 
 python generate_fg_algorithms.py
 ```
