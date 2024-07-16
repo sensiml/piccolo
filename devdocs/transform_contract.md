@@ -11,15 +11,18 @@ The input contract describes the parameters that can be passed to a functions AP
 
 **type** (required): the expected type for this parameter
 
-`    `Expected types are:
 
-[int][int16\_t][numeric][float]: Number
+Expected types are:
 
-[str]: String
+```
+    [int][int16\_t][numeric][float]: Number
 
-[list]: List
+    [str]: String
 
-[dict]: Dictionary 
+    [list]: List
+
+    [dict]: Dictionary
+    
 
 **element\_type** (required for [list] or [dict]), this is the expected type inside as values
 
@@ -31,26 +34,26 @@ The input contract describes the parameters that can be passed to a functions AP
 
 **max\_elements**: a limit of maximum count of elements for a list used for an editable list where a user can add custom elements
 
-` `**lookup** (optional): Instruction about what options will be extracted from a query
+**lookup** (optional): Instruction about what options will be extracted from a query
 
-- used for dynamic parameters that depend on a query (group\_columns, etc.)
+- used for dynamic parameters that depend on a query (group_columns, etc.)
 - overwrites options provided by this parameter
 
-`        `webui handle values:
+webui handle values:
 
-`            `**query\_columns** - columns at query
+**query\_columns** - columns at query
 
-`            `**query\_metadata\_columns** - metadata columns at query
+**query\_metadata\_columns** - metadata columns at query
 
-`            `**query\_label\_column** - label\_column at query
+**query\_label\_column** - label\_column at query
 
-`            `**query\_combine\_labels** - combine\_labels at query
+**query\_combine\_labels** - combine\_labels at query
 
-`            `**label\_values** - label\_values at labels
+**label\_values** - label\_values at labels
 
-`            `**metadata\_names** - list of names from metadata array
+**metadata\_names** - list of names from metadata array
 
-`            `**metadata\_label\_values** - list of values from metadata object
+**metadata\_label\_values** - list of values from metadata object
 
 **options**: the options that are available for this variables, these are a list of dictionaries with the same properties as the input contract
 
@@ -59,23 +62,23 @@ The input contract describes the parameters that can be passed to a functions AP
 
 **default**: the default value for this parameter which will be set if nothing is passed by the user
 
-**is\_ignored**: don't use this field for building pipeline
+**is_ignored**: don't use this field for building pipeline
 
-**is\_hidden**: hide from user, but use with default value
+**is_hidden**: hide from user, but use with default value
 
 **range:** the range of values that are acceptable
 
 **description:** the description will be shown in the documentation
 
-` `**handle\_by\_set**: This parameter will be set by the Parent function that this transform is part of
+**handle_by_set**: This parameter will be set by the Parent function that this transform is part of
 
-**no\_display**: do not display this to the user
+**no_display**: do not display this to the user
 
-**c\_param**: the index of the parameter for the c function
+**c_param**: the index of the parameter for the c function
 
-**display\_name**: the display name to be used in a GUI
+**display_name**: the display name to be used in a GUI
 
-**c\_param:** Index of the parameter in the c functions parameter array
+**c_param:** Index of the parameter in the c functions parameter array
 
 **num\_columns**:
 
