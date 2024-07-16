@@ -161,4 +161,5 @@ fg_cross_column_max_column_contracts = {
                  "type": "DataFrame",
                  "family": False}
                   ]
+}
 ```
