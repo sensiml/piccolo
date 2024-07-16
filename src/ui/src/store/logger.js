@@ -28,7 +28,7 @@ const WARNING = "WARNING";
 const INFO = "INFO";
 const DEBUG = "DEBUG";
 
-const _logToServer = (loglevel, username, message, stacktrace, tag) => {
+const _logToServer = async (loglevel, username, message, stacktrace, tag) => {
   if (!username) {
     const state = store.getState();
     // eslint-disable-next-line no-param-reassign
@@ -63,11 +63,17 @@ const _logToServer = (loglevel, username, message, stacktrace, tag) => {
       Authorization: `Api-Key ${process.env.REACT_APP_LOGGER_API_KEY}`,
     },
   });
+
   const esc = encodeURIComponent;
   const query = Object.keys(reqData)
     .map((k) => `${esc(k)}=${esc(reqData[k])}`)
     .join("&");
-  loggerApi.post("/log/", query);
+
+  try {
+    await loggerApi.post("/log/", query);
+  } catch (_err) {
+    console.info(query);
+  }
 };
 
 const logger = (() => {

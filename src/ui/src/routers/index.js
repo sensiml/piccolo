@@ -126,13 +126,17 @@ export const ROUTES = {
           path: "/model-build/:projectUUID?/select/",
           name: "select-screen",
         },
-        BUILDER_SCREEN: {
-          MODES: {
-            AUTOML: "automl",
-            CUSTOM: "custom",
-          },
-          path: "/model-build/:projectUUID?/builder/:pipelineUUID/",
-          name: "builder-screen",
+        FEATURE_EXTRACTOR: {
+          path: "/model-build/:projectUUID?/feature-extractor/:pipelineUUID?/",
+          name: "feature-extractor",
+        },
+        AUTOML_BUILDER_SCREEN: {
+          path: "/model-build/:projectUUID?/automl-builder/:pipelineUUID?/",
+          name: "automl-builder-screen",
+        },
+        CUSTOM_BUILDER_SCREEN: {
+          path: "/model-build/:projectUUID?/custom-builder/:pipelineUUID?/",
+          name: "custom-builder-screen",
         },
       },
     },

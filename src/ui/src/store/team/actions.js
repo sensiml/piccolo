@@ -40,7 +40,6 @@ export const loadTeamInfo = () => async (dispatch) => {
     }
   } catch (error) {
     logger.logError("", `${helper.getResponseErrorDetails(error)}\n`, error, "loadTeamInfo");
-    throwParsedApiError(error, "capture labels updating");
   }
   dispatch({ type: STORE_TEAM_INFO, payload: teamInfo });
 };

@@ -24,6 +24,9 @@ import { generatePath, useHistory } from "react-router-dom";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import ExploreIcon from "@mui/icons-material/Explore";
+import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 import { Backdrop, CircularProgress, Tooltip, IconButton, Snackbar } from "@mui/material";
 
@@ -39,7 +42,6 @@ import helper from "store/helper";
 import { ROUTES } from "routers";
 
 import { DialogModelRename } from "components/DialogModel";
-import { MenuItems, MenuTitles } from "components/Layout/LayoutConstants";
 import { TableLink } from "components/UILinks";
 
 import useStyles from "./KnowledgepacksTableStyles";
@@ -55,9 +57,6 @@ const KnowledgepacksTable = ({
   openTitle,
 }) => {
   const { t } = useTranslation("models");
-  const testModelMenuIcon = MenuItems.find((m) => m.title === MenuTitles.TestModel);
-  const downloadModelMenuIcon = MenuItems.find((m) => m.title === MenuTitles.DownloadModel);
-  const exploreModelMenuIcon = MenuItems.find((m) => m.title === MenuTitles.ExploreModel);
 
   const routersHistory = useHistory();
 
@@ -244,7 +243,7 @@ const KnowledgepacksTable = ({
           size="small"
           onClick={() => handleAction(ROUTES.MAIN.MODEL_TEST.path, row.sandbox_uuid, value)}
         >
-          {testModelMenuIcon.iconfn()}
+          <PlaylistAddCheckIcon />
         </IconButton>
       </Tooltip>
     );
@@ -259,7 +258,7 @@ const KnowledgepacksTable = ({
           size="small"
           onClick={() => handleAction(ROUTES.MAIN.MODEL_DOWNLOAD.path, row.sandbox_uuid, value)}
         >
-          {downloadModelMenuIcon.iconfn()}
+          <CloudDownloadIcon />
         </IconButton>
       </Tooltip>
     );
@@ -274,7 +273,7 @@ const KnowledgepacksTable = ({
           size="small"
           onClick={() => handleAction(ROUTES.MAIN.MODEL_EXPLORE.path, row.sandbox_uuid, value)}
         >
-          {exploreModelMenuIcon.iconfn()}
+          <ExploreIcon />
         </IconButton>
       </Tooltip>
     );

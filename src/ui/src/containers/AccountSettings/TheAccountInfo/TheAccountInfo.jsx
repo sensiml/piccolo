@@ -35,7 +35,7 @@ const TheAccountInfo = ({ userId, teamName }) => {
       _infoItems.push({ type: t("account-info.basic-info-team"), value: teamName });
       return _infoItems;
     }
-    return infoItems;
+    return _infoItems;
   }, [teamName, userId]);
 
   return (

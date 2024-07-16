@@ -51,9 +51,9 @@ const Auth = ({ logIn, logInOauthCallback }) => {
             />
           ) : null}
 
-          {/* <ErrorBoundary> */}
-          <LoginForm logIn={logIn} isDisableLogin={isInMaintenanceRange} />
-          {/* </ErrorBoundary> */}
+          <ErrorBoundary>
+            <LoginForm logIn={logIn} isDisableLogin={isInMaintenanceRange} />
+          </ErrorBoundary>
         </Route>
         <Route path={ROUTES.AUTH.child.OAUTH_CALLBACK.path}>
           <ErrorBoundary>

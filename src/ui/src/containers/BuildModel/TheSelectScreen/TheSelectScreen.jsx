@@ -154,7 +154,7 @@ const TheSelectScreen = ({
     setIsOpenImportPipeline(false);
 
     routersHistory.push({
-      pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.BUILDER_SCREEN.path, {
+      pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
         projectUUID,
         pipelineUUID: response.details,
       }),
@@ -176,15 +176,18 @@ const TheSelectScreen = ({
   }, [isOpenBuildModal, isOpenImportPipeline, isOpenPipelineTemplate]);
 
   useEffect(() => {
-    handleLoadPipelines();
-    loadPipelineTemplates();
-    clearPipelinesteps();
     const inputData = getPipelineStepDataClass({
       type: PIPELINE_STEP_TYPES.QUERY,
       subtype: [PIPELINE_STEP_TYPES.QUERY],
       isAutoML: true,
     }).getInputsData();
     setQueryInputData(inputData);
+  }, [queries]);
+
+  useEffect(() => {
+    handleLoadPipelines();
+    loadPipelineTemplates();
+    clearPipelinesteps();
   }, []);
 
   useEffect(() => {
