@@ -15,6 +15,47 @@ Release Notes
 Current Release
 ---------------
 
+.. _data-studio-release-2024-3-0:
+
+2024.3.0 (07/16/2024)
+`````````````````````
+
+:blue:`What's New`
+
+ * Added 'Text to Speech and AI Voice Generator' feature. This combines ElevenLabs voice generator API with the Data Studio labeling capabilities to generate speech audio datasets based on text prompts. *(Note: Requires an ElevenLabs account to use)*
+
+.. figure:: /data-studio/img/release-notes/ds-text-to-speech-window.png
+ :align: center
+..
+
+   *Text to Speech and AI Voice Generator can be found in the left navigation bar*
+
+.. figure:: /data-studio/img/release-notes/ds-text-to-speech-icon.png
+ :align: center
+..
+
+ * Generated files can be automatically labeled with segments for *Prompt, Gender, Accent, Age, Description, Use Case, or Custom Text*
+
+.. figure:: /data-studio/img/release-notes/ds-text-to-speech-auto-label.png
+ :align: center
+..
+
+ * Generated files can be named/generated with metadata options saved to the Project Explorer
+
+.. figure:: /data-studio/img/release-notes/ds-text-to-speech-file-metadata.png
+ :align: center
+..
+
+   *The Data Studio will auto-generate metadata and labels based on your file settings*
+
+.. figure:: /data-studio/img/release-notes/ds-text-to-speech-project-explorer.png
+ :align: center
+..
+
+
+Past Releases
+-------------
+
 .. _data-studio-release-2024-2-1:
 
 2024.2.1 (07/01/2024)
@@ -33,9 +74,6 @@ Current Release
 :blue:`Bug Fixes`
 
  * Fixed issue where the 'Delete Video Files' confirmation dialog was displayed even when files do not have videos
-
-Past Releases
--------------
 
 .. _data-studio-release-2024-2-0:
 
