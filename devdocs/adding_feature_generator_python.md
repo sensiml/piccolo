@@ -1,10 +1,10 @@
 # **Adding feature generator transform**
-This guide will walk through the steps to add a new feature generator transform. At the end of this, you should be able to add a new transform to the server code. In the embedded SDK [Adding a feature generator](file:///C:/wiki/spaces/SEN/pages/2193391619/Adding+a+feature+generator) we will extend this code to add the corresponding c code so that the transform can be run on the device as well.
+This guide will walk through the steps to add a new feature generator transform. At the end of this, you should be able to add a new transform to the server code. In the embedded SDK [Adding a feature generator](https://github.com/sensiml/piccolo/blob/main/devdocs/adding_feature_generator_embedded_sdk.md) we will extend this code to add the corresponding c code so that the transform can be run on the device as well.
 
 We will walk through adding a feature generator **Sum Columns** which will sum the values of all the sensor channels passed into the feature generator.
 
 ## Step 1. Create the database entry
-First step is to create the database, entry. We are adding Sum Columns, which can be categorized as a statistical feature. So I’m going to add it to the fg\_stats.py file. You can see the [Transform Model](file:///C:/wiki/spaces/SEN/pages/2190671875/Transform+Model) for documentation on what the fields mean. Open the file **functions_prod.yml** and add the following anywhere in the file
+First step is to create the database, entry. We are adding Sum Columns, which can be categorized as a statistical feature. So I’m going to add it to the fg\_stats.py file. You can see the [Transform Model](https://github.com/sensiml/piccolo/blob/main/devdocs/transform_contract.md) for documentation on what the fields mean. Open the file **functions_prod.yml** and add the following anywhere in the file
 
 ```
 - fields:
@@ -127,4 +127,4 @@ Finally, we want to add a functional tests for any new transform to the test_fun
 After you have finished testing your transform. Create a PR for it in bitbucket. Make sure to reference the [SDL-#] at the start of the title of the PR. After you create the PR, the unit tests and linters will run. If there are any issues with the build, the PR will be blocked until they are fixed. In addition, you will need to get one person to review and approve the code before you are allowed to merge.
 
 ## Step 10. Adding the C code for the embedded SDK
-To have the Codegeneration generate the embedded firmware with the C you need to add the C code to the embedded SDK. This Tutorial continues in the embedded SDK [Adding a feature generator](file:///C:/wiki/spaces/SEN/pages/2193391619/Adding+a+feature+generator) tutorial, where you will learn how to add the C code for the embedded SDK and then link the two.
+To have the Codegeneration generate the embedded firmware with the C you need to add the C code to the embedded SDK. This Tutorial continues in the embedded SDK [Adding a feature generator embedded SDK](https://github.com/sensiml/piccolo/blob/main/devdocs/adding_feature_generator_embedded_sdk.md) tutorial, where you will learn how to add the C code for the embedded SDK and then link the two.
