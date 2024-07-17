@@ -1,3 +1,4 @@
+![Piccolo AI Banner Image](https://sensiml.org/wp-content/uploads/2024/07/piccolo_github_banner.png)
 ## Piccolo AI™
 
 Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/) intended for individual developers, researchers, and AI enthusiasts. For enterprise teams contact SensiML for a licensed enterprise version of the software.
@@ -102,7 +103,7 @@ Upgrades will need to check out the latest code and run database.intialize conta
 
 ## Documentation
 
-Piccolo AI is the open-source version of SensiML ML Engine. As such, it's features and capabilities align with the majority of those found in SensiML's ML Egninge for which documentation can be found
+Piccolo AI is the open-source version of SensiML ML Engine. As such, it's features and capabilities align with the majority of those found in SensiML's ML Engine for which documentation can be found
 [here](https://sensiml.com/documentation/analytics-studio/index.html).
 
 For more information about our documentation processes or to build them yourself, see the
@@ -125,3 +126,5 @@ ensure someone else hasn't created an issue for the same topic.
 * Need help using Piccolo AI? Reach out on the [forum](https://forum.sensiml.org/),
 fellow community member or SensiML engineer will be happy to help you out.
 
+## Last but Not Least, a Special Thank You to Our Supporters!
+[![Stargazers repo roster for @sensiml/piccolo](https://reporoster.com/stars/sensiml/piccolo)](https://github.com/sensiml/piccolo/stargazers)
