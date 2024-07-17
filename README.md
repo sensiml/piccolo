@@ -103,7 +103,7 @@ Upgrades will need to check out the latest code and run database.intialize conta
 
 ## Documentation
 
-Piccolo AI is the open-source version of SensiML Analytics Studio.  As such, it's features and capabilities align with the majority of those found in SensiML's Analytics Studio for which documentation can be found
+Piccolo AI is the open-source version of SensiML ML Engine.  As such, it's features and capabilities align with the majority of those found in SensiML's ML Engine for which documentation can be found
 [here](https://sensiml.com/documentation/analytics-studio/index.html).
 
 For more information about our documentation processes or to build them yourself, see the
