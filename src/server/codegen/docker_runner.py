@@ -118,7 +118,7 @@ class DockerRunnerLocal(DockerBase):
 
         if settings.INSIDE_LOCAL_DOCKER:  # self.is_inside_docker():
             bind = {
-                "sensiml_server_data": {
+                "piccolo_server_data": {
                     "bind": "/data",
                     "mode": "rw",
                 }
