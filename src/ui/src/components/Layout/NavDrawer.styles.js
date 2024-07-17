@@ -112,7 +112,7 @@ const useStyles = () =>
       alignItems: "center",
     },
     iconButton: {
-      minWidth: 40,
+      minWidth: 30,
     },
     selectedMenuText: {
       color: theme.palette.primary.main,

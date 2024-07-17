@@ -197,8 +197,8 @@ const Header = ({
         isOpen={open}
         isSmallScreen={!smallScreenSize}
         selectedProject={selectedProject}
-        selectedPipeline={selectedPipeline}
         selectedModel={selectedModel}
+        selectedPipeline={selectedPipeline}
         onClose={() => handleDrawerClose()}
       />
       <HeaderMenu

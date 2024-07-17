@@ -159,8 +159,8 @@
     "pipeline-panel-btn-start-tooltip": "Excute pipeline",
     "pipeline-panel-btn-stop-tooltip": "Terminate the pipeline execution",
     "pipeline-panel-btn-export-tooltip": "Export the pipeline as a JSON, python, or IPython Notebook file",
-    "automl-result-table-title": "",
-    "result-table-title": "Models from each training fold",
+    "automl-result-table-title": "Models from each training fold",
+    "result-table-title": "",
     "automl-summary-table-title": "",
     "summary-table-title": "No Summary Provided for Custom Training",
     "tab-label-automl": "AutoML Pipeline",
@@ -258,7 +258,8 @@
     "dialog-warning-models-cancel-btn": "Cancel",
     "dialog-warning-models-confirm-btn": "Optimize",
     "download-cache-btn": "Download",
-    "download-cache-btn-cancel": "Cancel"
+    "download-cache-btn-cancel": "Cancel",
+    "feature-extractor-chart-no-data": "No Data"
   },
   "model-panel": {
     "change-btn": "Change Model",
