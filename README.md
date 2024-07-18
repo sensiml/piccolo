@@ -38,7 +38,7 @@ To try out Piccolo AI on your machine, we recommend using Docker.
 
 1. Install and start docker and docker-compose - https://docs.docker.com/engine/
 
-   * *Note: Windows users will need to use the wsl2 backend. Follow the instructions [here](https://docs.docker.com/desktop/wsl/)*
+   * *Note: Windows users will need to use the wsl2 backend. Follow the instructions [here](https://learn.microsoft.com/en-us/windows/wsl/install)*
    * *Note: If using Docker Desktop go to **Preferences > Resources > Advanced** and set Memory to at least 12GB.*
 
 2. Follow the [post-installation instructions](https://docker-docs.uclv.cu/engine/install/linux-postinstall/) as well to avoid having to run docker commands as sudo user 
