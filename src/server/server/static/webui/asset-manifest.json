@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/webui/static/js/main.87a49765.js",
+    "main.js": "/static/webui/static/js/main.b8a4372a.js",
     "static/js/635.5a8185dc.chunk.js": "/static/webui/static/js/635.5a8185dc.chunk.js",
     "static/js/830.7731f25f.chunk.js": "/static/webui/static/js/830.7731f25f.chunk.js",
     "static/js/47.26b8fe47.chunk.js": "/static/webui/static/js/47.26b8fe47.chunk.js",
@@ -26,15 +26,15 @@
     "static/js/478.e31ccaf4.chunk.js": "/static/webui/static/js/478.e31ccaf4.chunk.js",
     "static/js/577.9805c174.chunk.js": "/static/webui/static/js/577.9805c174.chunk.js",
     "static/js/908.18b4456c.chunk.js": "/static/webui/static/js/908.18b4456c.chunk.js",
-    "static/js/935.907871e3.chunk.js": "/static/webui/static/js/935.907871e3.chunk.js",
+    "static/js/935.3bdfceaf.chunk.js": "/static/webui/static/js/935.3bdfceaf.chunk.js",
     "static/js/790.3ab3b02c.chunk.js": "/static/webui/static/js/790.3ab3b02c.chunk.js",
-    "static/js/823.f55908cd.chunk.js": "/static/webui/static/js/823.f55908cd.chunk.js",
+    "static/js/823.b023979a.chunk.js": "/static/webui/static/js/823.b023979a.chunk.js",
     "static/js/886.caae989c.chunk.js": "/static/webui/static/js/886.caae989c.chunk.js",
     "static/js/746.1ab96227.chunk.js": "/static/webui/static/js/746.1ab96227.chunk.js",
     "static/js/306.7c1c5002.chunk.js": "/static/webui/static/js/306.7c1c5002.chunk.js",
     "static/js/431.1cc81f26.chunk.js": "/static/webui/static/js/431.1cc81f26.chunk.js",
     "static/js/200.62083925.chunk.js": "/static/webui/static/js/200.62083925.chunk.js",
-    "static/js/586.c17d616b.chunk.js": "/static/webui/static/js/586.c17d616b.chunk.js",
+    "static/js/586.f5f810b6.chunk.js": "/static/webui/static/js/586.f5f810b6.chunk.js",
     "static/js/971.7020684e.chunk.js": "/static/webui/static/js/971.7020684e.chunk.js",
     "static/media/windows-x86-logo.png": "/static/webui/static/media/windows-x86-logo.6bedcc80ad350aaaeb4a.png",
     "static/media/android-logo.png": "/static/webui/static/media/android-logo.fc180e4e6a20dad9eeec.png",
@@ -59,7 +59,7 @@
     "static/media/flow_arrow_full_width.svg": "/static/webui/static/media/flow_arrow_full_width.c38fd5596103eeedf83aa3a690a15f50.svg",
     "static/media/flow_arrow_down.svg": "/static/webui/static/media/flow_arrow_down.6bf6a43a105cf81e490bba2072ab8793.svg",
     "static/media/flow_no_arrow_down.svg": "/static/webui/static/media/flow_no_arrow_down.019ba1158073e919d084376168741adc.svg",
-    "main.87a49765.js.map": "/static/webui/static/js/main.87a49765.js.map",
+    "main.b8a4372a.js.map": "/static/webui/static/js/main.b8a4372a.js.map",
     "635.5a8185dc.chunk.js.map": "/static/webui/static/js/635.5a8185dc.chunk.js.map",
     "830.7731f25f.chunk.js.map": "/static/webui/static/js/830.7731f25f.chunk.js.map",
     "47.26b8fe47.chunk.js.map": "/static/webui/static/js/47.26b8fe47.chunk.js.map",
@@ -85,18 +85,18 @@
     "478.e31ccaf4.chunk.js.map": "/static/webui/static/js/478.e31ccaf4.chunk.js.map",
     "577.9805c174.chunk.js.map": "/static/webui/static/js/577.9805c174.chunk.js.map",
     "908.18b4456c.chunk.js.map": "/static/webui/static/js/908.18b4456c.chunk.js.map",
-    "935.907871e3.chunk.js.map": "/static/webui/static/js/935.907871e3.chunk.js.map",
+    "935.3bdfceaf.chunk.js.map": "/static/webui/static/js/935.3bdfceaf.chunk.js.map",
     "790.3ab3b02c.chunk.js.map": "/static/webui/static/js/790.3ab3b02c.chunk.js.map",
-    "823.f55908cd.chunk.js.map": "/static/webui/static/js/823.f55908cd.chunk.js.map",
+    "823.b023979a.chunk.js.map": "/static/webui/static/js/823.b023979a.chunk.js.map",
     "886.caae989c.chunk.js.map": "/static/webui/static/js/886.caae989c.chunk.js.map",
     "746.1ab96227.chunk.js.map": "/static/webui/static/js/746.1ab96227.chunk.js.map",
     "306.7c1c5002.chunk.js.map": "/static/webui/static/js/306.7c1c5002.chunk.js.map",
     "431.1cc81f26.chunk.js.map": "/static/webui/static/js/431.1cc81f26.chunk.js.map",
     "200.62083925.chunk.js.map": "/static/webui/static/js/200.62083925.chunk.js.map",
-    "586.c17d616b.chunk.js.map": "/static/webui/static/js/586.c17d616b.chunk.js.map",
+    "586.f5f810b6.chunk.js.map": "/static/webui/static/js/586.f5f810b6.chunk.js.map",
     "971.7020684e.chunk.js.map": "/static/webui/static/js/971.7020684e.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.87a49765.js"
+    "static/js/main.b8a4372a.js"
   ]
 }
