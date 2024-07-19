@@ -51,6 +51,7 @@ const KnowledgepacksTable = ({
   knowledgepacks,
   selectedProject,
   deleteModel,
+  clearModel,
   loadKnowledgepacks,
   renameModel,
   openRouterRedirect,
@@ -131,6 +132,7 @@ const KnowledgepacksTable = ({
     !data || Number.isNaN(data) || data === "" ? data : `${Number(data).toFixed(2)} %`;
 
   const handleAction = (path, pipelineUUID, modelUUID) => {
+    clearModel();
     routersHistory.push(
       generatePath(path, { projectUUID: selectedProject, pipelineUUID, modelUUID }),
     );
