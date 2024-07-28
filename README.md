@@ -92,6 +92,13 @@ The default username and password is stored in the `src/server/datamanager/fixtu
    password: TinyML4Life
    ```
 
+### Step-by-Step Install Video
+
+To help you get up and running quickly, you may also find our video installation guide useful.  Click on the video below for a complete walkthrough for getting Piccolo AI installed on a Windows 10 / 11 PC:
+
+
+<a href="https://sensiml.wistia.com/medias/lzyxvqlr9k?wvideo=lzyxvqlr9k"><img src="https://embed-ssl.wistia.com/deliveries/37d2cc5387147b921cb1c4b444244f53.jpg?image_crop_resized=900x506&image_play_button=true&image_play_button_size=2x&image_play_button_color=2949E5e0" alt="Piccolo AI Installation Video" width="450" height="253" /></a>
+
 ## Data Studio
 
 The Data Studio is SensiML's standalone Data Capture, Labeling, and Machine Learning Model testing application. It is a companion application to Piccolo AI, but it requires a [subscription](https://sensiml.com/plans/data-studio-edition/) to use with your local Piccolo AI. 
