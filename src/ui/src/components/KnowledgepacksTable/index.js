@@ -18,7 +18,13 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 */
 
 import { connect } from "react-redux";
-import { setSelectedModel, loadModels, renameModel, deleteModel } from "store/models/actions";
+import {
+  setSelectedModel,
+  loadModels,
+  renameModel,
+  deleteModel,
+  clearModel,
+} from "store/models/actions";
 import { loadKnowledgepacks } from "store/knowledgepacks/actions";
 import { setSelectedPipeline } from "store/pipelines/actions";
 import { setActiveView } from "store/common/actions";
@@ -37,6 +43,7 @@ const mapDispatchToProps = {
   loadKnowledgepacks,
   loadModels,
   renameModel,
+  clearModel,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(KnowledgepacksTable);

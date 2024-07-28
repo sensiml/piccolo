@@ -11,6 +11,7 @@ Data Studio
 
    /data-studio/overview
    /data-studio/installation-setup-instructions
+   /data-studio/connecting-to-your-local-piccolo-ai-server
    /data-studio/data-collection-overview
    /data-studio/real-time-data-collection
    /data-studio/flashing-data-collection-firmware
