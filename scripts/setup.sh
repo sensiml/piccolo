@@ -10,6 +10,10 @@ echo "USER EXECUTING SCRIPT IS $USER"
 whoami
 
 
+if [[ "$NO_SETUP" == "1" ]]; then
+  echo "NO_SETUP is set to 1. Exiting script."
+  exit 1  # Exit with a non-zero status to indicate failure
+fi
 
 if [ -z ${HOMEDIR+x} ]; then 
 	echo "HOMEDIR not set, "
