@@ -18,12 +18,6 @@ make clean && make -j && mv _build/libsensiml.a . && cd ../application/ && g++ m
 black==21.9b0
 
 
-## Run the SensiML Server in Docker
+## 
 
- sudo chmod 666 /var/run/docker.sock
-
-# copy the .env to a .env.local file and update the variables
-
-SML_SERVER_DATADIR="<path-to-shared-data-dir>"
-
-docker-compose --env-file=.env.local up
+docker exec -it <container-id> /bin/bash 
