@@ -38,7 +38,7 @@ To try out Piccolo AI on your machine, we recommend using Docker.
 
 1. Install and start docker and docker-compose - https://docs.docker.com/engine/
 
-   * *Note: Windows users will need to use the wsl2 backend. Follow the instructions [here](https://docs.docker.com/desktop/wsl/)*
+   * *Note: Windows users will need to use the wsl2 backend. Follow the instructions [here](https://learn.microsoft.com/en-us/windows/wsl/install)*
    * *Note: If using Docker Desktop go to **Preferences > Resources > Advanced** and set Memory to at least 12GB.*
 
 2. Follow the [post-installation instructions](https://docker-docs.uclv.cu/engine/install/linux-postinstall/) as well to avoid having to run docker commands as sudo user 
@@ -91,6 +91,13 @@ The default username and password is stored in the `src/server/datamanager/fixtu
    username: piccolo@sensiml.com
    password: TinyML4Life
    ```
+
+### Step-by-Step Install Video
+
+To help you get up and running quickly, you may also find our video installation guide useful.  Click on the video below for a complete walkthrough for getting Piccolo AI installed on a Windows 10 / 11 PC:
+
+
+<a href="https://sensiml.wistia.com/medias/lzyxvqlr9k?wvideo=lzyxvqlr9k"><img src="https://embed-ssl.wistia.com/deliveries/37d2cc5387147b921cb1c4b444244f53.jpg?image_crop_resized=900x506&image_play_button=true&image_play_button_size=2x&image_play_button_color=2949E5e0" alt="Piccolo AI Installation Video" width="450" height="253" /></a>
 
 ## Data Studio
 
