@@ -192,16 +192,7 @@ def testprojects():
         },
     )
 
-    project_free = Project.objects.create(
-        team_id=5,
-        name="FreeProject",
-        capture_sample_schema={
-            "Column1": {"type": "float", "index": 0},
-            "Column2": {"type": "float", "index": 1},
-        },
-    )
     projects = {
-        "free": project_free,
         "dev": project_dev,
     }
 

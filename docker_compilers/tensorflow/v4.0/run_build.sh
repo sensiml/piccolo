@@ -39,7 +39,7 @@ if [ -d /codegen_files ]; then
         check_return_code
         chown -R $user:$user /codegen_files
 else
-        cp /codegen_files/build_tensorflow.sh /$build_script_name
+        cp /data/datamanager/codegen/$kp_id/build_tensorflow.sh /$build_script_name
         dos2unix /$build_script_name
         chmod +x /$build_script_name
         cd /
