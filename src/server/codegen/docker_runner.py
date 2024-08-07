@@ -116,13 +116,8 @@ class DockerRunnerLocal(DockerBase):
             }
         )
 
-        if settings.INSIDE_LOCAL_DOCKER:  # self.is_inside_docker():
-            bind = {
-                "piccolo_server_data": {
-                    "bind": "/data",
-                    "mode": "rw",
-                }
-            }
+        if settings.INSIDE_LOCAL_DOCKER:
+            bind = [f"{settings.LOCAL_DOCKER_SERVER_DATA_VOLUMNE_NAME}:/data"]
         else:
             bind = {
                 self.root_dir: {
@@ -169,7 +164,6 @@ class DockerRunnerLocal(DockerBase):
             image=docker_name,
             entrypoint="/bin/bash",
             command="/run_build.sh",
-            #volumes=[self.mount_directory],
             host_config=container_host_cfg,
             environment=env_list,
         )
