@@ -23,6 +23,7 @@ import json
 import os
 from abc import abstractmethod
 from uuid import uuid4
+import logging
 
 import numpy as np
 
@@ -34,6 +35,10 @@ from library.classifiers.classifier import Classifier
 from library.models import FunctionCost
 from numpy import argmax, array, dtype
 from pandas import DataFrame
+
+from logger.log_handler import LogHandler
+
+logger = LogHandler(logging.getLogger(__name__))
 
 
 class TensorFlowMicro(Classifier):
@@ -110,7 +115,14 @@ class TensorFlowMicro(Classifier):
         try:
             result = p.read()
             model_profile = json.loads(result)["message"]
-        except:
+        except Exception as e:
+            logger.error(
+                {
+                    "message": str(e),
+                    "log_type": "classifier",
+                    "data": result,
+                }
+            )
             return {}
         finally:
             os.remove(tflite_dump)

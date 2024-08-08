@@ -48,6 +48,7 @@ class LogHandler:
             "pipeline_utils",
             "manager",
             "autoscaling",
+            "classifier",
         ]
 
     @property
