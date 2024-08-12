@@ -63,6 +63,62 @@ logger = LogHandler(logging.getLogger(__name__))
 class UnlockSandboxTask(Task):
     abstract = True
 
+    def on_failure(self, exc, task_id, args, kwargs, einfo):
+        try:
+            pipeline_execution = PipelineExecution.objects.get(task_id=task_id)
+            pipeline_execution.status = PipelineExecution.ExecutionStatusEnum.FAILED
+            pipeline_execution.save(update_fields=["status"])
+        except Exception as e:
+            project_id = args[0][1]
+            sandbox_id = args[0][2]
+            logger.errorlog(
+                {
+                    "message": "Failed to set Pipeline Execution status to failed",
+                    "error": str(e),
+                    "log_type": "PID",
+                    "sandbox_uuid": sandbox_id,
+                    "task_id": task_id,
+                    "project_uuid": project_id,
+                    "status": "Failed",
+                }
+            )
+
+    def after_return(self, status, retval, task_id, *args, **kwargs):
+        project_id = args[0][1]
+        sandbox_id = args[0][2]
+
+        try:
+            pipeline_queue.set_pipeline_to_not_active(project_id, sandbox_id)
+        except Exception as e:
+            logger.errorlog(
+                {
+                    "message": "Error Setting pipeline to not active",
+                    "error": str(e),
+                    "log_type": "PID",
+                    "sandbox_uuid": sandbox_id,
+                    "task_id": task_id,
+                    "project_uuid": project_id,
+                    "status": status,
+                }
+            )
+
+        pipeline_queue.remove_sandbox_from_queue(project_id, sandbox_id)
+
+        logger.userlog(
+            {
+                "message": "Unlocking Sandbox Thread",
+                "log_type": "PID",
+                "sandbox_uuid": sandbox_id,
+                "task_id": task_id,
+                "project_uuid": project_id,
+                "status": status,
+            }
+        )
+
+
+class UnlockAutosegmentationTask(Task):
+    abstract = True
+
     def after_return(self, status, retval, task_id, *args, **kwargs):
         project_id = args[0][1]
         sandbox_id = args[0][2]
@@ -193,7 +249,43 @@ def pipeline_async(self, user_id, project_id, sandbox_id, err_queue=deque()):
             PipelineExecution.ExecutionTypeEnum.PIPELINE,
             err_queue=err_queue,
         )
+    except:
+        _, _, exc_traceback = sys.exc_info()
+        s_traceback = "\n".join(traceback.format_tb(exc_traceback))
+        logger.errorlog(
+            {
+                "message": "Pipeline Initialization Failed",
+                "data": {"error": str(e), "traceback": s_traceback},
+                "log_type": "PID",
+                "sandbox_uuid": sandbox_id,
+                "task_id": self.request.id,
+                "project_uuid": project_id,
+            }
+        )
+        logger.slack(
+            {
+                "message": "Pipeline Initialization Failed",
+                "data": {"error": str(e), "traceback": s_traceback},
+                "log_type": "PID",
+                "sandbox_uuid": sandbox_id,
+                "task_id": self.request.id,
+                "project_uuid": project_id,
+            }
+        )
+        usage_log(
+            PJID=project,
+            operation="pipeline",
+            team=project.team,
+            PID=sandbox,
+            PROC=self.request.id,
+            runtime=time.time() - start,
+            detail={"status": "failed", "error": str(e), "traceback": s_traceback},
+            team_member=user.teammember,
+        )
 
+        raise e
+
+    try:
         tempdata, extra = engine.execute(sandbox.pipeline)
     except Exception as e:
         _, _, exc_traceback = sys.exc_info()
@@ -668,7 +760,9 @@ def auto_async(
     return engine.execution_summary
 
 
-@shared_task(bind=True, base=UnlockSandboxTask, ignore_result=False, track_started=True)
+@shared_task(
+    bind=True, base=UnlockAutosegmentationTask, ignore_result=False, track_started=True
+)
 def autosegment_async(
     self, user_id, project_id, sandbox_id, params, run_parallel, err_queue=deque()
 ):
@@ -695,8 +789,22 @@ def autosegment_async(
         engine = AutoSegmentationEngine(
             self.request.id, user, project_id, sandbox, err_queue=err_queue
         )
+    except Exception as e:
+        _, _, exc_traceback = sys.exc_info()
+        s_traceback = "\n".join(traceback.format_tb(exc_traceback))
+        logger.errorlog(
+            {
+                "message": "AudoSegment Failed",
+                "data": {"error": str(e), "traceback": s_traceback},
+                "log_type": "PID",
+                "sandbox_uuid": sandbox_id,
+                "task_id": self.request.id,
+                "project_uuid": project_id,
+            }
+        )
 
-        tempdata, extra = engine.optimize(sandbox.pipeline, params)
+    try:
+        engine.optimize(sandbox.pipeline, params)
     except Exception as e:
         _, _, exc_traceback = sys.exc_info()
         s_traceback = "\n".join(traceback.format_tb(exc_traceback))
