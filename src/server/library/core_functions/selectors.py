@@ -1213,7 +1213,12 @@ def correlation_select(
     df_out = DataFrame()
     unselected_features = []
 
-    i_cols = [col for col in input_data.columns if col not in passthrough_columns]
+    numeric_columns = input_data.select_dtypes(include="number").columns
+    i_cols = [
+        col
+        for col in input_data.columns
+        if (col not in passthrough_columns and col in numeric_columns)
+    ]
     df_pre = input_data[i_cols]
 
     # Scale
@@ -1391,7 +1396,13 @@ def correlation_select_remove_most_corr_first(
     if isinstance(feature_table, DataFrame) and median_sample_size:
         get_costs(feature_table, median_sample_size)
 
-    i_cols = [col for col in input_data.columns if col not in passthrough_columns]
+    numeric_columns = input_data.select_dtypes(include="number").columns
+    i_cols = [
+        col
+        for col in input_data.columns
+        if (col not in passthrough_columns and col in numeric_columns)
+    ]
+
     df_pre = input_data[i_cols]
     # create correlation matrix
     cm_df = DataFrame(abs(corrcoef(df_pre.T)))
