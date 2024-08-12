@@ -38,6 +38,8 @@ class TestcorrSelectMostCorr:
             os.path.join(os.path.dirname(__file__), "data", "example_features.csv")
         )
 
+        self.data["IgnoreThis"] = "twenty"
+
         odf, f_reject = correlation_select_remove_most_corr_first(
             self.data, 0.95, ["0", "1", "130"]
         )

@@ -414,7 +414,22 @@ def feature_selection_driver(
         args["input_data"] = selected_data
         args["feature_table"] = feature_table
 
-        selected_data, unselected_features = selector_call(**args)
+        try:
+            selected_data, unselected_features = selector_call(**args)
+        except Exception as e:
+            _, _, exc_traceback = sys.exc_info()
+            s_traceback = "\n".join(traceback.format_tb(exc_traceback))
+            logger.errorlog(
+                {
+                    "message": "KnowledgePack Generation Failed",
+                    "data": {"error": str(e), "traceback": s_traceback},
+                    "log_type": "PID",
+                    "UUID": pipeline_id,
+                    "task_id": task_id,
+                    "project_uuid": project_id,
+                }
+            )
+            unselected_features = []
 
         eliminated = {}
         for feature in unselected_features:
