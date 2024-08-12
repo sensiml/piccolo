@@ -701,29 +701,6 @@ class TestPipelineUtilityFunctions:
         expectedPath = "Test1"
         expectedData = "Test Data"
         expectedExtension = ".test_extension"
-        mock_os.return_value = expectedPath
-        mock_datastore.return_value = ""
-        mock_utils().ensure_path_exists.return_value = True
-        project = Project.objects.create(
-            name="APITestProject",
-            team=Team.objects.get(name=TEAM_NAME),
-        )
-        ret_feature_file = save_featurefile(project, expectedData, expectedExtension)
-        mock_os.assert_called_with(settings.SERVER_FEATURE_FILE_ROOT, project.uuid)
-        mock_datastore.assert_called_with(
-            expectedData, "{}{}".format(ret_feature_file.uuid, expectedExtension)
-        )
-        assert ret_feature_file.name == str(ret_feature_file.uuid)
-        assert ret_feature_file.project.uuid == project.uuid
-        assert ret_feature_file.path == expectedPath
-
-    @patch("datamanager.utils")
-    @patch("os.path.join")
-    @patch("datamanager.datastore.LocalDataStoreService.save_data")
-    def test_save_featurefile(self, mock_datastore, mock_os, mock_utils):
-        expectedPath = "Test1"
-        expectedData = "Test Data"
-        expectedExtension = ".test_extension"
         expectedFmt = ".test_extension"
         mock_os.return_value = expectedPath
         mock_datastore.return_value = ""
@@ -732,7 +709,7 @@ class TestPipelineUtilityFunctions:
             name="APITestProject",
             team=Team.objects.get(name=TEAM_NAME),
         )
-        ret_feature_file = save_featurefile(project, expectedData, expectedExtension)
+        ret_feature_file = save_featurefile(project, expectedData, expectedFmt)
         mock_os.assert_called_with(settings.SERVER_FEATURE_FILE_ROOT, project.uuid)
         mock_datastore.assert_called_with(
             expectedData,
