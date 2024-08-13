@@ -79,7 +79,7 @@ class DataStoreProvider(ObjectFactory):
 class LocalDataStoreService:
     def __init__(self, bucket: str = "", folder: str = "") -> None:
 
-        print(f"DATASTORE SERVICE intialize with b:{bucket} f:{folder}")
+        print(f"DATASTORE SERVICE INITIALIZED with b:{bucket} f:{folder}")
         self._bucket = bucket  # base dir
         self._folder = folder
 
@@ -212,7 +212,7 @@ class LocalDataStoreService:
 
 
 class LocalDataStoreBuilder(object):
-    def __call__(self, folder: str = "", bucket: str = "", **_ignored):
+    def __call__(self, bucket: str = "", folder: str = "", **_ignored):
         return LocalDataStoreService(bucket=bucket, folder=folder)
 
 

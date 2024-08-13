@@ -1291,9 +1291,9 @@ def compute_confusion_matrix(
 def get_featurefile_folder_path(project):
     feature_file_root = get_datastore_basedir(settings.SERVER_FEATURE_FILE_ROOT)
     if settings.USE_S3_BUCKET:
-        return os.path.join(feature_file_root, project.uuid)
+        return os.path.join(feature_file_root, str(project.uuid))
     else:
-        folder_path = os.path.join(feature_file_root, project.uuid)
+        folder_path = os.path.join(feature_file_root, str(project.uuid))
         utils.ensure_path_exists(feature_file_root)
         utils.ensure_path_exists(folder_path)
         return folder_path

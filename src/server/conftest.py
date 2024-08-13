@@ -30,7 +30,8 @@ from django.conf import settings
 
 @pytest.fixture(autouse=True)
 def use_dummy_cache_dir(settings):
-    FILE_DIR = os.path.join("/home/sml-app/test_cache")
+    FILE_DIR = os.path.join(f"/tmp/test_cache_{str(random.randint(0,100000))}")
+    print(f"SETTING FILE DIR TO {FILE_DIR}")
     SERVER_BASE_DIRECTORY = FILE_DIR
 
     settings.MAX_BATCH_SIZE = 2
@@ -68,6 +69,10 @@ def use_dummy_cache_dir(settings):
                 os.mkdir(folder)
             except FileExistsError:
                 continue
+
+    yield FILE_DIR
+
+    shutil.rmtree(FILE_DIR)
 
 
 @pytest.fixture
