@@ -165,5 +165,5 @@ class TestLogHandler:
             x = lh._encode_exception(message)
             assert x["data"]["error_message"] == "Test1"
             assert x["data"]["traceback"].endswith(
-                'server/logger/test/test_log_handler.py", line 135, in test_exception_log\n    raise ValueError("Test1")\n'
+                'line 154, in test_exception_log\n    raise ValueError("Test1")\n'
             )

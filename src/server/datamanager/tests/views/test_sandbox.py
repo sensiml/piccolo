@@ -52,18 +52,8 @@ def projects():
         },
     )
 
-    project_free = Project.objects.create(
-        team_id=5,
-        name="FreeProject",
-        capture_sample_schema={
-            "Column1": {"type": "float"},
-            "Column2": {"type": "float"},
-        },
-    )
+    yield {"dev": project_dev}
 
-    yield {"free": project_free, "dev": project_dev}
-
-    project_free.delete()
     project_dev.delete()
     project_dev_test.delete()
 
@@ -326,15 +316,9 @@ def test_generate_ipynb_code(client, test_projects_with_pipelines):
 
 def test_sandbox_async_cpu_validation(projects):
     client = APIClient()
-    client.login(username="unittest@starter.com", password="TinyML4Life")
-    project = Project.objects.create(
-        team_id=2,
-        name="DevProject",
-        capture_sample_schema={
-            "Column1": {"type": "float"},
-            "Column2": {"type": "float"},
-        },
-    )
+    client.login(username="unittest@piccolo.com", password="TinyML4Life")
+
+    project = projects["dev"]
     sandbox = Sandbox.objects.create(
         project=project,
         name="TestPipeline",
@@ -351,7 +335,10 @@ def test_sandbox_async_cpu_validation(projects):
         format="json",
     )
 
-    assert response.status_code == status.HTTP_405_METHOD_NOT_ALLOWED
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+    sandbox.active = False
+    sandbox.save()
 
     response = client.post(
         reverse(
