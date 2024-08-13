@@ -20,6 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import logging
 import uuid
 from unittest.mock import patch
+import os
 
 import engine.base.pipeline_utils as pipeline_utils
 import pytest
@@ -695,23 +696,24 @@ class TestPipelineUtilityFunctions:
         assert result_3 == expected_result_3
 
     @patch("datamanager.utils")
-    @patch("os.path.join")
     @patch("datamanager.datastore.LocalDataStoreService.save_data")
-    def test_save_featurefile(self, mock_datastore, mock_os, mock_utils):
-        expectedPath = "Test1"
+    def test_save_featurefile(self, mock_datastore_save_data, mock_utils):
+
         expectedData = "Test Data"
         expectedExtension = ".test_extension"
         expectedFmt = ".test_extension"
-        mock_os.return_value = expectedPath
-        mock_datastore.return_value = ""
+        mock_datastore_save_data.return_value = ""
         mock_utils().ensure_path_exists.return_value = True
         project = Project.objects.create(
             name="APITestProject",
             team=Team.objects.get(name=TEAM_NAME),
         )
+        expectedPath = os.path.join(
+            settings.SERVER_FEATURE_FILE_ROOT, str(project.uuid)
+        )
         ret_feature_file = save_featurefile(project, expectedData, expectedFmt)
-        mock_os.assert_called_with(settings.SERVER_FEATURE_FILE_ROOT, project.uuid)
-        mock_datastore.assert_called_with(
+
+        mock_datastore_save_data.assert_called_with(
             expectedData,
             "{}{}".format(ret_feature_file.uuid, expectedExtension),
             fmt=expectedFmt,
