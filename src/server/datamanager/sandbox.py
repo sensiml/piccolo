@@ -385,6 +385,11 @@ class SandboxAsyncMixin(object):
 
         sandbox = self.get_object()
 
+        if sandbox.active:
+            raise PipelineException(
+                "Pipeline currently executing. Use stop_pipeline() to terminate."
+            )
+
         pipeline_queue.set_start_sandbox(project_uuid, sandbox_uuid)
 
         sandbox.cpu_clock_time = 0
