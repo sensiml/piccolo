@@ -17,7 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -61,6 +61,10 @@ const FormAutoMLFeaturesFormAdd = ({
 
     return res;
   };
+
+  const queryColumnOptions = useMemo(() => {
+    return queryColumns.map((column) => ({ name: column, value: column }));
+  }, [queryColumns]);
 
   const getInputContractParameters = useCallback(
     (el) => {
@@ -166,7 +170,7 @@ const FormAutoMLFeaturesFormAdd = ({
             name="queryColumns"
             id="queryColumnsId"
             label="Default Columns"
-            options={queryColumns.map((column) => ({ name: column, value: column }))}
+            options={queryColumnOptions}
             defaultValue={queryColumns}
             onChange={handeChangeDefaultColumns}
           />
