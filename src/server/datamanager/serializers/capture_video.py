@@ -28,7 +28,7 @@ from datamanager import utils
 from rest_framework.fields import CreateOnlyDefault
 from django.conf import settings
 from datamanager.datastore import get_datastore
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import NotAcceptable, ValidationError
 from datamanager.fields import CurrentCaptureDefault
 from datamanager.models import CaptureVideo
 from rest_framework.reverse import reverse
@@ -129,15 +129,28 @@ class CaptureVideoSerializer(serializers.ModelSerializer):
             folder=f"{settings.CAPTURE_VIDEO_S3_ROOT}/{project_uuid}"
         )
 
-        # TODO: DATASTORE fix this so its in the same call
-        if datastore.is_remote:
-            datastore.save(file_key_name, uploaded_file.file.name, delete=True)
+        if not uploaded_file:
+            try:
+                upload_url = datastore.create_url(
+                    key=file_key_name,
+                    content_type=f"video/{ext}",
+                    content_length=capture_video.file_size,
+                )
+                capture_video.save()
+                capture_video.upload_url = upload_url
+                return capture_video
+            except NotImplementedError as error:
+                raise NotAcceptable(error)
         else:
-            utils.ensure_path_exists(settings.SERVER_CAPTURE_VIDEO_ROOT)
-            folder = capture_video.get_folder(project_uuid)
-            if not os.path.isdir(folder):
-                os.mkdir(folder)
-            move(uploaded_file.file.name, os.path.join(folder, file_key_name))
+            # TODO: DATASTORE fix this so its in the same call
+            if datastore.is_remote:
+                datastore.save(file_key_name, uploaded_file.file.name, delete=True)
+            else:
+                utils.ensure_path_exists(settings.SERVER_CAPTURE_VIDEO_ROOT)
+                folder = capture_video.get_folder(project_uuid)
+                if not os.path.isdir(folder):
+                    os.mkdir(folder)
+                move(uploaded_file.file.name, os.path.join(folder, file_key_name))
 
         capture_video.save()
         return capture_video
