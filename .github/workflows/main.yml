@@ -134,7 +134,7 @@ jobs:
           pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
           mkdir /${{github.workspace}}/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
-          cd srv/server
+          cd src/server
           py.test --durations=0 --junitxml=report_out.xml --html=unittest_report.html --cov=./ --cov-report html:cov_html src/server/datamanager/tests -n 4
 
       - uses: actions/upload-artifact@v3
