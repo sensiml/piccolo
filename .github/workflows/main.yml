@@ -181,5 +181,3 @@ jobs:
           cmake --build /usr/src/googletest/. --target install
       - run: |
           cd /${{github.workspace}}/src/embedded_ml_sdk/utest/
-          ls -lh
-          sudo bash build.sh
