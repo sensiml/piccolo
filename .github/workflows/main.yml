@@ -23,12 +23,12 @@ jobs:
       # black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
       # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true }}
       ui: "false"
-      server: "true"
+      server: "false"
       python_client: "true"
       func_tests: "false"
       black_formating: "false"
-      server_unit_tests: "true"
-      embedded_ml_sdk: "false"
+      server_unit_tests: "false"
+      embedded_ml_sdk: "true"
     steps:
       - uses: actions/checkout@v4
       - name: Check diff
@@ -180,6 +180,6 @@ jobs:
           cmake /usr/src/googletest/.
           cmake --build /usr/src/googletest/. --target install
       - run: |
-          cd src/embedded_ml_sdk/utest/
+          cd /${{github.workspace}}/src/embedded_ml_sdk/utest/
           ls -lh
           sudo bash build.sh
