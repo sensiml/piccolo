@@ -126,13 +126,13 @@ jobs:
           lfs: true
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.9"
       - run: |
           export DJANGO_ENV=test
           export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
           apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
-          pip install -U numpy==1.11.0
+          pip freeze | grep numpy
           mkdir /${{github.workspace}}/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
           cd /${{github.workspace}}/src/embedded_ml_sdk/pywrapper
