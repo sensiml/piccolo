@@ -1,0 +1,181 @@
+name: Main Check
+run-name: ${{ github.actor }} made changes
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+permissions:
+  checks: write
+env:
+  HOMEDIR: /${{github.workspace}}/src
+  CLASSIFIER_LIBS: /${{github.workspace}}/src/lib/
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      # ui: ${{ steps.filter.outputs.ui }}
+      # server: ${{ steps.filter.outputs.server }}
+      # python_client: ${{ steps.filter.outputs.python_client }}
+      # func_tests: ${{ steps.filter.outputs.func_tests }}
+      # black_formating: ${{ steps.filter.outputs.black_formating }}
+      # embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
+      # black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
+      # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true }}
+      ui: "false"
+      server: "true"
+      python_client: "true"
+      func_tests: "false"
+      black_formating: "false"
+      server_unit_tests: "true"
+      embedded_ml_sdk: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check diff
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          base: "main"
+          filters: |
+            ui:
+              - 'src/ui/**'
+            server:
+              - 'src/server/**'
+            python_client:
+              - 'src/python_client/**'
+            func_tests:
+              - 'func_tests/**'
+            embedded_ml_sdk:
+              - 'src/embedded_ml_sdk/**'
+  check-ui:
+    name: Check Formatting UI / UI Unit tests running
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.ui == 'true' }}
+
+    runs-on: ubuntu-latest
+    container:
+      image: node:16-alpine3.15
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install node packages
+        run: yarn --cwd src/ui install
+      - name: Run Eslint
+        run: yarn --cwd src/ui eslint
+      - name: Run Unit Tests
+        run: yarn --cwd src/ui test
+
+  check-black-formating:
+    name: Check Formatting Black
+    needs: detect-changes
+    if: ${{ needs.detect-changes.outputs.black_formating == 'true' }}
+
+    runs-on: ubuntu-latest
+    container:
+      image: sensiml/base
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install black==24.4.2
+
+      - name: Check Formatting Server
+        if: ${{ needs.detect-changes.outputs.server == 'true' }}
+        run: python -m black --check src/server/
+
+      - name: Check Formatting Python Client
+        if: ${{ needs.detect-changes.outputs.python_client == 'true' }}
+        run: python -m black --check src/python_client
+
+      - name: Check Formatting Function Test
+        if: ${{ needs.detect-changes.outputs.func_tests == 'true' }}
+        run: python -m black --check func_tests/
+
+  run-server-unit-tests:
+    name: "Run Server Unit Test"
+    needs:
+      - detect-changes
+    if: ${{ needs.detect-changes.outputs.server_unit_tests == 'true' }}
+
+    runs-on: ubuntu-latest
+    # container:
+    #   image: sensiml/base
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_DB: piccolodb
+          POSTGRES_USER: piccoloadmin
+          POSTGRES_PASSWORD: piccoloadmin3
+        ports:
+          - 5432:5432
+      redis:
+        # Docker Hub image
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps port 6379 on service container to the host
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - run: |
+          export DJANGO_ENV=test
+          export DJANGO_ENV_PATH=src/server/config/env/
+          apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
+          pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
+          mkdir /${{github.workspace}}/src/lib
+          /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
+          py.test --durations=0 --junitxml=report_out.xml --html=unittest_report.html --cov=./ --cov-report html:cov_html src/server/datamanager/tests -n 4
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: junit-upload-report
+          path: report_out.xml
+      - name: Surface failing tests
+        if: always()
+        uses: pmeier/pytest-results-action@main
+        with:
+          # A list of JUnit XML files, directories containing the former, and wildcard
+          # patterns to process.
+          # See @actions/glob for supported patterns.
+          path: report_out.xml
+
+          # (Optional) Add a summary of the results at the top of the report
+          summary: true
+
+          # (Optional) Select which results should be included in the report.
+          # Follows the same syntax as `pytest -r`
+          display-options: fEX
+
+          # (Optional) Fail the workflow if no JUnit XML was found.
+          fail-on-empty: true
+
+          # (Optional) Title of the test results section in the workflow summary
+          title: Test results
+  run-embedded-ml-unit-tests:
+    name: "Run Embedded ML Unit Test"
+    needs:
+      - detect-changes
+    if: ${{ needs.detect-changes.outputs.embedded_ml_sdk == 'true' }}
+
+    runs-on: ubuntu-latest
+    container:
+      image: sensiml/base
+    steps:
+      - run: |
+          yes Y | apt install libgtest-dev build-essential cmake
+          cmake /usr/src/googletest/.
+          cmake --build /usr/src/googletest/. --target install
+      - run: |
+          cd src/embedded_ml_sdk/utest/
+          ls -lh
+          sudo bash build.sh
