@@ -129,7 +129,7 @@ jobs:
           python-version: "3.10"
       - run: |
           export DJANGO_ENV=test
-          export DJANGO_ENV_PATH=src/server/config/env/
+          export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
           apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
           mkdir /${{github.workspace}}/src/lib
