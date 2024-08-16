@@ -182,4 +182,5 @@ jobs:
           cmake --build . --target install
       - run: |
           cd src/embedded_ml_sdk/utest
-          sudo bash build.sh
+          bash build.sh
+          ./kbgtest --gtest_output="xml:test_results.xml"
