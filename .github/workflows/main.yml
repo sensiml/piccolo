@@ -181,5 +181,5 @@ jobs:
           cd /usr/src/googletest && cmake .
           cmake --build . --target install
       - run: |
-          cd /${{ GITHUB_WORKSPACE }}/src/embedded_ml_sdk/utest
+          cd src/embedded_ml_sdk/utest
           sudo bash build.sh
