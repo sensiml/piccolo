@@ -181,10 +181,12 @@ jobs:
           # cmake --build . --target install
           cd /usr/src/
           echo "First"
+          pwd
           ls
       - run: |
           # cd /${{github.workspace}}/src/embedded_ml_sdk/utest
           echo "Second"
+          pwd
           ls
           echo "CD"
           cd src/
