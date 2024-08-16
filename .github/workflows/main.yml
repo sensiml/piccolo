@@ -177,19 +177,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          # yes Y | apt install libgtest-dev build-essential cmake
-          # cd /usr/src/googletest && cmake .
-          # cmake --build . --target install
-          cd /usr/src/
-          echo "First"
-          pwd
-          ls
+          yes Y | apt install libgtest-dev build-essential cmake
+          cd /usr/src/googletest && cmake .
+          cmake --build . --target install
       - run: |
-          # cd /${{github.workspace}}/src/embedded_ml_sdk/utest
-          echo "Second"
-          pwd
-          ls
-          echo "CD"
-          cd src/
-          ls
-          # sudo bash build.sh
+          cd /${{github.workspace}}/src/embedded_ml_sdk/utest
+          sudo bash build.sh
