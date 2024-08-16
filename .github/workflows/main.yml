@@ -18,7 +18,7 @@ jobs:
       server: ${{ steps.filter.outputs.server }}
       python_client: ${{ steps.filter.outputs.python_client }}
       func_tests: ${{ steps.filter.outputs.func_tests }}
-      embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
+      # embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
       black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
       server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
       # ui: "false"
@@ -27,7 +27,7 @@ jobs:
       # func_tests: "false"
       # black_formating: "false"
       # server_unit_tests: "false"
-      # embedded_ml_sdk: "true"
+      embedded_ml_sdk: "true"
     steps:
       - uses: actions/checkout@v4
       - name: Check diff
@@ -131,7 +131,6 @@ jobs:
           export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
           apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
-          pip freeze | grep numpy
           mkdir /${{github.workspace}}/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
           cd /${{github.workspace}}/src/embedded_ml_sdk/pywrapper
@@ -172,7 +171,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:latest
+      image: sensiml/base
     steps:
       - uses: actions/checkout@v4
       - run: |
