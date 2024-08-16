@@ -183,4 +183,5 @@ jobs:
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
+          ls
           ./kbgtest --gtest_output="xml:test_results.xml"
