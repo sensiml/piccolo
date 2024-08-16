@@ -175,6 +175,7 @@ jobs:
     container:
       image: sensiml/base
     steps:
+      - uses: actions/checkout@v4
       - run: |
           # yes Y | apt install libgtest-dev build-essential cmake
           # cd /usr/src/googletest && cmake .
@@ -190,4 +191,5 @@ jobs:
           ls
           echo "CD"
           cd src/
+          ls
           # sudo bash build.sh
