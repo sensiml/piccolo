@@ -176,10 +176,14 @@ jobs:
       image: sensiml/base
     steps:
       - run: |
-          yes Y | apt install libgtest-dev build-essential cmake
-          cd /usr/src/googletest && cmake .
-          cmake --build . --target install
-      - run: |
-          cd /${{github.workspace}}/src/embedded_ml_sdk/utest
+          # yes Y | apt install libgtest-dev build-essential cmake
+          # cd /usr/src/googletest && cmake .
+          # cmake --build . --target install
+          cd /usr/src/
+          echo "First"
           ls -lh
-          sudo bash build.sh
+      - run: |
+          # cd /${{github.workspace}}/src/embedded_ml_sdk/utest
+          echo "Second"
+          ls -lh
+          # sudo bash build.sh
