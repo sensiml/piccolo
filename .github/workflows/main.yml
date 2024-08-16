@@ -179,9 +179,8 @@ jobs:
       - run: |
           yes Y | apt install libgtest-dev build-essential cmake
           cd /usr/src/googletest && cmake .
-          cmake --build . --target install
+          cmake --build . --target src/embedded_ml_sdk/utest
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
-          ls
           # ./out/kbgtest --gtest_output="xml:test_results.xml"
