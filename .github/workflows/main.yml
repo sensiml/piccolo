@@ -172,11 +172,11 @@ jobs:
     if: ${{ needs.detect-changes.outputs.embedded_ml_sdk == 'true' }}
 
     runs-on: ubuntu-latest
-    # container:
-    #   image: sensiml/base
+    container:
+      image: sensiml/base
     steps:
       - run: |
-          apt-get install -y libgtest-dev build-essential cmake
+          yes Y | apt install libgtest-dev build-essential cmake
           cmake /usr/src/googletest/.
           cmake --build /usr/src/googletest/. --target install
       # - run: |
