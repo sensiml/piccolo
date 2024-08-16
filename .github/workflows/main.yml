@@ -181,9 +181,9 @@ jobs:
           # cmake --build . --target install
           cd /usr/src/
           echo "First"
-          ls -lh
+          ls ${{github.workspace}}
       - run: |
           # cd /${{github.workspace}}/src/embedded_ml_sdk/utest
           echo "Second"
-          ls -lh
+          ls ${{github.workspace}}
           # sudo bash build.sh
