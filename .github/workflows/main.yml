@@ -176,7 +176,7 @@ jobs:
     #   image: sensiml/base
     steps:
       - run: |
-          yes Y | apt-get update && apt-get install libgtest-dev build-essential cmake
+          apt-get install -y libgtest-dev build-essential cmake
           cmake /usr/src/googletest/.
           cmake --build /usr/src/googletest/. --target install
       # - run: |
