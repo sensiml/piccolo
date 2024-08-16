@@ -176,7 +176,13 @@ jobs:
     #   image: sensiml/base
     steps:
       - run: |
+          touch /tmp/apt_lock
+          while [ -f /tmp/apt_lock ]; do
+            sleep 1
+          done
+          touch /tmp/apt_lock
           yes Y | apt install libgtest-dev build-essential cmake
+          rm /tmp/apt_lock
           cmake /usr/src/googletest/.
           cmake --build /usr/src/googletest/. --target install
       # - run: |
