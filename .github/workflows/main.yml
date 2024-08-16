@@ -172,6 +172,8 @@ jobs:
     if: ${{ needs.detect-changes.outputs.embedded_ml_sdk == 'true' }}
 
     runs-on: ubuntu-latest
+    container:
+      image: ubuntu:latest
     steps:
       - uses: actions/checkout@v4
       - run: |
@@ -189,3 +191,25 @@ jobs:
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
+
+      - name: Surface failing embeded tests
+        if: always()
+        uses: pmeier/pytest-results-action@main
+        with:
+          # A list of JUnit XML files, directories containing the former, and wildcard
+          # patterns to process.
+          # See @actions/glob for supported patterns.
+          path: src/embedded_ml_sdk/utest/out/test_results.xml
+
+          # (Optional) Add a summary of the results at the top of the report
+          summary: true
+
+          # (Optional) Select which results should be included in the report.
+          # Follows the same syntax as `pytest -r`
+          display-options: fEX
+
+          # (Optional) Fail the workflow if no JUnit XML was found.
+          fail-on-empty: true
+
+          # (Optional) Title of the test results section in the workflow summary
+          title: Embedded ML Unit Test results
