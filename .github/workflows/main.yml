@@ -172,8 +172,6 @@ jobs:
     if: ${{ needs.detect-changes.outputs.embedded_ml_sdk == 'true' }}
 
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:latest
     steps:
       - uses: actions/checkout@v4
       - run: |
@@ -191,4 +189,3 @@ jobs:
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
-          # ./out/kbgtest --gtest_output="xml:test_results.xml"
