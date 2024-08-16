@@ -173,13 +173,21 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: sensiml/base
+      image: ubuntu:latest
     steps:
       - uses: actions/checkout@v4
       - run: |
-          yes Y | apt install libgtest-dev build-essential cmake
-          cd /usr/src/googletest && cmake .
-          cmake --build . --target src/embedded_ml_sdk/utest
+          # yes Y | apt install libgtest-dev build-essential cmake
+          # cd /usr/src/googletest && cmake .
+          # cmake --build . --target src/embedded_ml_sdk/utest
+          apt-get update -qq
+          apt-get install -y build-essential unzip libgtest-dev dos2unix jq cmake zip
+          apt-get clean 
+          rm -rf /var/lib/apt/lists/*
+          mkdir /build
+          cd /usr/src/googletest 
+          cmake . &&
+          cmake --build . --target install
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
