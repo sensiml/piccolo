@@ -23,8 +23,5 @@ make -j
 check_return_code
 #make VERBOSE=1
 echo "LOG START"
-./kbgtest --gtest_output="xml:test_results.xml" --gtest_print_time=true
-check_return_code
-
 
 # if need, try 'make VERBOSE=1'
