@@ -1018,12 +1018,12 @@ class KnowledgePack(VisualizeMixin):
         self._model_index = init_dict.get("model_index", None)
         self._execution_time = init_dict.get("execution_time", None)
 
-        self._class_map = init_dict["class_map"]
-        self._pipeline_summary = init_dict["pipeline_summary"]
-        self._query_summary = init_dict["query_summary"]
-        self._feature_summary = init_dict["feature_summary"]
-        self._transform_summary = init_dict["transform_summary"]
-        self._sensor_summary = init_dict["sensor_summary"]
+        self._class_map = init_dict.get("class_map")
+        self._pipeline_summary = init_dict.get("pipeline_summary")
+        self._query_summary = init_dict.get("query_summary", None)
+        self._feature_summary = init_dict.get("feature_summary")
+        self._transform_summary = init_dict.get("transform_summary")
+        self._sensor_summary = init_dict.get("sensor_summary")
 
         self._neuron_array = (
             init_dict.get("neuron_array")
