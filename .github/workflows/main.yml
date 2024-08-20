@@ -20,14 +20,14 @@ jobs:
       func_tests: ${{ steps.filter.outputs.func_tests }}
       # embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
       black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
-      server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
+      # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
       # ui: "false"
       # server: "false"
-      # python_client: "true"
+      # python_client: "false"
       # func_tests: "false"
       # black_formating: "false"
-      # server_unit_tests: "false"
-      embedded_ml_sdk: "true"
+      server_unit_tests: "true"
+      embedded_ml_sdk: "false"
     steps:
       - uses: actions/checkout@v4
       - name: Check diff
@@ -71,7 +71,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: sensiml/base
+      image: sensiml/utest-server
 
     steps:
       - uses: actions/checkout@v4
@@ -96,8 +96,8 @@ jobs:
     if: ${{ needs.detect-changes.outputs.server_unit_tests == 'true' }}
 
     runs-on: ubuntu-latest
-    # container:
-    #   image: sensiml/base
+    container:
+      image: sensiml/utest-server
     services:
       db:
         image: postgres
@@ -123,14 +123,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.9"
       - run: |
           export DJANGO_ENV=test
           export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
-          apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
-          pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
+          # apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
+          # pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
           mkdir /${{github.workspace}}/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
           cd /${{github.workspace}}/src/embedded_ml_sdk/pywrapper
@@ -146,46 +143,22 @@ jobs:
         if: always()
         uses: pmeier/pytest-results-action@main
         with:
-          # A list of JUnit XML files, directories containing the former, and wildcard
-          # patterns to process.
-          # See @actions/glob for supported patterns.
           path: report_out.xml
-
-          # (Optional) Add a summary of the results at the top of the report
           summary: true
-
-          # (Optional) Select which results should be included in the report.
-          # Follows the same syntax as `pytest -r`
           display-options: fEX
-
-          # (Optional) Fail the workflow if no JUnit XML was found.
           fail-on-empty: true
-
-          # (Optional) Title of the test results section in the workflow summary
           title: Test results
+
   run-embedded-ml-unit-tests:
     name: "Run Embedded ML Unit Test"
     needs:
       - detect-changes
     if: ${{ needs.detect-changes.outputs.embedded_ml_sdk == 'true' }}
-
     runs-on: ubuntu-latest
     container:
       image: sensiml/embedded-ml-utest
     steps:
       - uses: actions/checkout@v4
-      # - run: |
-      #     # yes Y | apt install libgtest-dev build-essential cmake
-      #     # cd /usr/src/googletest && cmake .
-      #     # cmake --build . --target src/embedded_ml_sdk/utest
-      #     apt-get update -qq
-      #     apt-get install -y build-essential unzip libgtest-dev dos2unix jq cmake zip
-      #     apt-get clean 
-      #     rm -rf /var/lib/apt/lists/*
-      #     mkdir /build
-      #     cd /usr/src/googletest 
-      #     cmake . &&
-      #     cmake --build . --target install
       - run: |
           cd src/embedded_ml_sdk/utest
           bash build.sh
@@ -194,20 +167,8 @@ jobs:
         if: always()
         uses: pmeier/pytest-results-action@main
         with:
-          # A list of JUnit XML files, directories containing the former, and wildcard
-          # patterns to process.
-          # See @actions/glob for supported patterns.
           path: src/embedded_ml_sdk/utest/out/test_results.xml
-
-          # (Optional) Add a summary of the results at the top of the report
           summary: true
-
-          # (Optional) Select which results should be included in the report.
-          # Follows the same syntax as `pytest -r`
           display-options: fEX
-
-          # (Optional) Fail the workflow if no JUnit XML was found.
           fail-on-empty: true
-
-          # (Optional) Title of the test results section in the workflow summary
           title: Embedded ML Unit Test results
