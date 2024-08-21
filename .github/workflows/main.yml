@@ -1,4 +1,4 @@
-cname: Main Check
+name: Main Check
 run-name: ${{ github.actor }} made changes
 on:
   pull_request:
