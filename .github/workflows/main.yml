@@ -12,20 +12,20 @@ jobs:
   detect-changes:
     runs-on: ubuntu-latest
     outputs:
-      # ui: ${{ steps.filter.outputs.ui }}
-      # server: ${{ steps.filter.outputs.server }}
-      # python_client: ${{ steps.filter.outputs.python_client }}
-      # func_tests: ${{ steps.filter.outputs.func_tests }}
-      # embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
-      # black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
-      # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
-      ui: "true"
-      server: "false"
-      python_client: "false"
-      func_tests: "false"
-      black_formating: "false"
-      server_unit_tests: "false"
-      embedded_ml_sdk: "false"
+      ui: ${{ steps.filter.outputs.ui }}
+      server: ${{ steps.filter.outputs.server }}
+      python_client: ${{ steps.filter.outputs.python_client }}
+      func_tests: ${{ steps.filter.outputs.func_tests }}
+      embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
+      black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
+      server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
+      # ui: "true"
+      # server: "false"
+      # python_client: "false"
+      # func_tests: "false"
+      # black_formating: "false"
+      # server_unit_tests: "false"
+      # embedded_ml_sdk: "false"
     steps:
       - uses: actions/checkout@v4
       - name: Check diff
