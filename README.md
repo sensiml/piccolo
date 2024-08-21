@@ -1,34 +1,35 @@
 ![Piccolo AI Banner Image](https://sensiml.org/wp-content/uploads/2024/07/piccolo_github_banner.png)
-## Piccolo AI™
+## About Piccolo AI<sup>™</sup>
 
-Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/) intended for individual developers, researchers, and AI enthusiasts. For enterprise teams contact SensiML for a licensed enterprise version of the software.
+Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/), a software development toolkit for constructing sensor-based AI inference models optimzed to run on low-power microcontrollers and IoT edge platforms (ex. x86 embedded PCs, RPi, arm Cortex-A mobile processors).  Piccolo AI is intended for individual developers, researchers, and AI enthusiasts and made available under the AGPLv3 license. For enterprise teams contact SensiML for a licensed enterprise version of the software.
 
-The Piccolo AI project includes
+The Piccolo AI project includes:
 
 * **SensiML's ML Engine**: The engine behind SensiML’s AutoML model building, sensor data management, model tracking, and embedded firmware generation 
 * **Embedded ML SDK**: SensiML's Inferencing and DSP SDK designed for building and running DSP & ML pipelines on edge devices
 * **Analytic Studio UI**: An Intuitive web interface for working with the SensiML ML Engine to build TinyML applications
 * **SensiML Python Client**: Allows programmatic access to the REST API services through Jupyter Notebooks
 
-Piccolo AI is currently optimized for the classification of time-series sensor data. Common use cases enabled by Piccolo AI include:
+### Use Cases and Application Examples
+Piccolo AI is currently optimized for the classification of **time-series** sensor data. Common use cases enabled by Piccolo AI include:
 
-* Acoustic Event Detection
-* Activity Recognition
-* Gesture Detection
-* Anomaly Detection
-* Keyword Spotting
-* Vibration Classification
+| Application | | Example Use Cases | Piccolo AI Reference Application(s) |
+| ----------- | --- | ----------------- | ------------------------------ |
+| **Acoustic<br>Event Detection** | ![Window Breakage Event](/assets/images/acoustic-event-detection.png) | Intrusion Detection<br>Machinery / Appliance Monitoring<br>Public Safety (ex. gunshot recogition)<br>Vehicle Diagnostics<br>Livestock Monitoring<br>Worker Safety (ex. leak detection) | [Pump State Recognition Demo](https://forum.sensiml.org/t/microphone-based-state-and-fault-detection-for-fluid-pumps/258/1)<br>[Smart Lock Demo](https://forum.sensiml.org/t/building-a-smart-lock-application-using-an-audio-sensor/50/1) |
+| **Activity<br>Recognition** | ![Gait Analysis](/assets/images/activity-recognition.png) | Human Gait Analysis<br>Ergonomic Assessment<br>Sport/Fitness Tracking<br>Elder Care Monitoring | [Boxing Punch Classification Demo]() |
+| Gesture<br>Detection | ![Gesture Recognition](/assets/images/gesture-recognition.png)| Touchless Machine Interfaces<br>Smarthome Control<br>Gaming Interfaces<br>Driver Monitoring<br>Interactive Retail Displays | [Wizard Wand Demo](https://forum.sensiml.org/t/wizard-magic-wand-gesture-game/76/1) |
+| **Anomaly<br>Detection** | ![Anomaly Detection](/assets/images/anomaly-detection.png) | Factory/Plant Process Control<br>Predictive Maintenance<br>Robotics<br>Remote Monitoring | [Robotic Arm Anomaly Detection](https://forum.sensiml.org/t/robot-arm-motion-recognition-and-anomaly-detection/256/1) |
+| **Keyword<br>Spotting** | ![Voice Recognition](/assets/images/voice-recognition.png) | Consumer Electronics UI<br>Security (ex. Voice Authentication)<br>HMI Command/Control | Keyword Spotting Demo<br>([Part 1](https://forum.sensiml.org/t/keyword-spotting-part-i-data-collection-and-data-annotation/86/1),[Part 2](https://forum.sensiml.org/t/keyword-spotting-part-ii-building-a-keyword-spotting-model/87/1)) |
+| **Vibration<br>Classification** | ![Machine State Detection](/assets/images/vibration-monitoring.png) | Predictive Maintenance<br>Vehicle Monitoring<br>Supply Chain Monitoring<br>Machine State Detection | [Smart Drill Demo](https://forum.sensiml.org/t/smart-cordless-power-drill-detecting-fastener-driving-states/72/1)<br>[Fan State Demo](https://forum.sensiml.org/t/imu-based-predictive-maintenance-fans-motors/254) |
 
-To learn more about Piccolo AI features and capabilities, see the
+Piccolo AI is not limited to only the applications listed above.  Virtually any time-series sensor input(s) can be used to classify application-specific events of interest.  Piccolo AI also provides support for regression models as well as basic feature transform outputs without classification. To learn more about Piccolo AI features and capabilities, see the
 [product page](https://sensiml.com/services/toolkit/analytics-studio/).
 
 ## Get Started
 
-The simplest way to get started learning and using the features in Piccolo AI is to sign up for an account on SensiML's managed SaaS service at
-[SensiML Free Trial](https://sensiml.com/plans/trial/).
+The simplest way to get started learning and using the features in Piccolo AI is to sign up for an account on SensiML's managed SaaS service at [SensiML Free Trial](https://sensiml.com/plans/trial/).
 
-If you prefer to install and manage Piccolo AI yourself, you can get
-the latest version on [github](https://github.com/sensiml/piccolo).
+If you prefer to install and manage Piccolo AI yourself, you can get the latest version on [GitHub](https://github.com/sensiml/piccolo).
 
 ## Run Piccolo AI Locally
 
