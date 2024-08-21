@@ -127,8 +127,8 @@ jobs:
       - run: |
           export DJANGO_ENV=test
           export DJANGO_ENV_PATH=/${{ env.WORKING_DIR }}/src/server/config/env/
-          export HOMEDIR: /${{ env.WORKING_DIR }}/src
-          export CLASSIFIER_LIBS: /${{ env.WORKING_DIR }}/src/lib/
+          export HOMEDIR=/${{ env.WORKING_DIR }}/src
+          export CLASSIFIER_LIBS=/${{ env.WORKING_DIR }}/src/lib/
           # apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           # pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
           echo "_____WORK DIR_"
