@@ -132,6 +132,7 @@ def django_db_setup(django_db_setup, django_db_blocker):
         )
 
     print("loaded stuff")
+    print("loaded stuff1")
 
 
 @pytest.fixture
