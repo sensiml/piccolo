@@ -1,4 +1,4 @@
-name: Main Check
+cname: Main Check
 run-name: ${{ github.actor }} made changes
 on:
   pull_request:
@@ -128,6 +128,10 @@ jobs:
           export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
           # apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           # pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
+          echo "_____PWD______"
+          pwd
+          echo "_____LS______"
+          ls
           mkdir /${{github.workspace}}/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
           cd /${{github.workspace}}/src/embedded_ml_sdk/pywrapper
