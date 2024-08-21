@@ -123,21 +123,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Get working directory
+        run: |
+          WORKING_DIR=$(pwd)
       - run: |
           export DJANGO_ENV=test
-          export DJANGO_ENV_PATH=/${{github.workspace}}/src/server/config/env/
+          export DJANGO_ENV_PATH=/$WORKING_DIR/src/server/config/env/
           # apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common
           # pip install -r src/server/requirements.txt && python -c "from mltk.core.tflite_micro.accelerators.mvp.estimator.utils import download_estimators; download_estimators()"
           echo "_____PWD______"
           pwd
           echo "_____LS______"
           ls
-          mkdir /${{github.workspace}}/src/lib
+          mkdir /$WORKING_DIR/src/lib
           /bin/bash src/embedded_ml_sdk/scripts/setup_classifiers.sh
-          cd /${{github.workspace}}/src/embedded_ml_sdk/pywrapper
+          cd /$WORKING_DIR/src/embedded_ml_sdk/pywrapper
           make -j
-          cd /${{github.workspace}}/src/server
-          py.test --durations=0 --junitxml=/${{github.workspace}}/report_out.xml --html=unittest_report.html --cov=./ --cov-report html:cov_html library/tests/core_functions -n 4
+          cd /$WORKING_DIR/src/server
+          py.test --durations=0 --junitxml=/$WORKING_DIR/report_out.xml --html=unittest_report.html --cov=./ --cov-report html:cov_html library/tests/core_functions -n 4
 
       - uses: actions/upload-artifact@v3
         with:
