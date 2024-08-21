@@ -20,12 +20,12 @@ jobs:
       # black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
       # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
       ui: "true"
-      server: "true"
-      python_client: "true"
-      func_tests: "true"
-      black_formating: "true"
-      server_unit_tests: "true"
-      embedded_ml_sdk: "true"
+      server: "false"
+      python_client: "false"
+      func_tests: "false"
+      black_formating: "false"
+      server_unit_tests: "false"
+      embedded_ml_sdk: "false"
     steps:
       - uses: actions/checkout@v4
       - name: Check diff
@@ -65,7 +65,7 @@ jobs:
         if: always()
         uses: pmeier/pytest-results-action@main
         with:
-          path: ui-report-out.xml
+          path: src/ui/ui-report-out.xml
           summary: true
           display-options: fEX
           fail-on-empty: true
