@@ -19,7 +19,7 @@ jobs:
       # embedded_ml_sdk: ${{ steps.filter.outputs.embedded_ml_sdk }}
       # black_formating: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' || steps.filter.outputs.func_tests == 'true' }}
       # server_unit_tests: ${{ steps.filter.outputs.server == 'true' || steps.filter.outputs.python_client == 'true' }}
-      ui: "false"
+      ui: "true"
       server: "true"
       python_client: "true"
       func_tests: "true"
@@ -60,7 +60,7 @@ jobs:
       - name: Run Eslint
         run: yarn --cwd src/ui eslint
       - name: Run Unit Tests
-        run: yarn --cwd src/ui test
+        run: yarn --cwd src/ui jest --verbose --coverage --reporters=default,jest-junit --testResultsProcessor=jest-junit --outputFile=./ui-report-out.xml
 
   check-black-formating:
     name: Check Formatting Black
@@ -86,6 +86,16 @@ jobs:
       - name: Check Formatting Function Test
         if: ${{ needs.detect-changes.outputs.func_tests == 'true' }}
         run: python -m black --check func_tests/
+
+      - name: Surface failing UI tests
+        if: always()
+        uses: pmeier/pytest-results-action@main
+        with:
+          path: ui-report-out.xml
+          summary: true
+          display-options: fEX
+          fail-on-empty: true
+          title: Test results
 
   run-server-unit-tests:
     name: "Run Server Unit Test"
@@ -148,7 +158,7 @@ jobs:
         with:
           name: junit-upload-report
           path: /${{ env.WORKING_DIR }}/report_out.xml
-      - name: Surface failing tests
+      - name: Surface failing server tests
         if: always()
         uses: pmeier/pytest-results-action@main
         with:
