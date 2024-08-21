@@ -60,7 +60,16 @@ jobs:
       - name: Run Eslint
         run: yarn --cwd src/ui eslint
       - name: Run Unit Tests
-        run: yarn --cwd src/ui jest --verbose --coverage --reporters=default,jest-junit --testResultsProcessor=jest-junit --outputFile=./ui-report-out.xml
+        run: yarn --cwd src/ui test:output
+      - name: Surface failing UI tests
+        if: always()
+        uses: pmeier/pytest-results-action@main
+        with:
+          path: ui-report-out.xml
+          summary: true
+          display-options: fEX
+          fail-on-empty: true
+          title: Test results
 
   check-black-formating:
     name: Check Formatting Black
@@ -86,16 +95,6 @@ jobs:
       - name: Check Formatting Function Test
         if: ${{ needs.detect-changes.outputs.func_tests == 'true' }}
         run: python -m black --check func_tests/
-
-      - name: Surface failing UI tests
-        if: always()
-        uses: pmeier/pytest-results-action@main
-        with:
-          path: ui-report-out.xml
-          summary: true
-          display-options: fEX
-          fail-on-empty: true
-          title: Test results
 
   run-server-unit-tests:
     name: "Run Server Unit Test"
