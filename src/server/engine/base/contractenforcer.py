@@ -23,7 +23,6 @@ from rest_framework import status
 
 
 class ContractEnforcer(object):
-
     """
     input contract parameters (validation parameters and descriptions of input to a function)
 
@@ -184,7 +183,6 @@ class ContractEnforcer(object):
     def types_are_equal(
         self, pipeline_type, contract_type, contract_default="NoDefault"
     ):
-
         """First, the trivial case: direct equality."""
         if pipeline_type == contract_type:
             return True

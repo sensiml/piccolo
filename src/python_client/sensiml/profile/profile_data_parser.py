@@ -185,11 +185,11 @@ class ProfileParser(object):
                 )
 
                 feature_index += 1
-            self._classifier_average_time[int(model_number)][
-                model_type
-            ] = "{0:0.9f}".format(
-                self._format_result(
-                    self._average(self._classifier_times[model_number][model_type])
+            self._classifier_average_time[int(model_number)][model_type] = (
+                "{0:0.9f}".format(
+                    self._format_result(
+                        self._average(self._classifier_times[model_number][model_type])
+                    )
                 )
             )
 

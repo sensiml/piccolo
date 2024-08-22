@@ -1039,9 +1039,9 @@ class Pipeline(object):
         if params is None:
             params = {}
 
-        self._validation_call = (
-            call
-        ) = self._client.functions.create_validation_method_call(name)
+        self._validation_call = call = (
+            self._client.functions.create_validation_method_call(name)
+        )
         for k, v in params.items():
             setattr(call, k, v)
 
@@ -1089,9 +1089,9 @@ class Pipeline(object):
         if params is None:
             params = {}
 
-        self._training_algorithm_call = (
-            call
-        ) = self._client.functions.create_training_algorithm_call(name)
+        self._training_algorithm_call = call = (
+            self._client.functions.create_training_algorithm_call(name)
+        )
         for k, v in params.items():
             setattr(call, k, v)
 

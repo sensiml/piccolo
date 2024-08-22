@@ -33,7 +33,6 @@ logger = logging.getLogger(__name__)
 
 
 class TestdegenerateNeuron:
-
     """
     Parameter to enable/disable a new algorithm that removes any degenerate neurons (as defined by AIF < minAIF)
     """

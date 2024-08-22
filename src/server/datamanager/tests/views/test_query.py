@@ -186,7 +186,7 @@ def query_list():
         columns=json.dumps(["Column1", "Column2"]),
         metadata_columns=json.dumps(["Subject", "capture_uuid", "segment_uuid"]),
         label_column=label_name,
-        metadata_filter=""
+        metadata_filter="",
         # metadata_filter="[capture_uuid] IN [{}]".format(captures[0].uuid),
     )
 

@@ -224,9 +224,9 @@ class AutomationEngine(
 
         if sum(self.param_hardware_target.values()):
             if self.fitness["classifiers_sram"] == 1:
-                self.auto_param_weights.loc[
-                    "classifiers_sram", "min"
-                ] = self.param_hardware_target["classifiers_sram"]
+                self.auto_param_weights.loc["classifiers_sram", "min"] = (
+                    self.param_hardware_target["classifiers_sram"]
+                )
 
         if len(self.sandbox.pipeline) and self.sandbox.pipeline[0]["type"] == "query":
             self.sandbox.pipeline[0]["outputs"] = ["temp.raw"]

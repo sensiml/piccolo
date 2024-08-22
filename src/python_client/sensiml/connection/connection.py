@@ -521,9 +521,9 @@ class Connection(object):
 
 # With ouath we don't want to send cookies, this will overwite and block session cookies
 class BlockAll(CookiePolicy):
-    return_ok = (
-        set_ok
-    ) = domain_return_ok = path_return_ok = lambda self, *args, **kwargs: False
+    return_ok = set_ok = domain_return_ok = path_return_ok = (
+        lambda self, *args, **kwargs: False
+    )
     netscape = True
     rfc2965 = hide_cookie2 = False
 

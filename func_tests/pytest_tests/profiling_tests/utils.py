@@ -45,9 +45,9 @@ def generate_configuration_parameters(dsk):
                         config["processor.display_name"] = processor.display_name
                         config["compiler.name"] = compiler.name
                         config["compiler.compiler_version"] = compiler.compiler_version
-                        config[
-                            "processor.profiling_enabled"
-                        ] = processor.profiling_enabled
+                        config["processor.profiling_enabled"] = (
+                            processor.profiling_enabled
+                        )
 
                         configurations.append(config)
 
@@ -96,9 +96,9 @@ def generate_binary_only_configuration_parameters(dsk):
                         config["processor.display_name"] = processor.display_name
                         config["compiler.name"] = compiler.name
                         config["compiler.compiler_version"] = compiler.compiler_version
-                        config[
-                            "processor.profiling_enabled"
-                        ] = processor.profiling_enabled
+                        config["processor.profiling_enabled"] = (
+                            processor.profiling_enabled
+                        )
 
                         if platform.can_build_binary:
                             configurations.append(config)

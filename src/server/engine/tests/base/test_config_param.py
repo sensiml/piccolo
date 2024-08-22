@@ -32,7 +32,6 @@ assert_almost_equal = np.testing.assert_almost_equal
 
 
 class TestConfigParamUnitTest:
-
     """Test optimization of hyperparameters
 
     An internal "fixture" (class attributes) of training data was provided by Luis:

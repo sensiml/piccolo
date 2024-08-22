@@ -43,7 +43,7 @@ if sensiml_server_path:
     django.setup()
 
 # -- General configuration ------------------------------------------------
-DOCUMENTATION_NAME = u"SensiML Toolkit Documentation"
+DOCUMENTATION_NAME = "SensiML Toolkit Documentation"
 
 # If your documentation needs a minimal Sphinx version, state it here.
 # needs_sphinx = '1.0'
@@ -79,8 +79,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"SensiML Toolkit"
-copyright = u"2022, SensiML Corporation. All rights reserved"
+project = "SensiML Toolkit"
+copyright = "2022, SensiML Corporation. All rights reserved"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -270,7 +270,7 @@ latex_documents = [
         "guides/getting-started/index",
         "SensiMLAnalyticSuite.tex",
         DOCUMENTATION_NAME,
-        u"SensiML",
+        "SensiML",
         "manual",
     )
 ]
@@ -300,7 +300,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [("index", "SensiMLAnalyticSuite", DOCUMENTATION_NAME, [u"SensiML"], 1)]
+man_pages = [("index", "SensiMLAnalyticSuite", DOCUMENTATION_NAME, ["SensiML"], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -335,7 +335,7 @@ texinfo_documents = [
 # texinfo_no_detailmenu = False
 
 # pdf info
-pdf_documents = [("index", u"SensiMLAnalyticSuite", DOCUMENTATION_NAME, u"SensiML")]
+pdf_documents = [("index", "SensiMLAnalyticSuite", DOCUMENTATION_NAME, "SensiML")]
 pdf_use_index = False
 
 # Example configuration for intersphinx: refer to the Python standard library.

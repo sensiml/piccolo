@@ -19,6 +19,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 from sensiml.datamanager.pipeline import PipelineStep
 
+
 # AugmentationCallSet
 class AugmentationCallSet(PipelineStep):
     """The base class for a collection of augmentation calls"""

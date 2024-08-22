@@ -362,9 +362,9 @@ class ExecutionEngine(object):
 
             query["segmenter"] = segmenter
 
-            summaries[
-                "query_summary"
-            ] = self.update_capture_configurations_object_to_uuid(query)
+            summaries["query_summary"] = (
+                self.update_capture_configurations_object_to_uuid(query)
+            )
 
             # Retrieve the query summary, check against the pipeline summary. Find the common sensors
             sensors = [s for s in literal_eval(query["columns"]) if s in pipeline]
@@ -498,10 +498,10 @@ class ExecutionEngine(object):
         )
 
         tvo_results["configurations"] = {}
-        tvo_results["configurations"][
-            config_index
-        ] = self._update_tvo_results_with_knowledgepack(
-            tvo_results["model_stats"], config_index, save_knowledgepacks, summaries
+        tvo_results["configurations"][config_index] = (
+            self._update_tvo_results_with_knowledgepack(
+                tvo_results["model_stats"], config_index, save_knowledgepacks, summaries
+            )
         )
 
         filename = self.add_data_cache(temp_step["outputs"][0], tvo_results, 0)

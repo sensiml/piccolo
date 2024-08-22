@@ -148,9 +148,11 @@ class QueryParser(object):
 
         select_dict = {
             "LABEL NAME": self._label,
-            "METADATA COLUMNS": (",".join(escape_strings(self._metadata)) + ",")
-            if self._metadata
-            else "",
+            "METADATA COLUMNS": (
+                (",".join(escape_strings(self._metadata)) + ",")
+                if self._metadata
+                else ""
+            ),
         }
 
         query_string = self._select_string.format(**select_dict)
@@ -176,9 +178,11 @@ class QueryParser(object):
 
         select_dict = {
             "LABEL NAME": self._label,
-            "METADATA COLUMNS": (",".join(escape_strings(self._metadata)) + ",")
-            if self._metadata
-            else "",
+            "METADATA COLUMNS": (
+                (",".join(escape_strings(self._metadata)) + ",")
+                if self._metadata
+                else ""
+            ),
         }
 
         query_string = self._select_string.format(**select_dict)
@@ -219,9 +223,11 @@ class QueryParser(object):
             "LABEL NAME": self._label,
             "SEGMENTER ID": self._segmenter_ids[0],
             "LABEL SELECT": self._get_metadata_select(self._label),
-            "METADATA COLUMNS": (",".join(escape_strings(self._metadata)) + ",")
-            if self._metadata
-            else "",
+            "METADATA COLUMNS": (
+                (",".join(escape_strings(self._metadata)) + ",")
+                if self._metadata
+                else ""
+            ),
         }
 
         query_string = self._select_profile.format(**select_profile_dict)
@@ -258,9 +264,11 @@ class QueryParser(object):
             "LABEL NAME": self._label,
             "SEGMENTER ID": self._segmenter_ids[0],
             "LABEL SELECT": self._get_metadata_select(self._label),
-            "METADATA COLUMNS": (",".join(escape_strings(self._metadata)) + ",")
-            if self._metadata
-            else "",
+            "METADATA COLUMNS": (
+                (",".join(escape_strings(self._metadata)) + ",")
+                if self._metadata
+                else ""
+            ),
         }
 
         query_string = self._select_summary.format(**select_summary_dict)

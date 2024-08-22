@@ -94,17 +94,17 @@ class TrainMixin(object):
 
     def create_kb_get_model_pattern(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "pme_return_pattern(model_index, pattern_index, pme_pattern);"
+        model_fill["PME"] = (
+            "pme_return_pattern(model_index, pattern_index, pme_pattern);"
+        )
 
         return self.create_case_fill_template_classifier_type(models_data, model_fill)
 
     def create_kb_add_last_pattern(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "ret = pme_add_new_pattern(kb_models[model_index].classifier_id, (uint8_t*)kb_models[model_index].pfeature_vector->data, category, influence);"
+        model_fill["PME"] = (
+            "ret = pme_add_new_pattern(kb_models[model_index].classifier_id, (uint8_t*)kb_models[model_index].pfeature_vector->data, category, influence);"
+        )
         model_fill["Decision Tree Ensemble"] = "ret = 0;"
         model_fill["Boosted Tree Ensemble"] = "ret = 0;"
         model_fill["Bonsai"] = "ret = 0;"
@@ -115,32 +115,32 @@ class TrainMixin(object):
 
     def create_kb_add_custom_pattern(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "ret = pme_add_new_pattern(kb_models[model_index].classifier_id, feature_vector, category, influence);"
+        model_fill["PME"] = (
+            "ret = pme_add_new_pattern(kb_models[model_index].classifier_id, feature_vector, category, influence);"
+        )
 
         return self.create_case_fill_template(models_data, model_fill)
 
     def create_kb_retrain_model(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "pme_rebalance_patterns(kb_models[model_index].classifier_id);"
+        model_fill["PME"] = (
+            "pme_rebalance_patterns(kb_models[model_index].classifier_id);"
+        )
 
         return self.create_case_fill_template_with_retrain(models_data, model_fill)
 
     def create_kb_score_model(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "pme_score_pattern(kb_models[model_index].classifier_id, (uint8_t*)kb_models[model_index].pfeature_vector->data, category);"
+        model_fill["PME"] = (
+            "pme_score_pattern(kb_models[model_index].classifier_id, (uint8_t*)kb_models[model_index].pfeature_vector->data, category);"
+        )
 
         return self.create_case_fill_template_with_retrain(models_data, model_fill)
 
     def create_kb_print_model_score(self, models_data):
         model_fill = {}
-        model_fill[
-            "PME"
-        ] = "pme_print_model_scores(kb_models[model_index].classifier_id);"
+        model_fill["PME"] = (
+            "pme_print_model_scores(kb_models[model_index].classifier_id);"
+        )
 
         return self.create_case_fill_template_with_retrain(models_data, model_fill)

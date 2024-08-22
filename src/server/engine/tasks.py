@@ -204,9 +204,9 @@ def execute_function_return_success(
             "data": {
                 "name": step["name"],
                 "cpu_clock_time": cpu_clock_time,
-                "data_size": len(data)
-                if not isinstance(data, DataFrame)
-                else data.shape[0],
+                "data_size": (
+                    len(data) if not isinstance(data, DataFrame) else data.shape[0]
+                ),
                 "input": input_data_key,
                 "output": filename,
             },
@@ -307,9 +307,9 @@ def execute_function(
             "data": {
                 "name": step["name"],
                 "cpu_clock_time": cpu_clock_time,
-                "data_size": len(data)
-                if not isinstance(data, DataFrame)
-                else data.shape[0],
+                "data_size": (
+                    len(data) if not isinstance(data, DataFrame) else data.shape[0]
+                ),
                 "data": input_data_key,
             },
             "UUID": pipeline_id,

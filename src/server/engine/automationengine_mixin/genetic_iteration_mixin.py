@@ -187,12 +187,12 @@ class GeneticIterationMixin:
             for library in libraries:
                 for pop_index, _ in enumerate(population[step_id]):
                     if library == "selectorset":
-                        population[step_id][pop_index][
-                            "set"
-                        ] = param_optimizer.define_parameters(
-                            inventory,
-                            sandbox_variable=library,
-                            add_unsupervised_selectors=True,
+                        population[step_id][pop_index]["set"] = (
+                            param_optimizer.define_parameters(
+                                inventory,
+                                sandbox_variable=library,
+                                add_unsupervised_selectors=True,
+                            )
                         )
                     else:
                         if population[step_id][pop_index].get("optimizers", None):
@@ -202,12 +202,12 @@ class GeneticIterationMixin:
                         else:
                             optimizer = None
 
-                        population[step_id][pop_index][
-                            library
-                        ] = param_optimizer.define_parameters(
-                            sandbox_variable=library,
-                            optimizer=optimizer,
-                            inventory=inventory,
+                        population[step_id][pop_index][library] = (
+                            param_optimizer.define_parameters(
+                                sandbox_variable=library,
+                                optimizer=optimizer,
+                                inventory=inventory,
+                            )
                         )
 
         if self.param_hardware_target["classifiers_sram"] and "tvo" in self.ga_steps:
@@ -711,9 +711,9 @@ def complete_missing_population(fitted_population_initial, missing_population_co
     as a place holder.
     """
     for i in range(missing_population_count):
-        fitted_population_initial.loc[
-            len(fitted_population_initial)
-        ] = fitted_population_initial.loc[i]
+        fitted_population_initial.loc[len(fitted_population_initial)] = (
+            fitted_population_initial.loc[i]
+        )
         fitted_population_initial.loc[len(fitted_population_initial) - 1, "fitness"] = 0
     return fitted_population_initial
 

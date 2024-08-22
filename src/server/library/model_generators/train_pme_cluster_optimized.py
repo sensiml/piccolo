@@ -100,7 +100,8 @@ class NeuronOptimization(ClusterLearning):
 
     def run(self):
         """Calls the cluster-based learning algorithm with the specified validation method. Scales the resulting
-        centroids, trains the simulator, gathers results and returns a summary of model performance"""
+        centroids, trains the simulator, gathers results and returns a summary of model performance
+        """
 
         self._initialize_validation_method()
 
