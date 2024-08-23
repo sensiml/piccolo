@@ -21,7 +21,6 @@ import uuid
 
 
 def is_valid_uuid4(uuid_string):
-
     """
     Validate that a UUID string is in
     fact a valid uuid4.

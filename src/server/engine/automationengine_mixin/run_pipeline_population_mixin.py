@@ -59,9 +59,11 @@ class RunPipelinePopulationMixin:
                     "step_index": step_id + len(self.static_pipeline) + 1,
                     "step_type": steps[0].get("type"),
                     "step_name": steps[0].get("name"),
-                    "iteration": "RCL"
-                    if self.last_iteration == "RCL"
-                    else self.last_iteration + 1,
+                    "iteration": (
+                        "RCL"
+                        if self.last_iteration == "RCL"
+                        else self.last_iteration + 1
+                    ),
                     "total_iterations": self.iterations,
                     "batch_size": batch_size,
                     "batch": num_batches if num_batches else len(steps),
@@ -89,9 +91,11 @@ class RunPipelinePopulationMixin:
                     "step_index": step_id + len(self.static_pipeline) + 1,
                     "step_type": steps[0].get("type"),
                     "step_name": steps[0].get("name"),
-                    "iteration": "RCL"
-                    if self.last_iteration == "RCL"
-                    else self.last_iteration + 1,
+                    "iteration": (
+                        "RCL"
+                        if self.last_iteration == "RCL"
+                        else self.last_iteration + 1
+                    ),
                     "total_iterations": self.iterations,
                     "batch_size": batch_size,
                     "batch": num_batches if num_batches else len(steps),
@@ -149,9 +153,9 @@ class RunPipelinePopulationMixin:
                 "step_type": steps[0].get("type"),
                 "step_name": steps[0].get("name"),
                 "total_steps": len(self.pipeline),
-                "iteration": "RCL"
-                if self.last_iteration == "RCL"
-                else self.last_iteration + 1,
+                "iteration": (
+                    "RCL" if self.last_iteration == "RCL" else self.last_iteration + 1
+                ),
                 "total_iterations": self.iterations,
                 "population_size": len(steps),
                 "iteration_start_index": len(self.static_pipeline) + 1,

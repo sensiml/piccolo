@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-
 import argparse
 import copy
 import os
@@ -57,7 +56,7 @@ def dataframe_from_h5(hdf):
     sensorNlocationMap = dict(zip(sensorIDs, newSensorLabels))
     # sensorNlocationMap = getAbbreviatedLabels(sensorIDs, sensorLabels)
     topLevelAttrs = [x for x in hdf]
-    topLevelAttrs.remove(u"Annotations")  # Remove "Annotation" attribute
+    topLevelAttrs.remove("Annotations")  # Remove "Annotation" attribute
     outDF = pd.DataFrame()
     for myattr in topLevelAttrs:
         myAcc = hdf[myattr]["Calibrated/Accelerometers"].value

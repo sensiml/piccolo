@@ -62,7 +62,8 @@ class TesetCostManager:
 
     def test_flash_sram_sum(self):
         """Flash costs from 'test' and 'another_function' should be summed: 632 + 1250 = 1882 (float is okay)
-        SRAM costs from 'test' and 'another_function' should be summed: 52 + 248 = 300 (float is okay)"""
+        SRAM costs from 'test' and 'another_function' should be summed: 52 + 248 = 300 (float is okay)
+        """
         costs = cost_manager.calc_function_costs(
             "test", "", self.test_costs, self.support_params
         )

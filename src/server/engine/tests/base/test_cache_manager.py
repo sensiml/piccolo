@@ -43,33 +43,33 @@ class TestCacheManager:
             },
             "outputs": ["temp.feat", "temp.featstats"],
             "set": [
-                {"function_name": u"Mean", "inputs": {"columns": ["AccelerometerY"]}},
+                {"function_name": "Mean", "inputs": {"columns": ["AccelerometerY"]}},
                 {
-                    "function_name": u"Standard Deviation",
+                    "function_name": "Standard Deviation",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Skewness",
+                    "function_name": "Skewness",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Kurtosis",
+                    "function_name": "Kurtosis",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"25th Percentile",
+                    "function_name": "25th Percentile",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"75th Percentile",
+                    "function_name": "75th Percentile",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"100th Percentile",
+                    "function_name": "100th Percentile",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Zero Crossing Rate",
+                    "function_name": "Zero Crossing Rate",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
             ],
@@ -89,7 +89,7 @@ class TestCacheManager:
             "refinement": {},
             "set": [
                 {
-                    "function_name": u"Recursive Feature Elimination",
+                    "function_name": "Recursive Feature Elimination",
                     "inputs": {"method": "Log R"},
                 }
             ],
@@ -97,17 +97,17 @@ class TestCacheManager:
         }
         self.step3 = {
             "inputs": {
-                u"input_data": "temp.selected",
-                u"max_bound": 254,
-                u"min_bound": 0,
-                u"passthrough_columns": [
+                "input_data": "temp.selected",
+                "max_bound": 254,
+                "min_bound": 0,
+                "passthrough_columns": [
                     "Filename",
                     "Subject",
                     "Activity",
                     "ActivityName",
                 ],
             },
-            "name": u"Min Max Scale",
+            "name": "Min Max Scale",
             "outputs": ["temp.scaled"],
             "type": "transform",
         }

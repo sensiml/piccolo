@@ -77,7 +77,8 @@ class ConfusionMatrixException(Exception):
 
 class ConfusionMatrix(object):
     """This object is a representation of a confusion matrix that contains properties for statistics that can be
-    generated from a confusion matrix as well as a DataFrame representation for easy viewing"""
+    generated from a confusion matrix as well as a DataFrame representation for easy viewing
+    """
 
     def __init__(self, metrics_dict):
         """Initializes ConfusionMatrix object
@@ -348,7 +349,8 @@ class ConfusionMatrix(object):
         primarily for viewing purposes.
 
             Returns:
-                cm_data_frame (pandas.DataFrame): DataFrame representation of dictionary confusion matrix"""
+                cm_data_frame (pandas.DataFrame): DataFrame representation of dictionary confusion matrix
+        """
         self._class_titles = [x for x in self._cm.keys() if x not in UNK_UNC]
         self._class_titles.sort()
         row_index = 0
@@ -412,7 +414,8 @@ class ConfusionMatrix(object):
 
 class ConfusionMatrixList(ConfusionMatrix):
     """ConfusionMatrix list object represents a group of confusion matrices and is itself a confusion matrix.
-    Enables investigation of child matrices to determine best model by the statistics of the confusion matrix"""
+    Enables investigation of child matrices to determine best model by the statistics of the confusion matrix
+    """
 
     def __init__(self, confusion_matrices):
         """Initializes ConfusionMatrixList object
@@ -421,7 +424,8 @@ class ConfusionMatrixList(ConfusionMatrix):
             values are ConfusionMatrix objects
 
         Raises:
-            ConfusionMatrixException: If arg are incorrect type, needs to be a dict of confusion matrices"""
+            ConfusionMatrixException: If arg are incorrect type, needs to be a dict of confusion matrices
+        """
         if isinstance(confusion_matrices, dict):
             for key, value in confusion_matrices.items():
                 if not isinstance(value, ConfusionMatrix):
@@ -450,7 +454,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest average sensitivity"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest average sensitivity
+        """
         return self._query_children(operator.gt, SE, True)
 
     def highest_avg_pp_child(self):
@@ -458,7 +463,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest average PP"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest average PP
+        """
         return self._query_children(operator.gt, PP, True)
 
     def highest_accuracy_child(self):
@@ -466,7 +472,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest accuracy"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest accuracy
+        """
         return self._query_children(operator.gt, ACC, False)
 
     def highest_specificity_child(self):
@@ -474,7 +481,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest specificity"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest specificity
+        """
         return self._query_children(operator.gt, SPEC, False)
 
     def highest_precision_child(self):
@@ -482,7 +490,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest precision"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest precision
+        """
         return self._query_children(operator.gt, PREC, True)
 
     def highest_f1_score_child(self):
@@ -490,7 +499,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest f1_score"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the highest f1_score
+        """
         return self._query_children(operator.gt, F1, True)
 
     def lowest_avg_se_child(self):
@@ -498,7 +508,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest average sensitivity"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest average sensitivity
+        """
         return self._query_children(operator.lt, SE, True)
 
     def lowest_avg_pp_child(self):
@@ -506,7 +517,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest average positive predictivity"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest average positive predictivity
+        """
         return self._query_children(operator.lt, PP, True)
 
     def lowest_accuracy_child(self):
@@ -514,7 +526,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest accuracy"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest accuracy
+        """
         return self._query_children(operator.lt, ACC, False)
 
     def lowest_specificity_child(self):
@@ -522,7 +535,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest specificity"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest specificity
+        """
         return self._query_children(operator.lt, SPEC, False)
 
     def lowest_precision_child(self):
@@ -530,7 +544,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest precision"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest precision
+        """
         return self._query_children(operator.lt, PREC, True)
 
     def lowest_f1_score_child(self):
@@ -538,7 +553,8 @@ class ConfusionMatrixList(ConfusionMatrix):
 
         Returns:
             key: key value provided in initialize dictionary pertaining to the confusion matrix
-            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest f1_score"""
+            confusion_matrix (ConfusionMatrix): The confusion matrix object with the lowest f1_score
+        """
         return self._query_children(operator.lt, F1, True)
 
     def head(self, length=5):
@@ -662,7 +678,8 @@ class ConfusionMatrixList(ConfusionMatrix):
         """Inspects the child matrices given to the init function to determine the classes contained in them
 
         Returns:
-            class_titles (list): list of class titles contained in the confusion matrix"""
+            class_titles (list): list of class titles contained in the confusion matrix
+        """
         k = self._confusion_matrices.keys()
         random_matrix_index = randint(0, len(self._confusion_matrices) - 1)
         to_inspect = self._confusion_matrices[k[random_matrix_index]]
@@ -693,7 +710,8 @@ class ConfusionMatrixList(ConfusionMatrix):
             prop (str): must be a property of the ConfusionMatrix object
 
         Returns:
-            result (tuple): Tuple of length 2, index 0 == index of confusion matrix, index 1 == confusion matrix"""
+            result (tuple): Tuple of length 2, index 0 == index of confusion matrix, index 1 == confusion matrix
+        """
         is_first = True
         ret = None
         for i, conf in self._confusion_matrices.items():

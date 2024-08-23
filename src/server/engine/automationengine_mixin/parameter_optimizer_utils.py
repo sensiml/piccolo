@@ -163,39 +163,39 @@ def recreation(
 
                 # Recreation of feature selector
                 if step["type"] == "selectorset" and "selectorset" in library_list:
-                    new_generation.loc[list_index, "selectorset"][
-                        "set"
-                    ] = define_parameters(
-                        sandbox_variable="selectorset",
-                        inventory=inventory,
-                        add_unsupervised_selectors=add_unsupervised_selectors,
+                    new_generation.loc[list_index, "selectorset"]["set"] = (
+                        define_parameters(
+                            sandbox_variable="selectorset",
+                            inventory=inventory,
+                            add_unsupervised_selectors=add_unsupervised_selectors,
+                        )
                     )
                 # Recreation of tvo steps
                 elif step["type"] == "tvo":
                     if "optimizers" in library_list:
-                        new_generation.loc[list_index, "tvo"][
-                            "optimizers"
-                        ] = define_parameters(
-                            sandbox_variable="optimizers",
-                            inventory=inventory,
+                        new_generation.loc[list_index, "tvo"]["optimizers"] = (
+                            define_parameters(
+                                sandbox_variable="optimizers",
+                                inventory=inventory,
+                            )
                         )
 
                     optimizer = new_generation.loc[list_index, "tvo"]["optimizers"][0][
                         "name"
                     ]
                     if "classifiers" in library_list:
-                        new_generation.loc[list_index, "tvo"][
-                            "classifiers"
-                        ] = define_parameters(
-                            sandbox_variable="classifiers",
-                            optimizer=optimizer,
-                            inventory=inventory,
+                        new_generation.loc[list_index, "tvo"]["classifiers"] = (
+                            define_parameters(
+                                sandbox_variable="classifiers",
+                                optimizer=optimizer,
+                                inventory=inventory,
+                            )
                         )
 
                     if "validation_methods" in library_list:
-                        new_generation.loc[list_index, "tvo"][
-                            "validation_methods"
-                        ] = read_validation_algorithms(validation_method)
+                        new_generation.loc[list_index, "tvo"]["validation_methods"] = (
+                            read_validation_algorithms(validation_method)
+                        )
 
                 """
                 # TODO: transforms don't work yet

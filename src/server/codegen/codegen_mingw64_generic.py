@@ -50,8 +50,8 @@ class MINGW64GenericCodeGenerator(GCCGenericCodeGenerator):
     def create_compile_flags(self):
         # TODO: These should be read as execution params for CFLAGS< LDFLAGS, etc instead of fill files,
         ret = {}
-        ret[
-            "readme_compile_string"
-        ] = "`x86_64-w64-mingw320-gcc main.c -o sensiml.exe -L../libsensiml -lsensiml -lm -I../libsensiml`"
+        ret["readme_compile_string"] = (
+            "`x86_64-w64-mingw320-gcc main.c -o sensiml.exe -L../libsensiml -lsensiml -lm -I../libsensiml`"
+        )
 
         return ret

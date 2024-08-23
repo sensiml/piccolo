@@ -35,7 +35,6 @@ logger = logging.getLogger(__name__)
 
 
 class TestTurboLearn:
-
     """Test turbo learning (train until no new neurons possible) an nonturbo (single-pass)
 
     Parameter to control enabling/disabling of “Turbo Training”. Turbo is when the training set is presented again to

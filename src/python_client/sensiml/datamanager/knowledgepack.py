@@ -1095,12 +1095,16 @@ def get_knowledgepack(
     if err is False:
         kp = KnowledgePack(
             connection,
-            response_data.get("project_uuid")
-            if response_data.get("project_uuid") is not None
-            else response_data.get("project"),
-            response_data.get("sandbox_uuid")
-            if response_data.get("sandbox_uuid") is not None
-            else response_data.get("sandbox"),
+            (
+                response_data.get("project_uuid")
+                if response_data.get("project_uuid") is not None
+                else response_data.get("project")
+            ),
+            (
+                response_data.get("sandbox_uuid")
+                if response_data.get("sandbox_uuid") is not None
+                else response_data.get("sandbox")
+            ),
         )
         kp.initialize_from_dict(response_data)
         return kp

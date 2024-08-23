@@ -456,9 +456,9 @@ class SetSampleValidation(ValidationMethod):
                 ]
             self._samples_per_class = new_samples_per_class.copy()
             if len(self._validation_samples_per_class) != 0:
-                new_samples_per_class[
-                    self._binary_class1
-                ] = self._validation_samples_per_class[self._binary_class1]
+                new_samples_per_class[self._binary_class1] = (
+                    self._validation_samples_per_class[self._binary_class1]
+                )
                 new_samples_per_class["other"] = 0
                 for c in other_classes:
                     new_samples_per_class[
@@ -777,12 +777,12 @@ class SetSampler:
         len(other_classes)
         other_classes.remove(binary_class1)
         data_binary = data.copy()
-        data_binary.loc[
-            data_binary[label_column] == binary_class1, label_column
-        ] = binary_class1
-        data_binary.loc[
-            data_binary[label_column].isin(other_classes), label_column
-        ] = other_classes[0]
+        data_binary.loc[data_binary[label_column] == binary_class1, label_column] = (
+            binary_class1
+        )
+        data_binary.loc[data_binary[label_column].isin(other_classes), label_column] = (
+            other_classes[0]
+        )
         return data_binary, other_classes
 
     def remap_keys_to_integers(self, class_size_dict):

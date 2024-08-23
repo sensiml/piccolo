@@ -32,6 +32,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy
 from engine.base import model_store
 
+
 # Stored signal (trigger) procedures
 def delete_capture_from_disk(sender, instance, **kwargs):
     datastore = get_datastore()

@@ -63,17 +63,17 @@ class TestGridSearchEngine:
             "name": "generator_set",
             "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
             "set": [
-                {"function_name": u"Mean", "inputs": {"columns": ["AccelerometerY"]}},
+                {"function_name": "Mean", "inputs": {"columns": ["AccelerometerY"]}},
                 {
-                    "function_name": u"Skewness",
+                    "function_name": "Skewness",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Kurtosis",
+                    "function_name": "Kurtosis",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Zero Crossing Rate",
+                    "function_name": "Zero Crossing Rate",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
             ],
@@ -90,17 +90,17 @@ class TestGridSearchEngine:
             "name": "generator_set",
             "outputs": ["temp.generator_set0", "temp.features.generator_set0"],
             "set": [
-                {"function_name": u"Mean", "inputs": {"columns": ["AccelerometerZ"]}},
+                {"function_name": "Mean", "inputs": {"columns": ["AccelerometerZ"]}},
                 {
-                    "function_name": u"Skewness",
+                    "function_name": "Skewness",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
                 {
-                    "function_name": u"Kurtosis",
+                    "function_name": "Kurtosis",
                     "inputs": {"columns": ["AccelerometerZ"]},
                 },
                 {
-                    "function_name": u"Zero Crossing Rate",
+                    "function_name": "Zero Crossing Rate",
                     "inputs": {"columns": ["AccelerometerY"]},
                 },
             ],

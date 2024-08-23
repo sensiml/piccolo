@@ -77,12 +77,13 @@ common_contracts = {
     "output_contract": [{"name": "output_data", "type": "DataSegment"}],
 }
 
+
 ##########################################################
 def noise_psd(N, psd=lambda f: 1):
     X_white = np.fft.rfft(np.random.randn(N))
     S = psd(np.fft.rfftfreq(N))
     # Normalize S
-    S = S / np.sqrt(np.mean(S ** 2))
+    S = S / np.sqrt(np.mean(S**2))
     X_shaped = X_white * S
     return np.fft.irfft(X_shaped)
 
@@ -548,6 +549,7 @@ add_noise_contracts["input_contract"].extend(
     ]
 )
 
+
 ##########################################################
 @augmenter(code=codes["scale_amplitude"])
 def scale_amplitude(segment, **kwargs):
@@ -961,6 +963,7 @@ pitch_shift_contracts["input_contract"].extend(
     ]
 )
 
+
 ##########################################################
 class DataStats(object):
     def __init__(self, inout_data, indx, crop_size: int):
@@ -971,7 +974,6 @@ class DataStats(object):
         self._stats, self._n_sample = self._data_sample_count()
 
     def _data_sample_count(self):
-
         """
         stats format: [[index, number, cumulative_number, normalized_cumulative], ...]
 
@@ -1038,7 +1040,6 @@ def segment_cropper(segment, **kwargs):
 
 
 def random_crop(input_data, **kwargs):
-
     """
     Random Crop:
         Randomly cropping a set of long input segments. A set of output segments of the same size are generated.
@@ -1372,7 +1373,6 @@ time_shift_contracts["input_contract"].extend(
 ##########################################################
 @augmenter(code=codes["resize_segment"], force_remove_originals=True)
 def resize_segment(segment, **kwargs):
-
     """
     Resize Segment:
         Resizing segments. Segment is padded with the average within a window or with the input padding value.

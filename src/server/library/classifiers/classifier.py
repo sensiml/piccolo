@@ -202,9 +202,9 @@ class Classifier(object):
             "ConfusionMatrix": confusion_matrix,
             "accuracy": stats_obj.accuracy if len(set(y_true)) > 1 else None,
             "sensitivity": stats_obj.sensitivity if len(set(y_true)) > 1 else None,
-            "positive_predictive_rate": stats_obj.positive_predictive_rate
-            if len(set(y_true)) > 1
-            else None,
+            "positive_predictive_rate": (
+                stats_obj.positive_predictive_rate if len(set(y_true)) > 1 else None
+            ),
             "f1_score": stats_obj.f1_score if len(set(y_true)) > 1 else None,
             "precision": stats_obj.precision if len(set(y_true)) > 1 else None,
             "specificity": None,

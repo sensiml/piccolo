@@ -33,7 +33,7 @@ def activity_pipeline_sandbox(dsk, query_name):
             "Zero Crossing Rate",
         ],
         params={"group_columns": ["Subject", "Activity", "window_id"]},
-        function_defaults={"columns": [u"AccelerometerY"]},
+        function_defaults={"columns": ["AccelerometerY"]},
     )
 
     dsk.pipeline.add_feature_selector(
