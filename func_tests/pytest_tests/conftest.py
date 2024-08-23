@@ -139,11 +139,7 @@ def ClientConnectionSession(request, SensiMLImportSession):
 
 @pytest.fixture(scope="session")
 def DataDir(request):
-<<<<<<< HEAD
-    data_dir = os.path.join(os.path.dirname(__file__),'data')
-=======
     data_dir = os.path.join(os.path.dirname(__file__), "data")
->>>>>>> 196245ee (# This is a combination of 4 commits.)
 
     return data_dir
 

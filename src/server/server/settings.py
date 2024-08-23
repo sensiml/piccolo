@@ -44,7 +44,7 @@ def load_env(filename=".env", dir=os.path.dirname(__file__)):
 
 env = environ.Env(
     ENVIRONMENT=(str, ""),
-    SECRET_KEY=(str,"asdf"),
+    SECRET_KEY=(str, "asdf"),
     ALLOWED_HOSTS=(str, "localhost"),
     DEBUG=(bool, False),
     EMAIL_FROM_ADDRESS=(str, "info@sensiml.com"),
@@ -108,7 +108,6 @@ env = environ.Env(
     GOOGLE_OAUTH_CLIENT_SECRET=(str, ""),
     GOOGLE_ACCESS_TOKEN_OBTAIN_URL=(str, ""),
     GOOGLE_USER_INFO_URL=(str, ""),
-
     OAUTH_CALLBACK_WEBUI_URL=(str, "/auth/oauth-callback/"),
     OAUTH_CALLBACK_MPLADV_URL=(str, "http://localhost:3000/"),
     CAPTURE_VIDEO_MAX_MB=(int, 5000),
@@ -543,7 +542,9 @@ WSGI_APPLICATION = "server.wsgi.application"
 
 if env("RANDOM_TEST_DATABASE"):
     letters = string.ascii_letters
-    test_database = "test_piccolodb_" + "".join(random.choice(letters) for i in range(10))
+    test_database = "test_piccolodb_" + "".join(
+        random.choice(letters) for i in range(10)
+    )
 else:
     test_database = "test_piccolodb"
 

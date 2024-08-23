@@ -25,12 +25,31 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('datamanager', '0001_initial'),
+        ("datamanager", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='knowledgepack',
-            options={'permissions': (('can_get_source', 'Can get source builds of knowledgepacks'), ('can_get_enterprise', 'Can get enterprise builds of knowledgepacks'), ('can_get_developer', 'Can get developer builds of knowledgepacks'), ('has_classification_limit', 'Has limited number of classifications on binary builds.'), ('has_sample_rate_limit', 'Sample rate of knowledgepack device limited to < 10kHz')), 'verbose_name': 'Knowledge Pack', 'verbose_name_plural': 'Knowledge Packs'},
+            name="knowledgepack",
+            options={
+                "permissions": (
+                    ("can_get_source", "Can get source builds of knowledgepacks"),
+                    (
+                        "can_get_enterprise",
+                        "Can get enterprise builds of knowledgepacks",
+                    ),
+                    ("can_get_developer", "Can get developer builds of knowledgepacks"),
+                    (
+                        "has_classification_limit",
+                        "Has limited number of classifications on binary builds.",
+                    ),
+                    (
+                        "has_sample_rate_limit",
+                        "Sample rate of knowledgepack device limited to < 10kHz",
+                    ),
+                ),
+                "verbose_name": "Knowledge Pack",
+                "verbose_name_plural": "Knowledge Packs",
+            },
         ),
     ]

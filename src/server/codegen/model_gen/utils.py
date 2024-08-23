@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
+
 def get_number_classifiers(models_data, classifier_type):
     num_classifiers = 0
     for model in models_data:

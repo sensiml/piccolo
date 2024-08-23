@@ -17,7 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
-﻿import pytest
+import pytest
 from datamanager.models import KnowledgePack, Project, Sandbox
 from engine.recognitionengine import clean_feature_cascade
 

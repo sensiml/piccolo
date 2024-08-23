@@ -40,10 +40,8 @@ def check_active(user):
         raise PermissionDenied
 
 
-
 class OAuth2TokenMiddleware(BaseOAuth2TokenMiddleware, MiddlewareMixin):
     """Override OAuth2 Middleware to not enforce CSRFTokens when authenticated."""
-    
 
     def process_request(self, request):
         super(OAuth2TokenMiddleware, self).process_request(request)

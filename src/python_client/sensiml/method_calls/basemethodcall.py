@@ -17,6 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 """
 
+
 class BaseMethodCall(object):
     """The base class for calls to functions.
     Child classes have their own additional properties and overwrite this docstring.
