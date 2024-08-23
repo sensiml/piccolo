@@ -21,7 +21,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 /* eslint-disable max-len */
 import React from "react";
 import { SvgIcon } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 export default ({ color, ...props }) => {
   const useStyles = () =>
