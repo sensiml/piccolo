@@ -2,11 +2,10 @@ id: custom_sensiml
 package: sensiml
 label: Sensiml Knowledge Pack
 description: >
-  This component provides a knowledge pack for a sensiml generated machine learning module.
+  This component provides a machine learning module for running inference on the xg24 using the nn-MVP.
 category: sensiml
 quality: production
 requires:
-  - name: tensorflow_lite_micro
   - name: mvp 
   - name: iostream_eusart
 provides:
