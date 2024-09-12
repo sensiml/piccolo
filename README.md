@@ -1,7 +1,7 @@
 ![Piccolo AI Banner Image](https://sensiml.org/wp-content/uploads/2024/07/piccolo_github_banner.png)
 ## About Piccolo AI<sup>™</sup>
 
-Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/), a software development toolkit for constructing sensor-based AI inference models optimzed to run on low-power microcontrollers and IoT edge platforms (ex. x86 embedded PCs, RPi, arm Cortex-A mobile processors).  Piccolo AI is intended for individual developers, researchers, and AI enthusiasts and made available under the AGPLv3 license. For enterprise teams contact SensiML for a licensed enterprise version of the software.
+Piccolo AI is the open-source version of [SensiML Analytics Studio](https://sensiml.com/services/toolkit/analytics-studio/), a software development toolkit for constructing sensor-based AI inference models optimzed to run on low-power microcontrollers and IoT edge platforms (ex. x86 embedded PCs, RPi, arm Cortex-A mobile processors).  Piccolo AI is intended for individual developers, researchers, and AI enthusiasts and made available under the AGPLv3 license.
 
 The Piccolo AI project includes:
 
