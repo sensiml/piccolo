@@ -29,7 +29,7 @@ Piccolo AI is not limited to only the applications listed above.  Virtually any 
 
 The simplest way to get started learning and using the features in Piccolo AI is to sign up for an account on SensiML's managed SaaS service at [SensiML Free Trial](https://sensiml.com/plans/trial/).
 
-If you prefer to install and manage Piccolo AI yourself, you can get the latest version on [GitHub](https://github.com/sensiml/piccolo).
+To install and manage Piccolo AI yourself, continue with the instructions and step-by-step installation video provided below.
 
 ## Run Piccolo AI Locally
 
