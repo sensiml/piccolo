@@ -283,6 +283,12 @@ def get_pipeline_status(project_id, sandbox_id):
     return pipeline_status, message, detail
 
 
+def get_is_pipeline_active(project_uuid, sandbox_uuid):
+    result = get_pipeline_task_id_status(project_uuid, sandbox_uuid)
+    pipeline_status = result.status
+    return pipeline_status in ["PENDING", "SENT", "STARTED"]
+
+
 def set_pipeline_to_active(project_uuid, sandbox_uuid, execution_type):
     sandbox = Sandbox.objects.get(uuid=sandbox_uuid)
     sandbox.active = True
