@@ -82,7 +82,7 @@ const SelectMultiChip = ({
         onChange(name, defaultValue);
       }
     }
-  }, [options]);
+  }, []);
 
   useEffect(() => {
     if (isObserveDefaultValue) {

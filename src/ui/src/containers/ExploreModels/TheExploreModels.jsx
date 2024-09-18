@@ -49,7 +49,7 @@ function a11yProps(index) {
   };
 }
 
-const ExploreModels = ({ model }) => {
+const ExploreModels = ({ model, selectedModel, setSelectedModel }) => {
   const classes = useStyles();
   const { projectUUID, modelUUID } = useParams();
 
@@ -66,6 +66,12 @@ const ExploreModels = ({ model }) => {
     setModelData(model);
     if (model) setLoadingModelData(model.isFetching);
   }, [model]);
+
+  useEffect(() => {
+    if (modelUUID && modelUUID !== selectedModel) {
+      setSelectedModel(modelUUID);
+    }
+  }, [modelUUID]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
