@@ -341,6 +341,11 @@ class KnowledgePackExportSerializer(serializers.ModelSerializer):
 
     def get_query_summary(self, obj):
 
+        empty_dict = {}
+
+        if not hasattr(obj, "query_summary") or not obj.query_summary:
+            return empty_dict  # for backward compatibility
+
         obj.query_summary.pop("segment_info", None)
 
         if isinstance(obj.query_summary["segmenter"], int):
