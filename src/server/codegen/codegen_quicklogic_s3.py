@@ -100,20 +100,26 @@ class QuickLogicS3CodeGenerator(KnowledgePackCodeGeneratorBase, DeviceCommandMix
         self.fill_build_files(kb_data, kp_base_dir)
 
         if self.is_tensorflow(classifier_types):
-            logger.debug(
-                {
-                    "message": "Building Tensorflow Library",
-                    "log_type": "KPID",
-                    "UUID": self.uuid,
-                }
-            )
-            self.docker_libtensorflow.set_tensorflow_compile(
-                platform="cortex_m_generic",
-                target_arch="cortex-m4+fp",
-                hardware_accelerator=self.platform.hardware_accelerator_kernel,
-            )
-            self.docker_libtensorflow.build_code_bin(build_type, self.application)
-            self.docker_libsensiml.compile_tensorflow = True
+
+            if self.nn_inference_engine == "nnom":
+                self.docker_nnom.build_code_bin(build_type, self.application)
+                self.compile_nnom = True
+
+            if self.nn_inference_engine == "tf_micro":
+                logger.debug(
+                    {
+                        "message": "Building Tensorflow Library",
+                        "log_type": "KPID",
+                        "UUID": self.uuid,
+                    }
+                )
+                self.docker_libtensorflow.set_tensorflow_compile(
+                    platform="cortex_m_generic",
+                    target_arch="cortex-m4+fp",
+                    hardware_accelerator=self.platform.hardware_accelerator_kernel,
+                )
+                self.docker_libtensorflow.build_code_bin(build_type, self.application)
+                self.docker_libsensiml.compile_tensorflow = True
 
         return self.docker_libsensiml.build_code_bin(self.build_type, self.application)
 

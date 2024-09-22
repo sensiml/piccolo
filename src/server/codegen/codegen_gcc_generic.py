@@ -90,13 +90,19 @@ class GCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
             )
 
         if self.is_tensorflow(classifier_types):
-            self.external_library_files += [
-                (
-                    os.path.join("libsensiml", "libtensorflow-microlite.a"),
-                    "libsensiml/libtensorflow-microlite.a",
-                )
-            ]
-            self.kb_generated_files.append("micro_api.h")
+
+            if self.nn_inference_engine == "nnom":
+                self.docker_nnom.build_code_bin(build_type, self.application)
+                self.compile_nnom = True
+
+            if self.nn_inference_engine == "tf_micro":
+                self.external_library_files += [
+                    (
+                        os.path.join("libsensiml", "libtensorflow-microlite.a"),
+                        "libsensiml/libtensorflow-microlite.a",
+                    )
+                ]
+                self.kb_generated_files.append("micro_api.h")
 
         self.copy_application_files(
             output_data=kb_data,

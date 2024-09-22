@@ -614,8 +614,9 @@ class ModelGraphMixin(object):
         elif classifier_config["classifier"] in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
+            "Neural Network"
         ]:
-            return {"classifier": "TensorFlow Lite for Microcontrollers"}
+            return {"classifier": "Neural Network"}
 
         elif classifier_config["classifier"] in ["Linear Regression"]:
             return {"classifier": "Linear Regression"}

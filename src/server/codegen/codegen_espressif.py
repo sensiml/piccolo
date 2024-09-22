@@ -80,36 +80,41 @@ class EspressifCodeGenerator(KnowledgePackCodeGeneratorBase):
             kb_data["use_test_data"] = ["#define SML_USE_TEST_DATA"]
 
         if self.is_tensorflow(classifier_types):
-            raise Exception(
-                "TensorFlow is not currently supported by the ESPRESSIF compiler"
-            )
+            if self.nn_inference_engine == "nnom":
+                self.docker_nnom.build_code_bin(build_type, self.application)
+                self.compile_nnom = True
 
-            proc = self.platform.target_processor
-
-            target_processor = proc.compiler_cpu_flag.split("=")[1]
-
-            if proc is None or proc.architecture.id != 1:
-                raise KnowledgePackGenerationError(
-                    "TensorFlow Lite Micro  is not supported currently for the enabled for this processor"
+            if self.nn_inference_engine == "tf_micro":
+                raise Exception(
+                    "TensorFlow Lite for Microcontrollers is not currently supported by the ESPRESSIF compiler"
                 )
 
-            platform = "m5stickc_plus"  # platform = "mplab_xc32"
+                proc = self.platform.target_processor
 
-            logger.debug(
-                {
-                    "message": "Building Tensorflow Library",
-                    "log_type": "KPID",
-                    "UUID": self.uuid,
-                }
-            )
+                target_processor = proc.compiler_cpu_flag.split("=")[1]
 
-            self.docker_libtensorflow.set_tensorflow_compile(
-                platform=platform,
-                target_arch=target_processor,
-                hardware_accelerator=self.platform.hardware_accelerator_kernel,
-            )
-            self.docker_libtensorflow.build_code_bin("source", self.application)
-            self.docker_libsensiml.compile_tensorflow = True
+                if proc is None or proc.architecture.id != 1:
+                    raise KnowledgePackGenerationError(
+                        "TensorFlow Lite Micro  is not supported currently for the enabled for this processor"
+                    )
+
+                platform = "m5stickc_plus"  # platform = "mplab_xc32"
+
+                logger.debug(
+                    {
+                        "message": "Building Tensorflow Library",
+                        "log_type": "KPID",
+                        "UUID": self.uuid,
+                    }
+                )
+
+                self.docker_libtensorflow.set_tensorflow_compile(
+                    platform=platform,
+                    target_arch=target_processor,
+                    hardware_accelerator=self.platform.hardware_accelerator_kernel,
+                )
+                self.docker_libtensorflow.build_code_bin("source", self.application)
+                self.docker_libsensiml.compile_tensorflow = True
 
         self.copy_application_files(
             output_data=kb_data,

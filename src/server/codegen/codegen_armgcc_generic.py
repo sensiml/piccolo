@@ -89,6 +89,7 @@ class ARMGCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
             )
 
         if self.is_tensorflow(classifier_types):
+            
             proc = self.platform.target_processor
 
             target_arch = proc.compiler_cpu_flag.split("=")[1]
@@ -99,6 +100,7 @@ class ARMGCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
             if "softfp" in self.device_config["float_options"]:
                 target_arch += "+sfp"
 
+        
             if proc is None:
                 raise KnowledgePackGenerationError(
                     "TensorFlow Lite Micro  is not supported currently for the enabled for this processor"
@@ -120,13 +122,18 @@ class ARMGCCGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
                 }
             )
 
-            self.docker_libtensorflow.set_tensorflow_compile(
-                platform=platform,
-                target_arch=target_arch,
-                hardware_accelerator=self.platform.hardware_accelerator_kernel,
-            )
-            self.docker_libtensorflow.build_code_bin(build_type, self.application)
-            self.docker_libsensiml.compile_tensorflow = True
+            if self.nn_inference_engine == "nnom":
+                self.docker_nnom.build_code_bin(build_type, self.application)
+                self.compile_nnom = True
+
+            if self.nn_inference_engine == "tf_micro":
+                self.docker_libtensorflow.set_tensorflow_compile(
+                    platform=platform,
+                    target_arch=target_arch,
+                    hardware_accelerator=self.platform.hardware_accelerator_kernel,
+                )
+                self.docker_libtensorflow.build_code_bin(build_type, self.application)
+                self.docker_libsensiml.compile_tensorflow = True
 
         self.copy_application_files(
             output_data=kb_data,

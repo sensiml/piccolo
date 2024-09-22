@@ -163,6 +163,5 @@ src/server/library/fixtures/platforms_v2.inc
 func_tests/pytest_tests/output.json
 func_tests/pytest_tests/pytest_html_report.html
 func_tests/pytest_tests/report.html
-src/server/library/fixtures/platforms_v2.yml
 src/embedded_ml_sdk/utest/out/
 src/embedded_ml_sdk/utest/build/

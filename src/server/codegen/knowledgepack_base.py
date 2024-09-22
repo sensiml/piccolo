@@ -86,6 +86,7 @@ class KnowledgePackCodeGeneratorBase(
         platform_id = self.device_config["target_platform"]
         self.platform = KnowledgePackPlatformMapper(platform_id, self.device_config)
         self.application = device_conf.get("application")
+        self.nn_inference_engine = device_conf.get("nn_inference_engine")
 
         self.add_profile_data = self.device_config.get("profile_data", False)
         self.build_type = build_type
@@ -101,6 +102,7 @@ class KnowledgePackCodeGeneratorBase(
             "package_library.sh",
         ]
         self.compile_tensorflow = False
+        self.compile_nnom = False
 
         base_code_dir = "{0}/{1}".format(settings.SERVER_CODEGEN_ROOT, self.uuid)
 
@@ -115,6 +117,15 @@ class KnowledgePackCodeGeneratorBase(
         )
 
         self.docker_libtensorflow = get_docker_runner("tensorflow")(
+            base_code_dir,
+            self.uuid,
+            self.task_id,
+            device_conf.get("debug", False),
+            self.platform,
+            self.device_config,
+        )
+        
+        self.docker_nnom = get_docker_runner("nnom")(
             base_code_dir,
             self.uuid,
             self.task_id,
@@ -169,7 +180,10 @@ class KnowledgePackCodeGeneratorBase(
 
         if "TensorFlow Lite for Microcontrollers" in classifier_types:
             return True
-
+        
+        if "Neural Network" in classifier_types:
+            return True
+        
         return False
 
     def ensure_path_exists(self, dir_path):

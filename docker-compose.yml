@@ -116,7 +116,7 @@ services:
     user: sml-app
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 4
     volumes:
       - server_data:/home/sml-app/data/
       - server_libs:/home/sml-app/install/lib/

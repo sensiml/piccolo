@@ -281,12 +281,17 @@ class FillFilesMixin(object):
             )
 
         if self.is_tensorflow(classifier_types):
-            self.fill_classifier_support(
-                output_data, os.path.join(out_dir, libfolder), "tf_micro"
-            )
-            self.fill_trained_models(
-                output_data, os.path.join(out_dir, libfolder), "tf_micro"
-            )
+            if self.nn_inference_engine == "nnom":
+                    #TODO: NNoM
+                    pass
+
+            if self.nn_inference_engine == "tf_micro":
+                self.fill_classifier_support(
+                    output_data, os.path.join(out_dir, libfolder), "tf_micro"
+                )
+                self.fill_trained_models(
+                    output_data, os.path.join(out_dir, libfolder), "tf_micro"
+                )
 
     def fill_classifier_support(self, output_data, out_dir, classifier_type):
         file_dir = os.path.join(

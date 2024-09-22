@@ -110,6 +110,7 @@ def validate_request_info_v2(data, knowledgepack_id):
     hardware_accelerator = data.get("hardware_accelerator", "")
     kb_description = data.get("kb_description", None)
     selected_application = data.get("application", None)
+    nn_inference_engine = data.get("nn_inference_engine", "nnom")
 
     platform = PlatformDescriptionVersion2.objects.get(uuid=target_platform)
     processor = ProcessorDescription.objects.get(uuid=target_processor)
@@ -146,6 +147,7 @@ def validate_request_info_v2(data, knowledgepack_id):
     data["target_processor"] = processor
     data["float_options"] = float_options
     data["extra_build_flags"] = extra_build_flags
+    data["nn_inference_engine"] = nn_inference_engine
 
     kb_description = validate_kb_description(kb_description, knowledgepack_id)
 

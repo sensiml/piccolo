@@ -88,6 +88,7 @@ def create_classifier_structures(models):
         if model["classifier_config"].get("classifier", "PME") in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
+            "Neural Network"
         ]:
             outputs.extend(
                 create_tf_micro_classifier_arrays(iterations, model["model_arrays"])

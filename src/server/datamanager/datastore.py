@@ -193,7 +193,10 @@ class LocalDataStoreService:
             logger.error({"message": err, "log_type": "datamanager"})
 
     def copy(self, key: str, new_key: str, directory: str):
-        return copyfile(os.path.join(directory, key), os.path.join(directory, new_key))
+        print("FOLD", self._fold(""))
+        print("Copy", self._fold(key))
+        print("TO", os.path.join(directory, new_key))
+        return copyfile(self._fold(key), os.path.join(directory, new_key))
 
     def copy_to_folder(self, key: str, new_key: str, new_directory: str):
         print(f"DATASTORE SERVICE: Copy from {self._fold(key)}")

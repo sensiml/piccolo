@@ -110,6 +110,10 @@ def is_tensorflow(ModelType):
 
     if "TensorFlow Lite for Microcontrollers" in ModelType:
         return True
+    
+
+    if "Neural Network" in ModelType:
+        return True
 
     return False
 

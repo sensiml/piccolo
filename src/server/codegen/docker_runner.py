@@ -34,6 +34,7 @@ from django.conf import settings
 from requests.exceptions import ConnectionError, ReadTimeout
 from codegen.docker_libtensorflow import DockerRunnerLibTensorflowMixin
 from codegen.docker_libsensiml import DockerRunnerSensiMLMixin
+from codegen.docker_nnom import DockerRunnerNNoMMixin
 from codegen.docker_errors import (
     CompilationErrorException,
     ExitCodeNonZeroException,
@@ -235,6 +236,12 @@ def get_docker_runner(docker_type: str):
 
         class DockerRunner(DockerRunnerLibTensorflowMixin, DockerRunnerBaseMixin):
             pass
+
+    elif docker_type == "nnom":
+
+        class DockerRunner(DockerRunnerNNoMMixin, DockerRunnerBaseMixin):
+            pass
+
 
     elif docker_type == "sensiml":
 

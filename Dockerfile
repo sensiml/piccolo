@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.11
 ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install --no-install-recommends --yes libusb-1.0-0-dev postgresql-client curl software-properties-common sudo \
     && useradd -m sml-app && adduser sml-app sudo && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers

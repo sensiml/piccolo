@@ -110,6 +110,7 @@ class TrainMixin(object):
         model_fill["Bonsai"] = "ret = 0;"
         model_fill["TF Micro"] = "ret = 0;"
         model_fill["TensorFlow Lite for Microcontrollers"] = "ret = 0;"
+        model_fill["Neural Network"] = "ret = 0;"
 
         return self.create_case_fill_template(models_data, model_fill)
 

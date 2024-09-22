@@ -197,7 +197,7 @@ class CodeGenMixin(TrainMixin):
         return kb_data, classifier_types
 
     def create_tensorflow_build_flags(self, models):
-        cflags = """
+        tf_micro_cflags = """
 ifeq ($(BUILD_TENSORFLOW), y)
     LDLIBS += -ltensorflow-microlite
     CFLAGS += -DTF_LITE_STATIC_MEMORY -DNDEBUG -DGEMMLOWP_ALLOW_SLOW_SCALAR_FALLBACK -DTF_LITE_STATIC_MEMORY
@@ -205,14 +205,25 @@ endif
 """
         for model in models:
             if self.is_tensorflow(model["classifier_config"]["classifier"]):
-                return cflags
+                if self.nn_inference_engine == "nnom":
+                    #TODO: NNoM
+                    pass
+
+                if self.nn_inference_engine == "tf_micro":
+                    return tf_micro_cflags
+
 
         return ""
 
     def create_kb_model_tf_micro_binary(self, models):
         for model in models:
             if self.is_tensorflow(model["classifier_config"]["classifier"]):
-                return model["model_arrays"]["tflite"]
+                if self.nn_inference_engine == "nnom":
+                    #TODO: NNoM
+                    pass
+
+                if self.nn_inference_engine == "tf_micro":
+                    return model["model_arrays"]["tflite"]
 
     def create_sml_classification_result_info(self, models_data):
         model_fill = {}
@@ -297,12 +308,12 @@ endif
             return 3
         elif classifier_type in ["Bonsai"]:
             return 4
-        elif classifier_type in ["TF Micro", "TensorFlow Lite for Microcontrollers"]:
+        elif classifier_type in ["TF Micro", "TensorFlow Lite for Microcontrollers", "Neural Network"]:
             return 5
         elif classifier_type in ["Linear Regression"]:
             return 6
         else:
-            raise Exception("Not a supported Classifier Type for code generation")
+            raise Exception(f"{classifier_type} not supported Classifier Type for code generation")
 
     def create_debug_flagging(self):
         ret = []
@@ -338,8 +349,13 @@ endif
             output.append('#include "bonsai_trained_models.h"')
 
         if self.is_tensorflow(classifier_types):
-            output.append('#include "tf_micro.h"')
-            output.append('#include "tf_micro_trained_models.h"')
+            if self.nn_inference_engine == "nnom":
+                #TODO: NNoM
+                pass
+
+            if self.nn_inference_engine == "tf_micro":
+                output.append('#include "tf_micro.h"')
+                output.append('#include "tf_micro_trained_models.h"')
 
         if "Linear Regression" in classifier_types:
             output.append('#include "linear_regression.h"')
@@ -363,7 +379,12 @@ endif
             output.append('#include "bonsai.h"')
 
         if self.is_tensorflow(classifier_types):
-            output.append('#include "tf_micro.h"')
+            if self.nn_inference_engine == "nnom":
+                #TODO: NNoM
+                pass
+
+            if self.nn_inference_engine == "tf_micro":
+                output.append('#include "tf_micro.h"')
 
         if "Linear Regression" in classifier_types:
             output.append('#include "linear_regression.h"')
@@ -397,7 +418,12 @@ endif
             output.append(c_line(1, "bonsai_init(bonsai_classifier_rows, 0);"))
 
         if self.is_tensorflow(classifier_types):
-            output.append(c_line(1, "tf_micro_init(tf_micro_classifier_rows, 0);"))
+            if self.nn_inference_engine == "nnom":
+                #TODO: NNoM
+                pass
+
+            if self.nn_inference_engine == "tf_micro":
+                output.append(c_line(1, "tf_micro_init(tf_micro_classifier_rows, 0);"))
 
         if "Linear Regression" in classifier_types:
             output.append(
@@ -452,11 +478,18 @@ endif
             elif model["classifier_config"]["classifier"] in [
                 "TF Micro",
                 "TensorFlow Lite for Microcontrollers",
+                "Neural Network"
             ]:
-                output_str += c_line(
-                    1,
-                    "ret = tf_micro_simple_submit(kb_model->classifier_id, kb_model->pfeature_vector, kb_model->pmodel_results);",
-                )
+                if self.nn_inference_engine=='tf_micro':
+                    output_str += c_line(
+                        1,
+                        "ret = tf_micro_simple_submit(kb_model->classifier_id, kb_model->pfeature_vector, kb_model->pmodel_results);",
+                    )
+                if self.nn_inference_engine=='nnom':
+                        output_str += c_line(
+                        1,
+                        "ret = nnom_simple_submit(kb_model->classifier_id, kb_model->pfeature_vector, kb_model->pmodel_results);",
+                    )
             else:
                 raise Exception("Classifier is not supported for codegeneration.")
 
