@@ -210,6 +210,11 @@ class LocalDataStoreService:
         except:
             pass
 
+    def create_url(self, *_args, **_kwargs):
+        raise NotImplementedError(
+            "Current datastore provider doesn't support direct cloud uploading"
+        )
+
 
 class LocalDataStoreBuilder(object):
     def __call__(self, bucket: str = "", folder: str = "", **_ignored):
