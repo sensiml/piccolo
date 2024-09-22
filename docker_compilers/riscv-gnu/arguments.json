@@ -1,0 +1,8 @@
+
+[
+    {
+        "repository": "sensiml/riscv-gnu",
+        "tag": "2024.09.03",
+        "build_args": {}
+    }
+]
