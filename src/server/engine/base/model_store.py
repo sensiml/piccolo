@@ -54,14 +54,13 @@ def get_model_store(project_uuid):
     return model_store
 
 
-def download_model(project_uuid, pipeline_id, model_id):
+def download_model(project_uuid, pipeline_id, model_id, path):
 
     model_store = get_model_store(project_uuid)
 
-    target = f"downloaded-model"
-    os.makedirs(target, exist_ok=True)
+    os.makedirs(path, exist_ok=True)
     model_path = model_store.download(
-        local_path=target,
+        local_path=path,
         domain=pipeline_id,
         model_id=model_id,
     )

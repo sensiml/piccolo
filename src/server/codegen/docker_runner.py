@@ -217,8 +217,9 @@ class DockerRunnerLocal(DockerBase):
                     "Failed to generate output!"
                 )
             finally:
+                pass
                 # Remove container on success. Maybe just do it anyway.
-                client.api.remove_container(resource_id=container_to_run.get("Id"))
+                # client.api.remove_container(resource_id=container_to_run.get("Id"))
         else:
             raise ExitCodeNonZeroException(container_returns)
 

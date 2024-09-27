@@ -79,6 +79,10 @@ class TrainFullyConnectedNeuralNetwork(NeuralNetworkBase):
     def initialize_model(self, x_train, y_train):
 
         tf_model = Sequential()
+        
+        tf_model.add(
+                layers.Input(shape=(x_train.shape[1],))
+        )
 
         layer_index = self._params["dense_layers"][0]
         layer_uuid = str(uuid.uuid4()).split("-")[0]
@@ -86,7 +90,6 @@ class TrainFullyConnectedNeuralNetwork(NeuralNetworkBase):
         tf_model.add(
             layers.Dense(
                 layer_index,
-                input_dim=x_train.shape[1],
                 name=f"dense_layer_{layer_index}_{layer_uuid}",
             )
         )

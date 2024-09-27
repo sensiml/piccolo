@@ -76,13 +76,14 @@ from nnom import generate_model
 import pandas as pd
 
 root_dir=sys.argv[1]
-model_path=os.path.join(root_dir,'model.h5')
+model_path=os.path.join(root_dir,'model')
 x_test = pd.read_csv(os.path.join(root_dir, 'test.csv'))
 
 model = load_model(model_path)
 
+print(model)
 input_shape=model.layers[0].input_shape 
-reshape_to = [-1]+[x for x in input_shape[0][1:]]
+reshape_to = [-1]+[x for x in input_shape[1:]]
 
 features = x_test[[x for x in x_test.columns if 'gen_' in x]].values
 

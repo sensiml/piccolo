@@ -27,6 +27,7 @@ from shutil import copyfile
 from codegen.codegen_platform_mapper import KnowledgePackPlatformMapper
 from django.conf import settings
 from datamanager.featurefile import _get_featurefile_datastore,_get_featurefile_name
+from engine.base.model_store import download_model
 
 
 logger = logging.getLogger(__name__)
@@ -125,7 +126,9 @@ class DockerRunnerNNoMMixin:
         data.to_csv(os.path.join(self.root_dir,'test.csv'))
         
         ## TODO: NNOM GET MODELSTORE H5 FILE
-       
+        model_info = self.obj.neuron_array['model_store']['model']
+        download_path = download_model(model_info['root'], model_info['domain'], model_info['model_id'], os.path.join(self.root_dir))
+        print(download_path)
         copyfile(
             os.path.join(
                 settings.CODEGEN_PLATFORM_DIR,
