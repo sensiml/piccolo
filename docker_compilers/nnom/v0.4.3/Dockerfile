@@ -8,7 +8,7 @@ awscli  > /dev/null \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
 
-RUN pip install git+https://github.com/majianjia/nnom@master pandas && git clone https://github.com/majianjia/nnom.git
+RUN git clone https://github.com/cknorow-sensiml/nnom/ && cd nnom && pip install . && pip install pandas
 WORKDIR /
 ADD run_build.sh /
 

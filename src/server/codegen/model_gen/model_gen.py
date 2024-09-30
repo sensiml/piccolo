@@ -24,6 +24,7 @@ from codegen.model_gen import (
     linear_regression,
     pme,
     tf_micro,
+    nnom
 )
 from django.core.exceptions import ValidationError
 

@@ -350,8 +350,8 @@ endif
 
         if self.is_tensorflow(classifier_types):
             if self.nn_inference_engine == "nnom":
-                #TODO: NNoM
-                pass
+                output.append('#include "nnom.h"')
+                output.append('#include "nnom_middleware.h"')
 
             if self.nn_inference_engine == "tf_micro":
                 output.append('#include "tf_micro.h"')
