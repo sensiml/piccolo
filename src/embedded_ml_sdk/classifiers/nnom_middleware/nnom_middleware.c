@@ -25,33 +25,39 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 float results[NNOM_MAX_NUMBER_REULTS];
 
-nnom_classifier_rows_t NNOMClassifierTable;
+nnom_classifier_rows_t nnom_classifier_rows;
+float probability;
+int32_t label;
 
-uint8_t tf_micro_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vector, model_results_t *model_results)
+int last_nnom_initialized = 0;
+nnom_model_t* model;
+uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vector, model_results_t *model_results)
 {
     uint8_t y = 1;
     float max_result = 0;
 
     if (last_nnom_initialized != classifier_id)
     {
-        micro_model_setup(NNOMClassifierTable[classifier_id].model_data, NNOMClassifierTable[classifier_id].kTensorArenaSize, NNOMClassifierTable[classifier_id].tensor_arena);
-        last_nnom_initialized = classifier_id;
+            model = nnom_model_create();
+            //nnom_classifier_rows[0].model=model
+            last_nnom_initialized = classifier_id;
     }
 
-    memcpy(nnom_input_data, feature_vector.data, feature_vector.size);
-    nnom_predict(NNOMClassifierTable[classifier_id].model, &model_results.result, &model_results.output_tensor);
+    memcpy(nnom_input_data, feature_vector->data, feature_vector->size);
+    nnom_predict(nnom_classifier_rows[classifier_id].model, &label, &probability);
 
 
     // regression
-    if (NNOMClassifierTable[classifier_id].estimator_type == ESTIMATOR_TYPE_REGRESSION)
+    if (nnom_classifier_rows[classifier_id].estimator_type == ESTIMATOR_TYPE_REGRESSION)
     {
-        return (uint8_t)results[0];
+        return (uint8_t)label;
     }
 
     // classification
+    /*
     max_result = results[0];
     model_results->output_tensor->data[0] = (int16_t)results[0];
-    for (int32_t i = 1; i < NNOMClassifierTable[classifier_id].num_outputs; i++)
+    for (int32_t i = 1; i < nnom_classifier_rows[classifier_id].num_outputs; i++)
     {
         if (results[i] > max_result)
         {
@@ -61,30 +67,33 @@ uint8_t tf_micro_simple_submit(uint8_t classifier_id, feature_vector_t *feature_
         model_results->output_tensor->data[i] = (int16_t)results[i];
     }
 
-    if (max_result < NNOMClassifierTable[classifier_id].threshold)
+
+    if (max_result < nnom_classifier_rows[classifier_id].threshold)
     {
         model_results->result = 0.0f;
         return 0;
     }
-
-    model_results->result = (float)y;
-
-    return y;
+    
+    */
+    model_results->result = (float)label;
+    
+    return float(label);
 }
 
-void nnom_init(tf_micro_classifier_rows_t *classifier_table, const uint8_t num_classifiers)
+void nnom_init(nnom_classifier_rows_t *classifier_table, const uint8_t num_classifiers)
 {
     model = nnom_model_create();
-    NNOMClassifierTable = classifier_table;
-    NNOMClassifierTable[0].model=model
+    nnom_classifier_rows = classifier_table;
+    nnom_classifier_rows[0].model=model
+    last_nnom_initialized=0
 
 }
 
 void nnom_model_results_object(int32_t classifier_id, model_results_t *model_results)
 {
-    for (int32_t i = 0; i < NNOMClassifierTable[classifier_id].num_outputs; i++)
+    for (int32_t i = 0; i < nnom_classifier_rows[classifier_id].num_outputs; i++)
     {
         model_results->output_tensor->data[i] = results[i];
     }
-    model_results->output_tensor->size = NNOMClassifierTable[classifier_id].num_outputs;
+    model_results->output_tensor->size = nnom_classifier_rows[classifier_id].num_outputs;
 }

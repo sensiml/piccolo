@@ -194,6 +194,8 @@ build_lib(){
 
     build_tensorflow $1
 
+    cp -r nnom/* .
+
     LIB_TENSORFLOW_FILE=libtensorflow-microlite.a
     if [ -f "$LIB_TENSORFLOW_FILE" ]; then
 	    build_tensorflow=y

@@ -32,12 +32,12 @@ SIZE            := '$(GNU_INSTALL_ROOT)/bin/size'
 THIS_DIR          := $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 OUT               := $(abspath $(THIS_DIR))/_build
 
-DEBUG_FLAGS = -O0 -g3
-CXXFLAGS += -std=c++11 -fno-builtin -DKBSIM -D__GNUC_PYTHON__
+DEBUG_FLAGS = -O0 -g3 -fpermissive -Wnarrowing
+CXXFLAGS += -fno-builtin -DKBSIM -D__GNUC_PYTHON__ 
 CXXFLAGS += $(SML_FLAGS)
 
 LDFLAGS += -L/include -L./
-IFLAGS += -I/include
+IFLAGS += -I/include -I/layers -I./
 LDLIBS += -lm
 
 // FILL_TENSORFLOW_BUILD_FLAGS
@@ -48,9 +48,14 @@ OBJS = $(patsubst %.c,$(OUT)/%.o,$(SRCS))
 
 // FILL_MAKEFILE_LIBRARY_NAME_MAIN
 
+#$(OUT)/%.o:$(THIS_DIR)/%.c
+#		@echo $(ANSI_RED)"[cPP]"$(ANSI_OFF) $@
+#		$(AT)$(CXX) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -fPIC -c -o $@ $< $(LDLIBS)
+
+
 $(OUT)/%.o:$(THIS_DIR)/%.c
 		@echo $(ANSI_RED)"[cPP]"$(ANSI_OFF) $@
-		$(AT)$(CXX) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -fPIC -c -o $@ $< $(LDLIBS)
+		$(AT)$(CC) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -fPIC -c -o $@ $< $(LDLIBS)
 
 
 $(MAIN): $(OBJS)

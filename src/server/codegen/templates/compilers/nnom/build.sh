@@ -112,10 +112,11 @@ ls
 cd /build/
 mkdir libsensiml
 mkdir libsensiml/nnom
-cp /nnom/inc/* libsensiml/nnom/
+cp -r /nnom/inc/* libsensiml/nnom/
 cp /nnom/port/* libsensiml/nnom/
 cp /nnom/src/core/* libsensiml/nnom/
-cp /nnom/src/layers/* libsensiml/nnom/
+cp -r /nnom/src/layers/* libsensiml/nnom/layers/
+
 cp /nnom/src/backends/* libsensiml/nnom/
 cp nnom/weights.h libsensiml/nnom/
 cp nnom/model.h5 libsensiml/

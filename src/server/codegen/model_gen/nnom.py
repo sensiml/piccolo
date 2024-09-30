@@ -27,12 +27,89 @@ def create_classifier_arrays(model_index, model):
     pass
 
 
-def create_lassifier_struct(model_index, model):
+def create_classifier_struct(model_index, model):
     pass
 
 
 def create_classifier_structures(models):
-    pass
+    """ typedef struct nnom_classifier_rows
+        {
+            uint16_t num_inputs;
+            uint8_t num_outputs;
+            float threshold;
+            uint8_t estimator_type;
+            nnom_model_t* model;
+        } nnom_classifier_rows_t;
+    """
+    
+    outputs = []
+
+    iterations = 0
+    for model in models:
+        if model["classifier_config"].get("classifier", "PME") in [
+            "TF Micro",
+            "TensorFlow Lite for Microcontrollers",
+            "Neural Network"
+        ]:
+            #outputs.extend(
+            #    create_tf_micro_classifier_arrays(iterations, model["model_arrays"])
+            #)
+            iterations += 1
+
+    iterations = 0
+
+    outputs.append(
+        (
+            "nnom_classifier_rows_t nnom_classifier_rows[{}] = ".format(
+                utils.get_number_classifiers(
+                    models, "TF Micro"
+                )+utils.get_number_classifiers(
+                    models, "TensorFlow Lite for Microcontrollers"
+                )+utils.get_number_classifiers(
+                    models, "Neural Network"
+                )
+            )
+            + "{"
+        )
+    )
+
+    for model in models:
+        if model["classifier_config"].get("classifier", "PME") in [
+            "TF Micro",
+            "TensorFlow Lite for Microcontrollers",
+             "Neural Network"
+        ]:
+            outputs.append("\n\t{")
+            outputs.append(
+                "\t\t.num_inputs = {0},".format(model["model_arrays"]["num_inputs"])
+            )
+            outputs.append(
+                "\t\t.num_outputs = {0},".format(model["model_arrays"]["num_outputs"])
+            )
+            outputs.append(
+                "\t\t.threshold = {0},".format(
+                    model["model_arrays"].get("threshold", 0.0) * 256
+                    - 127  # convert to int8 value
+                )
+            )
+            c_estimator_type_param_map = {
+                "classification": "ESTIMATOR_TYPE_CLASSIFICATION",
+                "regression": "ESTIMATOR_TYPE_REGRESSION",
+            }
+            outputs.append(
+                "\t\t.estimator_type = {0},".format(
+                    c_estimator_type_param_map[
+                        model["model_arrays"].get("estimator_type", "classification")
+                    ]
+                )
+            )
+            outputs.append("\t},")
+            iterations += 1
+
+    outputs.append("};")
+
+    return outputs
+
 
 
 def create_max_tmp_parameters(kb_models):

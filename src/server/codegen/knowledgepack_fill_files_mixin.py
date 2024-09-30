@@ -285,9 +285,9 @@ class FillFilesMixin(object):
                 self.fill_classifier_support(
                     output_data, os.path.join(out_dir, libfolder), "nnom_middleware"
                 )
-                #self.fill_trained_models(
-                #    output_data, os.path.join(out_dir, libfolder), "nnom_middleware"
-                #)
+                self.fill_trained_models(
+                    output_data, os.path.join(out_dir, libfolder), "nnom"
+                )
 
             if self.nn_inference_engine == "tf_micro":
                 self.fill_classifier_support(
