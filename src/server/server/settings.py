@@ -46,6 +46,7 @@ env = environ.Env(
     ENVIRONMENT=(str, ""),
     SECRET_KEY=(str, "asdf"),
     ALLOWED_HOSTS=(str, "localhost"),
+    SERVER_NAME=(str, "sensiml"),
     DEBUG=(bool, False),
     EMAIL_FROM_ADDRESS=(str, "info@sensiml.com"),
     HOSTNAME=(str, "localhost"),
