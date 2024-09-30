@@ -25,7 +25,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 float results[NNOM_MAX_NUMBER_REULTS];
 
-nnom_classifier_rows_t nnom_classifier_rows;
+nnom_classifier_rows_t *nnom_classifier_rows;
 float probability;
 int32_t label;
 
@@ -77,15 +77,15 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
     */
     model_results->result = (float)label;
     
-    return float(label);
+    return (float)label; 
 }
 
 void nnom_init(nnom_classifier_rows_t *classifier_table, const uint8_t num_classifiers)
 {
     model = nnom_model_create();
     nnom_classifier_rows = classifier_table;
-    nnom_classifier_rows[0].model=model
-    last_nnom_initialized=0
+    nnom_classifier_rows[0].model=model;
+    last_nnom_initialized=0;
 
 }
 

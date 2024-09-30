@@ -113,7 +113,7 @@ def create_classifier_structures(models):
 
 
 def create_max_tmp_parameters(kb_models):
-   pass
+   return []
 
 def validate_model_parameters(data):
     pass

@@ -27,6 +27,9 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 #include <string.h>
 #include <time.h>
 
+#ifdef __cplusplus // Only compile this when c++
+
+
 static struct timespec ts_end;
 static struct timespec ts_begin;
 static long total_time_ms;
@@ -65,5 +68,7 @@ float sml_profile_get_avg_iteration_time(uint32_t iterations)
 {
     return (sml_profile_get_total_time())/(iterations * 1.0f);
 }
+
+#endif
 
 #endif // __SML_PROFILE_UTILS_H__

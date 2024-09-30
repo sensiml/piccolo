@@ -264,13 +264,18 @@ endif
         formated_classifier_types = [
             x.lower().replace(" ", "_") for x in classifier_types
         ]
+        
+        def is_neural_netwrok(classifier_type):
+            return (classifier_type == "tensorflow_lite_for_microcontrollers" or classifier_type == 'neural_network')
 
         formated_classifier_types = [
-            x if x != "tensorflow_lite_for_microcontrollers" else "tf_micro"
+            x if not is_neural_netwrok(x) else self.nn_inference_engine
             for x in formated_classifier_types
         ]
+        
+        
 
-        logger.debug(
+        logger.info(
             {
                 "message": "CLASSIFIER TYPE INFORMATION",
                 "data": formated_classifier_types,
@@ -349,8 +354,8 @@ endif
             output.append('#include "bonsai_trained_models.h"')
 
         if self.is_tensorflow(classifier_types):
-            if self.nn_inference_engine == "nnom":
-                output.append('#include "nnom.h"')
+            if self.nn_inference_engine == "nnom":                
+                output.append('#include "nnom_trained_models.h"')
                 output.append('#include "nnom_middleware.h"')
 
             if self.nn_inference_engine == "tf_micro":
@@ -419,7 +424,7 @@ endif
 
         if self.is_tensorflow(classifier_types):
             if self.nn_inference_engine == "nnom":
-                output.append(c_line(1, "nnom_init(tf_micro_classifier_rows, 0);"))                
+                output.append(c_line(1, "nnom_init(nnom_classifier_rows, 0);"))                
 
             if self.nn_inference_engine == "tf_micro":
                 output.append(c_line(1, "tf_micro_init(tf_micro_classifier_rows, 0);"))
