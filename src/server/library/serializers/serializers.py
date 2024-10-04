@@ -162,6 +162,7 @@ class PlatformDescriptionVersion2Serializer(serializers.Serializer):
     documentation = serializers.CharField(max_length=255)
     platform_type = serializers.CharField(max_length=8)
     manufacturer = serializers.CharField(max_length=64)
+    nn_inference_engines = serializers.JSONField(default=dict, read_only=True)
 
 
 class PipelineSeedSerializer(serializers.Serializer):

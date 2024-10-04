@@ -298,6 +298,9 @@ class GenerateKnowledgePackSerializerVersion2(serializers.ModelSerializer):
     hardware_accelerator = serializers.CharField(
         write_only=True, default=None, allow_blank=True
     )
+    nn_inference_engine = serializers.CharField(
+        write_only=True, default="tf_micro", allow_blank=True
+    )
 
     class Meta:
         model = KnowledgePack
@@ -324,6 +327,7 @@ class GenerateKnowledgePackSerializerVersion2(serializers.ModelSerializer):
             "float_options",
             "application",
             "hardware_accelerator",
+            "nn_inference_engine",
         )
 
 

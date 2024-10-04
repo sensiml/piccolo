@@ -128,6 +128,7 @@ class PlatformDescriptionVersion2(models.Model):
     supported_source_drivers = JSONField(null=False, default=dict)
     supported_compilers = models.ManyToManyField(CompilerDescription)
     applications = JSONField(null=False, default=dict)
+    nn_inference_engines = JSONField(null=False, default=dict)
     platform_type = models.CharField(
         max_length=8, choices=PLATFORM_TYPES, default="devkit"
     )

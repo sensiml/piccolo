@@ -43,6 +43,7 @@
     "label-processor": "Processor",
     "label-float-option": "Float Options",
     "label-compiler": "Compiler",
+    "interface-engine": "Interface Engine",
     "label-format": "Format",
     "label-data-source": "Data Source",
     "label-sample-rate": "Sample Rate",

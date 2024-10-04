@@ -56,6 +56,8 @@ import useStyles from "../DownloadModelStyles";
 import AdvanceSettings from "./AdvanceSettings";
 import defaultSelectedPlatform from "./defaultSelectedPlatform";
 
+const TF_CLASSIFIER_NAME = "TensorFlow Lite for Microcontrollers";
+
 /*
 const defaultEmpty = {
   target_platform: "",
@@ -73,6 +75,7 @@ const TargetDeviceOptions = forwardRef(
   (
     {
       platformList,
+      modelData,
       captureConfigurations,
       updateOptions,
       defaultTargetOptions,
@@ -109,6 +112,10 @@ const TargetDeviceOptions = forwardRef(
     const getFormat = (canBuildLibrary) => {
       return canBuildLibrary ? FORMATS : FORMATS.filter((el) => el.isBinary === false);
     };
+
+    const classifierName = useMemo(() => {
+      return modelData?.device_configuration?.classifier;
+    }, [modelData]);
 
     const sampleRates = useMemo(() => {
       if (selectedPlatform?.supported_source_drivers && dataSource) {
@@ -173,6 +180,13 @@ const TargetDeviceOptions = forwardRef(
         ),
         target_compiler: platform?.default_selections?.compiler || "",
       };
+      if (platform?.nn_inference_engines && classifierName === TF_CLASSIFIER_NAME) {
+        const nnList = _.keys(platform.nn_inference_engines);
+        if (!_.isEmpty(nnList)) {
+          // eslint-disable-next-line prefer-destructuring
+          defaultData.nn_inference_engine = nnList[0];
+        }
+      }
       // set platform_versions
       if (platform.platform_versions && platform.platform_versions?.length) {
         defaultData.selected_platform_version = platform.platform_versions[0] || "";
@@ -366,7 +380,9 @@ const TargetDeviceOptions = forwardRef(
       set direct value to targetDeviceOptions, with name is key of config
     */
       const { name, value } = e.target;
+      console.log(name, value);
       setTargetDeviceOptions({ ...targetDeviceOptions, [name]: value });
+      console.log("targetDeviceOptions", targetDeviceOptions);
     };
 
     const handleDeviceProcessorOptionsChanges = (e, newValue) => {
@@ -514,6 +530,31 @@ const TargetDeviceOptions = forwardRef(
                   {selectedPlatform.supported_compilers.map((el, ind) => (
                     <MenuItem value={el.uuid} key={`comp_sl_${ind}`}>
                       {`${el.name} ${el.compiler_version}`}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              ""
+            )}
+
+            {!_.isEmpty(selectedPlatform.nn_inference_engines) &&
+            targetDeviceOptions.nn_inference_engine ? (
+              <FormControl fullWidth={true} className={classes.formControl}>
+                <InputLabel id="target_compiler_label" htmlFor="target_compiler">
+                  {t("target-device-options.interface-engine")}
+                </InputLabel>
+                <Select
+                  id="target_interface_engine"
+                  labelId="target_interface_engine_label"
+                  label={t("target-device-options.interface-engine")}
+                  name={"interface_engine"}
+                  onChange={handleDeviceOptionsDirectChanges}
+                  value={targetDeviceOptions.nn_inference_engine}
+                >
+                  {_.entries(selectedPlatform.nn_inference_engines).map(([key, item]) => (
+                    <MenuItem value={item.value} key={`nn_eng_${key}`}>
+                      {item.display_name}
                     </MenuItem>
                   ))}
                 </Select>

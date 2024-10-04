@@ -92,6 +92,7 @@ const MODEL_ROUTERS_FIELDS = {
     ...DEFAULT_FIELDS,
     "knowledgepack_description",
     "sandbox_uuid",
+    "device_configuration",
   ],
 };
 
