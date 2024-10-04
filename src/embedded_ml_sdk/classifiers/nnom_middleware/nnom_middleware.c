@@ -35,15 +35,20 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
 {
     uint8_t y = 1;
     float max_result = 0;
+    feature_vector_data = (int8_t*)feature_vector->data;
 
-    if (last_nnom_initialized != classifier_id)
+    /*if (last_nnom_initialized != classifier_id)
     {
             model = nnom_model_create();
             //nnom_classifier_rows[0].model=model
             last_nnom_initialized = classifier_id;
     }
+    */
 
-    memcpy(nnom_input_data, feature_vector->data, feature_vector->size);
+    for (int i=0; i<feature_vector->size; i++){
+
+        nnom_input_data[i]=feature_vector_data[i]
+    }
     nnom_predict(nnom_classifier_rows[classifier_id].model, &label, &probability);
 
 

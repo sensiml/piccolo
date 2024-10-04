@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.14.0rc1
+FROM tensorflow/tensorflow:2.14.0
 LABEL Description="Image for generating NNOM from model file"
 
 
