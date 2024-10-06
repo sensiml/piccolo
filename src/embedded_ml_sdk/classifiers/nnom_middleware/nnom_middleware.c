@@ -25,31 +25,28 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 float results[NNOM_MAX_NUMBER_REULTS];
 
-nnom_classifier_rows_t *nnom_classifier_rows;
+nnom_classifier_rows_t *nnom_classifier_rows_table;
 float probability;
 int32_t label;
 
-int last_nnom_initialized = 0;
-nnom_model_t* model;
+static bool last_nnom_initialized = false;
+
 uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vector, model_results_t *model_results)
 {
     uint8_t y = 1;
     float max_result = 0;
-    feature_vector_data = (int8_t*)feature_vector->data;
+    uint8_t* feature_vector_data = (uint8_t*)feature_vector->data;
 
-    /*if (last_nnom_initialized != classifier_id)
-    {
-            model = nnom_model_create();
-            //nnom_classifier_rows[0].model=model
-            last_nnom_initialized = classifier_id;
+    if (!last_nnom_initialized){
+        nnom_classifier_rows_table[classifier_id].model=nnom_model_create();
+        last_nnom_initialized=true;
     }
-    */
-
     for (int i=0; i<feature_vector->size; i++){
 
-        nnom_input_data[i]=feature_vector_data[i]
+        nnom_input_data[i]=(int8_t)((int)feature_vector_data[i]-127);
     }
-    nnom_predict(nnom_classifier_rows[classifier_id].model, &label, &probability);
+
+    nnom_predict(nnom_classifier_rows_table[classifier_id].model, &label, results);
 
 
     // regression
@@ -58,39 +55,32 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
         return (uint8_t)label;
     }
 
-    // classification
-    /*
+
     max_result = results[0];
-    model_results->output_tensor->data[0] = (int16_t)results[0];
-    for (int32_t i = 1; i < nnom_classifier_rows[classifier_id].num_outputs; i++)
+    model_results->output_tensor->data[0] = results[0];
+    for (int32_t i = 1; i < nnom_classifier_rows_table[classifier_id].num_outputs; i++)
     {
         if (results[i] > max_result)
         {
             max_result = results[i];
             y = i + 1;
         }
-        model_results->output_tensor->data[i] = (int16_t)results[i];
+        model_results->output_tensor->data[i] = results[i];
     }
 
 
-    if (max_result < nnom_classifier_rows[classifier_id].threshold)
+    if (max_result < nnom_classifier_rows_table[classifier_id].threshold)
     {
         model_results->result = 0.0f;
         return 0;
     }
     
-    */
-    model_results->result = (float)label;
-    
-    return (float)label; 
+    return (uint8_t)model_results->result; 
 }
 
 void nnom_init(nnom_classifier_rows_t *classifier_table, const uint8_t num_classifiers)
 {
-    model = nnom_model_create();
-    nnom_classifier_rows = classifier_table;
-    nnom_classifier_rows[0].model=model;
-    last_nnom_initialized=0;
+    nnom_classifier_rows_table = classifier_table;
 
 }
 
