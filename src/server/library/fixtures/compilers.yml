@@ -96,3 +96,12 @@
     docker_image_base: "sml_x86mingw_generic"
     docker_image_version: "v1.0"
   model: library.CompilerDescription
+
+- fields:
+    uuid: 051b4875-063c-43a8-ad4c-b3aa602f4516
+    name: RISC-V GNU Newlib
+    compiler_version: 2024.09.03
+    supported_arch: 3
+    docker_image_base: "riscv_gnu"
+    docker_image_version: "v1.0"
+  model: library.CompilerDescription
