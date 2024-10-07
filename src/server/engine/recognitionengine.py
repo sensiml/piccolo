@@ -136,6 +136,7 @@ class RecognitionEngine(object):
         elif self.classifier_type in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
+            "Neural Network",
         ]:
             self.classifier = TensorFlowMicro()
             self.classifier.load_model(self.neuron_array)
@@ -435,7 +436,7 @@ class RecognitionEngine(object):
             "target_compiler": CompilerDescription.objects.get(
                 uuid="62aabe7e-4f5d-4167-a786-072e4a8dc158"
             ),
-            "nn_inference_engine":'nnom'
+            "nn_inference_engine": "nnom",
         }
 
         logger.userlog(

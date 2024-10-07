@@ -850,6 +850,22 @@
 
 - fields:
     core: True
+    name: Load Model Neural Network
+    version: 1
+    type: Training Algorithm
+    subtype: Load
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
     name: Bonsai Tree Optimizer
     version: 1
     type: Training Algorithm

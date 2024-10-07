@@ -39,6 +39,7 @@ def get_classifier(config, save_model_parameters=True):
         "Boosted Tree Ensemble": BoostedTreeEnsemble,
         "TF Micro": TensorFlowMicro,
         "TensorFlow Lite for Microcontrollers": TensorFlowMicro,
+        "Neural Network": TensorFlowMicro,
         "Linear Regression": LinearRegression,
     }
     try:
