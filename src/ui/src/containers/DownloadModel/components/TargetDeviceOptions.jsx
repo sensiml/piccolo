@@ -380,9 +380,7 @@ const TargetDeviceOptions = forwardRef(
       set direct value to targetDeviceOptions, with name is key of config
     */
       const { name, value } = e.target;
-      console.log(name, value);
       setTargetDeviceOptions({ ...targetDeviceOptions, [name]: value });
-      console.log("targetDeviceOptions", targetDeviceOptions);
     };
 
     const handleDeviceProcessorOptionsChanges = (e, newValue) => {
@@ -545,15 +543,15 @@ const TargetDeviceOptions = forwardRef(
                   {t("target-device-options.interface-engine")}
                 </InputLabel>
                 <Select
-                  id="target_interface_engine"
-                  labelId="target_interface_engine_label"
+                  id="target_nn_inference_engine"
+                  labelId="target_nn_inference_engine"
                   label={t("target-device-options.interface-engine")}
-                  name={"interface_engine"}
+                  name={"nn_inference_engine"}
                   onChange={handleDeviceOptionsDirectChanges}
                   value={targetDeviceOptions.nn_inference_engine}
                 >
                   {_.entries(selectedPlatform.nn_inference_engines).map(([key, item]) => (
-                    <MenuItem value={item.value} key={`nn_eng_${key}`}>
+                    <MenuItem value={key} key={`nn_eng_${key}`}>
                       {item.display_name}
                     </MenuItem>
                   ))}
