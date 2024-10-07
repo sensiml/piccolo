@@ -10044,3 +10044,13 @@
     profiling_enabled: false
     clock_speed_mhz: 48
   model: library.ProcessorDescription
+
+- fields:
+    uuid: b7af771c-2edf-4601-9391-645db9558298
+    architecture: 3
+    display_name: Hazard 3
+    manufacturer: RISC-V
+    compiler_cpu_flag: "-march=rv32imc_zicsr -mabi=ilp32"
+    clock_speed_mhz: 80
+    profiling_enabled: false
+  model: library.ProcessorDescription

@@ -27,7 +27,11 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections:
       {
@@ -53,8 +57,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/arm-cortex-generic/cortex-arm-generic-platforms.html"
@@ -89,8 +101,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
@@ -125,7 +145,9 @@
         "uses_sensiml_interface": False,
         "uses_simple_streaming": True,
         "app_environment":
-          { "SML_APP_CONFIG_FILE": "/build/sensiml_recognition_motion/app_sensor_imu.h" },
+          {
+            "SML_APP_CONFIG_FILE": "/build/sensiml_recognition_motion/app_sensor_imu.h",
+          },
       }
     supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
     hardware_accelerators:
@@ -143,7 +165,11 @@
             "kernel": "siliconlabs",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections:
       {
@@ -154,8 +180,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/silicon-labs-xg24/silicon-labs-xg24.html"
@@ -166,7 +200,11 @@
     uuid: ef8777a0-17c4-414a-88f8-09734308bacf
     name: Raspberry Pi
     description: Build libraries for Raspberry Pi devices.
-    processors: [1b8bcfbd-7a6e-4292-8ccc-bf808e7658fc, e3d6cdb6-3d30-4efe-9201-592d20668c58]
+    processors:
+      [
+        1b8bcfbd-7a6e-4292-8ccc-bf808e7658fc,
+        e3d6cdb6-3d30-4efe-9201-592d20668c58,
+      ]
     can_build_binary: false
     codegen_file_location: ["arm-none-linux-gnueabihf"]
     permissions: { "developer": true, "enterprise": true, "starter": true }
@@ -204,12 +242,24 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/raspberry-pi/raspberry-pi.html"
@@ -221,7 +271,11 @@
     name: TensorfLow Lite Micro
     docker_image: "sensiml_tensorflow"
     description: Build a TensorFlow Lite for Microcontrollers inference library
-    processors: [241a03d2-3e13-4087-9d7b-07a3f96e6dff, 530e1a45-22d3-429b-ae03-90b28040c54d]
+    processors:
+      [
+        241a03d2-3e13-4087-9d7b-07a3f96e6dff,
+        530e1a45-22d3-429b-ae03-90b28040c54d,
+      ]
     can_build_binary: false
     platform_versions: ["0a4bec2a"]
     docker_image_version: "v4.0"
@@ -239,7 +293,11 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
         "siliconlabs":
           {
             "display_name": "Silicon Labs MVP AI Accelerator",
@@ -250,8 +308,16 @@
     default_selections: {}
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "compiler"
     documentation: "https://www.tensorflow.org/lite/microcontrollers"
@@ -263,12 +329,16 @@
     name: NNoM
     docker_image: "nnom"
     description: Build a NNoM inference library
-    processors: [241a03d2-3e13-4087-9d7b-07a3f96e6dff, 530e1a45-22d3-429b-ae03-90b28040c54d]
+    processors:
+      [
+        241a03d2-3e13-4087-9d7b-07a3f96e6dff,
+        530e1a45-22d3-429b-ae03-90b28040c54d,
+      ]
     can_build_binary: false
     platform_versions: [""]
     docker_image_version: "v0.4.3"
     codegen_file_location: ["nnom"]
-    permissions: { "developer": true, "enterprise": true, "starter": true }
+    permissions: { "developer": false, "enterprise": false, "starter": false }
     supported_source_drivers: {}
     codegen_parameters: {}
     supported_compilers: []
@@ -281,13 +351,25 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections: {}
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "compiler"
     documentation: "https://github.com/majianjia/nnom"
@@ -316,7 +398,11 @@
             "codegen_app_location": "platforms/quickthingplus",
           },
       }
-    codegen_parameters: { "codegen_class": "QuickLogicS3CodeGenerator", "board": "quickthingplus" }
+    codegen_parameters:
+      {
+        "codegen_class": "QuickLogicS3CodeGenerator",
+        "board": "quickthingplus",
+      }
     supported_compilers: [2e8bdcf0-557a-41bd-a41d-64e443ec97a9]
     hardware_accelerators:
       {
@@ -327,7 +413,11 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections:
       {
@@ -338,8 +428,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/sparkfun-thing-plus-quicklogic-eos-s3/sparkfun-thing-plus-quicklogic-eos-s3.html"
@@ -393,7 +491,11 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections:
       {
@@ -404,8 +506,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/arduino-nano33/arduino-nano33.html"
@@ -440,8 +550,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
@@ -481,7 +599,11 @@
             "description": "Use the ARM CMSIS library intrinsic functions to accelerate ops",
           },
         "cpu_only":
-          { "display_name": "CPU Only", "kernel": "", "description": "Use CPU based ops only" },
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
       }
     default_selections:
       {
@@ -502,8 +624,16 @@
       }
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/arduino-nicla-sense-me/arduino-nicla-sense-me.html"
@@ -514,7 +644,8 @@
     applications:
       AI Model Runner:
         codegen_app_name: testdata_runner
-        description: A Library that implements SensiML Simple Streaming interface
+        description:
+          A Library that implements SensiML Simple Streaming interface
           for reporting Knowledge Pack results
         supported_outputs:
           - - Serial
@@ -543,8 +674,16 @@
       starter: true
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: compiler
     processors:
@@ -581,8 +720,16 @@
       starter: true
     nn_inference_engines:
       {
-        "nnom": { "value": "nnom", "display_name": "Neural Network on Microcontrollers" },
-        "tf_micro": { "value": "tf_micro", "display_name": "TensorFlow Lite for Microcontrollers" },
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+        "tf_micro":
+          {
+            "value": "tf_micro",
+            "display_name": "TensorFlow Lite for Microcontrollers",
+          },
       }
     platform_type: devkit
     processors:

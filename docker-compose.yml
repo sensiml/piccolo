@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=piccoloadmin3
     ports:
       - "5432:5432"
+    volumes:
+      - database_data:/var/lib/postgresql/data      
   redis:
     mem_limit: "250M"
     image: redis
@@ -143,6 +145,7 @@ services:
 volumes:
   server_data:
   server_libs:
+  database_data:
   # attach to container and enter shell
   #
   # docker exec -it <container-id> /bin/bash
