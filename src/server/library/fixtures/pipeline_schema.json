@@ -312,7 +312,8 @@
         "TransformList": null,
         "Set": false,
         "Exclude": [
-            "TF Micro"
+            "TF Micro",
+            "TensorFlow Lite for Microcontrollers"
         ],
         "Limit": 1
     },
