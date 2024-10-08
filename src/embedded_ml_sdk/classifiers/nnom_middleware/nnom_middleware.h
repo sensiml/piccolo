@@ -24,7 +24,6 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 #define __NNOM_MIDDLEWARE_H__
 
 #include "nnom.h"
-#include "weights.h"
 #include "kbutils.h"
 
 // FILL_NNOM_MAX_TMP_PARAMETERS

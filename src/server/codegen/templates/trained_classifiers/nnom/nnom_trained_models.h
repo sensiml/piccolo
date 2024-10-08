@@ -27,7 +27,7 @@ extern "C"
 {
 #endif
 
-extern nnom_classifier_rows_t nnom_classifier_rows[];
+extern nnom_classifier_rows_t nnom_classifier_rows_table[];
 
 
 #ifdef __cplusplus

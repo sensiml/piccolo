@@ -144,7 +144,11 @@ class TrainFullyConnectedNeuralNetwork(NeuralNetworkBase):
                 )
 
         tf_model.add(
-            layers.Dense(y_train.shape[1], activation=self._params["final_activation"])
+            layers.Dense(y_train.shape[1])
+        )
+
+        tf_model.add(
+            layers.Activation(activation=self._params["final_activation"])
         )
 
         tf_model.compile(

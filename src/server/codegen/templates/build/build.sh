@@ -194,7 +194,10 @@ build_lib(){
 
     build_tensorflow $1
 
-    cp -r nnom/* .
+    mv nnom/* .
+    cat weights.h nnom_middleware.c > nnom_combined.c
+    mv  nnom_combined.c nnom_middleware.c
+    rm weights.h
 
     LIB_TENSORFLOW_FILE=libtensorflow-microlite.a
     if [ -f "$LIB_TENSORFLOW_FILE" ]; then

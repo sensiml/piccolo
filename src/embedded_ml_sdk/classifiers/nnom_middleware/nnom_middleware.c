@@ -25,7 +25,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 float results[NNOM_MAX_NUMBER_REULTS];
 
-nnom_classifier_rows_t *nnom_classifier_rows_table;
+nnom_classifier_rows_t *nnom_classifier_rows;
 float probability;
 int32_t label;
 
@@ -38,7 +38,7 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
     uint8_t* feature_vector_data = (uint8_t*)feature_vector->data;
 
     if (!last_nnom_initialized){
-        nnom_classifier_rows_table[classifier_id].model=nnom_model_create();
+        nnom_classifier_rows[classifier_id].model=nnom_model_create();
         last_nnom_initialized=true;
     }
     for (int i=0; i<feature_vector->size; i++){
@@ -46,7 +46,7 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
         nnom_input_data[i]=(int8_t)((int)feature_vector_data[i]-127);
     }
 
-    nnom_predict(nnom_classifier_rows_table[classifier_id].model, &label, results);
+    nnom_predict(nnom_classifier_rows[classifier_id].model, &label, results);
 
 
     // regression
@@ -58,7 +58,7 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
 
     max_result = results[0];
     model_results->output_tensor->data[0] = results[0];
-    for (int32_t i = 1; i < nnom_classifier_rows_table[classifier_id].num_outputs; i++)
+    for (int32_t i = 1; i < nnom_classifier_rows[classifier_id].num_outputs; i++)
     {
         if (results[i] > max_result)
         {
@@ -69,7 +69,7 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
     }
 
 
-    if (max_result < nnom_classifier_rows_table[classifier_id].threshold)
+    if (max_result < nnom_classifier_rows[classifier_id].threshold)
     {
         model_results->result = 0.0f;
         return 0;
@@ -80,7 +80,7 @@ uint8_t nnom_simple_submit(uint8_t classifier_id, feature_vector_t *feature_vect
 
 void nnom_init(nnom_classifier_rows_t *classifier_table, const uint8_t num_classifiers)
 {
-    nnom_classifier_rows_table = classifier_table;
+    nnom_classifier_rows = classifier_table;
 
 }
 

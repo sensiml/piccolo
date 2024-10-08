@@ -60,7 +60,7 @@ def create_classifier_structures(models):
 
     outputs.append(
         (
-            "nnom_classifier_rows_t nnom_classifier_rows[{}] = ".format(
+            "nnom_classifier_rows_t nnom_classifier_rows_table[{}] = ".format(
                 utils.get_number_classifiers(
                     models, "TF Micro"
                 )+utils.get_number_classifiers(

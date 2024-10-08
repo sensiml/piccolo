@@ -424,7 +424,7 @@ endif
 
         if self.is_tensorflow(classifier_types):
             if self.nn_inference_engine == "nnom":
-                output.append(c_line(1, "nnom_init(nnom_classifier_rows, 0);"))                
+                output.append(c_line(1, "nnom_init(nnom_classifier_rows_table, 0);"))                
 
             if self.nn_inference_engine == "tf_micro":
                 output.append(c_line(1, "tf_micro_init(tf_micro_classifier_rows, 0);"))
