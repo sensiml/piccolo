@@ -206,12 +206,11 @@ endif
         for model in models:
             if self.is_tensorflow(model["classifier_config"]["classifier"]):
                 if self.nn_inference_engine == "nnom":
-                    #TODO: NNoM
+                    # TODO: NNoM
                     pass
 
                 if self.nn_inference_engine == "tf_micro":
                     return tf_micro_cflags
-
 
         return ""
 
@@ -219,7 +218,7 @@ endif
         for model in models:
             if self.is_tensorflow(model["classifier_config"]["classifier"]):
                 if self.nn_inference_engine == "nnom":
-                    #TODO: NNoM
+                    # TODO: NNoM
                     pass
 
                 if self.nn_inference_engine == "tf_micro":
@@ -231,6 +230,9 @@ endif
             "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
         )
         model_fill["TensorFlow Lite for Microcontrollers"] = (
+            "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
+        )
+        model_fill["Neural Network"] = (
             "{\n\ttf_micro_model_results_object(kb_models[model_index].classifier_id, (model_results_t *)model_results);\n}"
         )
 
@@ -256,6 +258,20 @@ endif
 
             """
 
+        model_fill[
+            "Neural Network"
+        ] = """{
+               sml_classification_result_info(model_index, &model_result);\n
+               pbuf += sprintf(pbuf, ",\\"ModelDebug\\":[");
+               for (int32_t i=0; i<model_result.num_outputs; i++)
+               {
+                 pbuf += sprintf(pbuf, "%f, ", model_result.output_tensor[i]);
+               }
+               pbuf += sprintf(pbuf, "]");
+                }
+
+            """
+
         return self.create_case_fill_template_classifier_type(models_data, model_fill)
 
     def create_classifier_structures(self, classifier_types, kb_models):
@@ -264,16 +280,17 @@ endif
         formated_classifier_types = [
             x.lower().replace(" ", "_") for x in classifier_types
         ]
-        
+
         def is_neural_netwrok(classifier_type):
-            return (classifier_type == "tensorflow_lite_for_microcontrollers" or classifier_type == 'neural_network')
+            return (
+                classifier_type == "tensorflow_lite_for_microcontrollers"
+                or classifier_type == "neural_network"
+            )
 
         formated_classifier_types = [
             x if not is_neural_netwrok(x) else self.nn_inference_engine
             for x in formated_classifier_types
         ]
-        
-        
 
         logger.info(
             {
@@ -313,12 +330,18 @@ endif
             return 3
         elif classifier_type in ["Bonsai"]:
             return 4
-        elif classifier_type in ["TF Micro", "TensorFlow Lite for Microcontrollers", "Neural Network"]:
+        elif classifier_type in [
+            "TF Micro",
+            "TensorFlow Lite for Microcontrollers",
+            "Neural Network",
+        ]:
             return 5
         elif classifier_type in ["Linear Regression"]:
             return 6
         else:
-            raise Exception(f"{classifier_type} not supported Classifier Type for code generation")
+            raise Exception(
+                f"{classifier_type} not supported Classifier Type for code generation"
+            )
 
     def create_debug_flagging(self):
         ret = []
@@ -354,7 +377,7 @@ endif
             output.append('#include "bonsai_trained_models.h"')
 
         if self.is_tensorflow(classifier_types):
-            if self.nn_inference_engine == "nnom":                
+            if self.nn_inference_engine == "nnom":
                 output.append('#include "nnom_trained_models.h"')
                 output.append('#include "nnom_middleware.h"')
 
@@ -385,7 +408,7 @@ endif
 
         if self.is_tensorflow(classifier_types):
             if self.nn_inference_engine == "nnom":
-                #TODO: NNoM
+                # TODO: NNoM
                 pass
 
             if self.nn_inference_engine == "tf_micro":
@@ -424,7 +447,7 @@ endif
 
         if self.is_tensorflow(classifier_types):
             if self.nn_inference_engine == "nnom":
-                output.append(c_line(1, "nnom_init(nnom_classifier_rows, 0);"))                
+                output.append(c_line(1, "nnom_init(nnom_classifier_rows, 0);"))
 
             if self.nn_inference_engine == "tf_micro":
                 output.append(c_line(1, "tf_micro_init(tf_micro_classifier_rows, 0);"))
@@ -482,15 +505,15 @@ endif
             elif model["classifier_config"]["classifier"] in [
                 "TF Micro",
                 "TensorFlow Lite for Microcontrollers",
-                "Neural Network"
+                "Neural Network",
             ]:
-                if self.nn_inference_engine=='tf_micro':
+                if self.nn_inference_engine == "tf_micro":
                     output_str += c_line(
                         1,
                         "ret = tf_micro_simple_submit(kb_model->classifier_id, kb_model->pfeature_vector, kb_model->pmodel_results);",
                     )
-                if self.nn_inference_engine=='nnom':
-                        output_str += c_line(
+                if self.nn_inference_engine == "nnom":
+                    output_str += c_line(
                         1,
                         "ret = nnom_simple_submit(kb_model->classifier_id, kb_model->pfeature_vector, kb_model->pmodel_results);",
                     )

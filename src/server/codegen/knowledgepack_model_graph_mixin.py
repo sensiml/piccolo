@@ -614,7 +614,7 @@ class ModelGraphMixin(object):
         elif classifier_config["classifier"] in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
-            "Neural Network"
+            "Neural Network",
         ]:
             return {"classifier": "Neural Network"}
 
@@ -1617,6 +1617,8 @@ def get_classifier_type(knowledgepack):
     )
 
     if classifier_type == "tensorflow_lite_for_microcontrollers":
+        classifier_type = "tf_micro"
+    if classifier_type == "neural_network":
         classifier_type = "tf_micro"
 
     return classifier_type

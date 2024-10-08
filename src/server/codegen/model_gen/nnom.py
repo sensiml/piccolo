@@ -23,7 +23,7 @@ import codegen.model_gen.utils as utils
 
 
 def create_classifier_arrays(model_index, model):
-   
+
     pass
 
 
@@ -32,16 +32,16 @@ def create_classifier_struct(model_index, model):
 
 
 def create_classifier_structures(models):
-    """ typedef struct nnom_classifier_rows
-        {
-            uint16_t num_inputs;
-            uint8_t num_outputs;
-            float threshold;
-            uint8_t estimator_type;
-            nnom_model_t* model;
-        } nnom_classifier_rows_t;
+    """typedef struct nnom_classifier_rows
+    {
+        uint16_t num_inputs;
+        uint8_t num_outputs;
+        float threshold;
+        uint8_t estimator_type;
+        nnom_model_t* model;
+    } nnom_classifier_rows_t;
     """
-    
+
     outputs = []
 
     iterations = 0
@@ -49,11 +49,11 @@ def create_classifier_structures(models):
         if model["classifier_config"].get("classifier", "PME") in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
-            "Neural Network"
+            "Neural Network",
         ]:
-            #outputs.extend(
+            # outputs.extend(
             #    create_tf_micro_classifier_arrays(iterations, model["model_arrays"])
-            #)
+            # )
             iterations += 1
 
     iterations = 0
@@ -61,13 +61,11 @@ def create_classifier_structures(models):
     outputs.append(
         (
             "nnom_classifier_rows_t nnom_classifier_rows[{}] = ".format(
-                utils.get_number_classifiers(
-                    models, "TF Micro"
-                )+utils.get_number_classifiers(
+                utils.get_number_classifiers(models, "TF Micro")
+                + utils.get_number_classifiers(
                     models, "TensorFlow Lite for Microcontrollers"
-                )+utils.get_number_classifiers(
-                    models, "Neural Network"
                 )
+                + utils.get_number_classifiers(models, "Neural Network")
             )
             + "{"
         )
@@ -77,7 +75,7 @@ def create_classifier_structures(models):
         if model["classifier_config"].get("classifier", "PME") in [
             "TF Micro",
             "TensorFlow Lite for Microcontrollers",
-             "Neural Network"
+            "Neural Network",
         ]:
             outputs.append("\n\t{")
             outputs.append(
@@ -111,12 +109,13 @@ def create_classifier_structures(models):
     return outputs
 
 
-
 def create_max_tmp_parameters(kb_models):
-   return []
+    return []
+
 
 def validate_model_parameters(data):
     pass
+
 
 def validate_model_configuration(data):
     return data

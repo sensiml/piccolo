@@ -17,7 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { DISABLED_CLASSIFIERS } from "store/autoML/const";
+import { DISABLED_CLASSIFIERS } from "consts";
 
 export const selectTransformsByTypeSubType =
   (type, subtype, transformList, excludeTransform) => (state) => {

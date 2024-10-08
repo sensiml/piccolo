@@ -41,6 +41,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import FormCurtain from "components/UIFormCurtain";
 import CheckBoxSelectCard from "components/FormElements/CheckBoxSelectCard";
 
+import { NN_CLASSIFIER_NAME_LIST } from "consts";
 import {
   PLATROFM_TYPES,
   STEP_SELECT_PLATFORM,
@@ -55,8 +56,6 @@ import {
 import useStyles from "../DownloadModelStyles";
 import AdvanceSettings from "./AdvanceSettings";
 import defaultSelectedPlatform from "./defaultSelectedPlatform";
-
-const TF_CLASSIFIER_NAME = "TensorFlow Lite for Microcontrollers";
 
 /*
 const defaultEmpty = {
@@ -180,7 +179,7 @@ const TargetDeviceOptions = forwardRef(
         ),
         target_compiler: platform?.default_selections?.compiler || "",
       };
-      if (platform?.nn_inference_engines && classifierName === TF_CLASSIFIER_NAME) {
+      if (platform?.nn_inference_engines && NN_CLASSIFIER_NAME_LIST.includes(classifierName)) {
         const nnList = _.keys(platform.nn_inference_engines);
         if (!_.isEmpty(nnList)) {
           // eslint-disable-next-line prefer-destructuring

@@ -20,6 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import React, { useState } from "react";
 import { Box, Stepper, Step, StepLabel } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { DEFAULT_CLASSIFIER } from "consts";
 
 import PipelineQueryCreateForm from "components/PipelineQueryCreateForm";
 
@@ -75,7 +76,11 @@ const PipelineCreateForm = ({
         ))}
       </Stepper>
       {activeStep === STEP_PARAMS ? (
-        <PipelineCreateFormParameters classifiers={classifiers} onSubmit={handleSubmitParams} />
+        <PipelineCreateFormParameters
+          classifiers={classifiers}
+          defaultClassifier={DEFAULT_CLASSIFIER}
+          onSubmit={handleSubmitParams}
+        />
       ) : (
         <PipelineQueryCreateForm
           pipelineError={pipelineError}

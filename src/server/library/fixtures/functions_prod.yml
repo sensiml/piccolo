@@ -833,6 +833,23 @@
 
 - fields:
     core: True
+    name: Neural Network
+    version: 1
+    type: Classifier
+    subtype: NN
+    path: core_functions/mg_contracts.py
+    function_in_file: neural_network
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
+    uuid: 3994d48f-7b8a-4807-b919-284bbe045928
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
     name: Load Model TensorFlow Lite for Microcontrollers
     version: 1
     type: Training Algorithm
@@ -845,6 +862,22 @@
     deprecated: False
     dcl_executable: False
     uuid: 59918065-8a23-4c65-921a-471abcba36b9
+    automl_available: False
+  model: library.transform
+
+- fields:
+    core: True
+    name: Load Model Neural Network
+    version: 1
+    type: Training Algorithm
+    subtype: Load
+    path: core_functions/mg_contracts.py
+    function_in_file: load_model_tensorflow_micro
+    has_c_version: False
+    c_file_name:
+    c_function_name:
+    deprecated: False
+    dcl_executable: False
     automl_available: False
   model: library.transform
 

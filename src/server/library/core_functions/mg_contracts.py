@@ -1274,6 +1274,23 @@ def tensorflow_micro():
 tensorflow_micro_contracts = {"input_contract": [], "output_contract": []}
 
 
+def neural_network():
+    """
+    The Neural Network uses Tensorflow Lite for Microcontrollers, an inference engine
+    from Google optimized run machine learning models on embedded devices.
+
+    Tensorflow Lite for Microcontrollers supports a subset of all Tensorflow functions. For a full
+    list see `all_ops_resolver.cc <https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/micro/all_ops_resolver.cc>`_.
+
+    For additional documentation on Tensorflow Lite for Microcontrollers see `here <https://www.tensorflow.org/lite/microcontrollers>`_.
+    """
+
+    return None
+
+
+neural_network_contracts = {"input_contract": [], "output_contract": []}
+
+
 def load_model_tensorflow_micro(
     input_data,
     label_column,
@@ -1433,7 +1450,9 @@ DEFAULT_NN_TRAINING = [
         "type": "list",
         "element_type": "str",
         "handle_by_set": True,
-        "options": [{"name": "TensorFlow Lite for Microcontrollers"}],
+        "options": [
+            {"name": "TensorFlow Lite for Microcontrollers", "name": "Neural Network"}
+        ],
     },
     {"name": "class_map", "type": "dict", "handle_by_set": True, "default": None},
     {

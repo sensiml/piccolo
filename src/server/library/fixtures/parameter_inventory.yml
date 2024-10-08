@@ -322,3 +322,16 @@
     binary_classifiers: 0
     allow_unknown: 1
   model: library.parameterinventory
+
+- fields:
+    uuid: e040c660-45c2-4e48-92fc-2a22310076c9
+    function: 3994d48f-7b8a-4807-b919-284bbe045928
+    function_name: Neural Network
+    pipeline_key: classifiers
+    variable_name: null
+    variable_type: null
+    variable_values: null
+    classifiers_optimizers_group: 4
+    binary_classifiers: 0
+    allow_unknown: 1
+  model: library.parameterinventory

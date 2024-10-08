@@ -22,6 +22,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import StandardTable from "components/StandardTable";
 import { ColumnType } from "components/StandardTable/StandardTableConstants";
+import { NN_CLASSIFIER_NAME_LIST } from "consts";
 import NeuralNetworkSummary from "./NeuralNetworkSummary";
 import PMEModelSummary from "./PMEModelSummary";
 
@@ -72,7 +73,7 @@ const ModelSummary = ({ model, showTitle }) => {
           m.pipeline_summary[pipelineSummaryCount - 1].optimizers[0].inputs.max_depth;
       } else if (m.device_configuration?.classifier === "Boosted Tree Ensemble") {
         //
-      } else if (m.device_configuration?.classifier === "TensorFlow Lite for Microcontrollers") {
+      } else if (NN_CLASSIFIER_NAME_LIST.includes(m.device_configuration?.classifier)) {
         //
       }
     }
@@ -131,7 +132,7 @@ const ModelSummary = ({ model, showTitle }) => {
       {model?.data?.device_configuration?.classifier === "PME" && modelParameters ? (
         <PMEModelSummary model={modelParameters} />
       ) : null}
-      {model?.data?.device_configuration?.classifier === "TensorFlow Lite for Microcontrollers" ? (
+      {NN_CLASSIFIER_NAME_LIST.includes(model?.data?.device_configuration?.classifier) ? (
         <NeuralNetworkSummary model={model} />
       ) : null}
     </Box>

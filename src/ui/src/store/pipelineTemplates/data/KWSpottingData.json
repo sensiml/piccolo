@@ -123,7 +123,7 @@
           ],
           "classifiers": [
             {
-              "name": "TensorFlow Lite for Microcontrollers",
+              "name": "Neural Network",
               "inputs": {}
             }
           ],
@@ -296,7 +296,7 @@
           ],
           "classifiers": [
             {
-              "name": "TensorFlow Lite for Microcontrollers",
+              "name": "Neural Network",
               "inputs": {}
             }
           ],
@@ -501,7 +501,7 @@
           ],
           "classifiers": [
             {
-              "name": "TensorFlow Lite for Microcontrollers",
+              "name": "Neural Network",
               "inputs": {}
             }
           ],
@@ -659,7 +659,7 @@
           ],
           "classifiers": [
             {
-              "name": "TensorFlow Lite for Microcontrollers",
+              "name": "Neural Network",
               "inputs": {}
             }
           ],

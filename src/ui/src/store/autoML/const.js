@@ -87,7 +87,7 @@ export const TVO_LIST = [
   PIPELINE_STEP_TYPES.VALIDATION,
 ];
 
-export const DISABLED_CLASSIFIERS = ["TF Micro"];
+export const DISABLED_CLASSIFIERS = ["TF Micro", "TensorFlow Lite for Microcontrollers"];
 
 export const ONETIME_ADDED = [FEATURE_GENERATOR, FEATURE_SELECTOR];
 
