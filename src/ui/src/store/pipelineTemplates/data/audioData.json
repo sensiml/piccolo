@@ -168,7 +168,7 @@
           ],
           "classifiers": [
             {
-              "name": "TensorFlow Lite for Microcontrollers",
+              "name": "Neural Network",
               "inputs": {}
             }
           ],

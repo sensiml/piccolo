@@ -24,6 +24,7 @@ import CONSOLE from "./CONSOLE";
 import RESPONSIVE from "./RESPONSIVE";
 import PIPELINE_CONSTS from "./PIPELINE_CONSTS";
 
+export * from "./CLASSIFIERS";
 export * from "./CHARTS_TYPES";
 
 export {
