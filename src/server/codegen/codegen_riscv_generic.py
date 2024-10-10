@@ -30,7 +30,7 @@ from pandas import DataFrame
 logger = LogHandler(logging.getLogger(__name__))
 
 
-class EspressifCodeGenerator(KnowledgePackCodeGeneratorBase):
+class RISCVGNUGenericCodeGenerator(KnowledgePackCodeGeneratorBase):
     def __init__(
         self,
         knowledgepacks,
@@ -41,7 +41,7 @@ class EspressifCodeGenerator(KnowledgePackCodeGeneratorBase):
         test_data=None,
         target_os=None,
     ):
-        super(EspressifCodeGenerator, self).__init__(
+        super(RISCVGNUGenericCodeGenerator, self).__init__(
             knowledgepacks, uuid, task_id, device_conf, build_type
         )
         self.kb_generated_files = ["Makefile", "testdata.h"]
@@ -68,7 +68,7 @@ class EspressifCodeGenerator(KnowledgePackCodeGeneratorBase):
         sensor_columns = kb_models[0]["used_sensor_columns"]
 
         kb_data.update(self.create_sml_abstraction_calls(kb_models))
-        # kb_data.update(self.create_arm_cpu_flags())
+        kb_data.update(self.create_arm_cpu_flags())
 
         if isinstance(self.test_data, DataFrame):
             kb_data.update(
@@ -79,15 +79,42 @@ class EspressifCodeGenerator(KnowledgePackCodeGeneratorBase):
 
             kb_data["use_test_data"] = ["#define SML_USE_TEST_DATA"]
 
+        elif (
+            build_type == "bin"
+            and self.application == "testdata_runner"
+            and self.test_data is None
+        ):
+            raise KnowledgePackGenerationError(
+                "Test data required for this application"
+            )
+
         if self.is_tensorflow(classifier_types):
+            
+            proc = self.platform.target_processor
+
+            target_arch = proc.compiler_cpu_flag.split("=")[1]
+
+            if "hard" in self.device_config["float_options"]:
+                target_arch += "+fp"
+
+            if "softfp" in self.device_config["float_options"]:
+                target_arch += "+sfp"
+
+
+            logger.debug(
+                {
+                    "message": f"Building NN Library {self.nn_inference_engine}",
+                    "log_type": "KPID",
+                    "UUID": self.uuid,
+                }
+            )
+
             if self.nn_inference_engine == "nnom":
                 self.docker_nnom.build_code_bin(build_type, self.application)
                 self.compile_nnom = True
 
             else:
-                raise Exception(
-                   f"{self.nn_inference_engine} is not currently supported by the ESPRESSIF compiler"
-                )
+                raise (f"{self.nn_inference_engine} not supported")
 
         self.copy_application_files(
             output_data=kb_data,

@@ -22,6 +22,7 @@ from codegen.codegen_gcc_generic import GCCGenericCodeGenerator
 from codegen.codegen_quicklogic_s3 import QuickLogicS3CodeGenerator
 from codegen.codegen_mingw64_generic import MINGW64GenericCodeGenerator
 from codegen.codegen_espressif import EspressifCodeGenerator
+from codegen.codegen_riscv_generic import RISCVGNUGenericCodeGenerator
 
 __all__ = [
     "GCCGenericCodeGenerator",
@@ -29,4 +30,5 @@ __all__ = [
     "ARMGCCGenericCodeGenerator",
     "MINGW64GenericCodeGenerator",
     "EspressifCodeGenerator",
+    "RISCVGNUGenericCodeGenerator"
 ]
