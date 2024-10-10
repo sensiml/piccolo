@@ -57,16 +57,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/arm-cortex-generic/cortex-arm-generic-platforms.html"
@@ -101,16 +101,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
@@ -180,16 +180,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/silicon-labs-xg24/silicon-labs-xg24.html"
@@ -250,16 +250,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/raspberry-pi/raspberry-pi.html"
@@ -308,16 +308,16 @@
     default_selections: {}
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "compiler"
     documentation: "https://www.tensorflow.org/lite/microcontrollers"
@@ -360,16 +360,16 @@
     default_selections: {}
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "compiler"
     documentation: "https://github.com/majianjia/nnom"
@@ -428,16 +428,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/sparkfun-thing-plus-quicklogic-eos-s3/sparkfun-thing-plus-quicklogic-eos-s3.html"
@@ -506,16 +506,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/arduino-nano33/arduino-nano33.html"
@@ -550,16 +550,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "compiler"
     documentation: "https://sensiml.com/documentation/firmware/x86-processors/x86-platforms.html"
@@ -624,16 +624,16 @@
       }
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: "devkit"
     documentation: "https://sensiml.com/documentation/firmware/arduino-nicla-sense-me/arduino-nicla-sense-me.html"
@@ -674,16 +674,16 @@
       starter: true
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: compiler
     processors:
@@ -720,16 +720,16 @@
       starter: true
     nn_inference_engines:
       {
-        "nnom":
-          {
-            "value": "nnom",
-            "display_name": "Neural Network on Microcontrollers",
-          },
         "tf_micro":
           {
             "value": "tf_micro",
             "display_name": "TensorFlow Lite for Microcontrollers",
-          },
+          },      
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
       }
     platform_type: devkit
     processors:
