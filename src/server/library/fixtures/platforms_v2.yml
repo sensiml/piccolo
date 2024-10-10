@@ -738,3 +738,56 @@
       - ff5e8134-1e71-480b-a5e5-686e7e61e482
     uuid: 7b5f3d48-debe-4bba-a02e-16024989045d
   model: library.PlatformDescriptionVersion2
+
+
+- fields:
+    uuid: e9f53dfa-f434-4f24-9577-839c190f74da
+    name: RISC-V GNU LIB
+    description: Use the RISC-V GNU Lib compiler to build libraries for RISC-V devices.
+    processors:
+      [
+        b7af771c-2edf-4601-9391-645db9558298,
+      ]
+    can_build_binary: false
+    codegen_file_location: ["risc-v-gnu"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters: { "codegen_class": "RISCVGNUGenericCodeGenerator" }
+    supported_compilers: [051b4875-063c-43a8-ad4c-b3aa602f4516]
+    hardware_accelerators:
+      {
+        "cpu_only":
+          {
+            "display_name": "CPU",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "051b4875-063c-43a8-ad4c-b3aa602f4516",
+        "processor": "b7af771c-2edf-4601-9391-645db9558298",
+        "float": "Hard FP",
+        "hardware_accelerator": "",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "An application that feeds sensor data into a SensiML Knowledge Pack model",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "testdata_runner",
+          },
+      }
+    nn_inference_engines:
+      {   
+          "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          }
+      }
+    platform_type: "compiler"
+    documentation: "https://github.com/riscv-collab/riscv-gnu-toolchain"
+    manufacturer: RISC-V
+  model: library.PlatformDescriptionVersion2
