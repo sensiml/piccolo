@@ -1,4 +1,4 @@
-GNU_PREFIX := xtensa-esp32-elf
+GNU_PREFIX := riscv32-unknown-elf
 
 ADD_FEATURE_VECTOR?=y
 ADD_SEGMENT_DATA?=n
@@ -26,7 +26,6 @@ FLOAT_HARDWARE=hard
 
 # Toolchain commands
 CC              := '$(GNU_PREFIX)-gcc'
-CXX             := '$(GNU_PREFIX)-g++'
 AS              := '$(GNU_PREFIX)-as'
 AR              := '$(GNU_PREFIX)-ar' -r
 LD              := '$(GNU_PREFIX)-ld'
