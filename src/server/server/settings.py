@@ -842,6 +842,8 @@ OAUTH_CLIENT_SECRET = env("OAUTH_CLIENT_SECRET", default=None)
 
 ACTIVATION_CODE_AUTH = env("ACTIVATION_CODE_AUTH")
 
+OAUTH_DATA_STUDIO_CLIENT_NAME = "Data Studio"
+
 JWT = {
     # Accepted algorithms for decoder
     "ALGORITHMS": ["RS256", "RS512", "HS256", "HS512"],
