@@ -12,4 +12,4 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     working_dir: /sml_webui
-    command: yarn start
+    command: yarn start:docker
