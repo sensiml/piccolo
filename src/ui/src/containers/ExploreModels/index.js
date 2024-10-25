@@ -19,22 +19,17 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 import { connect } from "react-redux";
 
-import { loadModel } from "store/models/actions";
+import { loadModel, setSelectedModel } from "store/models/actions";
 
 import ExploreModels from "./TheExploreModels";
 
 const mapStateToProps = (state) => {
   return {
-    selectedProject: state.projects.selectedProject.uuid,
-    selectedPipeline: state.pipelines.selectedPipeline,
-    selectedProjectName: state.projects.selectedProject.name,
-    classifierRun: state.classifiers.classifierRun,
-    classifierCache: state.classifiers.classifierCache,
     selectedModel: state.models.selectedModel,
     model: state.models.modelData,
   };
 };
 
-const mapDispatchToProps = { loadModel };
+const mapDispatchToProps = { loadModel, setSelectedModel };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreModels);

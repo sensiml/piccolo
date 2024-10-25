@@ -165,7 +165,7 @@ class PipelineImportDecomposer extends PipelineDataDecomposer {
     super.__setPipelineStep(name, customName, updatedData, updatedOptions);
   }
 
-  __setFeatureFunctions(name, customName, data = [], options) {
+  __setPipelineStepWithSet(name, customName, data = [], options) {
     /**
      * set feature generators or feature selectors steps
      * with replacing dynamic fields like group_columns, sample_rate
@@ -233,9 +233,11 @@ class PipelineImportDecomposer extends PipelineDataDecomposer {
     }
 
     if (PIPELINE_STEP_TYPES.FEATURE_GENERATOR === name) {
-      this.__setFeatureFunctions(name, customName, data, options);
+      this.__setPipelineStepWithSet(name, customName, data, options);
     } else if (PIPELINE_STEP_TYPES.FEATURE_SELECTOR === name) {
-      this.__setFeatureFunctions(name, customName, data, options);
+      this.__setPipelineStepWithSet(name, customName, data, options);
+    } else if (PIPELINE_STEP_TYPES.AUGMENTATION === name) {
+      this.__setPipelineStepWithSet(name, customName, data, options);
     } else if (AUTOML_PARAMS_NAME === name) {
       super.__setPipelineStep(name, customName, data, options);
     } else if (PIPELINE_STEP_TYPES.QUERY === name) {

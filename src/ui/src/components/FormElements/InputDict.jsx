@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*
 Copyright 2017-2024 SensiML Corporation
 

@@ -60,10 +60,10 @@ const TableAutoSenseMetrics = ({ autosenseMetrics, projectUUID, pipelineUUID }) 
     routersHistory.push(getModelPagePath(row.knowledgepack));
   };
 
-  const openModelRender = (modelUUID, row) => {
+  const openModelRender = (modelUUID) => {
     return (
       <Tooltip title="Explore Model..">
-        <Link to={getModelPagePath(row.knowledgepack)}>
+        <Link to={getModelPagePath(modelUUID)}>
           <IconButton variant="contained" color="primary" size="small">
             <ExploreIcon />
           </IconButton>

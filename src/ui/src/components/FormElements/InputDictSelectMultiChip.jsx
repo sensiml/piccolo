@@ -30,7 +30,7 @@ const InputDictSelectMultiChip = ({
   labelId,
   label,
   name,
-  defaultValue,
+  defaultValue = [],
   options,
   onChange,
 }) => {
@@ -63,7 +63,7 @@ const InputDictSelectMultiChip = ({
 InputDictSelectMultiChip.propTypes = {
   id: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  defaultValue: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+  // defaultValue: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
 };
 
 export default InputDictSelectMultiChip;

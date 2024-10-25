@@ -168,7 +168,10 @@ const PipelinesTable = ({
       onUpdateProjectAction();
     }
     if (deletedItems?.length) {
-      openSnackBarWithMsg("success", `Successfully deleted the Pipeline ${selectedPipelineName}.`);
+      openSnackBarWithMsg(
+        "success",
+        `Successfully deleted the Pipeline ${selectedPipelineName || ""}.`,
+      );
     }
     handleCloseConfirmDelete();
     setDeletingPipeline(false);
