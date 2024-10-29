@@ -123,6 +123,7 @@
     "profile-total-latency": "Total Latency: "
   },
   "model-builder-select": {
+    "panel-title": "Pipelines",
     "create-dialog-header": "Create Pipeline",
     "card-header-last-modified": "Most Recent Pipeline",
     "ppl-card-name": "Name",

@@ -29,7 +29,7 @@ import DynamicFormElement from "components/FormElements/DynamicFormElement";
 
 import FormFeatureFormCreate from "./FormSetTransormFormAdd";
 import FormFeatureTransfromForm from "./FormSetTransfromForm";
-import useStyles from "../../BuildModeStyle";
+import useStyles from "../../../containers/BuildModel/BuildModeStyle";
 
 const FormTransformMultiSelect = ({ inputData, onClose, onSubmit, onShowInfo }) => {
   const { t } = useTranslation("models");

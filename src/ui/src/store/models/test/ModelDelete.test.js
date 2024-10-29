@@ -64,12 +64,17 @@ describe("models delete actions", () => {
 
   it("delete model should throw error Base API error", async () => {
     //mock setup
-    const errorResponse = { status: 404, data: { detail: "Not found.", status: 404 } };
+    const errorResponse = {
+      status: 404,
+      data: { detail: "Not found.", status: 404 },
+      config: { url: `/knowledgepack/${modelUUID}/` },
+    };
     try {
       await store.dispatch(deleteModel(modelUUID));
     } catch (error) {
-      expect(error).toEqual(new BaseAPIError(404, errorResponse));
-      expect(error.message).toEqual(errorResponse.data.detail);
+      const expectedError = new BaseAPIError(404, errorResponse);
+      expect(error).toEqual(expectedError);
+      expect(error.message).toEqual(expectedError.message);
     }
   });
 

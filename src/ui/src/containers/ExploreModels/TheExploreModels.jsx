@@ -28,9 +28,7 @@ import ModelSummary from "components/ModelSummary";
 import TabPanel from "components/TabPanel";
 import NoContent from "components/ResponsiveTable/NoContent";
 import ModelControlPanel from "components/ModelControlPanel";
-
 import TheFeatureVector from "containers/ExploreModels/TheFeatureVector";
-
 import TheFeatureEmbedding from "containers/ExploreModels/TheFeatureEmbedding";
 import TheConfusionMatrix from "containers/ExploreModels/TheConfusionMatrix";
 
@@ -185,7 +183,13 @@ const ExploreModels = ({ model, selectedModel, setSelectedModel }) => {
         </Route>
         <Route path={ROUTES.MAIN.MODEL_EXPLORE.child.FEATURE_SUMMARY.path}>
           <TabPanel value={value} index={3}>
-            {value === 3 ? <FeatureSummary model={modelData} /> : null}
+            {value === 3 ? (
+              <FeatureSummary
+                featureSummary={modelData?.data.feature_summary}
+                featureStatistics={modelData?.data?.model_results?.feature_statistics?.validation}
+                classMap={model?.data?.class_map}
+              />
+            ) : null}
           </TabPanel>
         </Route>
         <Route path={ROUTES.MAIN.MODEL_EXPLORE.child.MODEL_SUMMARY.path}>

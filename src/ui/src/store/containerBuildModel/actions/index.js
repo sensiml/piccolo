@@ -41,6 +41,7 @@ import {
   loadPipeline,
   loadIterationMetrics,
   loadPipelineResults,
+  setPipelineExecutionType,
 } from "store/pipelines/actions";
 
 import { optimizeProject } from "store/projects/actions";
@@ -65,8 +66,6 @@ import { setAlertBuilder, clearAlertBuilder } from "./setAlertBuilder";
 import { clearPipelineValidationError } from "./setPiepelineValidationError";
 
 export { updatePipelineStepsWithQuery };
-export { setIsAdvancedBuilding } from "./setIsAdvancedBuilding";
-export { setIsSelectScreenGridView } from "./setIsSelectScreenGridView";
 export { clearPipelinesteps } from "./clearPipelinesteps";
 
 export { setLoadingPipelineSteps };
@@ -75,7 +74,7 @@ export { clearPipelineValidationError };
 
 // eslint-disable-next-line max-len
 export const buildPipelineJson =
-  (selectedPipeline, selectedSteps, isAutoML = true) =>
+  (selectedPipeline, selectedSteps, pipelineSettingsData = {}) =>
   async (dispatch) => {
     const state = store.getState();
     const selectedQueryData = selectSelectedQueryObj(state);
@@ -83,11 +82,10 @@ export const buildPipelineJson =
 
     const { pipelineList, autoMLSeed } = new PipelineDataComposer(
       selectedSteps,
-      isAutoML,
       selectedQueryData,
       featureTransformColumns,
       segmentColumns,
-    ).getPipelineData();
+    ).getPipelineData(pipelineSettingsData);
     dispatch({
       type: STORE_PIPELINE_JSON,
       payload: {
@@ -96,39 +94,43 @@ export const buildPipelineJson =
     });
   };
 
-export const setPipelineStep = (pipelineId, pipelineSteps, autoMLParams) => async (dispatch) => {
-  dispatch({ type: STORE_PIPELINE_VALIDATION_ERROR, payload: "" });
-  await dispatch({ type: STORE_PIPELINE_STEPS, payload: { [pipelineId]: [...pipelineSteps] } });
-  const state = store.getState();
-  const [featureTransformColumns, segmentColumns] = selectTranformSegmentColumns(state);
+export const setPipelineStep =
+  (pipelineId, pipelineSteps, pipelineSettings, isAutoML) => async (dispatch) => {
+    dispatch({ type: STORE_PIPELINE_VALIDATION_ERROR, payload: "" });
+    await dispatch({ type: STORE_PIPELINE_STEPS, payload: { [pipelineId]: [...pipelineSteps] } });
+    const state = store.getState();
+    const [featureTransformColumns, segmentColumns] = selectTranformSegmentColumns(state);
 
-  const selectedQueryData = selectSelectedQueryObj(state);
-  const pipelineObj = getSelectedPipelineObj(state);
-  const selectedProject = state.projects?.selectedProject;
-  const { pipelineList, autoMLSeed } = new PipelineDataComposer(
-    pipelineSteps,
-    true,
-    selectedQueryData,
-    featureTransformColumns,
-    segmentColumns,
-  ).getPipelineData(autoMLParams);
+    const selectedQueryData = selectSelectedQueryObj(state);
+    const pipelineObj = getSelectedPipelineObj(state);
+    const selectedProject = state.projects?.selectedProject;
+    const pipelineSettingsData = {
+      ...(!_.isUndefined(pipelineSettings?.data) && pipelineSettings?.data),
+      ...(!_.isUndefined(isAutoML) && { disable_automl: !isAutoML }),
+    };
+    const { pipelineList, autoMLSeed } = new PipelineDataComposer(
+      pipelineSteps,
+      selectedQueryData,
+      featureTransformColumns,
+      segmentColumns,
+    ).getPipelineData(pipelineSettingsData);
 
-  if (pipelineObj) {
-    await dispatch(
-      updatePipeline({
-        projectUuid: selectedProject.uuid,
-        pipelineUuid: pipelineId,
-        pipelineSteps: pipelineList,
-        autoMLSeed,
-        pipelineName: pipelineObj.name,
-        cacheEnabled: pipelineObj.cache_enabled,
-        deviceConfig: pipelineObj.device_config,
-      }),
-    );
-  }
+    if (pipelineObj) {
+      await dispatch(
+        updatePipeline({
+          projectUuid: selectedProject.uuid,
+          pipelineUuid: pipelineId,
+          pipelineSteps: pipelineList,
+          autoMLSeed,
+          pipelineName: pipelineObj.name,
+          cacheEnabled: pipelineObj.cache_enabled,
+          deviceConfig: pipelineObj.device_config,
+        }),
+      );
+    }
 
-  dispatch(buildPipelineJson(pipelineId, pipelineSteps, true));
-};
+    dispatch(buildPipelineJson(pipelineId, pipelineSteps, pipelineSettingsData));
+  };
 
 export const setPipelineDefaultSteps = (defaultOptions) => async (dispatch, getState) => {
   const state = getState();
@@ -139,7 +141,10 @@ export const setPipelineDefaultSteps = (defaultOptions) => async (dispatch, getS
 
   dispatch(setLoadingPipelineSteps(true, "Loading pipeline ..."));
 
-  const [decomposer, isUpdatePipline = false] = getPipelineDecomposerClass(state, defaultOptions);
+  const [decomposer, isUpdatePipline = false] = getPipelineDecomposerClass(
+    state,
+    defaultOptions || {},
+  );
 
   const pipelineSettings = decomposer.getAutoMLStep();
   decomposedPipelineSteps = decomposer.getPipelineStepData();
@@ -175,7 +180,7 @@ export const setPipelineDefaultSteps = (defaultOptions) => async (dispatch, getS
     decomposedPipelineSteps = _.union(pipelineStepsWtTVO, defaultTVOPipelineSteps);
   }
 
-  if (selectedPipeline && !selectedPipelineSteps?.length) {
+  if (selectedPipeline && selectedPipelineSteps?.length !== decomposedPipelineSteps?.length) {
     // setPipelineStepsFromDecomposedData
     selectedPipelineSteps = await dispatch(
       setPipelineStepsFromDecomposedData(decomposedPipelineSteps),
@@ -195,7 +200,6 @@ export const setPipelineDefaultSteps = (defaultOptions) => async (dispatch, getS
                 : queryStep?.data?.use_session_preprocessor,
             },
           },
-          true,
           selectedPipelineSteps,
         ),
       );
@@ -213,7 +217,7 @@ export const setPipelineDefaultSteps = (defaultOptions) => async (dispatch, getS
       type: STORE_PIPELINE_STEPS,
       payload: { [selectedPipeline]: [...selectedPipelineSteps] },
     });
-    dispatch(buildPipelineJson(selectedPipeline, selectedPipelineSteps));
+    dispatch(buildPipelineJson(selectedPipeline, selectedPipelineSteps, pipelineSettings?.data));
   }
 
   dispatch(setLoadingPipelineSteps(false, ""));
@@ -237,23 +241,42 @@ export const loadPipelineBuilderData = (projectUUID, pipelineUUID) => async (dis
   dispatch(loadIterationMetrics(projectUUID, pipelineUUID));
 };
 
-export const loadDataAfterTraining = (projectUUID, pipelineUUID) => async (dispatch) => {
-  /**
-   * updates dependent data for new models
-   */
-  dispatch(loadPipelineResults(projectUUID, pipelineUUID));
-  dispatch(loadIterationMetrics(projectUUID, pipelineUUID));
-  dispatch(loadPipeline(projectUUID, pipelineUUID));
+export const loadDataAfterTraining =
+  (projectUUID, pipelineUUID, labelKey = "Label") =>
+  async (dispatch) => {
+    /**
+     * updates dependent data for new models
+     */
+    dispatch(loadPipelineResults(projectUUID, pipelineUUID, labelKey));
+    dispatch(loadIterationMetrics(projectUUID, pipelineUUID));
+    dispatch(loadPipeline(projectUUID, pipelineUUID));
+  };
+
+const getExecutionType = (executionType, isAutoML) => {
+  let exType = "AUTOML";
+  if (executionType === "pipeline") {
+    exType = "FEATURE_EXTRACTOR";
+  }
+  if (executionType === "auto" && isAutoML) {
+    exType = "CUSTOM";
+  }
+  return exType;
 };
 
 export const launchModelOptimization =
-  (selectedSteps, pipelineSettings, executionType) => async (dispatch) => {
+  (selectedSteps, pipelineSettings, executionType, isAutoML) => async (dispatch) => {
+    const pipelineSettingsData = {
+      ...(!_.isUndefined(pipelineSettings?.data) && pipelineSettings?.data),
+      ...(!_.isUndefined(isAutoML) && { disable_automl: !isAutoML }),
+    };
     const { autoMLSeed } = new PipelineDataComposer(selectedSteps).getPipelineData(
-      pipelineSettings,
+      pipelineSettingsData,
     );
     const state = store.getState();
     const selectedProject = state.projects?.selectedProject;
     const selectedPipeline = getSelectedPipelineObj(state);
+
+    dispatch(setPipelineExecutionType(getExecutionType(executionType, isAutoML)));
 
     await dispatch(clearOptimizationLogs());
     await dispatch(clearOptimizationDetailedLogs());
@@ -290,9 +313,6 @@ export const launchModelOptimization =
     );
   };
 
-export const stopModelOptimization = () => async (dispatch) => {
-  const state = store.getState();
-  const selectedProject = state.projects?.selectedProject;
-  const selectedPipeline = getSelectedPipelineObj(state);
-  await dispatch(killOptimizationRequest(selectedProject?.uuid, selectedPipeline?.uuid));
+export const stopModelOptimization = (projectUUID, pipelineUUID) => async (dispatch) => {
+  await dispatch(killOptimizationRequest(projectUUID, pipelineUUID));
 };

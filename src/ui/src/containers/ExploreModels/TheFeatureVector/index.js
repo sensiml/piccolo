@@ -23,11 +23,7 @@ import { loadFeatureVectorData } from "store/models/actions";
 import { loadSegments } from "store/segments/actions";
 
 import { selectSegments } from "store/segments/selectors";
-import {
-  selectLabelValuesHashMap,
-  selectLabelValuesColors,
-  selectLabelValuesByName,
-} from "store/labels/selectors";
+import { selectLabelValuesHashMap, selectLabelValuesColors } from "store/labels/selectors";
 
 import TheFeatureVector from "./TheFeatureVector";
 
@@ -40,7 +36,6 @@ const mapStateToProps = (state) => {
     segments: selectSegments(state),
     labelValuesHashMap: selectLabelValuesHashMap()(state),
     selectLabelColorHashMap: (labelName) => selectLabelValuesColors(labelName)(state),
-    selectLabelValuesByName: (labelName) => selectLabelValuesByName(labelName)(state),
   };
 };
 

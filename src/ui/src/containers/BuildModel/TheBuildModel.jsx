@@ -26,6 +26,9 @@ import { ROUTES } from "routers";
 import { AppLoader } from "components/UILoaders";
 
 const TheSelectScreen = lazy(() => import("./TheSelectScreen"));
+const TheClassificationScreen = lazy(() => import("./TheClassificationScreen"));
+const TheFeatureExtractorScreen = lazy(() => import("./TheFeatureExtractorScreen"));
+
 const TheBuilderScreen = lazy(() => import("./TheBuilderScreen"));
 
 const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipelineSteps }) => {
@@ -38,7 +41,7 @@ const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipel
   return (
     <Box>
       <Switch>
-        <Route path={ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path}>
+        <Route path={ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path}>
           <>
             {loadingPipelineSteps.isLoading ? (
               <AppLoader
@@ -48,7 +51,41 @@ const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipel
               />
             ) : null}
             <Suspense fallback={<AppLoader isOpen />}>
-              <TheBuilderScreen />
+              <TheBuilderScreen>
+                {(props) => <TheClassificationScreen isAutoML {...props} />}
+              </TheBuilderScreen>
+            </Suspense>
+          </>
+        </Route>
+        <Route path={ROUTES.MAIN.MODEL_BUILD.child.CUSTOM.path}>
+          <>
+            {loadingPipelineSteps.isLoading ? (
+              <AppLoader
+                isOpen={loadingPipelineSteps.isLoading}
+                message={loadingPipelineSteps.message}
+                // loadingPipelineSteps
+              />
+            ) : null}
+            <Suspense fallback={<AppLoader isOpen />}>
+              <TheBuilderScreen>
+                {(props) => <TheClassificationScreen {...props} isAutoML={false} />}
+              </TheBuilderScreen>
+            </Suspense>
+          </>
+        </Route>
+        <Route path={ROUTES.MAIN.MODEL_BUILD.child.FEATURE_EXTRACTOR.path}>
+          <>
+            {loadingPipelineSteps.isLoading ? (
+              <AppLoader
+                isOpen={loadingPipelineSteps.isLoading}
+                message={loadingPipelineSteps.message}
+                // loadingPipelineSteps
+              />
+            ) : null}
+            <Suspense fallback={<AppLoader isOpen />}>
+              <TheBuilderScreen>
+                {(props) => <TheFeatureExtractorScreen {...props} />}
+              </TheBuilderScreen>
             </Suspense>
           </>
         </Route>
@@ -62,7 +99,7 @@ const TheBuildModel = ({ selectedPipeline, loadingPipelineSteps, setLoadingPipel
             <Redirect
               from={ROUTES.MAIN.MODEL_BUILD.path}
               to={{
-                pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
+                pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path, {
                   projectUUID,
                   pipelineUUID: selectedPipeline,
                 }),

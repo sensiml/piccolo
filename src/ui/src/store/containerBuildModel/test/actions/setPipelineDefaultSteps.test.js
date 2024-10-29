@@ -111,7 +111,6 @@ let initialState = {
   containerBuildModel: {
     pipelineStepData: {},
     pipelineJsonData: {},
-    isAdvancedBuilding: true,
     isSelectScreenGridView: true,
     loadingPipelineSteps: {
       isLoading: false,

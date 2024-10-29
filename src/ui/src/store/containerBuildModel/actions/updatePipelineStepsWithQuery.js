@@ -49,7 +49,7 @@ const getDefaultOptions = (selectedPipelineSteps) => {
 };
 
 export const updatePipelineStepsWithQuery =
-  (queryStep = {}, isAutoML = true, pipelineSteps) =>
+  (queryStep = {}, pipelineSteps) =>
   async (dispatch, getState) => {
     const state = getState();
     const decomposer = new PipelineDataDecomposer(state, {});
@@ -169,7 +169,7 @@ export const updatePipelineStepsWithQuery =
       });
 
       // eslint-disable-next-line no-return-await
-      return await dispatch(setPipelineStepsFromDecomposedData(defautltPipelineSteps, isAutoML));
+      return await dispatch(setPipelineStepsFromDecomposedData(defautltPipelineSteps));
     };
 
     const addMandatoryStepsToSelectedPipelineSteps = (initialSelectedPipelineSteps) => {

@@ -69,7 +69,7 @@ class PipelineDataComposer {
 
   TVO_PARSER = [...TVO_LIST];
 
-  constructor(pipelineSteps, isAutoML, queryData, featureTransformColumns, segmentColumns) {
+  constructor(pipelineSteps, queryData, featureTransformColumns, segmentColumns) {
     /* state */
     this.labelColumn = queryData?.label_column || "";
     this.groupColumns = _.union(queryData?.metadata_columns || [], [this.labelColumn]);
@@ -83,7 +83,6 @@ class PipelineDataComposer {
         reset: true,
       },
     };
-    this.isAutoML = isAutoML;
     this.tempIndexes = {};
   }
 
@@ -339,14 +338,14 @@ class PipelineDataComposer {
     }
   }
 
-  __parseAutoMLParamsDataStep(pipelineStep) {
-    const { data } = pipelineStep || {};
-
-    if (data) {
+  __parseAutoMLParamsDataStep(pipelineSettingsData) {
+    if (pipelineSettingsData) {
       // eslint-disable-next-line camelcase
-      const { tvo, selectorset, set_training_algorithm, set_selectorset, ...restData } = data;
+      const { tvo, selectorset, set_training_algorithm, set_selectorset, ...restData } =
+        pipelineSettingsData;
       let trainingAlgorithms;
       let selectorSet;
+
       if (set_training_algorithm?.length) {
         trainingAlgorithms = set_training_algorithm.reduce((acc, algo) => {
           acc[algo] = {};
@@ -368,12 +367,12 @@ class PipelineDataComposer {
         searchSteps.push(AUTOML_SEARCHED_STEPS.SELECTOR_SET_PARAM);
       }
       if (trainingAlgorithms) {
-        Object.assign(this.autoMLSeed.params, { set_training_algorithm: trainingAlgorithms });
+        _.assign(this.autoMLSeed.params, { set_training_algorithm: trainingAlgorithms });
       }
       if (selectorSet) {
-        Object.assign(this.autoMLSeed.params, { set_selectorset: selectorSet });
+        _.assign(this.autoMLSeed.params, { set_selectorset: selectorSet });
       }
-      Object.assign(this.autoMLSeed.params, { ...restData, search_steps: [...searchSteps] });
+      _.assign(this.autoMLSeed.params, { ...restData, search_steps: [...searchSteps] });
     }
   }
 
@@ -416,7 +415,7 @@ class PipelineDataComposer {
     return this.pipelineList;
   }
 
-  getPipelineData(autoMLParams) {
+  getPipelineData(pipelineSettingsData) {
     /*
       @return {Array} pipelineList, autoMLSeed
     */
@@ -424,7 +423,7 @@ class PipelineDataComposer {
       return [];
     }
     this.__parsePipelineSteps();
-    this.__parseAutoMLParamsDataStep(autoMLParams);
+    this.__parseAutoMLParamsDataStep(pipelineSettingsData);
     return { pipelineList: this.pipelineList, autoMLSeed: this.autoMLSeed };
   }
 }

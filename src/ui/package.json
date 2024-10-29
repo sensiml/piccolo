@@ -136,6 +136,7 @@
     "cyheadless": "./node_modules/.bin/cypress run --headless --browser chrome",
     "test-e2e": "start-server-and-test start http://localhost:3000 cyheadless"
   },
+
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",

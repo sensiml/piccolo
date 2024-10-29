@@ -130,11 +130,11 @@ export const ROUTES = {
           path: "/model-build/:projectUUID?/feature-extractor/:pipelineUUID?/",
           name: "feature-extractor",
         },
-        AUTOML_BUILDER_SCREEN: {
+        AUTOML: {
           path: "/model-build/:projectUUID?/automl-builder/:pipelineUUID?/",
           name: "automl-builder-screen",
         },
-        CUSTOM_BUILDER_SCREEN: {
+        CUSTOM: {
           path: "/model-build/:projectUUID?/custom-builder/:pipelineUUID?/",
           name: "custom-builder-screen",
         },

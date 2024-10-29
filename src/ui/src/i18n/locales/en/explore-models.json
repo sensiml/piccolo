@@ -1,0 +1,6 @@
+{
+  "feature-embedding": {
+    "chart-title": "Feature Analysis",
+    "chart-fetching-text": "Generating Embeddings ..."
+  }
+}

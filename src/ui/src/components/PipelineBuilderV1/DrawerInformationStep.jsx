@@ -23,7 +23,7 @@ import { useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
 import FormUIDescriptionParameters from "./DrawerDescriptionParameters";
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const DrawerInformationStep = ({
   name,

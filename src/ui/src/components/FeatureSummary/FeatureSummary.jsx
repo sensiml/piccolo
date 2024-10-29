@@ -17,18 +17,22 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import React, { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
+import _ from "lodash";
+import { Box, Typography } from "@mui/material";
 import StandardTable from "components/StandardTable";
+import FeatureStatsChart from "components/FeatureStatsChart";
 
 import { ColumnType } from "components/StandardTable/StandardTableConstants";
 
-const FeatureSummary = ({ model, showTitle }) => {
-  const defaultFeatures = {
-    data: [],
-    isFetching: model.isFetching,
-  };
-  const [features, setFeatures] = useState(defaultFeatures);
+const FeatureSummary = ({
+  isFetching,
+  showTitle,
+  classMap = {},
+  featureSummary = [],
+  featureStatistics = [],
+}) => {
+  const [pageData, setPageData] = useState([]);
 
   const drawLabel = (column) => (
     <Typography variant="button">{column.title.toUpperCase()}</Typography>
@@ -69,17 +73,6 @@ const FeatureSummary = ({ model, showTitle }) => {
     },
   ];
 
-  useEffect(() => {
-    if (model && model.data && model.data.feature_summary) {
-      setFeatures({
-        data: model.data.feature_summary,
-        isFetching: model.isFetching,
-      });
-    } else {
-      setFeatures(defaultFeatures);
-    }
-  }, [model]);
-
   const title = "Feature Summary";
   const options = {
     rowsPerPage: 8,
@@ -87,17 +80,29 @@ const FeatureSummary = ({ model, showTitle }) => {
     noContentText: "No Feature Summary",
     excludePrimaryFromDetails: true,
     applyFilters: true,
-    summary: model,
     isDarkHeader: true,
+    capturePageData: (_pageData) => setPageData(_pageData),
   };
   return (
-    <StandardTable
-      tableId="featureSummaryTable"
-      tableColumns={columns}
-      tableData={features}
-      tableTitle={showTitle ? title : null}
-      tableOptions={options}
-    />
+    <>
+      <StandardTable
+        tableId="featureSummaryTable"
+        tableColumns={columns}
+        tableData={{ data: featureSummary, isFetching }}
+        tableTitle={showTitle ? title : null}
+        tableOptions={options}
+      />
+      {!_.isEmpty(featureStatistics) ? (
+        <Box mt={2}>
+          <FeatureStatsChart
+            key="featureStatsCharts"
+            featureStatistics={featureStatistics}
+            classMap={classMap || {}}
+            usedFeatureNames={pageData.map((row) => row.Feature)}
+          />
+        </Box>
+      ) : null}
+    </>
   );
 };
 

@@ -17,7 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import _ from "lodash";
 import PipelineDataBuilderDefault from "../domain/PipelineDataDefault";
 import defaultDataAutoML from "./data/defaultDataAutoML";
 import defaultDataCustomClassifier from "./data/defaultDataCustomClassifier";
@@ -41,7 +40,8 @@ describe("PipelineDataDefault.test", () => {
     stepToEqual.shift();
 
     // const pipelineSettings = defaultDataAutoML.shift();
-    expect(defaultPipelineSettings).toEqual(defaultDataAutoML[0]);
+
+    expect(defaultPipelineSettings.data).toEqual(defaultDataAutoML[0].data);
     expect(defaultPipelineSteps).toEqual(stepToEqual);
   });
 
@@ -59,7 +59,7 @@ describe("PipelineDataDefault.test", () => {
     stepToEqual.shift();
 
     const pipelineSettings = defaultDataCustomClassifier.shift();
-    expect(defaultPipelineSettings).toEqual(pipelineSettings);
+    expect(defaultPipelineSettings.data).toEqual(pipelineSettings.data);
     expect(defaultPipelineSteps).toEqual(stepToEqual);
   });
 });

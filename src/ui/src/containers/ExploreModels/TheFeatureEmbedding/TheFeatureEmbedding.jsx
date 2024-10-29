@@ -17,7 +17,7 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import _ from "lodash";
 import {
   Box,
@@ -31,11 +31,11 @@ import {
 } from "@mui/material";
 
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import FeaturesChart from "components/FeaturesChart";
 import TableFeatureSegments from "components/TableFeatureSegments";
 
 import IconSpinneAutoRenew from "components/UIIcons/IconSpinneAutoRenew";
-
 import useStyles from "containers/ExploreModels/ExploreModelsStyles";
 
 const FEATURE_ANALYSIS_TYPES = ["UMAP", "PCA", "TSNE"];
@@ -51,6 +51,7 @@ const TheFeatureEmbedding = ({
 }) => {
   const classes = useStyles();
   const { projectUUID } = useParams();
+  const { t } = useTranslation("explore-models");
 
   const [classNames, setClassNames] = useState([]);
 
@@ -113,11 +114,6 @@ const TheFeatureEmbedding = ({
       setIsGenerating(false);
     }
   };
-
-  const getFeatureNames = useCallback(() => {
-    // to speed up rendering
-    return [0, 1].map((index) => `${selectedAnalysisType}_${index}`);
-  }, [featureAnalysisData]);
 
   const loadFeatures = async () => {
     setIsGenerating(true);
@@ -209,19 +205,19 @@ const TheFeatureEmbedding = ({
           <FeaturesChart
             key={`key-feature-embeding`}
             featureData={featureAnalysisData}
-            featureNames={getFeatureNames()}
             colorHashMap={labelColorHashMap}
             labelColumn={labelColumn}
             featureX={`${selectedAnalysisType}_0`}
             featureY={`${selectedAnalysisType}_1`}
             parentRef={chartGridRef}
             selectedSegmentIndex={selectedSegmentIndex}
-            title={"<b>Feature Analysis</b>"}
+            title={`<b>${t("feature-embedding.chart-title")}</b>`}
             isFetching={isGenerating}
-            fetchingText={"Generating Embeddings ..."}
+            fetchingText={t("feature-embedding.chart-fetching-text")}
             onSelectPoint={handleSelectSegmemtIndex}
             selectedClasses={classNames.map((el) => el.value)}
             isAutoRangeXaxis={true}
+            maxChartSize={500}
           />
         </Box>
       </Paper>

@@ -17,62 +17,124 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import React from "react";
-import { Grid, Paper, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
+
+import PlayArrowOutlinedIcon from "@mui/icons-material/PlayArrowOutlined";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import makeStyles from "@mui/styles/makeStyles";
+import StopIcon from "@mui/icons-material/Stop";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
+import ControlPanel from "components/ControlPanel";
+import PipelineExportMenu from "components/PipelineExportMenu";
+
+import { UIButtonConvertibleToShort } from "components/UIButtons";
 import { useTranslation } from "react-i18next";
+import { useMainContext, useWindowResize } from "hooks";
+import { RESPONSIVE } from "consts";
 
-const useStyles = () =>
-  makeStyles((theme) => ({
-    pipelinePanelWrapper: {
-      marginBottom: theme.spacing(2),
-    },
-    textWrapper: {
-      display: "flex",
-      alignItems: "center",
-      padding: theme.spacing(2),
-    },
-
-    actionWrapper: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      gap: theme.spacing(2),
-      padding: theme.spacing(2),
-    },
-
-    stepperBackButton: {
-      border: `1px solid ${theme.palette.primary.main}`,
-      marginRight: theme.spacing(2),
-    },
-  }))();
-
-const BuilderPipelinePanel = ({ pipelineName, onClickBack, actionsBtns }) => {
-  const classes = useStyles();
+const BuilderPipelinePanel = ({
+  pipelineData,
+  handleChangePipeline,
+  getIsReadyToOptimize,
+  isOptimizationRunning,
+  handleLaunchOptimize,
+  handleKillLaunchOptimize,
+  exportPipeline,
+  projectUUID,
+  pipelineUUID,
+}) => {
   const { t } = useTranslation("models");
+  const { showMessageSnackbar } = useMainContext();
+
+  const [isShortBtnText, setIsShortBtnText] = useState(false);
+
+  const [anchorExportMenu, setAnchorExportMenu] = useState(null);
+  const isOpenExportMenu = Boolean(anchorExportMenu);
+
+  const handleExportPipeline = async (downloadType) => {
+    try {
+      await exportPipeline(projectUUID, pipelineUUID, downloadType);
+    } catch (error) {
+      showMessageSnackbar("error", error.message);
+    }
+  };
+
+  const handleCloseExportMenu = () => {
+    setAnchorExportMenu(null);
+  };
+
+  useWindowResize((data) => {
+    setIsShortBtnText(data.innerWidth < RESPONSIVE.WIDTH_FOR_SHORT_TEXT);
+  });
 
   return (
-    <Paper elevation={0}>
-      <Grid container className={classes.pipelinePanelWrapper}>
-        <Grid item md={6} className={classes.textWrapper}>
-          <IconButton
-            onClick={onClickBack}
-            className={classes.stepperBackButton}
-            color="primary"
-            size="small"
-          >
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant={"h4"}>
-            {t("model-builder.pipeline-panel-header", { pipelineName })}
-          </Typography>
-        </Grid>
-        <Grid item md={6} className={classes.actionWrapper}>
-          {actionsBtns}
-        </Grid>
-      </Grid>
-    </Paper>
+    <>
+      <PipelineExportMenu
+        archorEl={anchorExportMenu}
+        isOpen={isOpenExportMenu}
+        onClose={handleCloseExportMenu}
+        onDownloadPipeline={handleExportPipeline}
+      />
+      <ControlPanel
+        title={
+          isShortBtnText
+            ? pipelineData.name
+            : t("model-builder.pipeline-panel-header", {
+                pipelineName: pipelineData.name,
+              })
+        }
+        turncateLenght={
+          isShortBtnText ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT : RESPONSIVE.TRUNCATE_NAME_OVER
+        }
+        onClickBack={isShortBtnText ? null : handleChangePipeline}
+        actionsBtns={
+          <>
+            <UIButtonConvertibleToShort
+              variant={"contained"}
+              color={"primary"}
+              disabled={!getIsReadyToOptimize() || isOptimizationRunning}
+              onClick={() => handleLaunchOptimize()}
+              isShort={isShortBtnText}
+              tooltip={t("model-builder.pipeline-panel-btn-start-tooltip")}
+              text={t("model-builder.pipeline-panel-btn-start")}
+              icon={<PlayArrowOutlinedIcon />}
+            />
+            <UIButtonConvertibleToShort
+              variant={"outlined"}
+              color={"primary"}
+              disabled={false}
+              onClick={() => handleKillLaunchOptimize()}
+              isShort={isShortBtnText}
+              tooltip={t("model-builder.pipeline-panel-btn-stop-tooltip")}
+              text={t("model-builder.pipeline-panel-btn-stop")}
+              icon={<StopIcon />}
+            />
+
+            <UIButtonConvertibleToShort
+              color="primary"
+              variant={"outlined"}
+              onClick={(e) => setAnchorExportMenu(e.currentTarget)}
+              isShort={isShortBtnText}
+              icon={<IosShareIcon />}
+              endIcon={<ArrowDropDownIcon />}
+              tooltip={t("model-builder.pipeline-panel-btn-export-tooltip")}
+              text={t("Export")}
+            />
+            <UIButtonConvertibleToShort
+              variant={"outlined"}
+              color={"primary"}
+              disabled={false}
+              onClick={() => handleChangePipeline()}
+              isShort={isShortBtnText}
+              tooltip={"Switch pipelines"}
+              text={t("model-builder.pipeline-panel-btn-change")}
+              icon={<ArrowBackIcon />}
+            />
+          </>
+        }
+      />
+    </>
   );
 };
 

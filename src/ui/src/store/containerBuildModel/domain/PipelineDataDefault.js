@@ -19,7 +19,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 import _ from "lodash";
 import { selectedSessionData } from "store/sessions/selectors";
-import { PIPELINE_STEP_TYPES, TRANSFORM_TYPES, TVO_LIST } from "store/autoML/const";
+import { PIPELINE_STEP_TYPES, TRANSFORM_TYPES, TVO_LIST, AUTOML_STEP } from "store/autoML/const";
 import {
   StepDataQuery,
   StepDataTransform,
@@ -30,42 +30,44 @@ import {
 // eslint-disable-next-line max-len
 import combineFeaturesToNumColumns from "store/containerBuildModel/domain/utilCombineFeaturesToNumColumns";
 
-const DEFAULT_STEPS = [
-  // We're using snake case style, because potentially it's python API
-  {
-    name: "Pipeline Settings",
-    type: PIPELINE_STEP_TYPES.AUTOML_PARAMS,
-    subtypes: [],
-    params: {
-      disable_automl: false,
-      "prediction_target(%)": {
-        f1_score: 100,
-      },
-      hardware_target: {
-        classifiers_sram: 32000,
-      },
-      selectorset: true,
-      set_selectorset: [
-        "Information Gain",
-        "t-Test Feature Selector",
-        "Univariate Selection",
-        "Tree-based Selection",
-      ],
-      tvo: true,
-      set_training_algorithm: [
-        "Hierarchical Clustering with Neuron Optimization",
-        "RBF with Neuron Allocation Optimization",
-        "Random Forest",
-        "xGBoost",
-        "Train Fully Connected Neural Network",
-      ],
-      iterations: 2,
-      allow_unknown: false,
-      population_size: 40,
-      single_model: true,
-      hierarchical_multi_model: false,
+export const DEFAULT_PIPELINE_SETTINGS = {
+  name: "Pipeline Settings",
+  type: PIPELINE_STEP_TYPES.AUTOML_PARAMS,
+  subtypes: [],
+  params: {
+    reset: true,
+    disable_automl: false,
+    search_steps: ["tvo", "selectorset"],
+    "prediction_target(%)": {
+      f1_score: 100,
     },
+    hardware_target: {
+      classifiers_sram: 32000,
+    },
+    set_selectorset: [
+      "Information Gain",
+      "t-Test Feature Selector",
+      "Univariate Selection",
+      "Tree-based Selection",
+    ],
+    set_training_algorithm: [
+      "Hierarchical Clustering with Neuron Optimization",
+      "RBF with Neuron Allocation Optimization",
+      "Random Forest",
+      "xGBoost",
+      "Train Fully Connected Neural Network",
+    ],
+    iterations: 2,
+    allow_unknown: false,
+    population_size: 40,
+    single_model: true,
+    hierarchical_multi_model: false,
   },
+};
+
+export const DEFAULT_STEPS = [
+  // We're using snake case style, because potentially it's python API
+
   {
     type: PIPELINE_STEP_TYPES.QUERY,
     name: "Query",
@@ -338,8 +340,20 @@ class PipelineDataBuilderDefault {
     const getDisableAutoML = (paramsAutoML) => {
       return _.isUndefined(this.isAutoMLOptimization) ? paramsAutoML : !this.isAutoMLOptimization;
     };
+    const data = _.entries(DEFAULT_PIPELINE_SETTINGS.params).reduce((acc, [key, defaultValue]) => {
+      if (key === "search_steps" && _.isArray(defaultValue)) {
+        _.assign(acc, { selectorset: false, tvo: false });
+        defaultValue.forEach((val) => {
+          acc[val] = true;
+        });
+      } else {
+        acc[key] = defaultValue;
+      }
+      return acc;
+    }, {});
+
     return {
-      ...step.params,
+      ...data,
       disable_automl: getDisableAutoML(step.params.disable_automl),
     };
   }
@@ -384,10 +398,9 @@ class PipelineDataBuilderDefault {
   }
 
   getAutoMLStep() {
-    const step = DEFAULT_STEPS[0];
+    const step = DEFAULT_PIPELINE_SETTINGS;
     return {
-      name: step.name,
-      customName: step.name,
+      ...AUTOML_STEP,
       options: step.options,
       data: this.__populateAutoMLParams(step),
     };

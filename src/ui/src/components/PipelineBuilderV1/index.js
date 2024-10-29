@@ -17,11 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SET_IS_ADVANCED_BUILDING } from "store/containerBuildModel/actionTypes";
+import PipelineBuilder from "./PipelineBuilder";
 
-export const setIsAdvancedBuilding = (isAdvancedBuilding) => {
-  return {
-    type: SET_IS_ADVANCED_BUILDING,
-    payload: isAdvancedBuilding,
-  };
-};
+export default PipelineBuilder;

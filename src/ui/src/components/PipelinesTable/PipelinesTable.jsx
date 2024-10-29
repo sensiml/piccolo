@@ -55,6 +55,9 @@ const PipelinesTable = ({
   deletePipeline,
   loadPipelines,
   exportPipeline,
+  setPipelineExecutionType,
+  setPipelineIsActiveStatus,
+  actionSetSelectedPipelineName,
 }) => {
   const { t } = useTranslation("pipelines");
   const classes = useStyles();
@@ -102,11 +105,28 @@ const PipelinesTable = ({
     setSelectedItems(pipelinesUUID);
   };
 
-  const handleAction = (pipelineUUID) => {
+  const handleOpen = (pipelineData) => {
+    let { path } = ROUTES.MAIN.MODEL_BUILD.child.AUTOML;
+    let execType = "AUTOML";
+    actionSetSelectedPipelineName(pipelineData.name);
+
+    if (pipelineData.result_type === "pipeline") {
+      path = ROUTES.MAIN.MODEL_BUILD.child.FEATURE_EXTRACTOR.path;
+      execType = "FEATURE_EXTRACTOR";
+    }
+    if (pipelineData.result_type === "auto" && pipelineData?.hyper_params?.params?.disable_automl) {
+      path = ROUTES.MAIN.MODEL_BUILD.child.CUSTOM.path;
+      execType = "CUSTOM";
+    }
+    if (pipelineData.active) {
+      setPipelineIsActiveStatus();
+    }
+    setPipelineExecutionType(execType);
+
     routersHistory.push(
-      generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
+      generatePath(path, {
         projectUUID: selectedProject,
-        pipelineUUID,
+        pipelineUUID: pipelineData.uuid,
       }),
       { isOptimizeAutoMLParams: true },
     );
@@ -206,11 +226,7 @@ const PipelinesTable = ({
 
   const renderLinkOpenAction = (value, row) => {
     return (
-      <TableLink
-        color="primary"
-        onClick={(_e) => handleAction(row.uuid)}
-        tooltipTitle={`Open ${value}`}
-      >
+      <TableLink color="primary" onClick={(_e) => handleOpen(row)} tooltipTitle={`Open ${value}`}>
         {value}
       </TableLink>
     );

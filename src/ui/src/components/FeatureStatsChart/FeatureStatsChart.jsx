@@ -41,14 +41,13 @@ const chartConfig = {
     "hoverCompareCartesian",
   ],
 };
-const FeatureStatsChart = ({ model, usedFeatureNames }) => {
+const FeatureStatsChart = ({ featureStatistics, usedFeatureNames, classMap, title = "" }) => {
   const [featureStatisticsData, setFeatureStatisticsData] = useState(null);
-  const [modelName, setModelName] = useState(model);
   const [versionKey, setVersionKey] = useState(0);
 
   const chartLayout = {
     boxmode: "group",
-    title: `<b>${modelName} Feature Vector Distribution</b>`,
+    title: `<b>${title} Feature Vector Distribution</b>`,
     hovermode: "closest",
     xaxis: {
       autosize: true,
@@ -65,7 +64,7 @@ const FeatureStatsChart = ({ model, usedFeatureNames }) => {
     },
   };
 
-  const loadData = (rawData, classMap, featureNames) => {
+  const loadData = (rawData, featureNames) => {
     if (rawData) {
       const listOftraces = [];
       let offsetgroup = 1;
@@ -88,12 +87,13 @@ const FeatureStatsChart = ({ model, usedFeatureNames }) => {
           traces = [];
         }
         for (const labelId in rawData[featureFunctionName]) {
-          if (!classMap[labelId]) return;
-          let trace = traces.find((t) => t.name === classMap[labelId]);
+          // if (!classMap[labelId]) return;
+          const labelName = classMap[labelId] || labelId;
+          let trace = traces.find((t) => t.name === labelName);
 
           if (!trace) {
             trace = {
-              name: classMap[labelId],
+              name: labelName,
               offsetgroup: offsetgroup++,
               type: "box",
               boxpoints: "outliers",
@@ -123,20 +123,11 @@ const FeatureStatsChart = ({ model, usedFeatureNames }) => {
   };
 
   useEffect(() => {
-    if (model.isFetching) setFeatureStatisticsData([]);
-    if (!model.isFetching && model.data && model.data.model_results) {
-      const modelData = model.data;
-      setModelName(modelData.name);
-      if (modelData.model_results.feature_statistics) {
-        loadData(
-          modelData.model_results.feature_statistics.validation,
-          modelData.class_map,
-          usedFeatureNames,
-        );
-      }
+    if (featureStatistics) {
+      loadData(featureStatistics, usedFeatureNames);
     }
     setVersionKey(_.uniqueId());
-  }, [model, usedFeatureNames]);
+  }, [featureStatistics, usedFeatureNames]);
 
   const classes = useStyles();
   return featureStatisticsData ? (

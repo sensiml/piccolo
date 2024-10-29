@@ -27,7 +27,7 @@ import filters from "filters";
 import DynamicFormElement from "components/FormElements/DynamicFormElement";
 
 import FormUIDescriptionParameters from "../DrawerDescriptionParameters";
-import useStyles from "../../BuildModeStyle";
+import useStyles from "../../../containers/BuildModel/BuildModeStyle";
 
 const FormQuery = ({
   inputData,

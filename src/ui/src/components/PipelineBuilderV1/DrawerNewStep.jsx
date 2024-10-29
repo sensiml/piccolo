@@ -35,7 +35,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import { useTheme } from "@mui/material/styles";
 
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const DrawerNewStep = ({
   isOpen,

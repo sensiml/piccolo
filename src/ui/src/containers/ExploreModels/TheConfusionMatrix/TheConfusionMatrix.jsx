@@ -17,14 +17,13 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import { Box } from "@mui/material";
 import ConfusionMatrix from "components/ConfusionMatrix";
 
-const ConfusionMatrixSummary = ({ model, showTitle }) => {
+const ConfusionMatrixSummary = ({ model }) => {
   const [validationData, setValidationData] = useState({
     data: null,
     isFetching: model.isFetching,
@@ -73,7 +72,7 @@ const ConfusionMatrixSummary = ({ model, showTitle }) => {
         )}
       </Box>
       {allConfusionMatrix.data !== null
-        ? Object.entries(allConfusionMatrix.data).map(([key, value], index) => (
+        ? Object.entries(allConfusionMatrix.data).map(([key, value]) => (
             <Box key={key} sx={{ flexWrap: "wrap", display: "flex" }}>
               <ConfusionMatrix
                 model={{ data: value.validation, isFetching: false }}

@@ -22,6 +22,7 @@ import { selectedSessionData, selectedSessionName } from "store/sessions/selecto
 // eslint-disable-next-line no-unused-vars
 import { PIPELINE_STEP_TYPES, AUTOML_STEP } from "store/autoML/const";
 import { STEP_TYPES } from "store/pipelines/const";
+import { DEFAULT_PIPELINE_SETTINGS } from "store/containerBuildModel/domain/PipelineDataDefault";
 
 class PipelineDataDecomposer {
   constructor(state, pipelineData) {
@@ -344,18 +345,20 @@ class PipelineDataDecomposer {
 
   __extractAutoMLParams() {
     const APIdata = this?.pipelineData?.hyper_params?.params || {};
-    const data = Object.entries(APIdata).reduce((acc, [key, value]) => {
-      if (key === "search_steps" && _.isArray(value)) {
+    const data = _.entries(DEFAULT_PIPELINE_SETTINGS.params).reduce((acc, [key, defaultValue]) => {
+      if (key === "search_steps" && !_.isEmpty(APIdata[key])) {
         _.assign(acc, { selectorset: false, tvo: false });
-        value.forEach((val) => {
+        APIdata[key].forEach((val) => {
           acc[val] = true;
         });
+      } else if (key === "search_steps") {
+        // if no search_steps set default params as true
+        _.assign(acc, { selectorset: true, tvo: true });
       } else {
-        acc[key] = value;
+        acc[key] = !_.isUndefined(APIdata[key]) ? APIdata[key] : defaultValue;
       }
       return acc;
     }, {});
-
     // this.__setPipelineStep(AUTOML_STEP.name, AUTOML_STEP.customName, data);
     return data;
   }
