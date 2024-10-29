@@ -43,27 +43,34 @@ export const loadMetadata = (projectId) => async (dispatch) => {
   dispatch({ type: STORE_METADATA, metadata });
 };
 
-export const createMetadata = (projectUUID, name, isDropdown) => async () => {
-  if (!helper.isNullOrEmpty(projectUUID)) {
-    try {
-      const { data } = await api.post(`/project/${projectUUID}/metadata/`, {
-        name,
-        is_dropdown: isDropdown,
-        type: "string",
-        metadata: true,
-      });
-      return data;
-    } catch (err) {
-      logger.logError(
-        "",
-        err,
-        `${helper.getResponseErrorDetails(err)} \n--projectId:${projectUUID}`,
-        "createMetadata",
-      );
-      throwParsedApiError(err, "createMetadata");
+export const createMetadata =
+  (projectUUID, name, isDropdown, type = "string") =>
+  async () => {
+    if (!helper.isNullOrEmpty(projectUUID)) {
+      try {
+        const { data } = await api.post(`/project/${projectUUID}/metadata/`, {
+          name,
+          is_dropdown: isDropdown,
+          type,
+          metadata: true,
+        });
+        return data;
+      } catch (err) {
+        logger.logError(
+          "",
+          err,
+          `${helper.getResponseErrorDetails(err)} \n--projectId:${projectUUID}`,
+          "createMetadata",
+        );
+        throwParsedApiError(err, "createMetadata");
+      }
     }
-  }
-  return {};
+    return {};
+  };
+
+export const createDefaultMetadata = (projectUUID) => async (dispatch) => {
+  await dispatch(createMetadata(projectUUID, "Sample Rate", false, "integer"));
+  await dispatch(loadMetadata(projectUUID));
 };
 
 export const updateMetadata = (projectUUID, metadataUUID, name, isDropdown) => async () => {

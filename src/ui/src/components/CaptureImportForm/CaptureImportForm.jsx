@@ -60,6 +60,7 @@ const PipelineImportForm = ({
   updateCapture,
   onClose,
   onSubmitFile,
+  createDefaultMetadata,
   getCaptureMetadataFormData,
   getCaptureConfigurationFormData,
   getSampleRate,
@@ -97,9 +98,16 @@ const PipelineImportForm = ({
     return uploadingCaptures.filter(([id]) => !uploadedCaptureInfo[id]?.error);
   }, [uploadingCaptures, uploadedCaptureInfo]);
 
-  const handleOpenMetadata = () => {
-    setCaptureMetadataFormData(getCaptureMetadataFormData());
-    setCaptureConfigurationFromData(getCaptureConfigurationFormData());
+  const handleOpenMetadata = async () => {
+    let metadataFormData = getCaptureMetadataFormData();
+    let captureConfigurationFormData = getCaptureConfigurationFormData();
+    if (_.isEmpty(metadataFormData) && _.isEmpty(captureConfigurationFormData?.options)) {
+      await createDefaultMetadata(projectUUID);
+    }
+    metadataFormData = getCaptureMetadataFormData();
+    captureConfigurationFormData = getCaptureConfigurationFormData();
+    setCaptureMetadataFormData(metadataFormData);
+    setCaptureConfigurationFromData(captureConfigurationFormData);
     setActiveStep(STEP_FORM);
   };
 
@@ -124,7 +132,7 @@ const PipelineImportForm = ({
     }
 
     if (isSuccess) {
-      handleOpenMetadata();
+      await handleOpenMetadata();
     } else {
       setIsErrorFormOpened(true);
     }

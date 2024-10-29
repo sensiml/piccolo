@@ -28,7 +28,6 @@ import mockQueryList from "store/queries/fixtures/mockQueryList";
 import mockPipelineHierarchyRules from "store/autoML/fixures/mockPipelineHierarchyRules";
 import mockMetadata from "store/metadata/fixtures/mockMetadata";
 
-
 const mockStore = configureMockStore([thunk]);
 
 const setupMockStore = (customStore = {}) =>

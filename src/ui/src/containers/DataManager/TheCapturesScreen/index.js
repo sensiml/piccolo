@@ -36,6 +36,7 @@ import { selectCapturesStatistics } from "store/captures/selectors";
 import { selectedSampleRate } from "store/captureConfigurations/selectors";
 import { selectMetadataTableColumnData } from "store/metadata/selectors";
 import { selectSelectedSessionUUID } from "store/sessions/selectors";
+import { createDefaultMetadata } from "store/metadata/actions";
 
 import TheCapturesScreen from "./TheCapturesScreen";
 
@@ -61,6 +62,7 @@ const mapDispatchToProps = {
   loadCapturesStatistics,
   loadSources,
   deleteCapture,
+  createDefaultMetadata,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TheCapturesScreen);

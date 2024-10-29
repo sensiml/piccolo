@@ -34,7 +34,6 @@ function mapStateToProps(state) {
     modelData: state.models.modelData.data,
     modelList: state.models.modelList.data,
     sessions: state.sessions.data,
-    captureConfigurations: state.captureConfigurations.data,
     classifierCache: state.classifiers.classifierCache,
   };
 }
