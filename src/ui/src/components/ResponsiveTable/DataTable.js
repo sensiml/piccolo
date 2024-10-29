@@ -33,7 +33,6 @@ import Box from "@mui/material/Box";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import IconButton from "@mui/material/IconButton";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import FeatureStatsChart from "components/FeatureStatsChart";
 import FilterRow from "./Filters/FilterRow";
 import NoContent from "./NoContent";
 import Pagination from "./Pagination";
@@ -55,8 +54,13 @@ export default class DataTable extends Component {
   }
 
   componentDidMount() {
+    const displayData = this.getDisplayData();
     if (this.props.captureTableData) {
-      this.props.captureTableData(this.getDisplayData());
+      this.props.captureTableData(displayData);
+    }
+    if (this.props.capturePageData) {
+      const pageData = this.getPageData(displayData, this.props.page);
+      this.props.capturePageData(pageData);
     }
   }
 
@@ -72,9 +76,14 @@ export default class DataTable extends Component {
     const displayData = this.getDisplayData();
     const pageData = this.getPageData(displayData, this.props.page);
 
-    if (this.props.capturePageData) {
+    if (
+      ((_.isEmpty(prevProps.data) && !_.isEmpty(this.props.data)) ||
+        prevProps.page !== this.props.page) &&
+      this.props.capturePageData
+    ) {
       this.props.capturePageData(pageData);
     }
+
     if (
       // prevProps.uuid === this.props.selectedRowId ||
       prevProps.selectedRowId !== this.props.selectedRowId ||
@@ -101,7 +110,9 @@ export default class DataTable extends Component {
     }
   }
 
-  handleChangePage = (event, page) => this.props.onChangePage(event, page);
+  handleChangePage = (event, page) => {
+    this.props.onChangePage(event, page);
+  };
 
   handleChangeRowsPerPage = (event, page) => this.props.onChangeRowsPerPage(event, page);
 
@@ -290,7 +301,6 @@ export default class DataTable extends Component {
       applyFilters,
       getCustomRowProps,
       contextMenuAction,
-      summary,
     } = this.props;
 
     const { columns } = this.props;
@@ -442,13 +452,6 @@ export default class DataTable extends Component {
               </TableRow>
             </TableFooter>
           </Table>
-        )}
-        {summary && (
-          <FeatureStatsChart
-            key="featureStatsCharts"
-            model={summary}
-            usedFeatureNames={pageData.map((row) => row.Feature)}
-          />
         )}
       </>
     );

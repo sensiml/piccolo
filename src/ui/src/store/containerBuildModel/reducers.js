@@ -28,7 +28,6 @@ import {
   CLEAR_ALERT_BUILDER,
   STORE_PIPELINE_VALIDATION_ERROR,
   CLEAR_PIPELINE_VALIDATION_ERROR,
-  SET_IS_ADVANCED_BUILDING,
   SET_IS_SELECT_SCREEN_GRID_VIEW,
   SET_LOADING_PIPELINE_STEPS,
 } from "./actionTypes";
@@ -62,16 +61,6 @@ export const pipelineJsonData = (state = initialPipelineJsonData, action) => {
       return { ...state, ...payload };
     case CLEAR_PIPELINE_JSON:
       return initialPipelineJsonData;
-    default:
-      return state;
-  }
-};
-
-export const isAdvancedBuilding = (state = false, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case SET_IS_ADVANCED_BUILDING:
-      return payload;
     default:
       return state;
   }
@@ -131,7 +120,6 @@ export const pipelineValidationError = (state = "", action) => {
 export default combineReducers({
   pipelineStepData,
   pipelineJsonData,
-  isAdvancedBuilding,
   isSelectScreenGridView,
   loadingPipelineSteps,
   alertBuilder,

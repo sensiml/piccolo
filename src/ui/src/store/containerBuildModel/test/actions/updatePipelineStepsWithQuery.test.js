@@ -152,14 +152,11 @@ describe("Query updating", () => {
 
   it("should sessions steps with use_session_preprocessor is true", async () => {
     selectedPipelineStepsToKeep = await store.dispatch(
-      updatePipelineStepsWithQuery(
-        {
-          customName: queryDataAuto.name,
-          data: { name: queryDataAuto.name, use_session_preprocessor: true },
-          options: { isChangedColumns: false },
-        },
-        true,
-      ),
+      updatePipelineStepsWithQuery({
+        customName: queryDataAuto.name,
+        data: { name: queryDataAuto.name, use_session_preprocessor: true },
+        options: { isChangedColumns: false },
+      }),
     );
 
     const sermenter = selectedPipelineStepsToKeep.find(
@@ -186,14 +183,11 @@ describe("Query updating", () => {
 
   it("should set default segmenter and remove all session steps", async () => {
     const selectedPipelineStepsToKeep = await store.dispatch(
-      updatePipelineStepsWithQuery(
-        {
-          customName: queryDataAuto.name,
-          data: { name: queryDataAuto.name, use_session_preprocessor: false },
-          options: { isChangedColumns: false },
-        },
-        true,
-      ),
+      updatePipelineStepsWithQuery({
+        customName: queryDataAuto.name,
+        data: { name: queryDataAuto.name, use_session_preprocessor: false },
+        options: { isChangedColumns: false },
+      }),
     );
 
     const sermenter = selectedPipelineStepsToKeep.find(
@@ -217,14 +211,11 @@ describe("Query updating", () => {
 
   it("should first add session steps and remove after with different query", async () => {
     let selectedPipelineSteps = await store.dispatch(
-      updatePipelineStepsWithQuery(
-        {
-          customName: queryDataAuto.name,
-          data: { name: queryDataAuto.name, use_session_preprocessor: true },
-          options: { isChangedColumns: false },
-        },
-        true,
-      ),
+      updatePipelineStepsWithQuery({
+        customName: queryDataAuto.name,
+        data: { name: queryDataAuto.name, use_session_preprocessor: true },
+        options: { isChangedColumns: false },
+      }),
     );
 
     const sermenter = selectedPipelineSteps.find(
@@ -252,14 +243,11 @@ describe("Query updating", () => {
       selectedPipelineSteps;
 
     selectedPipelineSteps = await store.dispatch(
-      updatePipelineStepsWithQuery(
-        {
-          customName: queryDataManual.name,
-          data: { name: queryDataManual.name, use_session_preprocessor: true },
-          options: { isChangedColumns: false },
-        },
-        true,
-      ),
+      updatePipelineStepsWithQuery({
+        customName: queryDataManual.name,
+        data: { name: queryDataManual.name, use_session_preprocessor: true },
+        options: { isChangedColumns: false },
+      }),
     );
 
     const sermenterManual = selectedPipelineSteps.find(

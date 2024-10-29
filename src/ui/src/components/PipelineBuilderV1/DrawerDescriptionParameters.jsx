@@ -21,7 +21,7 @@ import React, { useCallback, isValidElement } from "react";
 import _ from "lodash";
 import { Box, Chip, Divider } from "@mui/material";
 
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const FormUIDescriptionParameters = ({ descriptionParameters }) => {
   const classes = useStyles();

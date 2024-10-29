@@ -26,7 +26,7 @@ import fileDownload from "js-file-download";
 import { PIPELINE_CONSTS } from "consts";
 import { v4 as uuidv4 } from "uuid";
 import { store } from "store";
-import { ASYNC_CECK_INTERVAL } from "config";
+import { ASYNC_CECK_INTERVAL, FEATURE_SAMPLE_SIZE_LIMIT } from "config";
 import { getPipelineObj } from "store/pipelines/selectors";
 
 import {
@@ -34,6 +34,7 @@ import {
   UPDATING_PIPELINE,
   UPDATED_PIPELINE,
   STORE_SELECTED_PIPELINE,
+  STORE_SELECTED_PIPELINE_NAME,
   STORE_PIPELINES,
   LOADING_PIPELINES,
   LOADING_PIPELINE_SEEDS,
@@ -58,6 +59,8 @@ import {
   UPDATE_OPTIMIATION_DETAILED_LOGS,
   CLEAR_OPTIMIATION_DETAILED_LOGS,
   STORE_PIPELINE_STATUS,
+  STORE_PIPELINE_EXEC_TYPE,
+  CLEAR_PIPELINE_EXEC_TYPE,
   LOADING_PIPELINE_DATA,
   STORE_PIPELINE_DATA,
 } from "../actionTypes";
@@ -70,6 +73,7 @@ import {
 
 import { clearIterationMetrics } from "./loadIterationMetrics";
 
+export { getPipelineStepFeatureStats } from "./getPipelineStepFeatureStats";
 export { loadIterationMetrics } from "./loadIterationMetrics";
 
 export const setRunningStatus = (responseBody) => async (dispatch) => {
@@ -82,9 +86,13 @@ export const setRunningStatus = (responseBody) => async (dispatch) => {
 
   if (responseBody?.status === "SUCCESS" && !responseBody.message) {
     dispatch({ type: FINISHED_OPTIMIZATION });
+    let message = "Automation Pipeline Completed.";
+    if (responseBody?.execution_type === "pipeline") {
+      message = "Feature Extraction Completed";
+    }
     logPayload = {
       status: MESSAGE_STATUS.SUCCESS,
-      message: "Automation Pipeline Completed.",
+      message,
     };
     isLauching = false;
   } else if (!responseBody?.status && !responseBody.message) {
@@ -125,6 +133,10 @@ export const setRunningStatus = (responseBody) => async (dispatch) => {
   // eslint-disable-next-line no-use-before-define
   dispatch(updateOptimizationLogs({ ...logPayload, isLauching }));
   return isLauching;
+};
+
+export const setPipelineIsActiveStatus = () => (dispatch) => {
+  dispatch({ type: RUNNING_OPTIMIZATION });
 };
 
 export const clearPipelineStatus = () => (dispatch) => {
@@ -200,6 +212,7 @@ export const loadPipelines = (projectId) => async (dispatch) => {
         params: {
           fields: [
             "name",
+            "result_type",
             "uuid",
             "created_at",
             "last_modified",
@@ -223,22 +236,55 @@ export const loadPipelines = (projectId) => async (dispatch) => {
   dispatch({ type: STORE_PIPELINES, pipelines });
 };
 
-export const loadPipeline = (projectUUID, pipelineUUID) => async (dispatch) => {
+export const setSelectedPipelineName = (name) => (dispatch) => {
+  dispatch({ type: STORE_SELECTED_PIPELINE_NAME, payload: name });
+};
+
+export const setPipelineExecutionType = (executionType) => ({
+  type: STORE_PIPELINE_EXEC_TYPE,
+  CLEAR_PIPELINE_EXEC_TYPE,
+  payload: { executionType },
+});
+
+export const clearPipelineExecutionType = (executionType) => ({
+  type: CLEAR_PIPELINE_EXEC_TYPE,
+  payload: { executionType },
+});
+
+export const loadPipeline = (projectUUID, pipelineUUID) => async (dispatch, getState) => {
+  const state = getState();
   dispatch({ type: LOADING_PIPELINE_DATA });
   try {
-    const { data } = await api.get(`/project/${projectUUID}/sandbox/${pipelineUUID}/`);
-    dispatch({ type: STORE_PIPELINE_DATA, payload: data });
+    const { data } = await api.get(`/project/${projectUUID}/sandbox/${pipelineUUID}/`, {
+      params: {
+        fields: ["name", "active", "pipeline", "hyper_params", "cache", "name", "result_type"],
+      },
+    });
+    let exType = "AUTOML";
+    if (data?.result_type === "pipeline") {
+      exType = "FEATURE_EXTRACTOR";
+    }
+    if (data?.result_type === "auto" && data?.hyper_params?.params?.disable_automl) {
+      exType = "CUSTOM";
+    }
+    if (state?.pipelines?.pipelineExecutionType !== exType) {
+      dispatch(setPipelineExecutionType(exType));
+    }
+
+    dispatch({ type: STORE_PIPELINE_DATA, payload: { ...data, uuid: pipelineUUID } });
   } catch (err) {
     logger.logError(
       "",
       `${helper.getResponseErrorDetails(err)} \n -- projectId`,
       err,
-      "loadPipelines",
+      "loadPipeline",
     );
   }
 };
 
 export const clearPipeline = () => (dispatch) => {
+  dispatch({ type: STORE_SELECTED_PIPELINE_NAME, payload: "" });
+  dispatch({ type: STORE_SELECTED_PIPELINE, selectedPipeline: "" });
   dispatch({ type: STORE_PIPELINE_DATA, payload: {} });
 };
 
@@ -335,7 +381,7 @@ export const checkPipelineIsRunning = (projectUuid, pipelineUuid) => async () =>
     if (helper.isNullOrEmpty(pipelineUuid)) return;
 
     const { data: responseBody } = await api.get(
-      `project/${projectUuid}/sandbox-async/${pipelineUuid}/`,
+      `project/${projectUuid}/sandbox-async/${pipelineUuid}/?status_only=true`,
     );
     // eslint-disable-next-line consistent-return
     return responseBody && responseBody.status && API_RUNNING_STATUS.includes(responseBody.status);
@@ -353,42 +399,61 @@ export const checkPipelineIsRunning = (projectUuid, pipelineUuid) => async () =>
   return false;
 };
 
-export const loadPipelineResults = (projectUuid, pipelineUuid) => async (dispatch) => {
-  dispatch({ type: LOADING_PIPELINES_RESULTS });
-  let isRunning = false;
-  let results = {};
+export const loadPipelineResults =
+  (projectUuid, pipelineUuid, labelKey = "Label") =>
+  async (dispatch) => {
+    dispatch({ type: LOADING_PIPELINES_RESULTS });
+    let isRunning = false;
+    let results = {};
 
-  try {
-    const { data: responseBody } = await api.get(
-      `project/${projectUuid}/sandbox-async/${pipelineUuid}/`,
-    );
-    isRunning = await dispatch(setRunningStatus(responseBody));
-    if (responseBody) {
-      if (responseBody.fitness_summary) {
-        results = responseBody.fitness_summary;
+    const getLabelValuesFromLabel = (_responseBody) => {
+      if (_responseBody?.results && _responseBody?.results[labelKey]) {
+        return [...new Set(_responseBody.results[labelKey])];
       }
-      if (!results.name) {
-        results.name = results.knowledgepack;
+      return [];
+    };
+
+    try {
+      const { data: responseBody } = await api.get(
+        `project/${projectUuid}/sandbox-async/${pipelineUuid}/`,
+        {
+          params: { sample_size: FEATURE_SAMPLE_SIZE_LIMIT },
+        },
+      );
+      isRunning = await dispatch(setRunningStatus(responseBody));
+      if (responseBody) {
+        if (responseBody.fitness_summary) {
+          results = responseBody.fitness_summary;
+        }
+        if (!results.name) {
+          results.name = results.knowledgepack;
+        }
+        if (!_.isEmpty(responseBody?.results?.configurations)) {
+          results.name = _.keys(responseBody?.results?.configurations);
+        }
+        if (responseBody?.execution_type === "pipeline") {
+          results.featureVectorData = responseBody?.results;
+          results.featureStatistics = responseBody?.statistics_summary?.feature_statistics || [];
+          results.featureSummary = responseBody?.statistics_summary?.feature_summary || [];
+          results.features = _.keys(responseBody.results);
+          results.labelValues = getLabelValuesFromLabel(responseBody);
+        }
       }
-      if (!_.isEmpty(responseBody?.results?.configurations)) {
-        results.name = _.keys(responseBody?.results?.configurations);
-      }
-    }
-  } catch (err) {
-    logger.logError(
-      "",
-      `${helper.getResponseErrorDetails(
+    } catch (err) {
+      logger.logError(
+        "",
+        `${helper.getResponseErrorDetails(
+          err,
+        )}\n--projectId:${projectUuid},pipelineUuid:${pipelineUuid}`,
         err,
-      )}\n--projectId:${projectUuid},pipelineUuid:${pipelineUuid}`,
-      err,
-      "loadPipelineResults",
-    );
-  }
+        "loadPipelineResults",
+      );
+    }
 
-  dispatch({ type: STORE_PIPELINE_RESULTS, results });
+    dispatch({ type: STORE_PIPELINE_RESULTS, results });
 
-  return isRunning;
-};
+    return isRunning;
+  };
 
 export const clearPipelineResults = () => async (dispatch) => {
   dispatch({ type: CLEAR_PIPELINE_RESULTS });
@@ -518,32 +583,30 @@ export const killOptimizationRequest = (projectUuid, pipelineUuid) => async (dis
     }),
   );
 
-  if (!helper.isNullOrEmpty(projectUuid) && !helper.isNullOrEmpty(pipelineUuid)) {
-    try {
-      await api.delete(`project/${projectUuid}/sandbox-async/${pipelineUuid}/`);
-      dispatch(
-        updateOptimizationLogs({
-          status: MESSAGE_STATUS.WARNING,
-          message: "Pipeline was terminated.",
-          isLauching: false,
-        }),
-      );
-      dispatch({ type: OPTIMIZATION_REQUEST_KILLED });
-    } catch (err) {
-      logger.logError(
-        "",
-        `${helper.getResponseErrorDetails(
-          err,
-        )}\n--projectId:${projectUuid},pipelineUuid:${pipelineUuid}`,
+  try {
+    await api.delete(`project/${projectUuid}/sandbox-async/${pipelineUuid}/`);
+    dispatch(
+      updateOptimizationLogs({
+        status: MESSAGE_STATUS.WARNING,
+        message: "Pipeline was terminated.",
+        isLauching: false,
+      }),
+    );
+    dispatch({ type: OPTIMIZATION_REQUEST_KILLED });
+  } catch (err) {
+    logger.logError(
+      "",
+      `${helper.getResponseErrorDetails(
         err,
-        "killOptimizationRequest",
-      );
-      dispatch({
-        type: KILLING_OPTIMIZATION_FAILED,
-        pipelineUuid,
-        message: "Error checking optimization request status.",
-      });
-    }
+      )}\n--projectId:${projectUuid},pipelineUuid:${pipelineUuid}`,
+      err,
+      "killOptimizationRequest",
+    );
+    dispatch({
+      type: KILLING_OPTIMIZATION_FAILED,
+      pipelineUuid,
+      message: "Error checking optimization request status.",
+    });
   }
 };
 

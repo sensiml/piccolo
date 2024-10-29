@@ -41,3 +41,5 @@ export const OAUTH_GOOGLE_REDIRECT_URL = REACT_APP_OAUTH_GOOGLE_REDIRECT_URL || 
 export const PLANS_LINK = process.env.REACT_APP_PLANS_LINK || "https://sensiml.com/plans/";
 export const CHANGE_PASSWORD_LINK = process.env.REACT_APP_CHANGE_PASSWORD_LINK;
 export const SUBSCRIPTION_LINK = process.env.REACT_APP_SUBSCRIPTION_URL;
+
+export const FEATURE_SAMPLE_SIZE_LIMIT = 200;

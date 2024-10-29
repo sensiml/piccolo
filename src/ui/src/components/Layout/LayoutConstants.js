@@ -26,6 +26,8 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ExploreIcon from "@mui/icons-material/Explore";
+import AutoModeOutlinedIcon from "@mui/icons-material/AutoModeOutlined";
+import ModelTrainingOutlinedIcon from "@mui/icons-material/ModelTrainingOutlined";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import StorageIcon from "@mui/icons-material/Storage";
 import SummaryIcon from "@mui/icons-material/Dvr";
@@ -93,7 +95,7 @@ const MENU_ITEMS_INFO = {
     iconfn: (iconProps) => <BuildIcon {...iconProps} />,
     getPath: (params = {}) =>
       generatePath(ROUTES.MAIN.MODEL_BUILD.child.SELECT_SCREEN.path, { ...params }),
-    _subItems: [
+    subItems: [
       {
         title: i18n.t("layout:nav-drawer.menu-item-feature-extractor"),
         id: "navFeatureExtractor",
@@ -106,9 +108,9 @@ const MENU_ITEMS_INFO = {
         title: i18n.t("layout:nav-drawer.menu-item-pipeline-automl"),
         id: "navPipelineAutoML",
         orderIndex: 2,
-        iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
+        iconfn: (iconProps) => <AutoModeOutlinedIcon {...iconProps} />,
         getPath: (params = {}) =>
-          generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path, {
             ...params,
           }),
       },
@@ -116,9 +118,9 @@ const MENU_ITEMS_INFO = {
         title: i18n.t("layout:nav-drawer.menu-item-pipeline-custom"),
         id: "navPipelineCustom",
         orderIndex: 3,
-        iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
+        iconfn: (iconProps) => <ModelTrainingOutlinedIcon {...iconProps} fontSize="medium" />,
         getPath: (params = {}) =>
-          generatePath(ROUTES.MAIN.MODEL_BUILD.child.CUSTOM_BUILDER_SCREEN.path, {
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.CUSTOM.path, {
             ...params,
           }),
       },

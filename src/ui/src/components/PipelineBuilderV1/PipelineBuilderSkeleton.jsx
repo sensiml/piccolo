@@ -22,7 +22,7 @@ import { Box } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 
 import { IconArrowWrap } from "components/FlowBuilder";
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const PipelineBuilderSkeleton = ({ isShow, amount = 5, isRemoveArrow = true }) => {
   const classes = useStyles();

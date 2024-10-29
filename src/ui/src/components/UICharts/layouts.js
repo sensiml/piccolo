@@ -75,8 +75,8 @@ export const boxChartLayout = {
   margin: {
     l: 80,
     r: 80,
-    b: 100,
-    t: 70,
+    b: 60,
+    t: 60,
     pad: 10,
   },
   colorway: [

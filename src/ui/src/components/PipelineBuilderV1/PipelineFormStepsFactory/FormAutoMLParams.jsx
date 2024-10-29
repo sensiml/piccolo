@@ -27,7 +27,7 @@ import HelpIcon from "components/HelpIcon";
 import DynamicFormElement from "components/FormElements/DynamicFormElement";
 import { AUTOML_PARAM_GROUPS, DISABLE_AUTOML_SELECTION_PARAM_NAME } from "store/autoML/const";
 
-import useStyles from "../../BuildModeStyle";
+import useStyles from "../../../containers/BuildModel/BuildModeStyle";
 import useFormStyles from "./FormStyle";
 
 const FormAutoMLParams = ({
@@ -143,7 +143,7 @@ const FormAutoMLParams = ({
         <Box mb={2} key={`group_automl_form_${index}`}>
           {inputData?.length &&
             inputData
-              .filter((data) => data.group === groupName)
+              .filter((data) => data.group === groupName && data.name !== "disable_automl")
               .map((formEl, inptIndex) => (
                 <Collapse
                   key={`${formEl.name}-${inptIndex}`}

@@ -21,7 +21,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import React, { useState, useEffect, useMemo } from "react";
 
 import { filterTruncateResponsive } from "filters";
-import { matchPath, useLocation, useHistory } from "react-router-dom";
+import { matchPath, useLocation, useHistory, generatePath } from "react-router-dom";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { RESPONSIVE } from "consts";
@@ -61,9 +61,14 @@ const mapStateToProps = (state) => {
     userId: state?.auth?.userId,
     selectedProject: state.projects?.selectedProject?.uuid || "",
     selectedPipeline: state.pipelines?.selectedPipeline || "",
+    selectedPipelineName: state.pipelines?.selectedPipelineName,
+    selectedPipelineData: state.pipelines?.pipelineData?.data || {},
+    selectedPipelineExecutionType: state.pipelines?.pipelineExecutionType,
+    setPipelineIsActiveStatus: state.pipelines?.setPipelineIsActiveStatus,
     selectedModel: state.models?.selectedModel || "",
     selectedProjectName: state.projects?.selectedProject?.name,
     isFreeAccount: getIsFreeAccount(state),
+    pipelineRunningStatus: state.pipelines?.pipelineRunningStatus,
   };
 };
 
@@ -80,9 +85,13 @@ const Header = ({
   userId,
   selectedProject,
   selectedPipeline,
+  selectedPipelineName,
   selectedModel,
   selectedProjectName,
   isFreeAccount,
+  pipelineRunningStatus,
+  selectedPipelineExecutionType,
+
   logOut,
   setNavBarState,
 }) => {
@@ -135,6 +144,14 @@ const Header = ({
 
   const handleMenuAccountSettings = () => {
     routersHistory.push(ROUTES.ACCOUNT_SETTINGS.path);
+  };
+
+  const handleChangePipeline = async () => {
+    routersHistory.push(
+      generatePath(ROUTES.MAIN.MODEL_BUILD.child.SELECT_SCREEN.path, {
+        projectUUID: selectedProject,
+      }),
+    );
   };
 
   const headerTitle = useMemo(() => {
@@ -199,6 +216,10 @@ const Header = ({
         selectedProject={selectedProject}
         selectedModel={selectedModel}
         selectedPipeline={selectedPipeline}
+        selectedPipelineName={selectedPipelineName}
+        handleChangePipeline={handleChangePipeline}
+        pipelineRunningStatus={pipelineRunningStatus}
+        selectedPipelineExecutionType={selectedPipelineExecutionType}
         onClose={() => handleDrawerClose()}
       />
       <HeaderMenu

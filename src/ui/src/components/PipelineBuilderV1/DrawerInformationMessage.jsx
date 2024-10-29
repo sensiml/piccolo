@@ -25,7 +25,7 @@ import { useTranslation } from "react-i18next";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Alert, AlertTitle, Drawer, Box, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const DrawerInformationMessage = ({ isOpen, header, message, onClose, parameters = [] }) => {
   const { t } = useTranslation("models");

@@ -26,7 +26,6 @@ const mapStateToProps = (state) => {
   return {
     selectedProject: state.projects?.selectedProject?.uuid,
     selectedModel: state.models?.selectedModel,
-    modelData: state.models?.modelData?.data || {},
   };
 };
 

@@ -22,11 +22,8 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import { getUniqueId } from "utils";
 import { PIPELINE_STEP_TYPES, AUTOML_STEP } from "store/autoML/const";
 
-export { setIsAdvancedBuilding } from "./setIsAdvancedBuilding";
-
 const setPipelineStepsFromDecomposedData =
-  (decomposedPipelineSteps, isAutoML = true) =>
-  async (_dispatch, getState) => {
+  (decomposedPipelineSteps) => async (_dispatch, getState) => {
     /**
      * updateting decomposed or pipeline steps with hirerarchy rules instructions
      * @return {Array} selectedPipelineSteps - updated pipeline array
@@ -52,11 +49,6 @@ const setPipelineStepsFromDecomposedData =
             id: getUniqueId(),
           };
         });
-
-      // if (isAutoML) {
-      //   const data = decomposedPipelineSteps.find((el) => el.name === AUTOML_STEP.name);
-      //   selectedPipelineSteps.unshift({ ...AUTOML_STEP, ...data, id: getUniqueId() });
-      // }
 
       // release not mondatory steps without data, keep either query or input_data
       selectedPipelineSteps = selectedPipelineSteps.filter((stepObj) => {

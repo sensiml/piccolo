@@ -111,12 +111,14 @@ class AbstractStepData {
       return contrctEl?.default;
     }
 
-    if (
-      !_.isArray(contrctEl?.default) &&
-      !_.isNull(contrctEl?.default) &&
-      !_.isUndefined(contrctEl?.default)
-    ) {
-      return contrctEl?.default;
+    if (!_.isArray(contrctEl?.default)) {
+      if (
+        !_.isEmpty(contrctEl?.default) &&
+        !_.isNull(contrctEl?.default) &&
+        !_.isUndefined(contrctEl?.default)
+      ) {
+        return contrctEl?.default;
+      }
     }
 
     if (formFieldType === FORM_TYPES.FORM_SELECT_TYPE) {
@@ -227,19 +229,13 @@ class AbstractStepData {
 
     if (contrctEl?.options?.length) {
       const options = _.map(contrctEl?.options, (el) => {
-        if (el.name && el.value) {
-          return { name: el.name, value: el.value };
-        }
-        if (!el.name && el.value) {
-          return { name: el.value, value: el.value };
-        }
-        if (el.name && !el.value) {
+        if (el.name) {
           return { name: el.name, value: el.name };
         }
         return { name: el, value: el };
       });
       if (contrctEl.default && contrctEl.type === "str") {
-        // some contracts have default values that are not in options
+        // some contract have default values out of options
         if (options.findIndex((el) => el.value === contrctEl.default) === -1) {
           return _.union(options, [{ name: contrctEl.default, value: contrctEl.default }]);
         }
@@ -299,9 +295,6 @@ class AbstractStepData {
       return `range_${contrctEl.type}`;
     }
     if (contrctEl.type === "str" && options?.length) {
-      return "select";
-    }
-    if (contrctEl.type === "numeric" && options?.length) {
       return "select";
     }
     if (contrctEl.type === "str" && this.isAdditionalyLookup(contrctEl.name)) {

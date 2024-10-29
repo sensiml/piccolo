@@ -46,7 +46,7 @@ import { useMainContext } from "hooks";
 import { DialogConfirm } from "components/DialogConfirm";
 import DialogInformation from "components/DialogInformation";
 import UIDialogForm from "components/UIDialogFormMedium";
-import DialogDistributionCharts from "components/DialogDistributionCharts";
+import PipelineStepDrawerStatistic from "components/PipelineStepDrawerStatistic";
 
 import api, { parseApiError } from "store/api";
 import fileDownload from "js-file-download";
@@ -72,7 +72,7 @@ import FormPipelineStep from "./PipelineFormStepsFactory";
 import FormStepEditor from "./FormStepEditor";
 import PipelineBuilderSkeleton from "./PipelineBuilderSkeleton";
 
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const STEP_COLORS = {
   Query: "rgba(255,210,21,0.7)",
@@ -127,20 +127,25 @@ const CircularProgressWithLabel = ({ current, total, ...props }) => {
 let downloadingCache = false;
 
 const PipelineBuilder = ({
+  isAutoML,
+  isModel,
   alertBuilder,
   pipelineSettings,
   selectedSteps,
   allSteps,
   transforms,
   isOptimizationRunning,
-  isAutoML,
   pipelineStatus,
   pipelineUUID,
   pipelineData,
   projectUUID,
   getPipelineStepDataClass,
   getPipelineStepDescription,
+  getPipelineStepFeatureStats,
   labelColors,
+  classMap,
+  selectLabelValuesColors,
+  selectLabelValuesByName,
   onCloseAlertBuilder,
   onCreateNewStep,
   onDeleteStep,
@@ -169,6 +174,7 @@ const PipelineBuilder = ({
   const [isDownloadingCache, setIsDownloadingCache] = useState(false);
 
   const [cacheDistributionData, setCacheDistributionData] = useState({});
+  const [featureStatsData, setFeatureStatsData] = useState({});
 
   const [isOpenCacheDownloadMenu, setIsOpenCacheDownloadMenu] = useState(false);
   const [isOpenDialogDistribution, setIsOpenDialogDistribution] = useState(false);
@@ -240,6 +246,7 @@ const PipelineBuilder = ({
         return true;
       }
       if (
+        isAutoML &&
         [PIPELINE_STEP_TYPES.CLASSIFIER, PIPELINE_STEP_TYPES.TRAINING_ALGORITHM].includes(
           step?.name,
         )
@@ -378,7 +385,6 @@ const PipelineBuilder = ({
       currentIndex > 0 &&
       selectedSteps[currentIndex]?.type !== PIPELINE_STEP_TYPES.AUTOML_PARAMS
     ) {
-      // return true;
       let index;
       for (index = 0; index < currentIndex; ++index) {
         if (!selectedSteps[index]?.data) {
@@ -662,14 +668,29 @@ const PipelineBuilder = ({
     handleCloseDownloadCacheMenu();
   };
 
-  const handleOpenDialogDistributionChart = (_e, _step) => {
+  const handleOpenDialogDistributionChart = async (_e, _step) => {
     setIsOpenDialogDistribution(true);
-    setCacheDistributionData(_step?.options?.cacheData);
+    setCacheDistributionData({
+      data: _step?.options?.cacheData,
+      step: {
+        isLoadFeatures: _step.options.isAfterFeatureGenerator,
+        stepName: _step.name,
+      },
+    });
+    if (_step.options.isAfterFeatureGenerator) {
+      try {
+        const data = await getPipelineStepFeatureStats(projectUUID, pipelineUUID, _step.index);
+        setFeatureStatsData(data);
+      } catch (apiError) {
+        showMessageSnackbar("error", apiError.message);
+      }
+    }
   };
 
   const handleCloseDialogDistributionChart = (_e, _step) => {
     setIsOpenDialogDistribution(false);
-    setCacheDistributionData([]);
+    setCacheDistributionData({});
+    setFeatureStatsData({});
   };
 
   const getStatuStepIndex = (_step_index) => {
@@ -795,21 +816,21 @@ const PipelineBuilder = ({
 
   return (
     <Box data-test={"ppl-step-builder"} className={classes.pipelineBuilderWrapper}>
-      <CardStep
-        dataTest="ppl-card-step"
-        className={getCardIsDisableToEdit(pipelineSettings) ? classes.cardStepDisabledToEdit : ""}
-        disable={!isStepAvailableToEdit(pipelineSettings)}
-        style={{
-          margin: "auto",
-          marginBottom: "1rem",
-          borderBottom: `4px solid ${STEP_COLORS.AUTOML_PARAMS}`,
-        }}
-        onInfo={(_e) => handleStepInfo(pipelineSettings)}
-        onEdit={(_e) => setActiveEditStep(pipelineSettings)}
-      >
-        <Box className={classes.cardTextWrap}>
-          <>
-            <span>{"Pipeline Settings"}</span>
+      {isAutoML ? (
+        <CardStep
+          dataTest="ppl-card-step"
+          className={getCardIsDisableToEdit(pipelineSettings) ? classes.cardStepDisabledToEdit : ""}
+          disable={!isStepAvailableToEdit(pipelineSettings)}
+          style={{
+            margin: "auto",
+            marginBottom: "1rem",
+            borderBottom: `4px solid ${STEP_COLORS.AUTOML_PARAMS}`,
+          }}
+          onInfo={(_e) => handleStepInfo(pipelineSettings)}
+          onEdit={(_e) => setActiveEditStep(pipelineSettings)}
+        >
+          <Box className={classes.cardTextWrap}>
+            <span>{"AutoML Settings"}</span>
             <Box className={classes.cardParamsWrapper}>
               {getInputCardParamsByTypeSubType(pipelineSettings.id).map((el, ind) => (
                 <Tooltip key={`${el.name}_${ind}`} title={el?.tooltip}>
@@ -820,144 +841,154 @@ const PipelineBuilder = ({
                 </Tooltip>
               ))}
             </Box>
-          </>
-        </Box>
-      </CardStep>
-      {_.entries(PIPELINE_GROUPS).map(([_groupKey, groupItem]) => {
-        const stepsToRender = selectedSteps.filter((_el) => groupItem.type === _el?.options?.type);
-        return (
-          <Box key={`group_${groupItem.type}`}>
-            <Box className={classes.groupBox}>
-              <div className={classes.groupHeader}>{groupItem.name}</div>
-              {_.isEmpty(stepsToRender) ? (
-                <PipelineBuilderSkeleton isShow={!selectedSteps?.length} amount={2} />
-              ) : (
-                stepsToRender.map((step) => (
-                  <Box
-                    className={classes.stepWrapper}
-                    key={`step_${groupItem.type}_${step.name}${step.index}`}
-                    data-test={"ppl-step-wapper"}
-                    data-cy={step.name}
-                  >
-                    <CardStep
-                      dataTest="ppl-card-step"
-                      className={getCardIsDisableToEdit(step) ? classes.cardStepDisabledToEdit : ""}
-                      icon={componentCardIcon(step, groupItem)}
-                      disable={!isStepAvailableToEdit(step.index)}
-                      isFlashingEdit={isStepAvailableToEdit(step.index) && !step?.data}
-                      style={getStepStyle(step.type)}
-                      onInfo={(_e) => handleStepInfo(step)}
-                      onEdit={
-                        !getCardIsDisableToEdit(step)
-                          ? (_e) => handleOpenStepEdit(step.index, step)
-                          : undefined
-                      }
-                      onDelete={
-                        isStepAvailableToDeleteForm(step)
-                          ? (_e) => handleDeleteStep(step.index, step)
-                          : undefined
-                      }
-                      onDownloadCache={
-                        step?.options?.isCached ? (e) => handleOpenDownloadCacheMenu(e, step) : null
-                      }
-                      onOpenCacheChart={
-                        step?.options?.cacheData?.isHasDistributionData
-                          ? (e) => handleOpenDialogDistributionChart(e, step)
-                          : null
-                      }
-                    >
-                      <Box className={classes.cardTextWrap}>
-                        {step.customName !== step.name && !step?.options?.isOptimizedByAutoML ? (
-                          <>
-                            <Box display={"flex"} alignItems={"center"}>
-                              <span>{step.name}</span>
-                              <CardInformationIcon />
-                            </Box>
-                            {[
-                              PIPELINE_STEP_TYPES.CLASSIFIER,
-                              PIPELINE_STEP_TYPES.TRAINING_ALGORITHM,
-                            ].includes(step.name) &&
-                            !pipelineSettings?.data?.disable_automl ? null : (
-                              <span>{filterTruncate(step.customName, 50)}</span>
-                            )}
-                            {isStepAvailableToEdit(step.index) && !step?.data ? (
-                              <span className={classes.dangerColor}>{" *"}</span>
-                            ) : (
-                              <span />
-                            )}
-                          </>
-                        ) : (
-                          <>
-                            <Box display={"flex"} alignItems={"center"}>
-                              {" "}
-                              <span>
-                                {t("model-builder.card-type-prefix", {
-                                  FunctionSubType: step.name,
-                                })}
-                              </span>
-                              <CardInformationIcon />
-                            </Box>
-                          </>
-                        )}
-                      </Box>
-                    </CardStep>
-
-                    {newStepAfter?.index === step.index ? (
-                      <Box className={classes.NewCardWrapper}>
-                        <IconArrowFullWidthWrap className={classes.fullWidthIcon} />
-                        <NewCardStep
-                          className={getStepStyle(newStepData.type)}
-                          borderColor={getStepColor(newStepData.type)}
-                        >
-                          <Box className={classes.cardTextWrap}>
-                            <span>{newStepData.name}</span>
-                            <span>{filterTruncate(newStepData.customName, 50)}</span>
-                          </Box>
-                        </NewCardStep>
-                      </Box>
-                    ) : nextStepsIsNotNone(step.nextSteps) &&
-                      groupItem.type !== "tvo" &&
-                      !isNextStepAvailableToAdd(step.index, step) ? (
-                      <Box className={classes.IconWrapper}>
-                        <IconArrowWrap
-                          dataTest={"ppl-step-next"}
-                          disable={
-                            !isStepAvailableToEdit(step.index) ||
-                            !isStepAvailableToEdit(step.index + 1)
-                          }
-                          isRemoveArrow={true}
-                          onClick={(_e) => handleNewStep(step.index, step)}
-                        />
-                      </Box>
-                    ) : nextStepsIsNotNone(step.nextSteps) && groupItem.type !== "tvo" ? (
-                      <Box className={classes.IconWrapper}>
-                        <IconArrowAddWrap
-                          dataTest={"ppl-step-add"}
-                          disable={
-                            !isStepAvailableToEdit(step.index) ||
-                            !isStepAvailableToEdit(step.index + 1)
-                          }
-                          onClick={(_e) => handleNewStep(step.index, step)}
-                          isRemoveArrow={true}
-                        />
-                      </Box>
-                    ) : (
-                      <Box mb={2} />
-                    )}
-                  </Box>
-                ))
-              )}
-            </Box>
-            {groupItem.type !== "tvo" ? (
-              <Box className={classes.IconWrapper}>
-                <Box style={{ marginTop: "-1rem" }}>
-                  <IconArrowWrap dataTest={"ppl-step-add"} />
-                </Box>
-              </Box>
-            ) : null}
           </Box>
-        );
-      })}
+        </CardStep>
+      ) : null}
+      {_.entries(PIPELINE_GROUPS)
+        .filter((el) => (el[1].type !== PIPELINE_GROUPS.TVO.type && !isModel) || isModel)
+        .map(([_groupKey, groupItem]) => {
+          const stepsToRender = selectedSteps.filter(
+            (_el) => groupItem.type === _el?.options?.type,
+          );
+          return (
+            <Box key={`group_${groupItem.type}`}>
+              <Box className={classes.groupBox}>
+                <div className={classes.groupHeader}>{groupItem.name}</div>
+                {_.isEmpty(stepsToRender) ? (
+                  <PipelineBuilderSkeleton isShow={!selectedSteps?.length} amount={2} />
+                ) : (
+                  stepsToRender.map((step) => (
+                    <Box
+                      className={classes.stepWrapper}
+                      key={`step_${groupItem.type}_${step.name}${step.index}`}
+                      data-test={"ppl-step-wapper"}
+                      data-cy={step.name}
+                    >
+                      <CardStep
+                        dataTest="ppl-card-step"
+                        className={
+                          getCardIsDisableToEdit(step) ? classes.cardStepDisabledToEdit : ""
+                        }
+                        icon={componentCardIcon(step, groupItem)}
+                        disable={!isStepAvailableToEdit(step.index)}
+                        isFlashingEdit={isStepAvailableToEdit(step.index) && !step?.data}
+                        style={getStepStyle(step.type)}
+                        onInfo={(_e) => handleStepInfo(step)}
+                        onEdit={
+                          !getCardIsDisableToEdit(step)
+                            ? (_e) => handleOpenStepEdit(step.index, step)
+                            : undefined
+                        }
+                        onDelete={
+                          isStepAvailableToDeleteForm(step)
+                            ? (_e) => handleDeleteStep(step.index, step)
+                            : undefined
+                        }
+                        onDownloadCache={
+                          !isOptimizationRunning && step?.options?.isCached
+                            ? (e) => handleOpenDownloadCacheMenu(e, step)
+                            : null
+                        }
+                        onOpenCacheChart={
+                          !isOptimizationRunning && step?.options?.isHasDistributionData
+                            ? (e) => handleOpenDialogDistributionChart(e, step)
+                            : null
+                        }
+                      >
+                        <Box className={classes.cardTextWrap}>
+                          {step.customName !== step.name && !step?.options?.isOptimizedByAutoML ? (
+                            <>
+                              <Box display={"flex"} alignItems={"center"}>
+                                <span>{step.name}</span>
+                                <CardInformationIcon />
+                              </Box>
+                              {[
+                                PIPELINE_STEP_TYPES.CLASSIFIER,
+                                PIPELINE_STEP_TYPES.TRAINING_ALGORITHM,
+                              ].includes(step.name) &&
+                              !pipelineSettings?.data?.disable_automl &&
+                              isAutoML ? null : (
+                                <span>{filterTruncate(step.customName, 50)}</span>
+                              )}
+                              {isStepAvailableToEdit(step.index) && !step?.data ? (
+                                <span className={classes.dangerColor}>{" *"}</span>
+                              ) : (
+                                <span />
+                              )}
+                            </>
+                          ) : (
+                            <>
+                              <Box display={"flex"} alignItems={"center"}>
+                                {" "}
+                                <span>
+                                  {t("model-builder.card-type-prefix", {
+                                    FunctionSubType: step.name,
+                                  })}
+                                </span>
+                                <CardInformationIcon />
+                              </Box>
+                            </>
+                          )}
+                        </Box>
+                      </CardStep>
+
+                      {newStepAfter?.index === step.index ? (
+                        <Box className={classes.NewCardWrapper}>
+                          <IconArrowFullWidthWrap className={classes.fullWidthIcon} />
+                          <NewCardStep
+                            className={getStepStyle(newStepData.type)}
+                            borderColor={getStepColor(newStepData.type)}
+                          >
+                            <Box className={classes.cardTextWrap}>
+                              <span>{newStepData.name}</span>
+                              <span>{filterTruncate(newStepData.customName, 50)}</span>
+                            </Box>
+                          </NewCardStep>
+                        </Box>
+                      ) : nextStepsIsNotNone(step.nextSteps) &&
+                        groupItem.type !== "tvo" &&
+                        !isNextStepAvailableToAdd(step.index, step) ? (
+                        <Box className={classes.IconWrapper}>
+                          <IconArrowWrap
+                            dataTest={"ppl-step-next"}
+                            disable={
+                              !isStepAvailableToEdit(step.index) ||
+                              !isStepAvailableToEdit(step.index + 1)
+                            }
+                            isRemoveArrow={true}
+                            onClick={(_e) => handleNewStep(step.index, step)}
+                          />
+                        </Box>
+                      ) : nextStepsIsNotNone(step.nextSteps) && groupItem.type !== "tvo" ? (
+                        <Box className={classes.IconWrapper}>
+                          <IconArrowAddWrap
+                            dataTest={"ppl-step-add"}
+                            disable={
+                              !isStepAvailableToEdit(step.index) ||
+                              !isStepAvailableToEdit(step.index + 1)
+                            }
+                            onClick={(_e) => handleNewStep(step.index, step)}
+                            isRemoveArrow={true}
+                          />
+                        </Box>
+                      ) : (
+                        <Box mb={2} />
+                      )}
+                    </Box>
+                  ))
+                )}
+              </Box>
+              {(isModel && groupItem.type !== "tvo") ||
+              (!isModel && groupItem.type !== "feature_extractor") ? (
+                <Box className={classes.IconWrapper}>
+                  <Box style={{ marginTop: "-1rem" }}>
+                    <IconArrowWrap dataTest={"ppl-step-add"} />
+                  </Box>
+                </Box>
+              ) : null}
+            </Box>
+          );
+        })}
       {newStepAfter.nextSteps ? (
         <DrawerNewStep
           isOpen={Boolean(newStepAfter.nextSteps)}
@@ -1088,11 +1119,22 @@ const PipelineBuilder = ({
         </Typography>
       </DialogInformation>
       {isOpenDialogDistribution ? (
-        <DialogDistributionCharts
+        <PipelineStepDrawerStatistic
           onClose={handleCloseDialogDistributionChart}
           isOpen={isOpenDialogDistribution}
           labelColors={labelColors}
-          data={cacheDistributionData}
+          data={cacheDistributionData?.data || {}}
+          featureSummary={featureStatsData.feature_summary}
+          featureStatistics={featureStatsData.feature_statistics}
+          featureVectorData={featureStatsData.feature_data}
+          features={_.keys(featureStatsData.feature_data)}
+          labelColumn={featureStatsData.label_column}
+          selectLabelValuesColors={selectLabelValuesColors}
+          labelValues={selectLabelValuesByName(featureStatsData.label_column || "Label")}
+          classMap={classMap}
+          classes={classes}
+          isLoadFeatures={cacheDistributionData?.step?.isLoadFeatures}
+          stepName={cacheDistributionData?.step?.stepName || ""}
         />
       ) : null}
       <UIDialogForm

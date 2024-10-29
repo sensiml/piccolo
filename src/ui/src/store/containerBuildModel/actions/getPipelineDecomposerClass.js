@@ -28,8 +28,6 @@ import PipelineImportDecomposer from "store/containerBuildModel/domain/PipelineI
 import { updatePipelineStepsWithQuery } from "./updatePipelineStepsWithQuery";
 
 export { updatePipelineStepsWithQuery };
-export { setIsAdvancedBuilding } from "./setIsAdvancedBuilding";
-export { setIsSelectScreenGridView } from "./setIsSelectScreenGridView";
 export { clearPipelinesteps } from "./clearPipelinesteps";
 
 const getPipelineDecomposerClass = (state, defaultOptions = {}) => {

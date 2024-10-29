@@ -43,7 +43,6 @@ const useStyles = () =>
         webkitBoxShadow: "none",
         backgroundColor: "transparent",
         cursor: "pointer !important",
-        // outline: `1px solid ${theme.borderBrandTransparent}`,
         borderRadius: "5px",
       },
       "&::-webkit-scrollbar-thumb": {
@@ -90,6 +89,13 @@ const useStyles = () =>
       "&svg": {
         color: "red",
       },
+    },
+    navTitle: {
+      textDecoration: "none",
+      alignItems: "center",
+      display: "flex",
+      justifyContent: "flex-start",
+      color: theme.palette.primary.main,
     },
 
     drawerClose: {

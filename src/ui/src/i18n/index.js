@@ -28,6 +28,7 @@ import EnNavigation from "./locales/en/navigation.json";
 import EnModels from "./locales/en/models.json";
 import EnProjects from "./locales/en/projects.json";
 import EnDataManager from "./locales/en/data-manager.json";
+import EnExploreModels from "./locales/en/explore-models.json";
 import EnPipelines from "./locales/en/pipelines.json";
 import EnQueries from "./locales/en/queries.json";
 import EnTeam from "./locales/en/team.json";
@@ -50,6 +51,7 @@ i18n.init({
       auth: EnAuth,
       projects: loadWithCommon(EnProjects),
       "data-manager": loadWithCommon(EnDataManager),
+      "explore-models": loadWithCommon(EnExploreModels),
       pipelines: loadWithCommon(EnPipelines),
       queries: loadWithCommon(EnQueries),
       team: loadWithCommon(EnTeam),

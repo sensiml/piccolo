@@ -22,56 +22,59 @@ import PipelineDataComposer from "../domain/PipelineDataComposer";
 
 // data
 import autoMLToCompose from "./data/autoMLToCompose";
-import referenceComposedJson from "./data/referenceComposedJson";
+import expectedComposedAutoMLPipeline from "./data/expectedComposedAutoMLPipeline";
+
+const collectAllValDFS = (lastVal, lastKey, prevKey, colletedArr) => {
+  const setVal = (key, prevKey, val) => {
+    // put only not empty values
+    if (val) {
+      if (prevKey) {
+        colletedArr[`${prevKey}_${key}`] = val;
+      } else {
+        colletedArr[key] = val;
+      }
+    }
+  };
+
+  if (_.isArray(lastVal)) {
+    if (lastVal?.length && _.isObject(lastVal[0])) {
+      // if obejct array
+      Object.entries(lastVal).forEach(([key, val]) => {
+        collectAllValDFS(val, key, prevKey ? `${prevKey}_${lastKey}` : lastKey, colletedArr);
+      });
+    } else {
+      // set value
+      setVal(lastKey, prevKey, lastVal.sort());
+    }
+  } else if (_.isObject(lastVal) && !_.isEmpty(lastVal)) {
+    Object.entries(lastVal).forEach(([key, val]) => {
+      collectAllValDFS(val, key, prevKey ? `${prevKey}_${lastKey}` : lastKey, colletedArr);
+    });
+  } else {
+    // set value
+    setVal(lastKey, prevKey, lastVal);
+  }
+};
 
 describe("PipelineDataComposer.test", () => {
   describe("AutoML pipeline compare with reference", () => {
-    const queryData = autoMLToCompose[1].options.descriptionParameters;
+    const { expPipelineJson, expAutoMLSeed } = expectedComposedAutoMLPipeline;
+    const queryData = autoMLToCompose.pipeline[0].options.descriptionParameters;
+    const { pipeline, pipelineSettings } = autoMLToCompose;
     const [featureTransformColumns, segmentColumns] = [["CascadeID"], ["SegmentID"]];
     const composer = new PipelineDataComposer(
-      autoMLToCompose,
-      true,
+      pipeline,
       queryData,
       featureTransformColumns,
       segmentColumns,
     );
-    composer.getPipelineData();
+    const { pipelineList, autoMLSeed } = composer.getPipelineData(pipelineSettings.data);
 
-    const collectAllValDFS = (lastVal, lastKey, prevKey, colletedArr) => {
-      const setVal = (key, prevKey, val) => {
-        // put only not empty values
-        if (val) {
-          if (prevKey) {
-            colletedArr[`${prevKey}_${key}`] = val;
-          } else {
-            colletedArr[key] = val;
-          }
-        }
-      };
+    expect(_.isEqual(autoMLSeed, expAutoMLSeed)).toEqual(true);
 
-      if (_.isArray(lastVal)) {
-        if (lastVal?.length && _.isObject(lastVal[0])) {
-          // if obejct array
-          Object.entries(lastVal).forEach(([key, val]) => {
-            collectAllValDFS(val, key, prevKey ? `${prevKey}_${lastKey}` : lastKey, colletedArr);
-          });
-        } else {
-          // set value
-          setVal(lastKey, prevKey, lastVal.sort());
-        }
-      } else if (_.isObject(lastVal) && !_.isEmpty(lastVal)) {
-        Object.entries(lastVal).forEach(([key, val]) => {
-          collectAllValDFS(val, key, prevKey ? `${prevKey}_${lastKey}` : lastKey, colletedArr);
-        });
-      } else {
-        // set value
-        setVal(lastKey, prevKey, lastVal);
-      }
-    };
-
-    composer.pipelineList.forEach((composedEl, index) => {
+    pipelineList.forEach((composedEl, index) => {
       describe(`comparing ${composedEl.name} ${composedEl.type} with the reference object`, () => {
-        const referenceElement = referenceComposedJson[index];
+        const referenceElement = expPipelineJson[index];
 
         let referenceAllValues = {};
         let composedAllValues = {};

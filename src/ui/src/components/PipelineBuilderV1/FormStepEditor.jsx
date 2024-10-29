@@ -27,7 +27,7 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { Box, Button, IconButton, Zoom } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const FormStepEditor = ({ name, data, transforms, onClose, onChangeData, onSubmit }) => {
   const monaco = useMonaco();

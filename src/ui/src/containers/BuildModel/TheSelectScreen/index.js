@@ -20,7 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import { connect } from "react-redux";
 import { PIPELINE_STEP_TYPES } from "store/autoML/const";
 import { selectTransformsByTypeSubType } from "store/transforms/selectors";
-import { addPipeline, loadPipelines, setSelectedPipeline } from "store/pipelines/actions";
+import { addPipeline, loadPipelines } from "store/pipelines/actions";
 import { loadQueries } from "store/queries/actions";
 import { clearPipelinesteps, setLoadingPipelineSteps } from "store/containerBuildModel/actions";
 import { loadPipelineTemplates } from "store/pipelineTemplates/actions";
@@ -46,7 +46,6 @@ const mapDispatchToProps = {
   loadPipelines,
   loadQueries,
   loadPipelineTemplates,
-  setSelectedPipeline,
   clearPipelinesteps,
   setLoadingPipelineSteps,
 };
