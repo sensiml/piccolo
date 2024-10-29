@@ -55,16 +55,19 @@ const CaptureMetadataForm = ({
         </Alert>
       ) : null}
       {alertMessage ? <Alert severity={alertType}>{alertMessage}</Alert> : null}
-      {!_.isEmpty(captureConfigurationFromData) &&
-        captureConfigurationFromData.map((formDataProps) => (
-          <FormControl key={formDataProps.name} fullWidth={true} className={classes.formControl}>
-            <DynamicFormElement
-              isUpdateWithDefault={false}
-              {...formDataProps}
-              onChange={handleUpdateConfiruration}
-            />
-          </FormControl>
-        ))}
+      {!_.isEmpty(captureConfigurationFromData?.options) && (
+        <FormControl
+          key={captureConfigurationFromData.name}
+          fullWidth={true}
+          className={classes.formControl}
+        >
+          <DynamicFormElement
+            isUpdateWithDefault={false}
+            {...captureConfigurationFromData}
+            onChange={handleUpdateConfiruration}
+          />
+        </FormControl>
+      )}
       {!_.isEmpty(captureMetadataFormData) &&
         captureMetadataFormData.map((formDataProps) => (
           <FormControl key={formDataProps.name} fullWidth={true} className={classes.formControl}>

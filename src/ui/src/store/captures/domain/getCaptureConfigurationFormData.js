@@ -24,18 +24,16 @@ const getCaptureConfigurationFormData = (state, captureUUID) => {
   const savedCapture = selectCapture(captureUUID)(state);
   const captureConfigurations = state.captureConfigurations?.data;
 
-  const res = [
-    {
-      name: "capture_configuration_uuid",
-      label: "Sensor Configuration",
-      formType: "select",
-      defaultValue: savedCapture?.capture_configuration_uuid || "",
-      options: _.map(captureConfigurations, (el) => ({
-        name: el.name,
-        value: el.uuid,
-      })),
-    },
-  ];
+  const res = {
+    name: "capture_configuration_uuid",
+    label: "Sensor Configuration",
+    formType: "select",
+    defaultValue: savedCapture?.capture_configuration_uuid || "",
+    options: _.map(captureConfigurations, (el) => ({
+      name: el.name,
+      value: el.uuid,
+    })),
+  };
   return res;
 };
 
