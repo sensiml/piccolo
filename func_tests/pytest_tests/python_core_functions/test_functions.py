@@ -130,7 +130,76 @@ def test_dsk_pipeline_data(dsk_proj):
     )
     results, stats = dsk.pipeline.execute()
     data, stats = dsk.pipeline.data(pipeline_step=1)
+
     assert_frame_equal(results, pd.DataFrame(data))
+
+    expected_datasegment = [
+        {
+            "columns": ["accelx", "accely", "accelz"],
+            "metadata": {
+                "Class": "Crawling",
+                "Rep": 1,
+                "Subject": "s01",
+                "SegmentID": 0,
+            },
+            "statistics": {},
+            "data": [
+                [377, 357, 333, 340, 372],
+                [569, 594, 638, 678, 708],
+                [4019, 4051, 4049, 4053, 4051],
+            ],
+        },
+        {
+            "columns": ["accelx", "accely", "accelz"],
+            "metadata": {
+                "Class": "Crawling",
+                "Rep": 1,
+                "Subject": "s01",
+                "SegmentID": 1,
+            },
+            "statistics": {},
+            "data": [
+                [410, 450, 492, 518, 528],
+                [733, 733, 696, 677, 695],
+                [4028, 3988, 3947, 3943, 3988],
+            ],
+        },
+        {
+            "columns": ["accelx", "accely", "accelz"],
+            "metadata": {
+                "Class": "Running",
+                "Rep": 1,
+                "Subject": "s01",
+                "SegmentID": 0,
+            },
+            "statistics": {},
+            "data": [
+                [-44, -47, -43, -40, -48],
+                [-3971, -3982, -3973, -3973, -3978],
+                [843, 836, 832, 834, 844],
+            ],
+        },
+        {
+            "columns": ["accelx", "accely", "accelz"],
+            "metadata": {
+                "Class": "Running",
+                "Rep": 1,
+                "Subject": "s01",
+                "SegmentID": 1,
+            },
+            "statistics": {},
+            "data": [
+                [-52, -64, -64, -66, -62],
+                [-3993, -3984, -3966, -3971, -3988],
+                [842, 821, 813, 826, 827],
+            ],
+        },
+    ]
+    data, stats = dsk.pipeline.get_cached_data(pipeline_step=1)
+    import pdb
+
+    pdb.set_trace()
+    assert expected_datasegment == data
 
 
 def test_sg_windowing(dsk_proj):
