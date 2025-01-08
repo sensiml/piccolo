@@ -123,6 +123,8 @@ def test_LoadTrainedNeuron(dsk_random_project, DataDir):
 
     results, stats = dsk.pipeline.execute()
 
+    print(results)
+
     results.summarize()
     model = results.configurations[0].models[0]
     assert model.neurons == neuron_array
