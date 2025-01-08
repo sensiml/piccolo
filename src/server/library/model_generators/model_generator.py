@@ -289,6 +289,7 @@ def compute_feature_stats(df):
             g.get_group(k)[df.columns[:-1]]
             .describe(percentiles=[0.045, 0.25, 0.5, 0.75, 0.955])
             .round(2)
+            .fillna(0)
             .to_dict()
         )
         outliers = compute_outliers(g.get_group(k)[df.columns[:-1]])
