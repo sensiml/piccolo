@@ -754,6 +754,7 @@ class SandboxAsyncMixin(object):
                     statistics_summary = calculate_feature_stats(
                         feature_data, feature_table, label_column, sandbox.uuid
                     )
+                    summary = feature_data
 
                 elif sandbox.result_type == "grid_search":
                     result_name = "grid_result.{}".format(sandbox_uuid)
