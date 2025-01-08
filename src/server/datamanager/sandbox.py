@@ -143,7 +143,15 @@ def calculate_feature_stats(feature_data, feature_table, label_column, sandbox_u
     if not isinstance(feature_data, DataFrame):
         return {}
 
-    selected_feature_cols.append(label_column)
+    feature_statistics = model_generator.compute_feature_stats(
+        feature_data[selected_feature_cols], label_in_df=False
+    )
+
+    feature_summary = (
+        selected_features.where(notnull(selected_features), NA)
+        .fillna("")
+        .to_dict(orient="records")
+    )
 
     return {
         "feature_statistics": model_generator.compute_feature_stats(
