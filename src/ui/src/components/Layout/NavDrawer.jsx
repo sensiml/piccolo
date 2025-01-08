@@ -68,7 +68,7 @@ const NavDrawer = ({
           return false;
       }
     },
-    [selectedModel, selectedPipeline],
+    [selectedModel, selectedPipelineName],
   );
 
   const filteredMenuItemsExternal = useMemo(
@@ -184,7 +184,7 @@ const NavDrawer = ({
                       <SubItemTitle id={menuItem.id} />
                       <List key={`suitem_list_${menuItem.id}`} sx={{ pl: 2, pt: 0, pb: 0 }}>
                         {menuItem.subItems.map((subItem) => (
-                          <>
+                          <Box key={`subitem_nav_link_${subItem.id}`}>
                             {showIfRunning(menuItem.id, subItem.getPath()) ? (
                               <NavLink
                                 className={classes.navLink}
@@ -210,7 +210,7 @@ const NavDrawer = ({
                                 </ListItem>
                               </NavLink>
                             ) : null}
-                          </>
+                          </Box>
                         ))}
                       </List>
                     </Collapse>

@@ -267,7 +267,7 @@ const PipelineBuilder = ({
     if (stepObj?.nextSteps?.includes(PARENT_KEY)) {
       let i = index;
       let nextParentSteps = selectedSteps[i]?.nextSteps;
-      while (nextParentSteps?.includes(PARENT_KEY) && --i > 0) {
+      while (nextParentSteps?.includes(PARENT_KEY) && --i >= 0) {
         nextParentSteps = selectedSteps[i]?.nextSteps;
       }
       if (!selectedSteps[i]?.nextSteps?.includes(PARENT_KEY)) {
