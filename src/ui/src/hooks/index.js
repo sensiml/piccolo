@@ -24,3 +24,4 @@ export { default as useRouterSearchParams } from "./useRouterSearchParams";
 export { default as useFilterTurncateResponsive } from "./useFilterTurncateResponsive";
 export { default as useIsShortText } from "./useIsShortText";
 export { default as useMainContext } from "./useMainContext";
+export { default as useReadFileText } from "./useReadFileText";

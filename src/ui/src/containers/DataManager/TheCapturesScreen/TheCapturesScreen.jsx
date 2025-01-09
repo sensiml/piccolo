@@ -72,6 +72,7 @@ const TheCapturesScreen = ({
   loadSources,
   deleteCapture,
   createDefaultMetadata,
+  onShowInformation,
 }) => {
   const classes = useStyles();
   const { projectUUID } = useParams();
@@ -193,6 +194,7 @@ const TheCapturesScreen = ({
               />
             </>
           }
+          onShowInformation={onShowInformation}
         />
       </Box>
       <DialogInformation isOpen={isOpenImport} onClose={handleCloseImportForm}>

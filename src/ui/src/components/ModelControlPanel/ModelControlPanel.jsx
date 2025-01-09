@@ -38,6 +38,7 @@ const ModelControlPanel = ({
   onChangePlatform,
   downloading,
   handleDownloadRequest,
+  onShowInformation,
 }) => {
   const { t } = useTranslation("models");
   const routersHistory = useHistory();
@@ -108,6 +109,7 @@ const ModelControlPanel = ({
           />
         </>
       }
+      onShowInformation={onShowInformation}
     />
   );
 };

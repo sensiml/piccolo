@@ -19,9 +19,11 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 */
 
 import React, { useState, lazy } from "react";
+import Markdown from "react-markdown";
 import { Header } from "components/Layout";
 import { Switch, Route } from "react-router-dom";
-import { Box, Grid, Snackbar } from "@mui/material";
+
+import { Box, Grid, Typography, Snackbar } from "@mui/material";
 
 import { MainContext } from "contexts";
 import RouterProxyAppMain from "components/Routers/RouterProxyAppMain";
@@ -34,6 +36,9 @@ import { AppLoader } from "components/UILoaders";
 import { ROUTES } from "routers";
 
 import useStyles from "./MainStyles";
+
+import makeStyles from "@mui/styles/makeStyles";
+import DialogInformation from "components/DialogInformation";
 
 const Home = lazy(() => import("containers/Home"));
 const ProjectSummary = lazy(() => import("containers/ProjectSummary"));
@@ -53,6 +58,7 @@ const Main = ({
   setIsShowBannerMaintenance,
 }) => {
   const classes = useStyles();
+  const [dialogInformationData, setDialogInformationData] = useState({});
 
   const handleCloseBanner = () => {
     setIsShowBannerMaintenance(false);
@@ -69,10 +75,26 @@ const Main = ({
     setOpenSnackbar(false);
   };
 
+  const LinkRenderer = (props) => {
+    return (
+      <a href={props.href} target="_blank" rel="noreferrer">
+        {props.children}
+      </a>
+    );
+  };
+
   const showMessageSnackbar = (variant, message) => {
     setSnackBarMessage(message);
     setSnackBarVariant(variant);
     setOpenSnackbar(true);
+  };
+
+  const showInformationWindow = (title, text) => {
+    setDialogInformationData({ title, text });
+  };
+
+  const handleCloseNewStepDialogInformation = () => {
+    setDialogInformationData({});
   };
 
   return (
@@ -81,7 +103,7 @@ const Main = ({
         <ErrorBoundary>
           <Header headerTitle={headerTitle} />
         </ErrorBoundary>
-        <MainContext.Provider value={{ showMessageSnackbar }}>
+        <MainContext.Provider value={{ showMessageSnackbar, showInformationWindow }}>
           <main className={classes.content}>
             {isShowBannerMaintenance ? (
               <BannerMaintenance
@@ -166,6 +188,17 @@ const Main = ({
             message={snackBarMessage}
           />
         </Snackbar>
+        <DialogInformation
+          isOpen={Boolean(dialogInformationData.title)}
+          onClose={handleCloseNewStepDialogInformation}
+        >
+          <Typography variant="h2" className={classes.infoTitle}>
+            {dialogInformationData.title}
+          </Typography>
+          <Typography paragraph>
+            <Markdown components={{ a: LinkRenderer }}>{dialogInformationData.text}</Markdown>
+          </Typography>
+        </DialogInformation>
       </Box>
     </>
   );

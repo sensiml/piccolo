@@ -41,6 +41,13 @@ const useStyles = () =>
       background: theme.backgroundApp,
       paddingTop: "4rem",
     },
+    infoTitle: {
+      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(2),
+      fontSize: theme.spacing(4),
+      fontWeight: 500,
+      textAlign: "center",
+    },
   }))();
 
 export default useStyles;
