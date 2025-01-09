@@ -34,16 +34,17 @@ import {
 } from "components/LogsView";
 
 import { getUniqueId } from "utils";
-import { useInterval, useMainContext } from "hooks";
+import { useInterval, useMainContext, useReadFileText } from "hooks";
 import { ROUTES } from "routers";
 import { RUNNING_STATUSES } from "consts";
 import { PIPELINE_STEP_TYPES } from "store/autoML/const";
 
 import FeatureVectorChart from "components/FeatureVectorChart";
-
 import FeatureSummary from "components/FeatureSummary";
-import PipelineBuilderFeatureExtraction from "../components/PipelineBuilderFeatureExtraction";
 
+import infoFile from "i18n/locales/en/info-pipeline-fe.md";
+
+import PipelineBuilderFeatureExtraction from "../components/PipelineBuilderFeatureExtraction";
 import QueryCacheAlertMessage from "../components/QueryCacheAlertMessage";
 import BuilderPipelinePanel from "../components/BuilderPipelinePanel";
 import PipelineBuilderAlertMessage from "../components/PipelineBuilderAlertMessage";
@@ -108,7 +109,6 @@ const TheFeatureExtractorScreen = ({
 
   exportPipeline,
   getPipelineStepFeatureStats,
-  onShowInformation,
 }) => {
   const routersHistory = useHistory();
   const scrollTop = useRef();
@@ -116,7 +116,8 @@ const TheFeatureExtractorScreen = ({
 
   const { t } = useTranslation("models");
   const { projectUUID, pipelineUUID } = useParams();
-  const { showMessageSnackbar } = useMainContext();
+  const { showMessageSnackbar, showInformationWindow } = useMainContext();
+  const screenInfo = useReadFileText(infoFile);
 
   const [selectedSteps, setSelectedSteps] = useState([]);
   // eslint-disable-next-line no-unused-vars
@@ -374,10 +375,7 @@ const TheFeatureExtractorScreen = ({
             handleChangePipeline={handleChangePipeline}
             getIsReadyToOptimize={getIsReadyToOptimize}
             onShowInformation={() => {
-              onShowInformation(
-                t("model-builder.pipeline-panel-header-fe"),
-                t("model-builder.pipeline-panel-fe-description"),
-              );
+              showInformationWindow(t("model-builder.pipeline-panel-header-fe"), screenInfo);
             }}
             isOptimizationRunning={isOptimizationRunning}
             handleLaunchOptimize={handleLaunchOptimize}

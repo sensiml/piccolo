@@ -105,15 +105,17 @@ const NavDrawer = ({
     [pipelineRunningStatus, activePipelinePath],
   );
 
-  const SubItemTitle = ({ id }) => {
+  const SubItemTitle = ({ id, isMenuOpen }) => {
     return (
       <>
         {selectedPipelineName && MENU_ITEMS_INFO.BUILD_MODEL.id === id ? (
           <ListItem>
-            <ListItemText
-              primary={filterTruncate(selectedPipelineName, 17)}
-              className={classes.navTitle}
-            />
+            {isMenuOpen ? (
+              <ListItemText
+                primary={filterTruncate(selectedPipelineName, 17)}
+                className={classes.navTitle}
+              />
+            ) : null}
             <Tooltip title={"Close Pipeline"}>
               <IconButton onClick={(_e) => handleChangePipeline()} variant="contained" size="small">
                 <CloseIcon fontSize="small" />
@@ -167,26 +169,25 @@ const NavDrawer = ({
                   })}
                   disabled={selectedProject === null}
                 >
-                  <Tooltip
-                    title={menuItem.tooltip || menuItem.title}
-                    placement="right"
-                    aria-label="menuItem.title"
-                  >
-                    <ListItem key={menuItem.id} id={menuItem.id}>
+                  <ListItem key={menuItem.id} id={menuItem.id}>
+                    <Tooltip title={menuItem.tooltip || menuItem.title} aria-label={menuItem.title}>
                       <ListItemIcon className={classes.iconButton}>
                         {menuItem.iconfn(getMenuProps(menuItem.orderIndex))}
                       </ListItemIcon>
-                      <ListItemText primary={menuItem.title} />
-                    </ListItem>
-                  </Tooltip>
+                    </Tooltip>
+                    <ListItemText sx={{ pl: isOpen ? 0 : 2 }} primary={menuItem.title} />
+                  </ListItem>
                 </NavLink>
 
                 {menuItem?.subItems ? (
                   <>
                     <Collapse in={isSubmenuItemsOpened(menuItem.id)} timeout={0}>
                       <Divider variant="middle" />
-                      <SubItemTitle id={menuItem.id} />
-                      <List key={`subitem_list_${menuItem.id}`} sx={{ pl: 2, pt: 0, pb: 0 }}>
+                      <SubItemTitle id={menuItem.id} isMenuOpen={isOpen} />
+                      <List
+                        key={`subitem_list_${menuItem.id}`}
+                        sx={{ pl: isOpen ? 2 : 0, pt: 0, pb: 0 }}
+                      >
                         {menuItem.subItems.map((subItem) => (
                           <Box key={`subitem_nav_link_${subItem.id}`}>
                             {showIfRunning(menuItem.id, subItem.getPath()) ? (
@@ -200,12 +201,11 @@ const NavDrawer = ({
                                   ...(selectedPipeline && { pipelineUUID: selectedPipeline }),
                                 })}
                               >
-                                <Tooltip
-                                  title={subItem.tooltip || subItem.title}
-                                  placement="right"
-                                  aria-label={subItem.title}
-                                >
-                                  <ListItem sx={{ pt: 0.5, pb: 0.5 }} id={subItem.id}>
+                                <ListItem sx={{ pt: 0.5, pb: 0.5 }} id={subItem.id}>
+                                  <Tooltip
+                                    title={subItem.tooltip || subItem.title}
+                                    aria-label={subItem.title}
+                                  >
                                     <ListItemIcon className={classes.iconButton}>
                                       {getIsPathHasStatus(subItem.getPath()) ? (
                                         <StatusRunningIcon status={pipelineRunningStatus} />
@@ -213,9 +213,12 @@ const NavDrawer = ({
                                         subItem.iconfn(getMenuProps(subItem.orderIndex))
                                       )}
                                     </ListItemIcon>
-                                    <ListItemText primary={subItem.title} />
-                                  </ListItem>
-                                </Tooltip>
+                                  </Tooltip>
+                                  <ListItemText
+                                    sx={{ pl: isOpen ? 0 : 2 }}
+                                    primary={subItem.title}
+                                  />
+                                </ListItem>
                               </NavLink>
                             ) : null}
                           </Box>
@@ -245,12 +248,7 @@ const NavDrawer = ({
                       {menuItem.iconfn({ color: "inherit", fontSize: "small" })}
                     </Tooltip>
                   </ListItemIcon>
-                  <ListItemText
-                    primary={menuItem.title}
-                    classes={{
-                      primary: classes.disabledMenuText,
-                    }}
-                  />
+                  <ListItemText sx={{ pl: isOpen ? 0 : 2 }} primary={menuItem.title} />
                 </ListItem>
               </NavLink>
             ))}

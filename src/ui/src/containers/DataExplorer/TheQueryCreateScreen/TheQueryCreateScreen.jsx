@@ -48,6 +48,7 @@ const TheQueryCreateScreen = ({
   // actions
   addOrUpdateQuery,
   setHasUnsavedChanges,
+  onShowInformation,
 }) => {
   const { projectUUID } = useParams();
   const routersHistory = useHistory();
@@ -202,6 +203,7 @@ const TheQueryCreateScreen = ({
               icon={<ExitToAppIcon />}
             />
           }
+          onShowInformation={onShowInformation}
         />
       </Box>
       <Grid container spacing={2} justifyContent="flex-start">
