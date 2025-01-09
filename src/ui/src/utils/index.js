@@ -51,7 +51,7 @@ export const getCombinations = (array, n) => {
   return combineRecur(array, n);
 };
 
-export const getFileExtention = (filename) => {
+export const getFileExtension = (filename) => {
   if (filename) {
     return _.split(filename, ".").pop();
   }

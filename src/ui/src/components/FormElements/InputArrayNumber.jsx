@@ -56,7 +56,7 @@ const InputArrayNumber = ({ onChange, range, isFloat, ...restProps }) => {
     }
     if (notInRangeVals?.length) {
       setValidationError(
-        t("array-field.errot-out-of-range", {
+        t("array-field.error-out-of-range", {
           values: _.join(notInRangeVals, ", "),
           startRange,
           endRange,

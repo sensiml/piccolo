@@ -170,7 +170,7 @@ const PipelineStepDrawerStatistic = ({
                   classes={labelValues}
                   selectLabelColorHashMap={selectLabelValuesColors}
                   isFetchingFeatureVectorData={_.isEmpty(featureVectorData)}
-                  movelClassesDown
+                  moveClassesDown
                 />
               ) : null}
             </>

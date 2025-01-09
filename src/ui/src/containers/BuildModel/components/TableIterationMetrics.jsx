@@ -81,7 +81,7 @@ const TableIterationMetrics = ({ iterationMetrics }) => {
     },
     {
       field: "classifiers",
-      title: t("model-builder.table-iterations-classifer"),
+      title: t("model-builder.table-iterations-classifier"),
       render: dataWithTooltip,
       type: ColumnType.Text,
     },

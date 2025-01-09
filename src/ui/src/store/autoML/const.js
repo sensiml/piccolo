@@ -142,11 +142,11 @@ export const DISABLED_TRAINING_ALGO = [];
 // execution_type
 
 export const PIPELINE_GROUPS = {
-  PEPROCESSING: {
+  PREPROCESSING: {
     name: "Preprocessing",
     type: "preprocessing",
   },
-  FEATURE_EXTRACOR: {
+  FEATURE_EXTRACTOR: {
     name: "Feature Extraction",
     type: "feature_extractor",
   },

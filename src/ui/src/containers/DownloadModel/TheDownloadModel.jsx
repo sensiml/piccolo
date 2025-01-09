@@ -247,14 +247,14 @@ const DownloadModel = ({
         },
       );
       if (response && response.error) {
-        setDownloadingMassageFailed(t("download.error-dowload-w-err", { error: response.error }));
+        setDownloadingMassageFailed(t("download.error-download-w-err", { error: response.error }));
         setDownloadingCode(response?.code);
         stopDownloadStatusCheck();
       } else {
         startDownloadStatusCheck();
       }
     } catch (error) {
-      setDownloadingMassageFailed(t("download.error-dowload-failed"));
+      setDownloadingMassageFailed(t("download.error-download-failed"));
       setDownloadingCode(500);
       stopDownloadStatusCheck();
     }
@@ -281,7 +281,7 @@ const DownloadModel = ({
       setDownloadingCode(response?.code);
       stopDownloadStatusCheck();
     } else if (response.error) {
-      setDownloadingMassageFailed(t("download.error-dowload-w-err", { error: response.error }));
+      setDownloadingMassageFailed(t("download.error-download-w-err", { error: response.error }));
       setDownloadingCode(response?.code);
       stopDownloadStatusCheck();
     } else {

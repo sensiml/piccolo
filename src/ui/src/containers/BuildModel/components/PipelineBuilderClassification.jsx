@@ -27,7 +27,7 @@ import {
 
 import PipelineBuilderV1 from "components/PipelineBuilderV1";
 
-const PiplineBuilderAutoML = (props) => {
+const PipelineBuilderAutoML = (props) => {
   const { selectedSteps, pipelineData } = props;
 
   const autoMLStep = useMemo(
@@ -78,9 +78,9 @@ const PiplineBuilderAutoML = (props) => {
         return PIPELINE_GROUPS.TVO.type;
       }
       if (isAfterFeatureGenerator) {
-        return PIPELINE_GROUPS.FEATURE_EXTRACOR.type;
+        return PIPELINE_GROUPS.FEATURE_EXTRACTOR.type;
       }
-      return PIPELINE_GROUPS.PEPROCESSING.type;
+      return PIPELINE_GROUPS.PREPROCESSING.type;
     };
 
     if (!_.isEmpty(selectedSteps) && !_.isEmpty(pipelineData)) {
@@ -170,4 +170,4 @@ const PiplineBuilderAutoML = (props) => {
   );
 };
 
-export default PiplineBuilderAutoML;
+export default PipelineBuilderAutoML;

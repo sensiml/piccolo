@@ -22,7 +22,7 @@ import React, { useMemo } from "react";
 import { DISABLED_FOR_CUSTOM_STEPS } from "store/autoML/const";
 import PipelineBuilder from "./PipelineBuilder";
 
-const PiplineBuilderCustomTraining = (props) => {
+const PipelineBuilderCustomTraining = (props) => {
   const { selectedSteps } = props;
 
   const getFilteredSelectedSteps = useMemo(() => {
@@ -40,4 +40,4 @@ const PiplineBuilderCustomTraining = (props) => {
   );
 };
 
-export default PiplineBuilderCustomTraining;
+export default PipelineBuilderCustomTraining;

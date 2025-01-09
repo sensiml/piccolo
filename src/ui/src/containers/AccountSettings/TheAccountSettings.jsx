@@ -70,7 +70,7 @@ const TheAccountSettings = () => {
                 <TheAccountInfo />
               </RouterProxyAppMain>
             </Route>
-            <Route exact path={ROUTES.ACCOUNT_SETTINGS.child.ACCOUNT_SUBCRIPTIONS.path}>
+            <Route exact path={ROUTES.ACCOUNT_SETTINGS.child.ACCOUNT_SUBSCRIPTIONS.path}>
               <RouterProxyAppMain>
                 <TheAccountSubscription />
               </RouterProxyAppMain>

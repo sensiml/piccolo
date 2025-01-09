@@ -43,7 +43,7 @@ import { UIButtonConvertibleToShort } from "components/UIButtons";
 import { ROUTES } from "routers";
 import { ElementLoader } from "components/UILoaders";
 import { UISnackBar } from "components/UISnackBar";
-import { getColorFromDCLFormat, getFileExtention } from "utils";
+import { getColorFromDCLFormat, getFileExtension } from "utils";
 import { useRouterSearchParams, useWindowResize } from "hooks";
 
 import { DialogFormLabel } from "components/DialogFormLabel";
@@ -53,7 +53,7 @@ import CaptureLabelingPanel from "./components/CaptureLabelingPanel";
 
 import { DataManagerContext } from "../context";
 
-const MOVING_DUBLICATELABELS = 10;
+const MOVING_DUPLICATE_LABELS = 10;
 const WIDTH_FOR_SHORT_TEXT = 1280;
 
 const TheCaptureDetailsScreen = ({
@@ -204,7 +204,7 @@ const TheCaptureDetailsScreen = ({
         (el) => el.id !== id && el.color === color && el.start === start && el.end === end,
       ) === -1;
     if (!isUnique) {
-      setChangesValidationError(t("capture-screen.error-label-dublicates"));
+      setChangesValidationError(t("capture-screen.error-label-duplicates"));
       return false;
     }
     return true;
@@ -239,7 +239,7 @@ const TheCaptureDetailsScreen = ({
 
     const isValid = validateLabelDuplicates(id, selectedLabelData.color, start, end);
 
-    selectedLabelData.start = isValid ? start : start + MOVING_DUBLICATELABELS;
+    selectedLabelData.start = isValid ? start : start + MOVING_DUPLICATE_LABELS;
     selectedLabelData.end = isValid ? end : end;
 
     setEditedLabel(selectedLabelData);
@@ -262,7 +262,7 @@ const TheCaptureDetailsScreen = ({
 
     const isValid = validateLabelDuplicates(id, color, defaultStart, defaultEnd);
 
-    const newStart = isValid ? defaultStart : selectedLabelData.start + MOVING_DUBLICATELABELS;
+    const newStart = isValid ? defaultStart : selectedLabelData.start + MOVING_DUPLICATE_LABELS;
     const newEnd = isValid ? defaultEnd : selectedLabelData.end;
 
     if (!_.isEmpty(editedLabel) && editedLabel?.id === id) {
@@ -352,7 +352,7 @@ const TheCaptureDetailsScreen = ({
     }
   };
 
-  const handleDiscartNewLabel = () => {
+  const handleDiscardNewLabel = () => {
     setNewLabel({});
   };
 
@@ -406,7 +406,7 @@ const TheCaptureDetailsScreen = ({
     }
   };
 
-  const handleDownloadFilde = () => {
+  const handleDownloadFiled = () => {
     const _selectedCapture = selectCapture(captureUUID);
     loadCapture(projectUUID, captureUUID, _selectedCapture?.name, true);
   };
@@ -450,7 +450,7 @@ const TheCaptureDetailsScreen = ({
       const _captureLabels = await loadCaptureLabels(projectUUID, captureUUID);
       logger.logInfo("", "open_capture", {
         total_samples: _captureLabels?.length || 0,
-        extension: getFileExtention(_selectedCapture?.name),
+        extension: getFileExtension(_selectedCapture?.name),
         project_uuid: projectUUID,
         capture_uuid: captureUUID,
       });
@@ -477,7 +477,7 @@ const TheCaptureDetailsScreen = ({
   }, [locationPath]);
 
   useEffect(() => {
-    // watch captureLabels and set selectDefaultCaptureLabels whic has all needed values
+    // watch captureLabels and set selectDefaultCaptureLabels which has all needed values
     if (_.isEmpty(editedLabel)) {
       setLabelData(selectDefaultCaptureLabels(selectedSessionUUID, selectedLabelUUID));
     }
@@ -497,7 +497,7 @@ const TheCaptureDetailsScreen = ({
         <ControlPanel
           title={t("capture-screen.panel-title", { captureName: selectedCapture.name })}
           onClickBack={isShortBtnText ? null : handleChangeCapture}
-          turncateLenght={35}
+          truncateLength={35}
           leftColumns={4}
           rightColumns={8}
           actionsBtns={
@@ -530,7 +530,7 @@ const TheCaptureDetailsScreen = ({
                 variant={"outlined"}
                 color={"primary"}
                 disabled={false}
-                onClick={() => handleDownloadFilde()}
+                onClick={() => handleDownloadFiled()}
                 isShort={isShortBtnText}
                 tooltip={t("capture-screen.panel-btn-download")}
                 text={t("capture-screen.panel-btn-download")}
@@ -557,7 +557,7 @@ const TheCaptureDetailsScreen = ({
               {isShowSelectLabel ? (
                 <Typography variant="subtitle1">
                   <span className={classes.chartInformationHeader} color="primary">
-                    {`${t("capture-screen.label-goup")}:`}
+                    {`${t("capture-screen.label-group")}:`}
                   </span>
                   {`${selectedLabel?.name}`}
                 </Typography>
@@ -606,7 +606,7 @@ const TheCaptureDetailsScreen = ({
             //
             onChangeNewLabel={handleChangeNewLabel}
             onCreateLabel={handleCreateLabel}
-            onDiscardNewLabel={handleDiscartNewLabel}
+            onDiscardNewLabel={handleDiscardNewLabel}
             onSaveNewLabel={handleSaveNewLabel}
           />
 
@@ -622,7 +622,7 @@ const TheCaptureDetailsScreen = ({
                 newSegment={newLabel}
                 editingSegment={editedLabel}
                 strokeWidth={4}
-                onSementMove={handleMoveLabel}
+                onSegmentMove={handleMoveLabel}
                 onNewSegmentMove={handleMoveNewLabel}
                 onSetEditedSegment={handleSetEditedLabel}
                 isReadOnlyMode={isDisabledByAutoSession}

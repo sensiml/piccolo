@@ -20,7 +20,7 @@
   },
   "account-api-keys": {
     "title": "API Keys",
-    "description": "API Keys allow authenticating a python SDK accessing the cloud resources",
+    "description": "API Keys allow authenticating a Python SDK accessing cloud resources",
     "header": "API Keys",
     "create-btn": "Generate API Key",
     "create-title": "Create API Key"

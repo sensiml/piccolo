@@ -285,7 +285,7 @@ const TheQueryDetailScreen = ({
         <ControlPanel
           title={`Name: ${DataExplorer.name}`}
           onClickBack={isShortBtnText ? null : handleChangeQueries}
-          turncateLenght={
+          truncateLength={
             isShortBtnText
               ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT
               : RESPONSIVE.TRUNCATE_NAME_OVER

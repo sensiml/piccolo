@@ -66,7 +66,7 @@ const LineChartSegments = ({
   segmentData,
   newSegment,
   editingSegment,
-  onSementMove,
+  onSegmentMove,
   onNewSegmentMove,
   onSetEditedSegment,
   audioFileSampleRate = 16000,
@@ -162,7 +162,7 @@ const LineChartSegments = ({
   const handleSegmentChanges = (evt, id) => {
     if (evt.selection) {
       const [start, end] = invertSelection(evt.selection);
-      onSementMove(start, end, id);
+      onSegmentMove(start, end, id);
     }
   };
 
@@ -660,12 +660,12 @@ const LineChartSegments = ({
 };
 
 LineChartSegments.propTypes = {
-  onSementMove: PropTypes.func,
+  onSegmentMove: PropTypes.func,
   segmentData: PropTypes.array.isRequired,
 };
 
 LineChartSegments.defaultProps = {
-  onSementMove: () => {},
+  onSegmentMove: () => {},
 };
 
 export default LineChartSegments;

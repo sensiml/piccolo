@@ -57,8 +57,8 @@ const mapStateToProps = (state) => {
     selectLabelValues: (labelUUID) => selectLabelValues(labelUUID)(state) || [],
     isLoadingSensorData: state?.captures?.captureSensorData?.isFetching || false,
     isLoadingLabel: state?.captures?.captureLabels?.isFetching || false,
-    getCaptureLabelsRequestData: (caprureUUID, labelUUID, updatedLabelData, deletedLabels) =>
-      getCaptureLabelsRequestData(caprureUUID, labelUUID, updatedLabelData, deletedLabels)(state),
+    getCaptureLabelsRequestData: (captureUUID, labelUUID, updatedLabelData, deletedLabels) =>
+      getCaptureLabelsRequestData(captureUUID, labelUUID, updatedLabelData, deletedLabels)(state),
   };
 };
 

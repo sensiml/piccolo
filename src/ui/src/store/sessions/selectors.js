@@ -57,7 +57,7 @@ export const selectSelectedSessionUUID = (state) => {
   return _.toString(selectedSessionUUID) || "";
 };
 
-export const selectSessoionTableData = (state) => {
+export const selectSessionTableData = (state) => {
   const getAlgorithmName = (parameters) => {
     const parsedParameters = JSON.parse(parameters);
     return parsedParameters?.name || "";

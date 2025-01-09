@@ -42,11 +42,11 @@ import { PIPELINE_STEP_TYPES } from "store/autoML/const";
 import FeatureVectorChart from "components/FeatureVectorChart";
 
 import FeatureSummary from "components/FeatureSummary";
-import PipelineBuilderFeatureExtraction from "../componets/PipelineBuilderFeatureExtraction";
+import PipelineBuilderFeatureExtraction from "../components/PipelineBuilderFeatureExtraction";
 
-import QueryCacheAlertMessage from "../componets/QueryCacheAlertMessage";
-import BuilderPipelinePanel from "../componets/BuilderPipelinePanel";
-import PipelineBuilderAlertMessage from "../componets/PipelineBuilderAlertMessage";
+import QueryCacheAlertMessage from "../components/QueryCacheAlertMessage";
+import BuilderPipelinePanel from "../components/BuilderPipelinePanel";
+import PipelineBuilderAlertMessage from "../components/PipelineBuilderAlertMessage";
 import useStyles from "../BuildModeStyle";
 import UIPaperNoContent from "components/UIPaperNoContent";
 
@@ -501,7 +501,7 @@ const TheFeatureExtractorScreen = ({
                   classes={pipelineResults.labelValues || []}
                   selectLabelColorHashMap={selectLabelValuesColors}
                   isFetchingFeatureVectorData={pipelineResultsIsFetching}
-                  movelClassesDown
+                  moveClassesDown
                 />
               ) : (
                 <UIPaperNoContent text={t("model-builder.feature-extractor-chart-no-data")} />

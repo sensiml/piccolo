@@ -143,7 +143,7 @@ const FormTransformMultiSelect = ({ inputData, onClose, onSubmit, onShowInfo }) 
               color="primary"
               onClick={(_e) => handleShowAddTransformForm(true)}
             >
-              {t("model-builder.dradrawerwe-edit-step-add-btn")}
+              {t("model-builder.drawer-edit-step-add-btn")}
             </Button>
           </Box>
         ) : null}

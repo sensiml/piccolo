@@ -49,7 +49,7 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks }) => {
   const { selectionMode } = useParams();
   const { state } = useLocation();
 
-  const [isShowAlerSnackBar, setIsShowAlertSnackBar] = useState(false);
+  const [isShowAlertSnackBar, setIsShowAlertSnackBar] = useState(false);
 
   const tableOpenData = useMemo(() => {
     let res = {};
@@ -114,9 +114,9 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks }) => {
           <ControlPanelSelect title={getChangeModelName()} />
         )}
       </Box>
-      {/* isShowAlerSnackBar */}
+      {/* isShowAlertSnackBar */}
       <UISnackBar
-        isOpen={isShowAlerSnackBar && state?.message}
+        isOpen={isShowAlertSnackBar && state?.message}
         onClose={handleCloseAlert}
         message={state?.message}
         variant={state?.massageVariant || "info"}

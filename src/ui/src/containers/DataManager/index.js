@@ -20,14 +20,14 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import { connect } from "react-redux";
 import { createSession, setSelectedSession, loadSessions } from "store/sessions/actions";
 
-import { selectSessoionTableData } from "store/sessions/selectors";
+import { selectSessionTableData } from "store/sessions/selectors";
 import { selectIsDemoTeam } from "store/team/selectors";
 
 import TheDataManager from "./TheDataManager";
 
 const mapStateToProps = (state) => {
   return {
-    sessions: selectSessoionTableData(state) || [],
+    sessions: selectSessionTableData(state) || [],
     selectedSessionUUID: state.sessions.selectedSessionUUID || "",
     isDemoTeam: selectIsDemoTeam(state) || false,
   };

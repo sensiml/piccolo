@@ -1,9 +1,9 @@
 {
   "array-field": {
     "error-validation": "The array is not valid starting from the point: {{point}}",
-    "errot-out-of-range": "Values: {{values}} are not between {{startRange}} and {{endRange}}",
+    "error-out-of-range": "Values: {{values}} are not between {{startRange}} and {{endRange}}",
     "helper-text-range": "The values should be between {{startRange}} and {{endRange}}",
-    "helper-text-limit-beetween": "The array size should be between {{minElements}} and {{maxElements}}",
+    "helper-text-limit-between": "The array size should be between {{minElements}} and {{maxElements}}",
     "helper-text-limit-equal": "The array size should be {{minElements}}",
     "helper-text-limit-max": "The allowed maximum array size is {{maxElements}}",
     "helper-text-limit-min": "The allowed minimum array size is {{minElements}}"

@@ -652,7 +652,7 @@ const PipelineBuilder = ({
         });
 
         if (data?.results && downloadingCache) {
-          // remove all extentions
+          // remove all extension
           fileDownload(
             JSON.stringify(data.results),
             `${pipelineData?.name}.${stepName}.cache.${indexPage}.json`,
