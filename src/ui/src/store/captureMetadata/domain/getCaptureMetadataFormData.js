@@ -20,10 +20,12 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import { FORM_TYPES } from "consts";
 import { selectMetadataFormData } from "store/metadata/selectors";
 import { selectedCaptureMetadatas } from "store/captureMetadata/selectors";
+import { store } from "store";
 
 import _ from "lodash";
 
-const getCaptureMetadataFormData = (state, captureUUID) => {
+const getCaptureMetadataFormData = (captureUUID) => {
+  const state = store.getState();
   const metadataItems = selectMetadataFormData(state);
   const savedCaptureMetadata = selectedCaptureMetadatas(captureUUID)(state);
 

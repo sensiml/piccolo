@@ -111,6 +111,7 @@ const TheClassificationScreen = ({
 
   exportPipeline,
   getPipelineStepFeatureStats,
+  onShowInformation,
 }) => {
   const routersHistory = useHistory();
   const scrollTop = useRef();
@@ -393,6 +394,21 @@ const TheClassificationScreen = ({
         <div className={classes.topPanelTopOverlap} />
         <Box className={classes.topPanelWrapper}>
           <BuilderPipelinePanel
+            title={
+              isAutoML
+                ? t("model-builder.pipeline-panel-header-automl")
+                : t("model-builder.pipeline-panel-header-custom")
+            }
+            onShowInformation={() => {
+              onShowInformation(
+                isAutoML
+                  ? t("model-builder.pipeline-panel-header-automl")
+                  : t("model-builder.pipeline-panel-header-custom"),
+                isAutoML
+                  ? t("model-builder.pipeline-panel-automl-description")
+                  : t("model-builder.pipeline-panel-custom-description"),
+              );
+            }}
             pipelineData={pipelineData}
             handleChangePipeline={handleChangePipeline}
             getIsReadyToOptimize={getIsReadyToOptimize}

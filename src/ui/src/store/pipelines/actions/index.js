@@ -73,8 +73,17 @@ import {
 
 import { clearIterationMetrics } from "./loadIterationMetrics";
 
-export { getPipelineStepFeatureStats } from "./getPipelineStepFeatureStats";
+import { getPipelineStepFeatureStats } from "./getPipelineStepFeatureStats";
+
+export { getPipelineStepFeatureStats };
 export { loadIterationMetrics } from "./loadIterationMetrics";
+
+const getLabelValuesFromDataTable = (dataTable, labelKey) => {
+  if (dataTable && dataTable[labelKey]) {
+    return [...new Set(dataTable[labelKey])];
+  }
+  return [];
+};
 
 export const setRunningStatus = (responseBody) => async (dispatch) => {
   let logPayload = {};
@@ -400,18 +409,11 @@ export const checkPipelineIsRunning = (projectUuid, pipelineUuid) => async () =>
 };
 
 export const loadPipelineResults =
-  (projectUuid, pipelineUuid, labelKey = "Label") =>
+  (projectUuid, pipelineUuid, labelKey = "Label", isLoadFeature = false) =>
   async (dispatch) => {
     dispatch({ type: LOADING_PIPELINES_RESULTS });
     let isRunning = false;
     let results = {};
-
-    const getLabelValuesFromLabel = (_responseBody) => {
-      if (_responseBody?.results && _responseBody?.results[labelKey]) {
-        return [...new Set(_responseBody.results[labelKey])];
-      }
-      return [];
-    };
 
     try {
       const { data: responseBody } = await api.get(
@@ -435,8 +437,19 @@ export const loadPipelineResults =
           results.featureVectorData = responseBody?.results;
           results.featureStatistics = responseBody?.statistics_summary?.feature_statistics || [];
           results.featureSummary = responseBody?.statistics_summary?.feature_summary || [];
-          results.features = _.keys(responseBody.results);
-          results.labelValues = getLabelValuesFromLabel(responseBody);
+          results.featureNames = _.keys(responseBody.results);
+          results.labelValues = getLabelValuesFromDataTable(responseBody?.results, labelKey);
+        } else if (
+          isLoadFeature &&
+          _.isEmpty(results.featureStatistics) &&
+          !_.isEmpty(responseBody?.execution_summary)
+        ) {
+          const lastStepIndex = responseBody?.execution_summary?.length - 1;
+          const featureStats = await dispatch(
+            getPipelineStepFeatureStats(projectUuid, pipelineUuid, lastStepIndex),
+          );
+
+          results = { ...results, ...featureStats };
         }
       }
     } catch (err) {

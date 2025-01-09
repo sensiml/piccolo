@@ -21,6 +21,10 @@ import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = () =>
   makeStyles((theme) => ({
+    headerInfoIconButton: {
+      marginLeft: theme.spacing(1),
+      marginTop: theme.spacing(1),
+    },
     grid: {},
     controlPanelWrapper: {
       display: "flex",

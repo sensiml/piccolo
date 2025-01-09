@@ -53,9 +53,11 @@ const PipelineImportForm = ({
   };
 
   const handleCreate = (pipelineName, queryName, isUseSessionPreprocessor, replacedColumns) => {
+    const disableAutoML = pipelineJson.hyper_params?.params?.disable_automl || false;
     onSubmit({
       pipelineName,
       pipelineJson,
+      isAutoMLOptimization: !disableAutoML,
       queryName,
       replacedColumns,
       isUseSessionPreprocessor,

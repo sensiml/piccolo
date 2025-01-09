@@ -19,11 +19,10 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 
 /* eslint-disable no-unused-vars */
 import React from "react";
-import filters from "filters";
 import { useTranslation } from "react-i18next";
 
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { Alert, AlertTitle, Drawer, Box, Button, Typography } from "@mui/material";
+import { Drawer, Box, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useStyles from "./BuildModeStyle";
 

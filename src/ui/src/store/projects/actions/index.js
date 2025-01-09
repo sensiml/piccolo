@@ -26,6 +26,7 @@ import helper from "store/helper";
 
 import { createLabelValue } from "store/labels/actions";
 import { DEFALULT_LABEL } from "store/labels/domain";
+import { createDefaultMetadata } from "store/metadata/actions";
 
 import {
   DELETING_PROJECT,
@@ -86,6 +87,7 @@ export const createProject = (name) => async (dispatch) => {
         color: DEFALULT_LABEL.color,
       }),
     );
+    dispatch(createDefaultMetadata(response?.data?.uuid));
   } catch (err) {
     logger.logError("", err, `${helper.getResponseErrorDetails(err)}}`, "createProject");
     throwParsedApiError(err, "createProject");

@@ -196,8 +196,12 @@ const NavDrawer = ({
                                   ...(selectedPipeline && { pipelineUUID: selectedPipeline }),
                                 })}
                               >
-                                <ListItem sx={{ pt: 0.5, pb: 0.5 }} id={subItem.id}>
-                                  <Tooltip title={subItem.title} aria-label="add">
+                                <Tooltip
+                                  title={subItem.tooltip || subItem.title}
+                                  placement="right"
+                                  aria-label={subItem.title}
+                                >
+                                  <ListItem sx={{ pt: 0.5, pb: 0.5 }} id={subItem.id}>
                                     <ListItemIcon className={classes.iconButton}>
                                       {getIsPathHasStatus(subItem.getPath()) ? (
                                         <StatusRunningIcon status={pipelineRunningStatus} />
@@ -205,9 +209,9 @@ const NavDrawer = ({
                                         subItem.iconfn(getMenuProps(subItem.orderIndex))
                                       )}
                                     </ListItemIcon>
-                                  </Tooltip>
-                                  <ListItemText primary={subItem.title} />
-                                </ListItem>
+                                    <ListItemText primary={subItem.title} />
+                                  </ListItem>
+                                </Tooltip>
                               </NavLink>
                             ) : null}
                           </Box>

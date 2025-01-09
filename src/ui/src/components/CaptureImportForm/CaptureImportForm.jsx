@@ -103,9 +103,11 @@ const PipelineImportForm = ({
     let captureConfigurationFormData = getCaptureConfigurationFormData();
     if (_.isEmpty(metadataFormData) && _.isEmpty(captureConfigurationFormData?.options)) {
       await createDefaultMetadata(projectUUID);
+
+      metadataFormData = getCaptureMetadataFormData();
+      captureConfigurationFormData = getCaptureConfigurationFormData();
     }
-    metadataFormData = getCaptureMetadataFormData();
-    captureConfigurationFormData = getCaptureConfigurationFormData();
+
     setCaptureMetadataFormData(metadataFormData);
     setCaptureConfigurationFromData(captureConfigurationFormData);
     setActiveStep(STEP_FORM);

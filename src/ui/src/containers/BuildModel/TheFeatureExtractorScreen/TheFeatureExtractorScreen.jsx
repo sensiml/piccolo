@@ -108,6 +108,7 @@ const TheFeatureExtractorScreen = ({
 
   exportPipeline,
   getPipelineStepFeatureStats,
+  onShowInformation,
 }) => {
   const routersHistory = useHistory();
   const scrollTop = useRef();
@@ -199,6 +200,7 @@ const TheFeatureExtractorScreen = ({
         projectUUID,
         pipelineUUID,
         selectedQueryStepData?.label_column,
+        true,
       );
       if (isRunning) {
         startOptimizationChecker();
@@ -368,9 +370,15 @@ const TheFeatureExtractorScreen = ({
         <div className={classes.topPanelTopOverlap} />
         <Box className={classes.topPanelWrapper}>
           <BuilderPipelinePanel
-            pipelineData={pipelineData}
+            title={t("model-builder.pipeline-panel-header-fe")}
             handleChangePipeline={handleChangePipeline}
             getIsReadyToOptimize={getIsReadyToOptimize}
+            onShowInformation={() => {
+              onShowInformation(
+                t("model-builder.pipeline-panel-header-fe"),
+                t("model-builder.pipeline-panel-fe-description"),
+              );
+            }}
             isOptimizationRunning={isOptimizationRunning}
             handleLaunchOptimize={handleLaunchOptimize}
             handleKillLaunchOptimize={handleKillLaunchOptimize}
@@ -486,7 +494,7 @@ const TheFeatureExtractorScreen = ({
                 />
               ) : !_.isEmpty(pipelineResults.featureVectorData) ? (
                 <FeatureVectorChart
-                  features={pipelineResults.features}
+                  features={pipelineResults.featureNames}
                   featureVectorData={pipelineResults.featureVectorData}
                   parentRef={chartGridRef}
                   labelColumn={selectedQueryStepData?.label_column}
