@@ -61,7 +61,6 @@ export default [
       group_columns: ["segment_uuid", "Type", "Subject", "Punch"],
       window_size: 250,
       delta: 250,
-      is_use_train_delta: false,
       train_delta: 0,
       return_segment_index: false,
       transform: "Windowing",

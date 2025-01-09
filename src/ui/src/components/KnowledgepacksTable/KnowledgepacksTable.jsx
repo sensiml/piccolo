@@ -119,7 +119,7 @@ const KnowledgepacksTable = ({
     loadKnowledgepacks(selectedProject);
   };
 
-  const handlseSelectInTable = (selectedUUIDs) => {
+  const handleSelectInTable = (selectedUUIDs) => {
     setSelectedItems(selectedUUIDs);
   };
 
@@ -178,7 +178,7 @@ const KnowledgepacksTable = ({
       return;
     }
     loadKnowledgepacks(selectedProject);
-    openSnackBarWithMsg("success", "Successfuly renamed the Knowledgepack.");
+    openSnackBarWithMsg("success", "Successfully renamed the Knowledgepack.");
     setSavingKnowledgepack(false);
   };
 
@@ -407,7 +407,7 @@ const KnowledgepacksTable = ({
     isDarkHeader: true,
     selectionField: "uuid",
     isShowSelection: true,
-    onSelectInTable: handlseSelectInTable,
+    onSelectInTable: handleSelectInTable,
   };
   return (
     <>

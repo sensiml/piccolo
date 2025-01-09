@@ -253,12 +253,9 @@ export const loadDataAfterTraining =
   };
 
 const getExecutionType = (executionType, isAutoML) => {
-  let exType = "AUTOML";
+  let exType = isAutoML ? "AUTOML" : "CUSTOM";
   if (executionType === "pipeline") {
     exType = "FEATURE_EXTRACTOR";
-  }
-  if (executionType === "auto" && isAutoML) {
-    exType = "CUSTOM";
   }
   return exType;
 };
