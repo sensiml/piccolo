@@ -974,6 +974,49 @@ class TestLabelRelationship:
             ]
         )
 
+        label_url = reverse(
+            "project-label-relationship-list",
+            kwargs={"project_uuid": self.project.uuid},
+        )
+
+        response = client.get(
+            f"{label_url}?page_size=1",
+        )
+
+        assert len(response.data["results"]) == 1
+        assert sorted(list(response.data["results"][0].keys())) == sorted(
+            [
+                "uuid",
+                "capture",
+                "label",
+                "label_value",
+                "capture_sample_sequence_start",
+                "capture_sample_sequence_end",
+                "label_info",
+                "segmenter",
+                "created_at",
+                "last_modified",
+            ]
+        )
+
+        response = client.get(response.data["next"].replace("http://testserver", ""))
+
+        assert len(response.data["results"]) == 1
+        assert sorted(list(response.data["results"][0].keys())) == sorted(
+            [
+                "uuid",
+                "capture",
+                "label",
+                "label_value",
+                "capture_sample_sequence_start",
+                "capture_sample_sequence_end",
+                "label_info",
+                "segmenter",
+                "created_at",
+                "last_modified",
+            ]
+        )
+
     def test_project_label_relationship_delete_multi(self, client):
         self.make_label_labelvalue(client)
         clv = []
