@@ -429,6 +429,39 @@ class TestMetadataRelationship:
             ]
         )
 
+        label_url = reverse(
+            "project-metadata-relationship-list",
+            kwargs={"project_uuid": self.project.uuid},
+        )
+
+        response = client.get(f"{label_url}?page_size=1")
+
+        assert len(response.data["results"]) == 1
+        assert sorted(list(response.data["results"][0].keys())) == sorted(
+            [
+                "uuid",
+                "capture",
+                "label",
+                "label_value",
+                "created_at",
+                "last_modified",
+            ]
+        )
+
+        response = client.get(response.data["next"].replace("http://testserver", ""))
+
+        assert len(response.data["results"]) == 1
+        assert sorted(list(response.data["results"][0].keys())) == sorted(
+            [
+                "uuid",
+                "capture",
+                "label",
+                "label_value",
+                "created_at",
+                "last_modified",
+            ]
+        )
+
     def test_project_metadata_relationship_delete_multi(self, client):
         cmv = []
         for i in range(0, 4):

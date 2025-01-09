@@ -20,6 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import inspect
 import pkgutil
 
+
 __all__ = []
 urlpatterns = []
 
