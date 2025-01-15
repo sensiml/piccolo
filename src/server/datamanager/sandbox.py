@@ -124,7 +124,9 @@ def get_label_column_from_pipeline(sandbox):
     if len(sandbox.pipeline) > 0:
         query_step = next((x for x in sandbox.pipeline if x["type"] == "query"), None)
         if query_step is not None:
-            query_object = Query.objects.get(name=query_step["name"])
+            query_object = Query.objects.get(
+                name=query_step["name"], project=sandbox.project
+            )
             label_column = query_object.label_column
 
     return label_column
@@ -135,7 +137,6 @@ def calculate_feature_stats(feature_data, feature_table, label_column, sandbox_u
         feature_table, sandbox_uuid
     )
     selected_feature_cols.append(label_column)
-    print(label_column)
 
     return {
         "feature_statistics": model_generator.compute_feature_stats(
