@@ -28,7 +28,7 @@ import { useWindowResize } from "hooks";
 import { RESPONSIVE } from "consts";
 import { UIButtonConvertibleToShort } from "components/UIButtons";
 
-const TheQueryScreen = () => {
+const TheQueryScreen = ({ onShowInformation }) => {
   // eslint-disable-next-line no-unused-vars
   const { projectUUID } = useParams();
   const routersHistory = useHistory();
@@ -39,7 +39,7 @@ const TheQueryScreen = () => {
     setIsShortBtnText(data.innerWidth < RESPONSIVE.WIDTH_FOR_SHORT_TEXT);
   });
 
-  const handledleUpdateAction = () => {
+  const handleUpdateAction = () => {
     routersHistory.push({
       pathname: generatePath(ROUTES.MAIN.DATA_EXPLORER.child.QUERY_SCREEN.path, {
         projectUUID,
@@ -59,7 +59,8 @@ const TheQueryScreen = () => {
     <>
       <Box mb={2}>
         <ControlPanel
-          title={"Data Explorer"}
+          title={"Querying Data"}
+          onShowInformation={onShowInformation}
           actionsBtns={
             <>
               <UIButtonConvertibleToShort
@@ -76,7 +77,7 @@ const TheQueryScreen = () => {
         />
       </Box>
       <Box>
-        <QueriesTable onUpdateProjectAction={handledleUpdateAction} />
+        <QueriesTable onUpdateProjectAction={handleUpdateAction} />
       </Box>
     </>
   );

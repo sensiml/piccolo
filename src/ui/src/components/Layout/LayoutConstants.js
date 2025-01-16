@@ -69,6 +69,7 @@ const MENU_ITEMS_INFO = {
   },
   SUMMARY: {
     title: i18n.t("layout:nav-drawer.menu-item-project-summary"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.project-summary"),
     id: "navSummary",
     orderIndex: 2,
     iconfn: (iconProps) => <SummaryIcon {...iconProps} />,
@@ -76,6 +77,7 @@ const MENU_ITEMS_INFO = {
   },
   DATAMANAGER: {
     title: i18n.t("layout:nav-drawer.menu-item-data-manager"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.data-manager"),
     id: "navDataManager",
     orderIndex: 3,
     iconfn: (iconProps) => <StorageIcon {...iconProps} />,
@@ -83,6 +85,7 @@ const MENU_ITEMS_INFO = {
   },
   PRERARE_DATA: {
     title: i18n.t("layout:nav-drawer.menu-item-queries"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.queries"),
     id: "navPrepareData",
     orderIndex: 4,
     iconfn: (iconProps) => <PollOutlinedIcon {...iconProps} />,
@@ -90,6 +93,7 @@ const MENU_ITEMS_INFO = {
   },
   BUILD_MODEL: {
     title: i18n.t("layout:nav-drawer.menu-item-build-model"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.pipelines"),
     id: "navBuildModel",
     orderIndex: 5,
     iconfn: (iconProps) => <BuildIcon {...iconProps} />,
@@ -98,7 +102,7 @@ const MENU_ITEMS_INFO = {
     subItems: [
       {
         title: i18n.t("layout:nav-drawer.menu-item-feature-extractor"),
-        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-fe-tooltip"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.pipeline-fe"),
         id: "navFeatureExtractor",
         orderIndex: 1,
         iconfn: (iconProps) => <FilterAltOutlinedIcon {...iconProps} />,
@@ -107,7 +111,7 @@ const MENU_ITEMS_INFO = {
       },
       {
         title: i18n.t("layout:nav-drawer.menu-item-pipeline-custom"),
-        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-custom-tooltip"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.pipeline-custom"),
         id: "navPipelineCustom",
         orderIndex: 3,
         iconfn: (iconProps) => <ModelTrainingOutlinedIcon {...iconProps} fontSize="medium" />,
@@ -118,7 +122,7 @@ const MENU_ITEMS_INFO = {
       },
       {
         title: i18n.t("layout:nav-drawer.menu-item-pipeline-automl"),
-        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-automl-tooltip"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.pipeline-automl"),
         id: "navPipelineAutoML",
         orderIndex: 2,
         iconfn: (iconProps) => <AutoModeOutlinedIcon {...iconProps} />,
@@ -131,6 +135,7 @@ const MENU_ITEMS_INFO = {
   },
   MODELS: {
     title: i18n.t("layout:nav-drawer.menu-item-models"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.models"),
     id: "navOpenModel",
     orderIndex: 6,
     iconfn: (iconProps) => <DataObjectOutlinedIcon {...iconProps} />,
@@ -138,6 +143,7 @@ const MENU_ITEMS_INFO = {
     subItems: [
       {
         title: i18n.t("layout:nav-drawer.menu-item-explore-model"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.explore-model"),
         id: "navExploreModel",
         orderIndex: 7,
         iconfn: (iconProps) => <ExploreIcon {...iconProps} />,
@@ -145,6 +151,7 @@ const MENU_ITEMS_INFO = {
       },
       {
         title: i18n.t("layout:nav-drawer.menu-item-test-model"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.test-model"),
         id: "navTestModel",
         orderIndex: 8,
         iconfn: (iconProps) => <PlaylistAddCheckIcon {...iconProps} />,
@@ -152,6 +159,7 @@ const MENU_ITEMS_INFO = {
       },
       {
         title: i18n.t("layout:nav-drawer.menu-item-download-model"),
+        tooltip: i18n.t("layout:nav-drawer-tooltips.download-model"),
         id: "navDownloadModel",
         orderIndex: 9,
         iconfn: (iconProps) => <CloudDownloadIcon {...iconProps} />,

@@ -36,11 +36,13 @@ import DialogTableSelect from "components/UIDialogTableSelect";
 
 import { ROUTES } from "routers";
 
-import { useRouterSearchParams } from "hooks";
+import { useRouterSearchParams, useMainContext, useReadFileText } from "hooks";
+
 import TheCapturesScreen from "./TheCapturesScreen";
 
 import { DataManagerContext } from "./context";
 import { AppLoader } from "components/UILoaders";
+import infoFile from "i18n/locales/en/info-data-manager.md";
 
 // Lazy loading optional screen
 const TheCaptureDetailsScreen = lazy(() => import("./TheCaptureDetailsScreen"));
@@ -58,6 +60,9 @@ const TheDataManager = ({
   const locationPath = useLocation();
   const { projectUUID } = useParams();
   const { t } = useTranslation("data-manager");
+
+  const { showInformationWindow } = useMainContext();
+  const screenInfoMd = useReadFileText(infoFile);
 
   const sessionsToSelect = useMemo(() => {
     return sessions.map((session) => ({
@@ -120,7 +125,10 @@ const TheDataManager = ({
           <DataManagerContext.Provider
             value={{ onOpenSelectSessionDialog: handleOpenSelectSessionDialog }}
           >
-            <TheCapturesScreen selectedSession={selectedSession} />
+            <TheCapturesScreen
+              onShowInformation={() => showInformationWindow("Data Manager", screenInfoMd)}
+              selectedSession={selectedSession}
+            />
           </DataManagerContext.Provider>
         </Route>
         <Route path={ROUTES.MAIN.DATA_MANAGER.child.CAPTURE_DETAILS_SCREEN.path}>
@@ -129,6 +137,7 @@ const TheDataManager = ({
           >
             <Suspense fallback={AppLoader}>
               <TheCaptureDetailsScreen
+                onShowInformation={() => showInformationWindow("Data Manager", screenInfoMd)}
                 selectedSession={selectedSession}
                 isDisabledByAutoSession={isDisabledByAutoSession}
                 isReadOnlyMode={isReadOnlyMode}

@@ -167,14 +167,18 @@ const NavDrawer = ({
                   })}
                   disabled={selectedProject === null}
                 >
-                  <ListItem key={menuItem.id} id={menuItem.id}>
-                    <Tooltip title={menuItem.title} aria-label="add">
+                  <Tooltip
+                    title={menuItem.tooltip || menuItem.title}
+                    placement="right"
+                    aria-label="menuItem.title"
+                  >
+                    <ListItem key={menuItem.id} id={menuItem.id}>
                       <ListItemIcon className={classes.iconButton}>
                         {menuItem.iconfn(getMenuProps(menuItem.orderIndex))}
                       </ListItemIcon>
-                    </Tooltip>
-                    <ListItemText primary={menuItem.title} />
-                  </ListItem>
+                      <ListItemText primary={menuItem.title} />
+                    </ListItem>
+                  </Tooltip>
                 </NavLink>
 
                 {menuItem?.subItems ? (

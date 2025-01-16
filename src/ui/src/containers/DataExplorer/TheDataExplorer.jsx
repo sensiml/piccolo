@@ -27,7 +27,9 @@ import { ROUTES } from "routers";
 import TheQueryScreen from "./TheQueryScreen";
 
 import { DataExplorerContext } from "./context";
+import { useMainContext, useReadFileText } from "hooks";
 import { AppLoader } from "components/UILoaders";
+import infoFile from "i18n/locales/en/info-queries.md";
 
 const TheQueryDetailScreen = lazy(() => import("./TheQueryDetailScreen"));
 const TheQueryCreateScreen = lazy(() => import("./TheQueryCreateScreen"));
@@ -35,26 +37,35 @@ const TheQueryCreateScreen = lazy(() => import("./TheQueryCreateScreen"));
 const TheDataExplorer = () => {
   const { projectUUID } = useParams();
 
+  const { showInformationWindow } = useMainContext();
+  const screenInfoMd = useReadFileText(infoFile);
+
   return (
     <ErrorBoundary>
       <Box>
         <Switch>
           <Route path={ROUTES.MAIN.DATA_EXPLORER.child.QUERY_SCREEN.path}>
             <DataExplorerContext.Provider>
-              <TheQueryScreen />
+              <TheQueryScreen
+                onShowInformation={() => showInformationWindow("Querying Data", screenInfoMd)}
+              />
             </DataExplorerContext.Provider>
           </Route>
           <Route path={ROUTES.MAIN.DATA_EXPLORER.child.QUERY_DETAILS_SCREEN.path}>
             <DataExplorerContext.Provider>
               <Suspense fallback={<AppLoader isOpen />}>
-                <TheQueryDetailScreen />
+                <TheQueryDetailScreen
+                  onShowInformation={() => showInformationWindow("Querying Data", screenInfoMd)}
+                />
               </Suspense>
             </DataExplorerContext.Provider>
           </Route>
           <Route path={ROUTES.MAIN.DATA_EXPLORER.child.QUERY_CREATE_SCREEN.path}>
             <DataExplorerContext.Provider>
               <Suspense fallback={<AppLoader isOpen />}>
-                <TheQueryCreateScreen />
+                <TheQueryCreateScreen
+                  onShowInformation={() => showInformationWindow("Querying Data", screenInfoMd)}
+                />
               </Suspense>
             </DataExplorerContext.Provider>
           </Route>

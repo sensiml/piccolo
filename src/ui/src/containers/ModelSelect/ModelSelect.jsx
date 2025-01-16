@@ -90,7 +90,7 @@ const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks }) => {
       return `Select model to open in ${MODELS_SELECTION_MODE[state?.parentPath.split("/")[1]]}`;
     }
 
-    return "Select Model";
+    return "Models";
   };
 
   const handleCloseAlert = () => {

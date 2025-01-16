@@ -85,6 +85,7 @@ const TheCaptureDetailsScreen = ({
   setHasUnsavedChanges,
   setSelectedLabel,
   updateCapturesStatisticsSegments,
+  onShowInformation,
 }) => {
   const classes = useStyles();
   const routersHistory = useHistory();
@@ -548,6 +549,7 @@ const TheCaptureDetailsScreen = ({
               />
             </>
           }
+          onShowInformation={onShowInformation}
         />
       </Box>
       <Box mb={1}>

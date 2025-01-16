@@ -49,6 +49,10 @@ import ProjectStatisticsTable from "components/ProjectStatisticsTable";
 import ModelControlPanel from "components/ModelControlPanel";
 import { AppLoader } from "components/UILoaders";
 
+import { useMainContext, useReadFileText } from "hooks";
+
+import infoFile from "i18n/locales/en/info-model-test.md";
+
 import useStyles from "./TestModelsStyles";
 import ClassificationResults from "./ClassificationResults";
 
@@ -114,6 +118,9 @@ const TestModels = ({
   const [activeSession, setActiveSession] = React.useState("");
   const [sessionList, setSessionList] = React.useState("");
   const [modelClassMap, setModelClassMap] = useState([]);
+
+  const { showInformationWindow } = useMainContext();
+  const screenInfoMd = useReadFileText(infoFile);
 
   const handleSessionChange = (event) => {
     setActiveSession(event.target.value);
@@ -446,7 +453,10 @@ const TestModels = ({
     <>
       <Box className={classes.box}>
         <Grid item xs={12}>
-          <ModelControlPanel modelData={modelData} />
+          <ModelControlPanel
+            onShowInformation={() => showInformationWindow("Testing a Model", screenInfoMd)}
+            modelData={modelData}
+          />
         </Grid>
         <Paper elevation={0}>
           <Grid container className={classes.sessionWrapper} spacing={2}>

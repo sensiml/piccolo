@@ -67,6 +67,7 @@ const TheQueryDetailScreen = ({
   loadQueries,
   setHasUnsavedChanges,
   resetFeatureStats,
+  onShowInformation,
 }) => {
   const { projectUUID } = useParams();
   const { queryUUID } = useParams();
@@ -290,6 +291,7 @@ const TheQueryDetailScreen = ({
               ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT
               : RESPONSIVE.TRUNCATE_NAME_OVER
           }
+          onShowInformation={onShowInformation}
           leftColumns={4}
           rightColumns={8}
           actionsBtns={
