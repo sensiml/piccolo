@@ -27,7 +27,7 @@ import HelpIcon from "components/HelpIcon";
 import DynamicFormElement from "components/FormElements/DynamicFormElement";
 import { useTheme } from "@mui/material/styles";
 
-import useStyles from "../../BuildModeStyle";
+import useStyles from "../../../containers/BuildModel/BuildModeStyle";
 
 const FormTransform = ({
   inputData,

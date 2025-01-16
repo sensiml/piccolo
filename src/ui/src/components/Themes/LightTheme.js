@@ -162,7 +162,7 @@ const LightTheme = (props) => {
     colorEditIcons: "#81A4D8",
     colorNewItems: "#4D7690",
 
-    borderBrandTransparent: "rgba(1, 119, 189, 50%)",
+    borderBrandTransparent: "rgba(1, 119, 189, 30%)",
     borderBrandGradient:
       // eslint-disable-next-line max-len
       `linear-gradient(90deg, ${lightBlue[800]} 28%, rgba(255,255,255,1) 100%, rgba(255,255,255,1) 100%)`,

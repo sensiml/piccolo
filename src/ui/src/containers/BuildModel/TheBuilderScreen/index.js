@@ -28,7 +28,6 @@ import {
   loadPipelineBuilderData,
   loadDataAfterTraining,
   stopModelOptimization,
-  setIsAdvancedBuilding,
   clearAlertBuilder,
   clearPipelineValidationError,
 } from "store/containerBuildModel/actions";
@@ -41,7 +40,10 @@ import {
   downloadPipelineStepCache,
   loadPipeline,
   setSelectedPipeline,
+  clearPipelineExecutionType,
   exportPipeline,
+  getPipelineStepFeatureStats,
+  setSelectedPipelineName,
 } from "store/pipelines/actions";
 
 import {
@@ -49,19 +51,13 @@ import {
   clearQueryCacheStatus,
   buildQueryCache,
   loadQueryStatistic,
-  loadQuerySegmentStatistic,
 } from "store/queries/actions";
 
-import {
-  selectPipelineSteps,
-  selectedQueryData,
-  selectAutoMLParams,
-} from "store/containerBuildModel/selectors";
+import { selectedQueryData } from "store/containerBuildModel/selectors";
 import { selectPipelineStepDescription } from "store/autoML/selectors";
 
 import { getPipelineResultTableData } from "store/pipelines/selectors/";
-
-import { selectLabelValuesColors } from "store/labels/selectors";
+import { selectLabelValuesColors, selectLabelValuesByName } from "store/labels/selectors";
 
 import getPipelineStepDataClass from "store/containerBuildModel/domain/PipelineStepsDataFactory";
 import TheBuilderScreen from "./TheBuilderScreen";
@@ -70,28 +66,30 @@ const mapStateToProps = (state) => {
   return {
     alertBuilder: state.containerBuildModel?.alertBuilder || {},
     pipelineValidationError: state.containerBuildModel?.pipelineValidationError,
-    isAdvancedBuilding: state.containerBuildModel?.isAdvancedBuilding || false,
     defaultOptions: state.router?.location?.state,
     pipelineHierarchyRules: state.autoML.pipelineHierarchyRules?.data,
+    iterationMetrics: state.pipelines.iterationMetrics || [],
+    pipelineExecutionType: state.pipelines?.pipelineExecutionType,
     transforms: state.transforms?.data,
-    pipelines: state.pipelines.pipelineList.data,
     selectedPipeline: state.pipelines?.selectedPipeline,
+    selectedPipelineName: state.pipelines?.selectedPipelineName,
     pipelineData: state.pipelines?.pipelineData?.data || {},
     selectedProjectObj: state.projects?.selectedProject || {},
-    selectedSteps: selectPipelineSteps(state),
-    autoMLParams: selectAutoMLParams(state),
     navBarIsOpen: state?.common?.values?.navBarIsOpen,
-    labelColors: selectLabelValuesColors("Label")(state),
+
     getQueryData: (queryName) => selectedQueryData(state, queryName),
     getPipelineStepDataClass: (params) => getPipelineStepDataClass({ ...params, state }),
     getPipelineStepDescription: selectPipelineStepDescription,
+    selectLabelValuesColors: (labelName) => selectLabelValuesColors(labelName || "Label")(state),
+    selectLabelValuesByName: (labelName) => selectLabelValuesByName(labelName || "Label")(state),
 
-    iterationMetrics: state.pipelines.iterationMetrics || [],
     optimizationLogs: state.pipelines.optimizationLogs || [],
     pipelineRunningStatus: state.pipelines.pipelineRunningStatus || "",
     pipelineStatus: state.pipelines?.pipelineStatus.data,
+
     pipelineResultData: getPipelineResultTableData(state),
-    queryList: state.queries?.queryList?.data || [],
+    pipelineResults: state.pipelines?.pipelineResults?.data,
+    pipelineResultsIsFetching: state.pipelines?.pipelineResults?.isFetching,
     queryCacheStatusData: state.queries?.queryCacheStatus?.data,
   };
 };
@@ -99,33 +97,36 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   clearAlertBuilder,
   clearPipelineValidationError,
-
-  setIsAdvancedBuilding,
-  setPipelineStep,
-  setPipelineDefaultSteps,
-  updatePipelineStepsWithQuery,
-  loadPipelinesHierarchyRules,
-
-  checkOptimizationStatus,
-  loadPipelineBuilderData,
-  loadDataAfterTraining,
   clearOptimizationLogs,
-
   clearPipelineResults,
   clearPipelineStatus,
+  clearPipeline,
+  clearQueryCacheStatus,
+
+  setPipelineStep,
+  setPipelineDefaultSteps,
+  setSelectedPipeline,
+  setSelectedPipelineName,
+  updatePipelineStepsWithQuery,
+
   launchModelOptimization,
-  stopModelOptimization,
+  checkOptimizationStatus,
+  clearPipelineExecutionType,
+
+  loadPipelinesHierarchyRules,
+  loadPipelineBuilderData,
+  loadDataAfterTraining,
   loadPipelineResults,
   loadQueryCacheStatus,
-  buildQueryCache,
-  clearQueryCacheStatus,
   loadQueryStatistic,
-  loadQuerySegmentStatistic,
-  clearPipeline,
-  downloadPipelineStepCache,
   loadPipeline,
-  setSelectedPipeline,
+
+  stopModelOptimization,
+  buildQueryCache,
+  downloadPipelineStepCache,
+
   exportPipeline,
+  getPipelineStepFeatureStats,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TheBuilderScreen);

@@ -18,5 +18,5 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 */
 
 import { createContext } from "react";
-
+// REST OF CONTEXT IS DESCRIBED IN src/ui/src/containers/Main.jsx
 export const MainContext = createContext(null);

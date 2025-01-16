@@ -117,7 +117,7 @@ const TableSegments = ({
     showPagination: true,
     applyFilters: true,
     isDarkHeader: true,
-    selectionField,
+    selectionField: onSelectSegmemts ? selectionField : undefined,
     selectionFieldIsSortable: false,
     onSelectInTable: handlseSelectInTable,
     isDisabledSelectAll: true,

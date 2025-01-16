@@ -153,8 +153,14 @@ const TheSelectScreen = ({
 
     setIsOpenImportPipeline(false);
 
+    let pathToRedirect = ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path;
+
+    if (!isAutoMLOptimization) {
+      pathToRedirect = ROUTES.MAIN.MODEL_BUILD.child.CUSTOM.path;
+    }
+
     routersHistory.push({
-      pathname: generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML_BUILDER_SCREEN.path, {
+      pathname: generatePath(pathToRedirect, {
         projectUUID,
         pipelineUUID: response.details,
       }),
@@ -214,7 +220,7 @@ const TheSelectScreen = ({
     <Box className={classes.root}>
       <Box mb={2}>
         <ControlPanel
-          title={"Build Model 1"}
+          title={t("model-builder-select.panel-title")}
           actionsBtns={
             <>
               <UIButtonConvertibleToShort
@@ -239,7 +245,10 @@ const TheSelectScreen = ({
           }
         />
       </Box>
-      <Box mb={2} spacing={2} className={classes.selectCardGridWrapper}>
+      <Box mb={2}>
+        <PipelinesTable />
+      </Box>
+      <Box spacing={2} className={classes.selectCardGridWrapper}>
         <SelectCard
           header={t("model-builder-select.create-dialog-header")}
           btnText={t("model-builder-select.create-dialog-header")}
@@ -310,7 +319,6 @@ const TheSelectScreen = ({
           onSubmit={handleBuildNewPipeline}
         />
       </DialogInformation>
-      <PipelinesTable />
     </Box>
   );
 };

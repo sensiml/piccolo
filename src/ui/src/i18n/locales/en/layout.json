@@ -29,8 +29,8 @@
     "menu-item-models": "Models",
     "menu-item-build-model": "Pipelines",
     "menu-item-feature-extractor": "Feature Extractor",
-    "menu-item-pipeline-automl": "AutoML pipeline",
-    "menu-item-pipeline-custom": "Custom pipeline",
+    "menu-item-pipeline-automl": "AutoML Training",
+    "menu-item-pipeline-custom": "Custom Training",
     "menu-item-explore-model": "Explore Model",
     "menu-item-test-model": "Test Model",
     "menu-item-download-model": "Download Model"

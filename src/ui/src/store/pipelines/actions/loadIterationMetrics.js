@@ -23,15 +23,10 @@ import helper from "store/helper";
 import { UPDATE_ITERATION_METRICS, CLEAR_ITERATION_METRICS } from "../actionTypes";
 
 export const loadIterationMetrics = (projectUuid, pipelineUuid) => async (dispatch) => {
-  if (!projectUuid || !pipelineUuid) {
-    return;
-  }
-
   try {
     const { data } = await api.get(
       `/project/${projectUuid}/sandbox/${pipelineUuid}/automl-iteration-metrics/`,
     );
-
     dispatch({ type: UPDATE_ITERATION_METRICS, payload: Array.isArray(data) ? data : [] });
   } catch (err) {
     logger.logError("", helper.getResponseErrorDetails(err), err, "loadIterationmetrics");

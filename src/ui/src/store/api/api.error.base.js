@@ -22,8 +22,11 @@ import _ from "lodash";
 class BaseAPIError extends Error {
   constructor(errorCode, response) {
     super();
-    if (errorCode !== 500) {
-      this.message = _.trim(this.parseErrorData(response?.data));
+    if (errorCode === 404) {
+      // eslint-disable-next-line max-len
+      this.message = `Server doesn't support API endpoint ${response?.config?.url}. Please, contact support.`;
+    } else if (errorCode !== 500) {
+      this.message = _.truncate(_.trim(this.parseErrorData(response?.data)), { length: 300 });
     } else if (!response) {
       this.message = "Something went wrong. Please, contact support.";
     } else if (response && _.isString(response)) {

@@ -178,5 +178,9 @@
     "limit": "Limit",
     "used": "Used",
     "usage": "Usage %"
+  },
+  "feature-vector-chart": {
+    "chart-title": "Feature Vector Plot",
+    "fetching-text": "Loading Features ..."
   }
 }

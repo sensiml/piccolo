@@ -21,7 +21,7 @@ import React from "react";
 
 import { Alert, Drawer, Box, Typography, Switch, FormControlLabel } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import useStyles from "../BuildModeStyle";
+import useStyles from "./BuildModeStyle";
 
 const DrawerEditStep = ({
   name,

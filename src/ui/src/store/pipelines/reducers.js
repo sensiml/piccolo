@@ -25,6 +25,7 @@ import {
   UPDATING_PIPELINE,
   UPDATED_PIPELINE,
   STORE_SELECTED_PIPELINE,
+  STORE_SELECTED_PIPELINE_NAME,
   STORE_PIPELINES,
   LOADING_PIPELINES,
   LOADING_PIPELINE_DATA,
@@ -52,6 +53,7 @@ import {
   UPDATE_ITERATION_METRICS,
   CLEAR_ITERATION_METRICS,
   STORE_PIPELINE_STATUS,
+  STORE_PIPELINE_EXEC_TYPE,
 } from "./actionTypes";
 import { RUNNING_STATUS } from "./status";
 
@@ -81,6 +83,16 @@ export function selectedPipeline(state = "", action) {
       return state;
   }
 }
+
+export const selectedPipelineName = (state = "", action) => {
+  // this is used to store the name for quick access
+  switch (action.type) {
+    case STORE_SELECTED_PIPELINE_NAME:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 export const pipelineResults = (state = { data: {}, isFetching: false }, action) => {
   switch (action.type) {
@@ -201,7 +213,7 @@ export const pipelineStatus = (state = pipelineDetailedStatusState, action) => {
   }
 };
 
-function setPipelineStatus(state, retStatus, optRequestStatus) {
+export const setPipelineStatus = (state, retStatus, optRequestStatus) => {
   if (!state[retStatus.pipelineUuid]) {
     state[retStatus.pipelineUuid] = {
       uuid: retStatus.pipelineUuid,
@@ -220,7 +232,17 @@ function setPipelineStatus(state, retStatus, optRequestStatus) {
   state[retStatus.pipelineUuid].uuid = retStatus.pipelineUuid;
   state[retStatus.pipelineUuid].status = optRequestStatus;
   state[retStatus.pipelineUuid].messages.push(retStatus.message);
-}
+};
+
+export const pipelineExecutionType = (state = "", action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case STORE_PIPELINE_EXEC_TYPE:
+      return payload.executionType;
+    default:
+      return state;
+  }
+};
 
 export const optimizationLogs = (state = [{ message: [] }], action) => {
   const { type, payload } = action;
@@ -265,9 +287,11 @@ export const iterationMetrics = (state = { data: [] }, action) => {
 
 export default combineReducers({
   selectedPipeline,
+  selectedPipelineName,
   pipelineList,
   pipelineData,
   pipelineResults,
+  pipelineExecutionType,
   seedList,
   pipelineRunningStatus,
   pipelineStatus,

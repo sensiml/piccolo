@@ -17,11 +17,6 @@ You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
 
-import { SET_IS_SELECT_SCREEN_GRID_VIEW } from "store/containerBuildModel/actionTypes";
+import PipelineStepDrawerStatistic from "./PipelineStepDrawerStatistic";
 
-export const setIsSelectScreenGridView = (isAdvancedBuilding) => {
-  return {
-    type: SET_IS_SELECT_SCREEN_GRID_VIEW,
-    payload: isAdvancedBuilding,
-  };
-};
+export default PipelineStepDrawerStatistic;

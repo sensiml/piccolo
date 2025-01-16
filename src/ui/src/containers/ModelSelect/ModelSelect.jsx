@@ -43,7 +43,7 @@ const MODELS_SELECTION_MODE = {
   [ROUTES.MAIN.MODEL_SELECT.MODES.SELECT_DOWNLOAD]: "Download Model",
 };
 
-const ModelSelect = ({ selectedProject, loadKnowledgepacks, modelData }) => {
+const ModelSelect = ({ selectedProject, modelData, loadKnowledgepacks }) => {
   const routersHistory = useHistory();
   const { t } = useTranslation("models");
   const { selectionMode } = useParams();
@@ -83,7 +83,7 @@ const ModelSelect = ({ selectedProject, loadKnowledgepacks, modelData }) => {
   };
 
   const getChangeModelName = () => {
-    if (modelData.name) {
+    if (modelData?.name) {
       return `Model: ${modelData.name}`;
     }
     if (state?.parentPath !== undefined) {

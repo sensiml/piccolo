@@ -24,6 +24,7 @@ import { Box } from "@mui/material";
 
 import { ScatterHistogramChart } from "components/UICharts";
 import { useWindowResize } from "hooks";
+import { ElementLoader } from "components/UILoaders";
 
 const scatterPlot = {
   mode: "markers",
@@ -71,17 +72,6 @@ const annotationTemplate = {
   opacity: 0.4,
 };
 
-const annotationLoadingTemplate = {
-  arrowhead: 6,
-  ax: 0,
-  ay: 0,
-  bgcolor: "rgba(255, 255, 255, 0.9)",
-  font: { size: 18 },
-  borderwidth: 3,
-  borderpad: 5,
-  text: "Loading Data ...",
-};
-
 const SCALE_CHART_SIZE = 0.9;
 const MAX_CHART_SIZE = 700;
 
@@ -91,7 +81,6 @@ const FeaturesChart = ({
   labelColumn,
   featureX,
   featureY,
-  featureZ,
   parentRef,
   selectedClasses,
   title,
@@ -99,21 +88,23 @@ const FeaturesChart = ({
   isFetching,
   fetchingText,
   onSelectPoint,
+  maxChartSize = MAX_CHART_SIZE,
   isAutoRangeXaxis = false,
+  isShowLegend = false,
 }) => {
   const [layoutHistogram, setLayoutHistogram] = useState({});
-  const [chartSize, setChartSize] = useState({ width: MAX_CHART_SIZE, height: MAX_CHART_SIZE });
+  const [chartSize, setChartSize] = useState({ width: maxChartSize, height: maxChartSize });
   const [chartRange, setChartRange] = useState([-10, 265]);
   const [chartData, setChartData] = useState([]);
 
   useWindowResize(() => {
-    if (parentRef?.current && parentRef.current.offsetWidth * SCALE_CHART_SIZE < MAX_CHART_SIZE) {
+    if (parentRef?.current && parentRef.current.offsetWidth * SCALE_CHART_SIZE < maxChartSize) {
       setChartSize({
         width: parentRef.current.offsetWidth * SCALE_CHART_SIZE,
         height: parentRef.current.offsetWidth * SCALE_CHART_SIZE,
       });
-    } else {
-      setChartSize({ width: MAX_CHART_SIZE, height: MAX_CHART_SIZE });
+    } else if (parentRef?.current) {
+      setChartSize({ width: maxChartSize, height: maxChartSize });
     }
   });
 
@@ -138,8 +129,11 @@ const FeaturesChart = ({
     const maxRanges = [];
     const minRanges = [];
 
+    let maxRangeVal = -10;
+    let minRangeVal = 260;
+
     _.entries(labelIndices).forEach(([label, labelInds]) => {
-      const [x, y, z] = [featureX, featureY, featureZ].map((feature) => {
+      const [x, y] = [featureX, featureY].map((feature) => {
         if (featureData[feature]) {
           const filteredFeatures = featureData[feature].filter((_el, index) =>
             labelInds.includes(index),
@@ -149,8 +143,10 @@ const FeaturesChart = ({
         return [];
       });
       if (isAutoRangeXaxis) {
-        [x, y, z].forEach((el) => {
+        [x, y].forEach((el) => {
           if (!_.isEmpty(el)) {
+            maxRangeVal = _.max([maxRangeVal, _.max(el)]);
+            minRangeVal = _.min([minRangeVal, _.min(el)]);
             maxRanges.push(_.max(el));
             minRanges.push(_.min(el));
           }
@@ -162,7 +158,6 @@ const FeaturesChart = ({
         ids: labelInds,
         x,
         y,
-        z,
         hovertext: "Click to show related segment",
         marker: {
           ...scatterPlot.marker,
@@ -181,7 +176,7 @@ const FeaturesChart = ({
           ...histogramPlot.marker,
           color: colorHashMap[label],
         },
-        showlegend: true,
+        showlegend: isShowLegend,
       });
 
       res.push({
@@ -197,10 +192,14 @@ const FeaturesChart = ({
       });
     });
     if (isAutoRangeXaxis) {
-      setChartRange([_.round(_.min(minRanges), 0), _.round(_.max(maxRanges), 0)]);
+      setChartRange([
+        // add 5 gap based on max value
+        _.round(minRangeVal - maxRangeVal * 0.05, 0),
+        _.round(maxRangeVal + maxRangeVal * 0.05, 0),
+      ]);
     }
     setChartData(res);
-  }, [labelIndices, featureX, featureY, featureZ, colorHashMap]);
+  }, [labelIndices, featureX, featureY, colorHashMap]);
 
   const handleClick = (e) => {
     const point = e?.points[0];
@@ -234,40 +233,36 @@ const FeaturesChart = ({
     setLayoutHistogram((prev) => ({ ...prev, annotations: [] }));
   }, [featureX, featureY]);
 
-  useEffect(() => {
-    if (isFetching) {
-      const annotation = {
-        ...annotationLoadingTemplate,
-        text: fetchingText || annotationLoadingTemplate.text,
-      };
-      setLayoutHistogram((prev) => ({ ...prev, annotations: [annotation] }));
-    } else {
-      setLayoutHistogram((prev) => ({ ...prev, annotations: [] }));
-    }
-  }, [isFetching]);
-
   return (
     <Box mt={2} style={chartSize} margin={"auto"}>
-      <ScatterHistogramChart
-        data={chartData}
-        layout={layoutHistogram}
-        title={title}
-        onClick={handleClick}
-        $xaxis={{
-          title: {
-            text: featureX,
-            standoff: 20,
-          },
-          range: chartRange,
-        }}
-        $yaxis={{
-          title: {
-            text: featureY,
-            standoff: 15,
-          },
-          range: chartRange,
-        }}
-      />
+      {isFetching ? (
+        <ElementLoader
+          isOpen
+          message={fetchingText}
+          style={{ justifyContent: "flex-start", marginTop: "4rem" }}
+        />
+      ) : (
+        <ScatterHistogramChart
+          data={chartData}
+          layout={layoutHistogram}
+          title={title}
+          onClick={handleClick}
+          $xaxis={{
+            title: {
+              text: featureX,
+              standoff: 20,
+            },
+            range: chartRange,
+          }}
+          $yaxis={{
+            title: {
+              text: featureY,
+              standoff: 15,
+            },
+            range: chartRange,
+          }}
+        />
+      )}
     </Box>
   );
 };

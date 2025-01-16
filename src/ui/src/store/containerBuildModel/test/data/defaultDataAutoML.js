@@ -22,6 +22,7 @@ export default [
     name: "Pipeline Settings",
     customName: "Pipeline Settings",
     data: {
+      reset: true,
       disable_automl: false,
       "prediction_target(%)": { f1_score: 100 },
       hardware_target: { classifiers_sram: 32000 },
