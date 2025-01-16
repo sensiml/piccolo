@@ -33,7 +33,10 @@
     "menu-item-pipeline-custom": "Custom Training",
     "menu-item-explore-model": "Explore Model",
     "menu-item-test-model": "Test Model",
-    "menu-item-download-model": "Download Model"
+    "menu-item-download-model": "Download Model",
+    "menu-item-pipeline-fe-tooltip": "Explore your data:  See what your sensor data looks like and create useful summaries without building a model.",
+    "menu-item-pipeline-custom-tooltip": "Build your own model:  Choose how to process your data and select the model type for maximum control.",
+    "menu-item-pipeline-automl-tooltip": "Automatically find the best model: Choose how to process your data, and we'll find the best model and settings for you."
   },
   "menu-external": {
     "get-started-title": "Get Started",

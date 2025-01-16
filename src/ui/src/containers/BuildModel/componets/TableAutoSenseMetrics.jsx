@@ -36,7 +36,7 @@ const TableAutoSenseMetrics = ({ autosenseMetrics, projectUUID, pipelineUUID }) 
 
   const [metrics, setMetrics] = useState({
     data: autosenseMetrics,
-    loading: false,
+    loading: true,
   });
 
   const getModelPagePath = (modelUUID) => {

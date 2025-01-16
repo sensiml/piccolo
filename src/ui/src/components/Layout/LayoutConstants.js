@@ -98,6 +98,7 @@ const MENU_ITEMS_INFO = {
     subItems: [
       {
         title: i18n.t("layout:nav-drawer.menu-item-feature-extractor"),
+        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-fe-tooltip"),
         id: "navFeatureExtractor",
         orderIndex: 1,
         iconfn: (iconProps) => <FilterAltOutlinedIcon {...iconProps} />,
@@ -105,22 +106,24 @@ const MENU_ITEMS_INFO = {
           generatePath(ROUTES.MAIN.MODEL_BUILD.child.FEATURE_EXTRACTOR.path, { ...params }),
       },
       {
-        title: i18n.t("layout:nav-drawer.menu-item-pipeline-automl"),
-        id: "navPipelineAutoML",
-        orderIndex: 2,
-        iconfn: (iconProps) => <AutoModeOutlinedIcon {...iconProps} />,
-        getPath: (params = {}) =>
-          generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path, {
-            ...params,
-          }),
-      },
-      {
         title: i18n.t("layout:nav-drawer.menu-item-pipeline-custom"),
+        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-custom-tooltip"),
         id: "navPipelineCustom",
         orderIndex: 3,
         iconfn: (iconProps) => <ModelTrainingOutlinedIcon {...iconProps} fontSize="medium" />,
         getPath: (params = {}) =>
           generatePath(ROUTES.MAIN.MODEL_BUILD.child.CUSTOM.path, {
+            ...params,
+          }),
+      },
+      {
+        title: i18n.t("layout:nav-drawer.menu-item-pipeline-automl"),
+        tooltip: i18n.t("layout:nav-drawer.menu-item-pipeline-automl-tooltip"),
+        id: "navPipelineAutoML",
+        orderIndex: 2,
+        iconfn: (iconProps) => <AutoModeOutlinedIcon {...iconProps} />,
+        getPath: (params = {}) =>
+          generatePath(ROUTES.MAIN.MODEL_BUILD.child.AUTOML.path, {
             ...params,
           }),
       },

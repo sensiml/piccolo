@@ -34,12 +34,13 @@ import { useMainContext, useWindowResize } from "hooks";
 import { RESPONSIVE } from "consts";
 
 const BuilderPipelinePanel = ({
-  pipelineData,
+  title,
   handleChangePipeline,
   getIsReadyToOptimize,
   isOptimizationRunning,
   handleLaunchOptimize,
   handleKillLaunchOptimize,
+  onShowInformation,
   exportPipeline,
   projectUUID,
   pipelineUUID,
@@ -77,17 +78,12 @@ const BuilderPipelinePanel = ({
         onDownloadPipeline={handleExportPipeline}
       />
       <ControlPanel
-        title={
-          isShortBtnText
-            ? pipelineData.name
-            : t("model-builder.pipeline-panel-header", {
-                pipelineName: pipelineData.name,
-              })
-        }
+        title={title}
         turncateLenght={
           isShortBtnText ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT : RESPONSIVE.TRUNCATE_NAME_OVER
         }
         onClickBack={isShortBtnText ? null : handleChangePipeline}
+        onShowInformation={onShowInformation}
         actionsBtns={
           <>
             <UIButtonConvertibleToShort

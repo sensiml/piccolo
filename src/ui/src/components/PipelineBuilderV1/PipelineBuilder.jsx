@@ -145,7 +145,6 @@ const PipelineBuilder = ({
   labelColors,
   classMap,
   selectLabelValuesColors,
-  selectLabelValuesByName,
   onCloseAlertBuilder,
   onCreateNewStep,
   onDeleteStep,
@@ -802,11 +801,11 @@ const PipelineBuilder = ({
     [selectedSteps, activeEditStep, pipelineStatus, isOptimizationRunning],
   );
 
-  const CardInformationIcon = () => (
+  const CardInformationIcon = ({ step }) => (
     <Tooltip title={t("flow-builder.card-step-help-info")} placement="top">
       <Link
         className={`${classes.cardInfoIcon}`}
-        onClick={(_e) => handleStepInfo(pipelineSettings)}
+        onClick={(_e) => handleStepInfo(step)}
         data-test="info-link"
       >
         <InfoOutlinedIcon style={{ color: theme.colorEditIcons }} fontSize="xsmall" />
@@ -900,7 +899,7 @@ const PipelineBuilder = ({
                             <>
                               <Box display={"flex"} alignItems={"center"}>
                                 <span>{step.name}</span>
-                                <CardInformationIcon />
+                                <CardInformationIcon step={step} />
                               </Box>
                               {[
                                 PIPELINE_STEP_TYPES.CLASSIFIER,
@@ -925,7 +924,7 @@ const PipelineBuilder = ({
                                     FunctionSubType: step.name,
                                   })}
                                 </span>
-                                <CardInformationIcon />
+                                <CardInformationIcon step={step} />
                               </Box>
                             </>
                           )}
@@ -1124,13 +1123,13 @@ const PipelineBuilder = ({
           isOpen={isOpenDialogDistribution}
           labelColors={labelColors}
           data={cacheDistributionData?.data || {}}
-          featureSummary={featureStatsData.feature_summary}
-          featureStatistics={featureStatsData.feature_statistics}
-          featureVectorData={featureStatsData.feature_data}
-          features={_.keys(featureStatsData.feature_data)}
-          labelColumn={featureStatsData.label_column}
+          featureVectorData={featureStatsData?.featureVectorData || {}}
+          featureStatistics={featureStatsData?.featureStatistics || {}}
+          featureSummary={featureStatsData?.featureSummary || {}}
+          features={featureStatsData?.featureNames || {}}
+          labelColumn={featureStatsData?.labelColumn || ""}
+          labelValues={featureStatsData?.labelValues || []}
           selectLabelValuesColors={selectLabelValuesColors}
-          labelValues={selectLabelValuesByName(featureStatsData.label_column || "Label")}
           classMap={classMap}
           classes={classes}
           isLoadFeatures={cacheDistributionData?.step?.isLoadFeatures}

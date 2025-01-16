@@ -43,7 +43,7 @@ import TheCapturesScreen from "./TheCapturesScreen";
 const mapStateToProps = (state) => {
   return {
     captures: selectCapturesStatistics(state),
-    getCaptureMetadataFormData: (captureUUID) => getCaptureMetadataFormData(state, captureUUID),
+    getCaptureMetadataFormData: (captureUUID) => getCaptureMetadataFormData(captureUUID),
     getCaptureConfigurationFormData: (captureUUID) =>
       getCaptureConfigurationFormData(state, captureUUID),
     getSampleRate: (uuid) => selectedSampleRate(uuid)(state),
