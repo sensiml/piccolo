@@ -170,7 +170,6 @@ env = environ.Env(
     NEW_ACCOUNT_URL=(str, "documentation/"),
     CODEGEN_TENSORFLOW_PLATFORM_VERSION=(str, "0a4bec2a"),
     AWS_CUSTOMER_REPORT_LOG_BUCKET=(str, "sml.customer.reports"),
-    ALLOW_UPDATE_PROJECT_SCHEMA=(bool, False),
     EMBEDDED_SDK_LICENSE=(
         str,
         """/* ----------------------------------------------------------------------
@@ -791,7 +790,6 @@ CODEGEN_TENSORFLOW_PLATFORM_VERSION = env("CODEGEN_TENSORFLOW_PLATFORM_VERSION")
 
 STARTER_CLASSIFICATION_LIMIT = env("STARTER_CLASSIFICATION_LIMIT")
 BASIC_EDITION_SAMPLE_RATE_LIMIT = env("BASIC_EDITION_SAMPLE_RATE_LIMIT")
-ALLOW_UPDATE_PROJECT_SCHEMA = env("ALLOW_UPDATE_PROJECT_SCHEMA")
 
 # Bonsai C++ library
 BONSAI = env("BONSAI")

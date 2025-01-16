@@ -300,6 +300,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "created_at",
             "active_pipelines",
             "description",
+            "lock_schema",
             "last_modified",
         )
         read_only_fields = (

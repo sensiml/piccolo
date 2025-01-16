@@ -248,6 +248,7 @@ class Project(models.Model):
     image_file_name = models.CharField(
         max_length=1100, null=True, unique=True, default=None
     )
+    lock_schema = models.BooleanField(default=False)
     last_modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):

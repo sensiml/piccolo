@@ -311,7 +311,12 @@ def get_capture_file(project_uuid: str, capture_file: str, ext: str) -> DataFram
         datastore.get("{}".format(os.path.basename(capture_file)), capture_file)
 
     if ext == ".csv":
-        tmp_df = read_csv(capture_file, index_col="sequence")
+        cols = list(read_csv(capture_file, nrows=1))
+        tmp_df = read_csv(
+            capture_file,
+            index_col="sequence",
+            usecols=[col for col in cols if col != "timestamp"],
+        )
     elif ext == ".wav":
         with wave.open(capture_file, "rb") as wave_reader:
             waveFrames = wave_reader.readframes(wave_reader.getnframes())

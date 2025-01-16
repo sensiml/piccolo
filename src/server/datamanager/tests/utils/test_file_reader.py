@@ -114,36 +114,36 @@ def test_csv_reader_data_mixed(filereader_mixed_int_float):
 def test_csv_reader_schema_int_float(filereader_mixed_int_float):
     schema = filereader_mixed_int_float.schema
     assert {
-        "AccelerometerX": {"type": "int", "index": 0},
-        "AccelerometerY": {"type": "float", "index": 1},
-        "GyroscopeZ": {"type": "float", "index": 2},
+        "AccelerometerX": {"type": "int"},
+        "AccelerometerY": {"type": "float"},
+        "GyroscopeZ": {"type": "float"},
     } == schema
 
 
 def test_csv_reader_schema_float(filereader_float):
     schema = filereader_float.schema
     assert {
-        "AccelerometerX": {"type": "float", "index": 0},
-        "AccelerometerY": {"type": "float", "index": 1},
-        "GyroscopeZ": {"type": "float", "index": 2},
+        "AccelerometerX": {"type": "float"},
+        "AccelerometerY": {"type": "float"},
+        "GyroscopeZ": {"type": "float"},
     } == schema
 
 
 def test_csv_reader_schema_int(filereader_int):
     schema = filereader_int.schema
     assert {
-        "AccelerometerX": {"type": "int", "index": 0},
-        "AccelerometerY": {"type": "int", "index": 1},
-        "GyroscopeZ": {"type": "int", "index": 2},
+        "AccelerometerX": {"type": "int"},
+        "AccelerometerY": {"type": "int"},
+        "GyroscopeZ": {"type": "int"},
     } == schema
 
 
 def test_csv_reader_schema_int_space_fields(filereader_int_name_space_fields):
     schema = filereader_int_name_space_fields.schema
     assert {
-        "Accelerometer_X": {"type": "int", "index": 0},
-        "AccelerometerY": {"type": "int", "index": 1},
-        "GyroscopeZ": {"type": "int", "index": 2},
+        "Accelerometer_X": {"type": "int"},
+        "AccelerometerY": {"type": "int"},
+        "GyroscopeZ": {"type": "int"},
     } == schema
 
 
