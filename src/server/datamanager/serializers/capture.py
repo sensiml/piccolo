@@ -79,8 +79,8 @@ def validate_capture_file(capture, tmp_name):
         for index, (key, item) in enumerate(
             capture.project.capture_sample_schema.items()
         ):
-            if item.get("index") is None:
-                item["index"] = index
+            if item.get("index"):
+                item.pop("index")
                 update_capture_sample_schema = True
 
         for key in reader.schema.keys():
@@ -88,10 +88,7 @@ def validate_capture_file(capture, tmp_name):
                 capture.project.capture_sample_schema[key] = reader.schema[key]
                 update_capture_sample_schema = True
 
-        if (
-            not settings.ALLOW_UPDATE_PROJECT_SCHEMA
-            and capture.project.capture_sample_schema
-        ):
+        if capture.project.lock_schema:
             project_columns = sorted(list(capture.project.capture_sample_schema.keys()))
             capture_columns = sorted(list(reader.schema.keys()))
             if project_columns != capture_columns:

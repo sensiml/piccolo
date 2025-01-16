@@ -1130,6 +1130,8 @@ def extract_capture(capture, project_uuid):
         data = WaveFileReader(capture.file)._dataframe
     if "sequence" in data.columns:
         data = data.drop("sequence", axis=1)
+    if "timestamp" in data.columns:
+        data = data.drop("timestamp", axis=1)
 
     if capture.number_samples is None:
         capture.number_samples = data.shape[0]

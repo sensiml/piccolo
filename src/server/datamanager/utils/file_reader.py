@@ -50,18 +50,22 @@ def make_schema(dataframe):
     invalid_columns = []
     schema = {}
     for index, dtype in enumerate(dataframe.dtypes):
-        if dtype not in ["int64", "float64"]:
+        if (
+            dtype not in ["int64", "float64"]
+            and dataframe.columns[index] != "timestamp"
+        ):
             invalid_columns.append(dataframe.columns[index])
 
         column_dtype = None
         if dtype in ["int64"]:
             column_dtype = "int"
+        elif dtype in ["string"]:
+            column_dtype = "string"
         elif dtype in ["float64"]:
             column_dtype = "float"
 
         schema[dataframe.columns[index].replace(" ", "_")] = {
             "type": column_dtype,
-            "index": index,
         }
 
     if invalid_columns:
@@ -154,10 +158,7 @@ class WaveFileReader(FileReader):
                 index="sequence"
             )
 
-            self._schema = {
-                key: {"type": "int16", "index": index}
-                for index, key in enumerate(columns)
-            }
+            self._schema = {key: {"type": "int16"} for index, key in enumerate(columns)}
 
     def to_CSVFileReader(self, tmp_file_path):
         self._dataframe.to_csv(tmp_file_path, index=None)
