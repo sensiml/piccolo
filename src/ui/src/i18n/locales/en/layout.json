@@ -22,7 +22,7 @@
     "tooltip-collapse": "Collapse Navbar",
     "tooltip-expand": "Expand Navbar",
     "menu-item-home": "Projects",
-    "menu-item-change-project": "Change Project",
+    "menu-item-close-project": "Close Project",
     "menu-item-project-summary": "Project Summary",
     "menu-item-data-manager": "Data Manager",
     "menu-item-queries": "Queries",
@@ -36,17 +36,18 @@
     "menu-item-download-model": "Download Model"
   },
   "nav-drawer-tooltips": {
-    "project-summary": "Project Summary page gives you an overview of your project. You can edit the image and project description to provide more context about each project you work on.",
-    "data-manager": "The files that you collected with the Data Studio are available and can be managed in the Data Manager. You can view, download, delete, and update segments and metadata in your labeled files through the Data Manager.",
-    "queries": "Queries are used to select your sensor data from your project. If you need to filter out certain parts of your sensor data based on metadata or labels, you can specify that here.",
-    "pipelines": "Pipelines are containers for a series of data processing steps and contains the blueprint for your model's development. It includes the sensor data input parameters, transforms, feature generators, feature selectors, feature transforms, and classifiers.",
-    "models": "On Model page you can get more information about the models that were generated from the Pipeline page.",
-    "explore-model": "Explore Model page you can get more information about the models that were generated from the Build Model page.",
-    "download-model": "Generated a Knowledge Pack that takes the event detection model you generated in the pipeline and transforms it into a binary or library file that can be run on your hardware device at the edge.",
-    "test-model": "Test Model provides several useful tools for testing how your model will perform before flashing it to a device.",
-    "pipeline-fe": "Explore your data:  See what your sensor data looks like and create useful summaries without building a model.",
-    "pipeline-custom": "Build your own model:  Choose how to process your data and select the model type for maximum control.",
-    "pipeline-automl": "Automatically find the best model: Choose how to process your data, and we'll find the best model and settings for you."
+    "menu-item-close-project": "Close Project",
+    "project-summary": "Project Summary",
+    "data-manager": "Data Manager",
+    "queries": "Queries",
+    "pipelines": "Pipelines",
+    "models": "Models",
+    "explore-model": "Explore Model",
+    "download-model": "Download Model",
+    "test-model": "Test Model",
+    "pipeline-fe": "Feature Extractor",
+    "pipeline-custom": "Custom Training",
+    "pipeline-automl": "AutoML Training"
   },
   "menu-external": {
     "get-started-title": "Get Started",

@@ -17,32 +17,7 @@ Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public
 License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses/>.
 */
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Box,
-  CircularProgress,
-  Typography,
-  Link,
-  Tooltip,
-  FormControlLabel,
-  Checkbox,
-  Stack,
-} from "@mui/material";
-
-import makeStyles from "@mui/styles/makeStyles";
-import DialogInformation from "components/DialogInformation";
-
-const useStyles = (navBarIsOpen) =>
-  makeStyles((theme) => ({
-    infoTitle: {
-      marginBottom: theme.spacing(4),
-      marginTop: theme.spacing(2),
-      fontSize: theme.spacing(4),
-      fontWeight: 500,
-      textAlign: "center",
-    },
-  }))();
+import React, { useEffect } from "react";
 
 const TheBuilderScreen = ({
   children,
@@ -60,9 +35,6 @@ const TheBuilderScreen = ({
   setSelectedPipelineName,
   ...props
 }) => {
-  const classes = useStyles();
-  const [dialogInformationData, setDialogInformationData] = useState({});
-
   const stopOptimizationChecker = () => {
     clearOptimizationLogs();
     clearPipelineResults();
@@ -86,14 +58,6 @@ const TheBuilderScreen = ({
     ];
   }, []);
 
-  const handleShowInformation = (title, text) => {
-    setDialogInformationData({ title, text });
-  };
-
-  const handleCloseNewStepDialogInformation = () => {
-    setDialogInformationData({});
-  };
-
   return (
     <>
       {children({
@@ -103,20 +67,8 @@ const TheBuilderScreen = ({
         clearPipelineStatus,
         clearQueryCacheStatus,
         pipelineData,
-        onShowInformation: handleShowInformation,
         ...props,
       })}
-      <DialogInformation
-        isOpen={Boolean(dialogInformationData.title)}
-        onClose={handleCloseNewStepDialogInformation}
-      >
-        <Typography variant="h2" className={classes.infoTitle}>
-          {dialogInformationData.title}
-        </Typography>
-        <Typography paragraph>
-          <p style={{ whiteSpace: "pre-wrap" }}>{dialogInformationData.text}</p>
-        </Typography>
-      </DialogInformation>
     </>
   );
 };

@@ -39,6 +39,9 @@
     "btn-import-open-metadata-form": "Go to metadata form",
     "header-imported-files": "Imported files:"
   },
+  "control-panel": {
+    "tooltip-info-button": "Show information about this page"
+  },
   "label-table": {
     "title": "Segments",
     "tooltip-label-selected": "Segment Is Selected",

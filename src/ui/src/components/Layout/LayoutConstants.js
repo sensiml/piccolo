@@ -60,8 +60,8 @@ const MENU_ITEMS_INFO = {
     getPath: (params = {}) => generatePath(ROUTES.MAIN.HOME.path, { ...params }),
   },
   CHANGE_PROJECT: {
-    title: i18n.t("layout:nav-drawer.menu-item-change-project"),
-    tooltip: i18n.t("layout:menu-external.get-started-tooltip"),
+    title: i18n.t("layout:nav-drawer.menu-item-close-project"),
+    tooltip: i18n.t("layout:nav-drawer-tooltips.menu-item-close-project"),
     id: "navChangeProject",
     orderIndex: 1,
     iconfn: (iconProps) => <ExitToAppIcon {...iconProps} />,
@@ -83,7 +83,7 @@ const MENU_ITEMS_INFO = {
     iconfn: (iconProps) => <StorageIcon {...iconProps} />,
     getPath: (params = {}) => generatePath(ROUTES.MAIN.DATA_MANAGER.path, { ...params }),
   },
-  PRERARE_DATA: {
+  PREPARE_DATA: {
     title: i18n.t("layout:nav-drawer.menu-item-queries"),
     tooltip: i18n.t("layout:nav-drawer-tooltips.queries"),
     id: "navPrepareData",
@@ -174,7 +174,7 @@ const MENU_ITEMS = [
   { ...MENU_ITEMS_INFO.CHANGE_PROJECT },
   { ...MENU_ITEMS_INFO.SUMMARY },
   { ...MENU_ITEMS_INFO.DATAMANAGER },
-  { ...MENU_ITEMS_INFO.PRERARE_DATA },
+  { ...MENU_ITEMS_INFO.PREPARE_DATA },
   { ...MENU_ITEMS_INFO.BUILD_MODEL },
   { ...MENU_ITEMS_INFO.MODELS },
 ];

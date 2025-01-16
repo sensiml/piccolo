@@ -35,11 +35,13 @@ import {
 import { UITablePanel } from "components/UIPanels";
 
 import { getUniqueId } from "utils";
-import { useInterval, useMainContext } from "hooks";
-
+import { useInterval, useMainContext, useReadFileText } from "hooks";
 import { ROUTES } from "routers";
 import { RUNNING_STATUSES } from "consts";
 import { EXECUTION_TYPES, PIPELINE_STEP_TYPES } from "store/autoML/const";
+
+import infoAutoMLFile from "i18n/locales/en/info-pipeline-automl.md";
+import infoCustomFile from "i18n/locales/en/info-pipeline-custom.md";
 
 import PipelineBuilderClassification from "../components/PipelineBuilderClassification";
 import TableAutoSenseMetrics from "../components/TableAutoSenseMetrics";
@@ -112,7 +114,6 @@ const TheClassificationScreen = ({
 
   exportPipeline,
   getPipelineStepFeatureStats,
-  onShowInformation,
 }) => {
   const routersHistory = useHistory();
   const scrollTop = useRef();
@@ -120,7 +121,10 @@ const TheClassificationScreen = ({
 
   const { t } = useTranslation("models");
   const { projectUUID, pipelineUUID } = useParams();
-  const { showMessageSnackbar } = useMainContext();
+  const { showMessageSnackbar, showInformationWindow } = useMainContext();
+
+  const screenInfoAutoMLMd = useReadFileText(infoAutoMLFile);
+  const screenInfoCustom = useReadFileText(infoCustomFile);
 
   const [selectedSteps, setSelectedSteps] = useState([]);
   const [pipelineSettings, setPipelineSettings] = useState([]);
@@ -401,13 +405,11 @@ const TheClassificationScreen = ({
                 : t("model-builder.pipeline-panel-header-custom")
             }
             onShowInformation={() => {
-              onShowInformation(
+              showInformationWindow(
                 isAutoML
                   ? t("model-builder.pipeline-panel-header-automl")
                   : t("model-builder.pipeline-panel-header-custom"),
-                isAutoML
-                  ? t("model-builder.pipeline-panel-automl-description")
-                  : t("model-builder.pipeline-panel-custom-description"),
+                isAutoML ? screenInfoAutoMLMd : screenInfoCustom,
               );
             }}
             pipelineData={pipelineData}
