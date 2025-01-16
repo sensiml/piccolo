@@ -164,6 +164,7 @@ class LabelRelationshipBySegmenterListView(generics.ListAPIView):
 )
 class ProjectLabelRelationshipListView(generics.ListAPIView):
     serializer_class = V2CaptureLabelValueSerializer
+    pagination_class = QueryParamCursorPagination
 
     permission_classes = (
         permissions.IsAuthenticated,
