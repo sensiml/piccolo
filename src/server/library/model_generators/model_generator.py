@@ -280,29 +280,27 @@ def compute_outliers(d):
     return outliers
 
 
-def compute_feature_stats(df, label_in_df=True):
+def compute_feature_stats(df):
     """This assumes that the last column in the dataframe is the label column"""
 
-    if label_in_df:
-        columns = df.columns[:-1]
-    else:
-        columns = df.columns
+    label = df.columns[-1]
+    features_names = df.columns[:-1]
 
-    g = df.groupby(columns)
+    g = df.groupby(label)
 
     M = {}
     for k, v in g.groups.items():
         M[k] = (
-            g.get_group(k)[columns]
+            g.get_group(k)[features_names]
             .describe(percentiles=[0.045, 0.25, 0.5, 0.75, 0.955])
             .round(2)
             .fillna(0)
             .to_dict()
         )
 
-        outliers = compute_outliers(g.get_group(k)[columns])
+        outliers = compute_outliers(g.get_group(k)[features_names])
         for feature in M[k].keys():
-            M[k][feature]["median"] = g.get_group(k)[columns][feature].median()
+            M[k][feature]["median"] = g.get_group(k)[features_names][feature].median()
             M[k][feature]["outlier"] = outliers[feature]
 
     l = {k: {} for k in M[next(iter(M))].keys()}
