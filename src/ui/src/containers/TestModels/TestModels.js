@@ -383,14 +383,13 @@ const TestModels = ({
   };
 
   const getFilteredCaptureSets = (selectedRows) => {
-    return selectedRows.map((row) => {
-      const rowUuid = fileType === fileTypeNames.CAPTURES ? row.uuid : row.uuid;
-      if (selectedCaptureSets.find((s) => s.uuid === rowUuid) === undefined) {
+    return selectedRows.map(({ uuid, name }) => {
+      if (selectedCaptureSets.findIndex((s) => s.uuid === uuid) === -1) {
         return fileType === fileTypeNames.CAPTURES
-          ? { uuid: rowUuid, name: row.name, type: "capture" }
+          ? { uuid, name, type: "capture" }
           : {
-              uuid: rowUuid,
-              name: checkForCsv(row.name),
+              uuid,
+              name: checkForCsv(name),
               type: "featurefile",
             };
       }
@@ -401,19 +400,14 @@ const TestModels = ({
   const updateCaptureSelection = (rows) => {
     const selectedRows = rows.filter((row) => row.captureSelected === 1);
 
-    const unSelectedUUIDs = rows.map((row) => {
-      if (row.captureSelected === 0) {
-        return fileType === fileTypeNames.CAPTURES ? row.uuid : row.uuid;
-      }
-      return "";
-    });
+    const unSelectedUUIDs = rows.filter((row) => row.captureSelected === 0).map((row) => row.uuid);
 
     let unSelectedRowSet = selectedCaptureSets.filter(
       (s) => s !== undefined && !unSelectedUUIDs.includes(s.uuid),
     );
 
     let newRowSet = [...unSelectedRowSet, ...getFilteredCaptureSets(selectedRows)].filter(
-      (x) => x !== undefined,
+      (x) => !_.isEmpty(x),
     );
 
     setSelectedCaptureSets(newRowSet);

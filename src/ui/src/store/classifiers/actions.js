@@ -45,12 +45,9 @@ export const submitClassifier =
         !helper.isNullOrEmpty(modelId)
       ) {
         try {
-          const captures = selectedCaptureSets.map((sc) => {
-            if (sc.type === "capture") {
-              return sc.name;
-            }
-            return undefined;
-          });
+          const captures = selectedCaptureSets
+            .filter((sc) => sc.type === "capture")
+            .map((sc) => sc?.name);
           const postData = {
             stop_step: false,
             platform: "emulator",

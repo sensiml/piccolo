@@ -154,6 +154,7 @@ const ProjectStatisticsTable = ({
   };
 
   const updateCaptureSelection = (captureUuid) => {
+    // TODO this should be refactored it brokes the immutability rules
     if (projectStatistics && projectStatistics.data) {
       const selectedRow = projectStatistics.data.find((ps) => ps[CAPTURE_UUID] === captureUuid);
       if (selectedRow) {
@@ -470,8 +471,7 @@ const ProjectStatisticsTable = ({
             <UIButtonResponsiveToShort
               variant={"outlined"}
               color={"primary"}
-              disabled={false}
-              onClick={() => handleStopClassierRun}
+              onClick={() => handleStopClassierRun()}
               tooltip={"Stop The Currently Executing Test"}
               text={"Stop"}
               icon={<StopIcon />}
