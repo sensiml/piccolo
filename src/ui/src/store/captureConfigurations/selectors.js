@@ -18,13 +18,18 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 */
 
 import _ from "lodash";
+import { selectedMetadataSampleRate } from "store/metadata/selectors";
 
 export const selectedSampleRate = (uuid) => (state) => {
   /**
    * @returns {Number || undefined} sampleRate
    */
   const catpureCongList = state.captureConfigurations?.data || [];
-  let sampleRate;
+  let sampleRate = selectedMetadataSampleRate(state);
+
+  if (sampleRate) {
+    return sampleRate;
+  }
 
   if (_.isArray(catpureCongList) && catpureCongList.length > 0) {
     let captureConfigObj = {};

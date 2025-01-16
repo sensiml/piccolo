@@ -82,3 +82,14 @@ export const selectMetadataTableColumnData = (state) => {
   }
   return [];
 };
+
+export const selectedMetadataSampleRate = (state) => {
+  if (selectedMetadataNames(state).includes("Sample Rate")) {
+    const sampleRateObj = state.metadata?.data.find((el) => el.name === "Sample Rate");
+    if (!_.isEmpty(sampleRateObj?.label_values)) {
+      return _.toSafeInteger(sampleRateObj.label_values[0]?.value);
+    }
+    return null;
+  }
+  return null;
+};
