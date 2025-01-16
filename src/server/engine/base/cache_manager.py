@@ -82,14 +82,29 @@ class CacheManager(object):
     def _cache_is_present(self):
         return self._cache is not None
 
-    def _cache_file_exists(self, file_name):
-        if isinstance(file_name, list):
-            for f in file_name:
+    def _parse_file_info(self, file_info):
+        if isinstance(file_info, dict):
+            return file_info.get("filename")
+        elif isinstance(file_info, str):
+            return file_info
+        else:
+            raise Exception("Invalid format for file info")
+
+    def _cache_file_exists(self, file_info):
+        if isinstance(file_info, list):
+            for f in file_info:
                 if not self._cache_file_exists(f):
                     return False
             return True
         else:
-            return self._datastore.key_exists(self.set_variable_path_id(file_name))
+            file_name = self._parse_file_info(file_info)
+
+            if os.path.exists(self.set_variable_path_id(file_name)):
+                return True
+            elif self._datastore.key_exists(self.set_variable_path_id(file_name)):
+                return True
+
+            return False
 
     def get_last_iteration(self, cache_key="auto_results"):
         """Returns the last numbered iteration that was generated. Currently
@@ -126,6 +141,7 @@ class CacheManager(object):
                     "name": "query",
                     "value": serializers.serialize("json", [query]),
                 }
+
             if not difference_detected and self.step_has_valid_cache(i, step, detail):
                 # logger.userlog(
                 #    {
@@ -181,6 +197,7 @@ class CacheManager(object):
 
         The cached file must also be present on either the local cache root or S3.
         """
+
         if self._cache_is_present():
             if len(self._cache["pipeline"]) > index:
                 if self._cache["pipeline"][index] == step:
@@ -264,10 +281,7 @@ class CacheManager(object):
         if not summary:
             return None
 
-        if isinstance(summary, dict):
-            filename = summary.get("filename")
-        else:
-            filename = summary
+        filename = self._parse_file_info(summary)
 
         if not filename:
             return None
