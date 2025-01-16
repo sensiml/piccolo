@@ -20,7 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { generatePath, useHistory, Link } from "react-router-dom";
+import { generatePath, useHistory } from "react-router-dom";
 
 import { Tooltip } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
@@ -30,7 +30,7 @@ import { ROUTES } from "routers";
 
 import StandardTable from "components/StandardTable";
 
-const TableAutoSenseMetrics = ({ autosenseMetrics, projectUUID, pipelineUUID }) => {
+const TableAutoSenseMetrics = ({ autosenseMetrics, projectUUID, pipelineUUID, onClearModel }) => {
   const routersHistory = useHistory();
   const { t } = useTranslation("models");
 
@@ -56,18 +56,26 @@ const TableAutoSenseMetrics = ({ autosenseMetrics, projectUUID, pipelineUUID }) 
     return !data ? "" : isNaN(data) ? data.toUpperCase() : Number(data).toFixed(0);
   };
 
+  const handleOpenModel = (modelUUID) => {
+    onClearModel();
+    routersHistory.push(getModelPagePath(modelUUID));
+  };
+
   const handleDoubleClick = (event, row) => {
-    routersHistory.push(getModelPagePath(row.knowledgepack));
+    handleOpenModel(row.knowledgepack);
   };
 
   const openModelRender = (modelUUID) => {
     return (
       <Tooltip title="Explore Model..">
-        <Link to={getModelPagePath(modelUUID)}>
-          <IconButton variant="contained" color="primary" size="small">
-            <ExploreIcon />
-          </IconButton>
-        </Link>
+        <IconButton
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={() => handleOpenModel(modelUUID)}
+        >
+          <ExploreIcon />
+        </IconButton>
       </Tooltip>
     );
   };

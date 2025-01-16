@@ -84,11 +84,11 @@ const NavDrawer = ({
     return "";
   }, [selectedPipelineExecutionType]);
 
-  const showIfRunning = (parnetId, pathToCheck) => {
+  const showIfRunning = (parentId, pathToCheck) => {
     if (
       RUNNING_STATUSES.RUNNING === pipelineRunningStatus &&
       !matchPath(pathToCheck, { path: activePipelinePath, sctrict: false }) &&
-      MENU_ITEMS_INFO.BUILD_MODEL.id === parnetId
+      MENU_ITEMS_INFO.BUILD_MODEL.id === parentId
     ) {
       return false;
     }
@@ -182,7 +182,7 @@ const NavDrawer = ({
                     <Collapse in={isSubmenuItemsOpened(menuItem.id)} timeout={0}>
                       <Divider variant="middle" />
                       <SubItemTitle id={menuItem.id} />
-                      <List key={`suitem_list_${menuItem.id}`} sx={{ pl: 2, pt: 0, pb: 0 }}>
+                      <List key={`subitem_list_${menuItem.id}`} sx={{ pl: 2, pt: 0, pb: 0 }}>
                         {menuItem.subItems.map((subItem) => (
                           <Box key={`subitem_nav_link_${subItem.id}`}>
                             {showIfRunning(menuItem.id, subItem.getPath()) ? (

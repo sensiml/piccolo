@@ -88,6 +88,7 @@ const TheClassificationScreen = ({
   clearPipelineResults,
   clearPipelineStatus,
   clearQueryCacheStatus,
+  clearModel,
 
   setPipelineStep,
   setPipelineDefaultSteps,
@@ -553,6 +554,7 @@ const TheClassificationScreen = ({
                     autosenseMetrics={pipelineResultData}
                     projectUUID={selectedProjectObj.uuid}
                     pipelineUUID={selectedPipeline}
+                    onClearModel={clearModel}
                   />
                 </>
               )}

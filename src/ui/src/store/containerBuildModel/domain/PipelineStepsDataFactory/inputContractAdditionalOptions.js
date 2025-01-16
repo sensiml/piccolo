@@ -62,9 +62,6 @@ export default {
   delta: {
     defaultLookup: SAMPLE_RATE,
   },
-  train_delta: {
-    default_use_param: false,
-  },
   // tranform
   input_data: {
     is_ignored: true,

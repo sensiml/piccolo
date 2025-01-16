@@ -27,32 +27,27 @@ import {
 
 import PipelineBuilderV1 from "components/PipelineBuilderV1";
 
-const PipelineBuilderAutoML = (props) => {
+const PipelineBuilderAutoML = ({ isAutoML, pipelineSettings, ...props }) => {
   const { selectedSteps, pipelineData } = props;
-
-  const autoMLStep = useMemo(
-    () => selectedSteps.find((step) => step?.type === PIPELINE_STEP_TYPES.AUTOML_PARAMS),
-    [selectedSteps],
-  );
 
   const getCoveredSearchedStep = useCallback(() => {
     // AUTOML SEARCHED STEPS
 
-    if (autoMLStep?.data?.disable_automl) {
+    if (!isAutoML) {
       return [];
     }
 
     // find all steps from inputData AutoML form
     return AUTOML_SEARCHED_STEPS_TYPES_LOOKUP.reduce(
       (acc, el) => {
-        if (autoMLStep?.data[el.paramName]) {
+        if (pipelineSettings?.data[el.paramName]) {
           acc.push(el.stepType);
         }
         return acc;
       },
       [PIPELINE_STEP_TYPES.AUTOML_PARAMS],
     );
-  }, [selectedSteps]);
+  }, [pipelineSettings, isAutoML]);
 
   const getFilteredSelectedSteps = useMemo(() => {
     const getOptimizedByAutoML = (type) => {
@@ -165,7 +160,13 @@ const PipelineBuilderAutoML = (props) => {
 
   return (
     <>
-      <PipelineBuilderV1 {...props} isModel={true} selectedSteps={getFilteredSelectedSteps} />
+      <PipelineBuilderV1
+        {...props}
+        isAutoML={isAutoML}
+        pipelineSettings={pipelineSettings}
+        isModel={true}
+        selectedSteps={getFilteredSelectedSteps}
+      />
     </>
   );
 };

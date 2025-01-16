@@ -241,21 +241,13 @@ const PipelineBuilder = ({
       if (step?.options?.isSession && step?.type !== PIPELINE_STEP_TYPES.INPUT_DATA) {
         return true;
       }
-      if (step?.options?.isOptimizedByAutoML && step?.type !== PIPELINE_STEP_TYPES.AUTOML_PARAMS) {
+      if (step?.options?.isOptimizedByAutoML) {
         return true;
-      }
-      if (
-        isAutoML &&
-        [PIPELINE_STEP_TYPES.CLASSIFIER, PIPELINE_STEP_TYPES.TRAINING_ALGORITHM].includes(
-          step?.name,
-        )
-      ) {
-        return !pipelineSettings.data?.disable_automl;
       }
 
       return isOptimizationRunning;
     },
-    [selectedSteps, isOptimizationRunning],
+    [selectedSteps, pipelineSettings, isOptimizationRunning],
   );
 
   const getAvailableNextSteps = (index, stepObj) => {

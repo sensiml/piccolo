@@ -72,7 +72,7 @@ class CommonStepDataTransfrorm extends AbstractStepData {
           // only form element types
           if (Object.values(FORM_TYPES).includes(formFieldType)) {
             if (this.TYPES_WITH_OPTIONS.includes(formFieldType) && !options?.length) {
-              // hide selectors withot options for keep empy elements as default
+              // hide selectors without options for keep empy elements as default
               isFormHidden = true;
             }
 

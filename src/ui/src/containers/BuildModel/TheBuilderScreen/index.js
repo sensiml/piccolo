@@ -46,6 +46,8 @@ import {
   setSelectedPipelineName,
 } from "store/pipelines/actions";
 
+import { clearModel } from "store/models/actions";
+
 import {
   loadQueryCacheStatus,
   clearQueryCacheStatus,
@@ -102,6 +104,7 @@ const mapDispatchToProps = {
   clearPipelineStatus,
   clearPipeline,
   clearQueryCacheStatus,
+  clearModel,
 
   setPipelineStep,
   setPipelineDefaultSteps,
