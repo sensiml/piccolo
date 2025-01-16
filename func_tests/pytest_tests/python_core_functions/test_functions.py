@@ -196,9 +196,7 @@ def test_dsk_pipeline_data(dsk_proj):
         },
     ]
     data, stats = dsk.pipeline.get_cached_data(pipeline_step=1)
-    import pdb
 
-    pdb.set_trace()
     assert expected_datasegment == data
 
 
