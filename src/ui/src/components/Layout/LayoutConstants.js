@@ -194,7 +194,6 @@ const MENU_ITEMS_EXTERNAL = [
     title: i18n.t("layout:menu-external.demo-title"),
     tooltip: i18n.t("layout:menu-external.demo-tooltip"),
     id: "navDemos",
-    target: "_blank",
     orderIndex: 1,
     isHidden: false,
     iconfn: (iconProps) => <DriveEtaIcon {...iconProps} />,

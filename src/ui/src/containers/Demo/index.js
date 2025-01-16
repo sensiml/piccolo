@@ -18,19 +18,14 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 */
 
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { resetApp } from "store/auth/actions";
 import { ROUTES } from "routers";
 
 const Demo = () => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(resetApp());
+    window.open(`${ROUTES.AUTH.child.LOGIN.fullPath}?demo`, "_blank");
   }, []);
 
-  return <Redirect to={`${ROUTES.AUTH.child.LOGIN.fullPath}?demo`} />;
+  return <div />;
 };
 
 export default Demo;
