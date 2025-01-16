@@ -45,6 +45,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.views import APIView
+from datamanager.utils.pagination import QueryParamCursorPagination
 
 
 @extend_schema_view(
@@ -356,6 +357,7 @@ class V2LabelRelationshipBySegmenterListView(generics.ListCreateAPIView):
         permissions.IsAuthenticated,
         permissions.DjangoModelPermissions,
     )
+    pagination_class = QueryParamCursorPagination
     serializer_class = V2ProjectCaptureLabelValueSerializer
 
     def get_serializer(self, *args, **kwargs):

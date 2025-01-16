@@ -32,6 +32,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.views import APIView
+from datamanager.utils.pagination import QueryParamCursorPagination
 
 
 @extend_schema_view(
@@ -57,6 +58,7 @@ class MetadataRelationshipListView(generics.ListCreateAPIView):
         permissions.DjangoModelPermissions,
     )
     serializer_class = V2CaptureMetadataValueSerializer
+    pagination_class = QueryParamCursorPagination
 
     def get_serializer(self, *args, **kwargs):
         if isinstance(kwargs.get("data"), list):
@@ -187,6 +189,7 @@ class MetadataRelationshipDetailView(generics.RetrieveUpdateDestroyAPIView):
 )
 class ProjectMetadataRelationshipListView(V2LabelRelationshipBySegmenterListView):
     serializer_class = V2CaptureMetadataRelationshipManySerializer
+    pagination_class = QueryParamCursorPagination
 
     permission_classes = (
         permissions.IsAuthenticated,

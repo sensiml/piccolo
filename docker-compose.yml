@@ -69,13 +69,23 @@ services:
       - DJANGO_ENV_PATH=/home/sml-app/install/config/env
       - DJANGO_DEBUGGER=True
       - PORT_PTVSD=8005
-    command: python manage.py runserver 0.0.0.0:8000 --noreload
+    #command: python manage.py runserver 0.0.0.0:8000 --noreload
+    # --workers 4 
+    command:  gunicorn --bind 0.0.0.0:8000 --timeout 3600 --max-requests 250 --reload server.wsgi:application
     ports:
       - "8000:8000"
     depends_on:
       - db
       - redis
       - sensiml.databse.initalize
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - sensiml.cloud      
   sensiml.pipelines:
     #mem_limit: "2000M"
     image: sensiml/base
@@ -116,7 +126,7 @@ services:
     user: sml-app
     deploy:
       mode: replicated
-      replicas: 8
+      replicas: 2
     volumes:
       - server_data:/home/sml-app/data/
       - server_libs:/home/sml-app/install/lib/

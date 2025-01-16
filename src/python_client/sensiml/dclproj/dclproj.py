@@ -401,7 +401,7 @@ class DCLProject:
         return capture_list[capture_list.name == capture].to_dict(orient="records")[0]
 
     def get_capture_metadata(
-        self, capture: str, include_ids: bool = False
+        self, capture: str = None, include_ids: bool = False
     ) -> DataFrame:
         """Gets the metadata for the specified capture
 
@@ -436,7 +436,10 @@ class DCLProject:
             "CaptureMetadataValue", fields, fk_fields=fk_fields, header=header
         )
 
-        return df[df["capture"] == capture]
+        if capture is not None:
+            return df[df["capture"] == capture]
+
+        return df
 
     def get_segments(self, sessions: Optional[List] = None):
         """
