@@ -243,6 +243,22 @@ class CacheManager(object):
 
         return data, num_pages
 
+    def get_result_from_cache_with_sample_size(
+        self,
+        variable_name,
+        sample_size,
+        page_index=0,
+        cache_key="results",
+    ):
+        (data, num_pages) = self.get_result_from_cache(
+            variable_name, page_index, cache_key
+        )
+
+        if sample_size is not None and len(data) > sample_size:
+            data = data.sample(n=sample_size, replace=False)
+
+        return data, num_pages
+
     def get_file(self, summary):
         """Gets data from the cache corresponding to a particular named variable."""
         if not summary:
