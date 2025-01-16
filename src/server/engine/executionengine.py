@@ -86,6 +86,7 @@ class ExecutionEngine(object):
         self.project_id = project_id
         self._error_queue = err_queue
         self._current_step_info = {}
+        self._update_sandbox_value = True
         # clean the temp table for this pipeline_id before executing
         if self._sandbox is not None:
             self.pipeline_id = self._sandbox.uuid
@@ -111,7 +112,10 @@ class ExecutionEngine(object):
 
         self.pipeline_execution.save()
 
-    def update_execution_status(self, execution_type, status, wall_time):
+    def turn_off_update_sandbox_value(self):
+        self._update_sandbox_value = False
+
+    def update_team_cpu_usage(self, execution_type, status, wall_time):
         if isinstance(self._sandbox, EmptySandbox):
             return
 
@@ -187,7 +191,11 @@ class ExecutionEngine(object):
 
         self._current_step_info = update_dict
 
-        if self._sandbox is not None and self._sandbox.project is not None:
+        if (
+            self._sandbox is not None
+            and self._sandbox.project is not None
+            and self._update_sandbox_value
+        ):
             update_sandbox_value(
                 self._sandbox.project.uuid, self.pipeline_id, json.dumps(update_dict)
             )

@@ -560,7 +560,12 @@ class Sandbox(object):
 
         return data, summary
 
-    def intermediate_data(self, pipeline_step: int, page_index: int = 0):
+    def intermediate_data(
+        self,
+        pipeline_step: int,
+        page_index: int = 0,
+        convert_datasegments_to_dataframe=True,
+    ):
         """Retrieves intermediate pipeline step data from a previously executed pipeline.
 
         Args:
@@ -568,11 +573,18 @@ class Sandbox(object):
             page_index (int): the index to pull form the cache
 
         Returns:
-            (DataFrame or ModelResultSet): result of executed pipeline, specified by the sandbox.
+        Returns:
+            1. A datasegments dictionary if the pipeline step is prior to the feature extraction step
+            2. A feature vector DataFrame if the result is before the Model train step
+            3. A ModelResultSet if the selected pipeline step is TVO step, otherwise the output of the pipeline
 
         """
         url = f"project/{self._project.uuid}/sandbox/{self.uuid}/data/"
-        payload = {"pipeline_step": pipeline_step, "page_index": page_index}
+        payload = {
+            "pipeline_step": pipeline_step,
+            "page_index": page_index,
+            "convert_datasegments_to_dataframe": convert_datasegments_to_dataframe,
+        }
         response = self._connection.request("get", url, params=payload)
 
         data, err = utility.check_server_response(response)

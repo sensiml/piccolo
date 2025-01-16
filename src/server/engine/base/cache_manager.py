@@ -237,7 +237,13 @@ class CacheManager(object):
 
         return len(keys), keys
 
-    def get_result_from_cache(self, variable_name, page_index=0, cache_key="results"):
+    def get_result_from_cache(
+        self,
+        variable_name,
+        page_index=0,
+        cache_key="results",
+        convert_datasegments_to_dataframe=True,
+    ):
         num_pages, keys = self.get_result_pages(variable_name, cache_key=cache_key)
 
         if keys is None:
@@ -255,7 +261,11 @@ class CacheManager(object):
 
         data = self.get_file(keys[page_index])
 
-        if isinstance(data, list) and is_datasegments(data):
+        if (
+            convert_datasegments_to_dataframe
+            and isinstance(data, list)
+            and is_datasegments(data)
+        ):
             data = DataSegments(data).to_dataframe()
 
         return data, num_pages
@@ -266,12 +276,17 @@ class CacheManager(object):
         sample_size,
         page_index=0,
         cache_key="results",
+        convert_datasegments_to_dataframe=True,
     ):
         (data, num_pages) = self.get_result_from_cache(
-            variable_name, page_index, cache_key
+            variable_name, page_index, cache_key, convert_datasegments_to_dataframe
         )
 
-        if sample_size is not None and len(data) > sample_size:
+        if (
+            sample_size is not None
+            and isinstance(data, DataFrame)
+            and len(data) > sample_size
+        ):
             data = data.sample(n=sample_size, replace=False)
 
         return data, num_pages

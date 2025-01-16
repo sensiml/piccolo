@@ -341,6 +341,12 @@ class SandboxCrudMixin(object):
     def sandbox_data(self, request, project_uuid):
         """Return the columns of data requested."""
 
+        def str_to_bool(value):
+            if not isinstance(value, str):
+                return value
+
+            return value.lower() == "true"
+
         sandbox = self.get_object()
         pipeline = sandbox.pipeline
         step = request.query_params.get("pipeline_step", None)
@@ -353,6 +359,19 @@ class SandboxCrudMixin(object):
         sample_size = request.query_params.get("sample_size", None)
         if sample_size is None:
             sample_size = request.data.get("sample_size")
+
+        convert_datasegments_to_dataframe = str_to_bool(
+            request.query_params.get("convert_datasegments_to_dataframe", None)
+        )
+        if convert_datasegments_to_dataframe is None:
+            convert_datasegments_to_dataframe = request.data.get(
+                "convert_datasegments_to_dataframe", True
+            )
+
+        if not isinstance(convert_datasegments_to_dataframe, bool):
+            raise Exception(
+                "Invalid Parameter: convert_datasegments_to_dataframe must be bool"
+            )
 
         if step:
             step = int(step)
@@ -384,6 +403,7 @@ class SandboxCrudMixin(object):
             page_index=page_index,
             sample_size=sample_size,
             cache_key="data",
+            convert_datasegments_to_dataframe=convert_datasegments_to_dataframe,
         )
 
         if data is None:
@@ -630,7 +650,7 @@ class SandboxAsyncMixin(object):
         if sample_size is None:
             sample_size = request.data.get("sample_size")
 
-        if sample_size:
+        if sample_size is not None:
             sample_size = int(sample_size)
 
         number_of_pages = 0

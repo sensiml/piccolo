@@ -643,13 +643,19 @@ class Pipeline(object):
 
         return self._results[0], self._results[1]
 
-    def data(self, pipeline_step: int, page_index: int = 0) -> DataFrame:
-        """Retrieves results from a specific pipeline step in the pipeline from stored values in kbcloud
+    def data(
+        self,
+        pipeline_step: int,
+        page_index: int = 0,
+        convert_datasegments_to_dataframe=True,
+    ) -> DataFrame:
+        """Retrieves results from a specific pipeline step in the pipeline from stored values in the pipeline cache
         after execution has been performed.
 
         Args:
             pipeline_step (int): Pipeline step to retrieve results from.
             page_index (int): Index of data to get.
+            datasegments (bool): Keep results in datasegments format instead flattening to DataFrame format
 
         Returns:
             A ModelResultSet if the selected pipeline step is TVO step, otherwise the output of the pipeline
@@ -657,7 +663,32 @@ class Pipeline(object):
         """
         try:
             return self._sandbox.intermediate_data(
-                pipeline_step=pipeline_step, page_index=page_index
+                pipeline_step=pipeline_step,
+                page_index=page_index,
+                convert_datasegments_to_dataframe=convert_datasegments_to_dataframe,
+            )
+        except HTTPError:
+            return None, None
+
+    def get_cached_data(self, pipeline_step: int, page_index: int = 0) -> DataFrame:
+        """Retrieves results from a specific pipeline step in the pipeline from stored values in the pipeline cache
+        after execution has been performed.
+
+        Args:
+            pipeline_step (int): Pipeline step to retrieve results from.
+            page_index (int): Index of data to get.
+            datasegments (bool): Keep results in datasegments format instead flattening to DataFrame format
+
+        Returns:
+            1. A datasegments dictionary if the pipeline step is prior to the feature extraction step
+            2. A feature vector DataFrame if the result is before the Model train step
+            3. A ModelResultSet if the selected pipeline step is TVO step, otherwise the output of the pipeline
+        """
+        try:
+            return self._sandbox.intermediate_data(
+                pipeline_step=pipeline_step,
+                page_index=page_index,
+                convert_datasegments_to_dataframe=False,
             )
         except HTTPError:
             return None, None
