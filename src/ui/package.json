@@ -28,7 +28,7 @@
     "lodash-es": "^4.17.15",
     "lodash.isequal": "^4.5.0",
     "material-css": "^0.7.0",
-    "node-sass": "^6.0.1",
+    "sass": "1.80.3",
     "plotly.js": "^2.11.1",
     "plotly.js-cartesian-dist-min": "^2.11.1",
     "prop-types": "^15.7.2",
@@ -121,6 +121,7 @@
     "prestart": "yarn install",
     "start": "react-scripts --max_old_space_size=6144 start",
     "build": "react-scripts --max_old_space_size=6144 build",
+    "start:docker": "env-cmd -f .env.docker react-scripts --max_old_space_size=6144 start",
     "build:develop": "env-cmd -f .env.development react-scripts --max_old_space_size=6144 build",
     "build:staging": "env-cmd -f .env.staging react-scripts --max_old_space_size=6144 build",
     "build:docker_server": "PUBLIC_URL=/static/webui env-cmd -f .env.docker react-scripts --max_old_space_size=6144 build",
@@ -133,21 +134,13 @@
     "test:watch": "yarn test --watch",
     "cypress": "cypress open",
     "cyheadless": "./node_modules/.bin/cypress run --headless --browser chrome",
-    "test-e2e": "start-server-and-test start http://localhost:3000 cyheadless",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "test-e2e": "start-server-and-test start http://localhost:3000 cyheadless"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
-    "@storybook/addon-actions": "^6.4.9",
-    "@storybook/addon-essentials": "^6.4.9",
-    "@storybook/addon-links": "^6.4.9",
-    "@storybook/node-logger": "^6.4.9",
-    "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.4.9",
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^14.4.3",
@@ -168,8 +161,7 @@
     "jest-react-hooks-shallow": "^1.5.1",
     "lint-staged": "^12.0.2",
     "prettier": "^2.4.1",
-    "start-server-and-test": "^1.11.0",
-    "storybook-addon-i18n": "^5.1.13"
+    "start-server-and-test": "^1.11.0"
   },
   "eslintConfig": {
     "overrides": [
