@@ -717,7 +717,7 @@ export const downloadPipelineStepCache =
         params: { pipeline_step: index, page_index: indexPage },
       });
       if (data?.results) {
-        // remove all extentions
+        // remove all extension
         fileDownload(
           JSON.stringify(data.results),
           `${pipelineName}.${stepName}.cache.${indexPage}.json`,

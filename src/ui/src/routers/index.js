@@ -45,7 +45,7 @@ export const ROUTES = {
         path: "/account-settings/account-info/",
         name: "account-info",
       },
-      ACCOUNT_SUBCRIPTIONS: {
+      ACCOUNT_SUBSCRIPTIONS: {
         path: "/account-settings/account-subscriptions/",
         name: "account-subscription",
       },

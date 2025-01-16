@@ -70,7 +70,7 @@ const DialogModalRename = ({
       );
 
     if (!newModelName) {
-      setError(t("dialog-rename-models-error-requaried"));
+      setError(t("dialog-rename-models-error-required"));
       return;
     }
 

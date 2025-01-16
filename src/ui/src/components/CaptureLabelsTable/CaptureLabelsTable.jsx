@@ -124,15 +124,15 @@ const CaptureLabelsTable = ({
       return true;
     }
     if (start > end) {
-      setLabelFormValidationError(t("label-table.lalel-form-error-stat-greater-end"));
+      setLabelFormValidationError(t("label-table.label-form-error-stat-greater-end"));
       return false;
     }
     if (start < 0) {
-      setLabelFormValidationError(t("label-table.lalel-form-error-stat-less-0"));
+      setLabelFormValidationError(t("label-table.label-form-error-stat-less-0"));
       return false;
     }
     if (end > selectedCapture.max_sequence) {
-      setLabelFormValidationError(t("label-table.lalel-form-error-end-greater-max"));
+      setLabelFormValidationError(t("label-table.label-form-error-end-greater-max"));
       return false;
     }
     if (
@@ -140,7 +140,7 @@ const CaptureLabelsTable = ({
         (label) => label.start === start && label.end === end && label.id !== selectedLabel,
       )
     ) {
-      setLabelFormValidationError(t("label-table.lalel-form-error-dublicates"));
+      setLabelFormValidationError(t("label-table.label-form-error-duplicates"));
       return false;
     }
     return true;

@@ -134,7 +134,7 @@ const DrawerNewStep = ({
               ))}
             </Select>
             {isNewStepNameError ? (
-              <FormHelperText>{t("model-builder.drawer-new-error-error-requaried")}</FormHelperText>
+              <FormHelperText>{t("model-builder.drawer-new-error-error-required")}</FormHelperText>
             ) : null}
           </FormControl>
         ) : null}

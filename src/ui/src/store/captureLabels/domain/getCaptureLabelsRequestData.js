@@ -22,7 +22,7 @@ import _ from "lodash";
 import { selectedCaptureMetadataUUID } from "store/captureMetadata/selectors";
 
 const getCaptureLabelsRequestData =
-  (caprureUUID, labelUUID, updatedLabelData, deletedLabels) => (state) => {
+  (captureUUID, labelUUID, updatedLabelData, deletedLabels) => (state) => {
     /**
      * @params {Object} updatedLabelData
      * @params {Object} deletedLabels
@@ -32,7 +32,7 @@ const getCaptureLabelsRequestData =
 
     const getDataObj = (labelEl) => {
       return {
-        capture: caprureUUID,
+        capture: captureUUID,
         ...(!labelEl.isCreated && { uuid: labelEl.id }), // uuid only for updated
         label: labelUUID,
         label_value: labelEl.labelValueUUID,

@@ -41,7 +41,7 @@ import PipelineTemplateCreateForm from "components/PipelineTemplateCreateForm";
 import { DEFAULT_CLASSIFIER, PIPELINE_STEP_TYPES } from "store/autoML/const";
 
 import useStyles from "../BuildModeStyle";
-import SelectCard from "../componets/SelectCard";
+import SelectCard from "../components/SelectCard";
 
 const TheSelectScreen = ({
   selectedProject,

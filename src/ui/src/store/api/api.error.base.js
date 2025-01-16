@@ -75,7 +75,7 @@ class BaseAPIError extends Error {
         }
       });
     }
-    // in these cases details should be at the begining
+    // in these cases details should be at the beginning
     if (data?.message) {
       return concatMessage(data.message, `${message ? "\n" : ""}${message}`);
     }

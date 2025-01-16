@@ -26,7 +26,7 @@ import _ from "lodash";
 import fileDownload from "js-file-download";
 import TokenStorage from "services/TokenStorage";
 import api, { throwParsedApiError } from "store/api";
-import { getFileExtention, CSVToJSON } from "utils";
+import { getFileExtension, CSVToJSON } from "utils";
 
 import logger from "store/logger";
 import helper from "store/helper";
@@ -161,14 +161,14 @@ export const loadCapture =
     dispatch({ type: LOADING_CAPTURE_SENSOR_DATA });
 
     const parseResponse = async (response) => {
-      if (getFileExtention(captureFileName) === "csv") {
+      if (getFileExtension(captureFileName) === "csv") {
         const csvFile = await response.text();
         if (isDownload) {
           fileDownload(csvFile, captureFileName);
         } else {
           sensorData = CSVToJSON(csvFile);
         }
-      } else if (getFileExtention(captureFileName) === "wav") {
+      } else if (getFileExtension(captureFileName) === "wav") {
         const bufferArray = await response.arrayBuffer();
         if (isDownload) {
           fileDownload(bufferArray, captureFileName);

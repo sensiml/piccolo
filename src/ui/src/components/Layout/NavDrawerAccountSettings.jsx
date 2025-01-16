@@ -57,7 +57,7 @@ const MenuItems = [
     id: "subscriptions",
     orderIndex: 1,
     iconfn: (iconProps) => <AccountBalanceWalletOutlinedIcon {...iconProps} />,
-    getPath: () => ROUTES.ACCOUNT_SETTINGS.child.ACCOUNT_SUBCRIPTIONS.path,
+    getPath: () => ROUTES.ACCOUNT_SETTINGS.child.ACCOUNT_SUBSCRIPTIONS.path,
   },
   {
     title: "API Keys",

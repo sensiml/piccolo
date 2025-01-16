@@ -27,7 +27,7 @@ const CaptureConfiguration = ({ captureConfigurations, dataSource }) => {
   const classes = useStyles();
 
   const renderSensors = (source) => {
-    // render senrors types separated by ,
+    // render sensors types separated by ,
     if (!source.sensors) {
       return [];
     }

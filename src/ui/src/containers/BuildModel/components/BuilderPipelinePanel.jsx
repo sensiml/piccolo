@@ -79,7 +79,7 @@ const BuilderPipelinePanel = ({
       />
       <ControlPanel
         title={title}
-        turncateLenght={
+        truncateLength={
           isShortBtnText ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT : RESPONSIVE.TRUNCATE_NAME_OVER
         }
         onClickBack={isShortBtnText ? null : handleChangePipeline}

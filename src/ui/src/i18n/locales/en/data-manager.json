@@ -10,8 +10,8 @@
     "panel-btn-session": "Session",
     "panel-btn-import-tooltip": "Import capture file ",
     "panel-btn-import-text": "Import Capture",
-    "error-label-dublicates": "Cannot have duplicate segment labels in the same location",
-    "label-goup": "Label Group",
+    "error-label-duplicates": "Cannot have duplicate segment labels in the same location",
+    "label-group": "Label Group",
     "session": "Session",
     "alert-auto-session": "The segment positions were generated using an auto session. You are only able to update the label values."
   },

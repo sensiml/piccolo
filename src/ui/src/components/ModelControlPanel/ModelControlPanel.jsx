@@ -68,7 +68,7 @@ const ModelControlPanel = ({
           : t("model-select.control-panel-change", { modelName: modelData?.name })
       }
       onClickBack={isShortBtnText ? null : handleSwitchModel}
-      turncateLenght={
+      truncateLength={
         isShortBtnText ? RESPONSIVE.TRUNCATE_NAME_OVER_SHORT_TEXT : RESPONSIVE.TRUNCATE_NAME_OVER
       }
       actionsBtns={

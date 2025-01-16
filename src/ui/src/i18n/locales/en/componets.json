@@ -24,12 +24,12 @@
   },
   "capture-form-import": {
     "help-text": "Upload CSV or Wav",
-    "capure-name-label": "Capture #{{ id }}",
+    "capture-name-label": "Capture #{{ id }}",
     "btn-import-submit": "Confirm Import",
     "error-capture-name-exist": "File with name {{ name }} already exists",
     "error-capture-should-be-unique": "File names should be unique",
-    "error-capture-name-extention": "File requires extensions: {{extentions}}",
-    "alert-success-import": "Files uploaded successfuly. Now you can set metadata.",
+    "error-capture-name-extension": "File requires extensions: {{extension}}",
+    "alert-success-import": "Files uploaded successfully. Now you can set metadata.",
     "alert-importing-limit": "You reach the maximum amount of imported files per time",
     "alert-importing-error-form": "Some files have not been uploaded successfully. You can try to fix and import them again or move forward to the metadata form.",
     "step-header-import": "Import Capture File",
@@ -62,10 +62,10 @@
     "form-edit-label-end": "End",
     "alert-deleting-title": "Delete Segment",
     "alert-deleting-text": "Are you sure you want to delete segments?",
-    "lalel-form-error-stat-greater-end": "Segment start location cannot be greater than segment end location",
-    "lalel-form-error-stat-less-0": "Segment start location cannot be less than 0",
-    "lalel-form-error-end-greater-max": "Segment end location cannot be greater than the file length",
-    "lalel-form-error-dublicates": "Cannot have duplicate segment labels in the same location",
+    "label-form-error-stat-greater-end": "Segment start location cannot be greater than segment end location",
+    "label-form-error-stat-less-0": "Segment start location cannot be less than 0",
+    "label-form-error-end-greater-max": "Segment end location cannot be greater than the file length",
+    "label-form-error-duplicates": "Cannot have duplicate segment labels in the same location",
     "empty-content": "No Labels"
   },
   "label-values-table": {
@@ -157,7 +157,7 @@
     "description": "API Keys allow authenticating a python SDK accessing the cloud resources",
     "dialog-delete-alert-title": "Delete API Key",
     "dialog-delete-alert-description": "Are you sure you want to delete the following API Key: {{name}}?",
-    "dialog-delete-success-message": "API Key {{name}} has been deleted successfuly"
+    "dialog-delete-success-message": "API Key {{name}} has been deleted successfully"
   },
   "dialog-form-api-key": {
     "validation-error-duplicate": "API Key name {{ name }} already exists",

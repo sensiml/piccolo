@@ -34,7 +34,7 @@ const FeatureVectorChart = ({
   isFetchingFeatureVectorData,
   onSelectSegmemts,
   labelColumn = "Label",
-  movelClassesDown = false,
+  moveClassesDown = false,
   classes = [],
 }) => {
   const { t } = useTranslation("components");
@@ -125,7 +125,7 @@ const FeatureVectorChart = ({
     >
       <Paper elevation={0}>
         <Box p={2}>
-          {!movelClassesDown ? (
+          {!moveClassesDown ? (
             <Stack mb={2}>
               <ClassSelector />
             </Stack>
@@ -188,7 +188,7 @@ const FeatureVectorChart = ({
             fetchingText={t("feature-vector-chart.fetching-text")}
             maxChartSize={500}
           />
-          {movelClassesDown ? (
+          {moveClassesDown ? (
             <Stack mb={2}>
               <ClassSelector />
             </Stack>

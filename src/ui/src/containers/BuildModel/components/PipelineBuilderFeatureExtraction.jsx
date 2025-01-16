@@ -24,9 +24,9 @@ const PipelineBuilderClassification = (props) => {
 
     const getStepType = (isAfterFeatureGenerator) => {
       if (isAfterFeatureGenerator) {
-        return PIPELINE_GROUPS.FEATURE_EXTRACOR.type;
+        return PIPELINE_GROUPS.FEATURE_EXTRACTOR.type;
       }
-      return PIPELINE_GROUPS.PEPROCESSING.type;
+      return PIPELINE_GROUPS.PREPROCESSING.type;
     };
 
     if (!_.isEmpty(selectedSteps) && !_.isEmpty(pipelineData)) {

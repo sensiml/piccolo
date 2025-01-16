@@ -27,7 +27,7 @@ import UploadFile from "components/FormElements/UploadFile";
 
 import { useTranslation } from "react-i18next";
 
-import { getFileExtention, getFileName } from "utils";
+import { getFileExtension, getFileName } from "utils";
 import { IconButtonRounded } from "components/UIButtons";
 import useStyles from "./PipelineImportStyles";
 
@@ -51,11 +51,11 @@ const CaptureImportFormImport = ({ captureNames, onSubmit, errorUpload }) => {
   const errorCaptureNames = useMemo(() => {
     if (!_.isEmpty(uploadedFileNameList)) {
       return uploadedFileNameList.reduce((acc, [id, name]) => {
-        const ext = getFileExtention(name);
+        const ext = getFileExtension(name);
 
         if (!ext || !ALLOWED_EXT_LIST.includes(ext)) {
-          acc[id] = t("capture-form-import.error-capture-name-extention", {
-            extentions: _.join(ALLOWED_EXT_LIST, ", "),
+          acc[id] = t("capture-form-import.error-capture-name-extension", {
+            extension: _.join(ALLOWED_EXT_LIST, ", "),
           });
         }
         if (captureNames.map((_name) => getLowerFileName(_name)).includes(getLowerFileName(name))) {

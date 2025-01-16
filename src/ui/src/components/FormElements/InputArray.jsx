@@ -92,7 +92,7 @@ const InputArrayForm = ({
     if (minElements && maxElements && minElements === maxElements) {
       setLimitHelperText(t("array-field.helper-text-limit-equal", { minElements, maxElements }));
     } else if (minElements && maxElements) {
-      setLimitHelperText(t("array-field.helper-text-limit-beetween", { minElements, maxElements }));
+      setLimitHelperText(t("array-field.helper-text-limit-between", { minElements, maxElements }));
     } else if (maxElements) {
       setLimitHelperText(t("array-field.helper-text-limit-max", { maxElements }));
     } else if (minElements) {

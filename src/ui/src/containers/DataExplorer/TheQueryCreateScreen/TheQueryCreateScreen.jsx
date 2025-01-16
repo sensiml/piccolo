@@ -189,7 +189,7 @@ const TheQueryCreateScreen = ({
         <ControlPanel
           title={"Create Query"}
           onClickBack={handleCancelCreateQuery}
-          turncateLenght={35}
+          truncateLength={35}
           leftColumns={4}
           rightColumns={8}
           actionsBtns={

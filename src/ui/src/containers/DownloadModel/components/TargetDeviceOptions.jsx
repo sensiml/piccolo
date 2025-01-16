@@ -689,7 +689,7 @@ const TargetDeviceOptions = forwardRef(
                     .map((platform, index) => {
                       return (
                         <CheckBoxSelectCard
-                          key={`pipline_checkbox_${index}`}
+                          key={`pipeline_checkbox_${index}`}
                           image={
                             _.has(platformLogos, platform.manufacturer)
                               ? platformLogos[platform.manufacturer]

@@ -59,7 +59,7 @@ const ControlPanel = ({
   onClickBack,
   onShowInformation,
   actionsBtns,
-  turncateLenght = 0,
+  truncateLength = 0,
 }) => {
   const classes = useStyles();
 
@@ -78,7 +78,7 @@ const ControlPanel = ({
             </IconButtonRounded>
           ) : null}
           <Typography variant={"h2"} classes={{ root: classes.titleRoot }}>
-            {title && filterTruncateMiddle(title, turncateLenght)}
+            {title && filterTruncateMiddle(title, truncateLength)}
             {onShowInformation ? (
               <IconButton onClick={onShowInformation}>
                 <InfoOutlinedIcon color="primary" />

@@ -29,7 +29,7 @@ const PipelineBuilderAlertMessage = ({
         message: (
           <>
             {tQueries("validation.no-segments", { queryName: queryStatistic?.name })}
-            <Box mt={1}>{tQueries("help.unknow")}</Box>
+            <Box mt={1}>{tQueries("help.unknown")}</Box>
           </>
         ),
         type: "warning",
@@ -43,7 +43,7 @@ const PipelineBuilderAlertMessage = ({
               queryName: queryStatistic?.name,
               segments: _.keys(queryStatistic?.segments).join(", "),
             })}
-            <Box mt={1}>{tQueries("help.unknow")}</Box>
+            <Box mt={1}>{tQueries("help.unknown")}</Box>
           </>
         ),
         type: "warning",

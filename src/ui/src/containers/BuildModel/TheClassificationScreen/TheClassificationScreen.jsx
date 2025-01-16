@@ -41,12 +41,12 @@ import { ROUTES } from "routers";
 import { RUNNING_STATUSES } from "consts";
 import { EXECUTION_TYPES, PIPELINE_STEP_TYPES } from "store/autoML/const";
 
-import PipelineBuilderClassification from "../componets/PipelineBuilderClassification";
-import TableAutoSenseMetrics from "../componets/TableAutoSenseMetrics";
-import TableIterationMetrics from "../componets/TableIterationMetrics";
-import QueryCacheAlertMessage from "../componets/QueryCacheAlertMessage";
-import PipelineBuilderAlertMessage from "../componets/PipelineBuilderAlertMessage";
-import BuilderPipelinePanel from "../componets/BuilderPipelinePanel";
+import PipelineBuilderClassification from "../components/PipelineBuilderClassification";
+import TableAutoSenseMetrics from "../components/TableAutoSenseMetrics";
+import TableIterationMetrics from "../components/TableIterationMetrics";
+import QueryCacheAlertMessage from "../components/QueryCacheAlertMessage";
+import PipelineBuilderAlertMessage from "../components/PipelineBuilderAlertMessage";
+import BuilderPipelinePanel from "../components/BuilderPipelinePanel";
 
 import useStyles from "../BuildModeStyle";
 
