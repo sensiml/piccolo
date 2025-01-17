@@ -227,7 +227,7 @@ class TestCapture:
         from engine.base import pipeline_utils
         from datamanager.models import TeamMember
 
-        user = TeamMember.objects.get(email="unittest@sensiml.com").user
+        user = TeamMember.objects.get(email="unittest@piccolo.com").user
         capture_df_pipeline_utils, _, _ = pipeline_utils.get_capturefile(
             user, project.uuid, capture.name
         )

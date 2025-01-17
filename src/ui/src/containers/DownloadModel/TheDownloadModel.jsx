@@ -280,7 +280,7 @@ const DownloadModel = ({
       fileDownload(response.data, response.filename);
       stopDownloadStatusCheck();
       setCompleted(100);
-      showMessage("success", t("download.success-dowload", { filename: response.filename }));
+      showMessage("success", t("download.success-download", { filename: response.filename }));
       setDownloadingCode(response?.code);
       stopDownloadStatusCheck();
     } else if (response.status === CANCELED) {

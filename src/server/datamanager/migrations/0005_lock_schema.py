@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("datamanager", "0086_label_info"),
+        ("datamanager", "0004_label_info"),
     ]
 
     operations = [
