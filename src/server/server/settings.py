@@ -159,7 +159,7 @@ env = environ.Env(
     CELERY_RDB_PORT=(int, 6899),
     DOCKER_HOST_SML_DATA_DIR=(str, ""),
     INSIDE_LOCAL_DOCKER=(bool, True),
-    LOCAL_DOCKER_SERVER_DATA_VOLUMNE_NAME=(str, "sensiml_server_data"),
+    LOCAL_DOCKER_SERVER_DATA_VOLUME_NAME=(str, "sensiml_server_data"),
     FOUNDATION_MODEL_STORE_DOMAIN=(str, "sensiml"),
     FOUNDATION_MODEL_STORE_PROJECT=(str, "sensiml"),
     ADMIN_SITE_HEADER=(str, "SensiML Account Management"),
@@ -236,7 +236,8 @@ else:
     print("No environment {} found".format(os.environ.get("DJANGO_ENV")))
 
 
-LOCAL_DOCKER_SERVER_DATA_VOLUMNE_NAME = env("LOCAL_DOCKER_SERVER_DATA_VOLUMNE_NAME")
+LOCAL_DOCKER_SERVER_DATA_VOLUME_NAME = env("LOCAL_DOCKER_SERVER_DATA_VOLUME_NAME")
+SERVER_NAME = env("SERVER_NAME")
 ENVIRONMENT = env("ENVIRONMENT")
 FREE_TEAM_PK = env("FREE_TEAM_PK")
 SENSIML_LIBRARY_PACK = None

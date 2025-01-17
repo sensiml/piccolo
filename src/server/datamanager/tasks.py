@@ -321,7 +321,7 @@ def pipeline_async(self, user_id, project_id, sandbox_id, err_queue=deque()):
             team_member=user.teammember,
         )
         engine._temp.clean_up_temp()
-        engine.update_execution_status(
+        engine.update_team_cpu_usage(
             execution_type=PipelineExecution.ExecutionTypeEnum.PIPELINE,
             status=PipelineExecution.ExecutionStatusEnum.FAILED,
             wall_time=time.time() - start,
@@ -331,7 +331,7 @@ def pipeline_async(self, user_id, project_id, sandbox_id, err_queue=deque()):
         e.args = (engine._current_step_info,)
         raise e
 
-    engine.update_execution_status(
+    engine.update_team_cpu_usage(
         execution_type=PipelineExecution.ExecutionTypeEnum.PIPELINE,
         status=PipelineExecution.ExecutionStatusEnum.SUCCESS,
         wall_time=time.time() - start,
@@ -570,7 +570,7 @@ def gridsearch_async(
             }
         )
         engine._temp.clean_up_temp()
-        engine.update_execution_status(
+        engine.update_team_cpu_usage(
             execution_type=PipelineExecution.ExecutionTypeEnum.GRIDSEARCH,
             status=PipelineExecution.ExecutionStatusEnum.FAILED,
             wall_time=time.time() - start,
@@ -580,7 +580,7 @@ def gridsearch_async(
         e.args = (engine._current_step_info,)
         raise e
 
-    engine.update_execution_status(
+    engine.update_team_cpu_usage(
         execution_type=PipelineExecution.ExecutionTypeEnum.GRIDSEARCH,
         status=PipelineExecution.ExecutionStatusEnum.SUCCESS,
         wall_time=time.time() - start,
@@ -721,7 +721,7 @@ def auto_async(
             team_member=user.teammember,
         )
         engine._temp.clean_up_temp()
-        engine.update_execution_status(
+        engine.update_team_cpu_usage(
             execution_type=PipelineExecution.ExecutionTypeEnum.AUTOML,
             status=PipelineExecution.ExecutionStatusEnum.FAILED,
             wall_time=time.time() - start,
@@ -731,7 +731,7 @@ def auto_async(
         e.args = (engine._current_step_info,)
         raise e
 
-    engine.update_execution_status(
+    engine.update_team_cpu_usage(
         execution_type=PipelineExecution.ExecutionTypeEnum.AUTOML,
         status=PipelineExecution.ExecutionStatusEnum.SUCCESS,
         wall_time=time.time() - start,
@@ -820,7 +820,7 @@ def autosegment_async(
         )
 
         engine._temp.clean_up_temp()
-        engine.update_execution_status(
+        engine.update_team_cpu_usage(
             execution_type=PipelineExecution.ExecutionTypeEnum.AUTOSEG,
             status=PipelineExecution.ExecutionStatusEnum.FAILED,
             wall_time=time.time() - start,
@@ -829,7 +829,7 @@ def autosegment_async(
         e.args = ({"error": e.args[0]},)
         raise e
 
-    engine.update_execution_status(
+    engine.update_team_cpu_usage(
         execution_type=PipelineExecution.ExecutionTypeEnum.AUTOSEG,
         status=PipelineExecution.ExecutionStatusEnum.SUCCESS,
         wall_time=time.time() - start,

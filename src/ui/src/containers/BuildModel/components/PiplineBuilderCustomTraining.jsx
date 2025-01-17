@@ -20,6 +20,7 @@ License along with SensiML Piccolo AI. If not, see <https://www.gnu.org/licenses
 import React, { useMemo } from "react";
 
 import { DISABLED_FOR_CUSTOM_STEPS } from "store/autoML/const";
+// eslint-disable-next-line import/extensions
 import PipelineBuilder from "./PipelineBuilder";
 
 const PipelineBuilderCustomTraining = (props) => {

@@ -116,13 +116,8 @@ class DockerRunnerLocal(DockerBase):
             }
         )
 
-        if settings.INSIDE_LOCAL_DOCKER:  # self.is_inside_docker():
-            bind = {
-                "piccolo_server_data": {
-                    "bind": "/data",
-                    "mode": "rw",
-                }
-            }
+        if settings.INSIDE_LOCAL_DOCKER:
+            bind = [f"{settings.LOCAL_DOCKER_SERVER_DATA_VOLUME_NAME}:/data"]
         else:
             bind = {
                 self.root_dir: {
@@ -218,6 +213,10 @@ class DockerRunnerLocal(DockerBase):
             finally:
                 # Remove container on success. Maybe just do it anyway.
                 client.api.remove_container(resource_id=container_to_run.get("Id"))
+        elif container_returns["StatusCode"] == 127 and settings.INSIDE_LOCAL_DOCKER:
+            raise ExitCodeNonZeroException(
+                f"Model data has missing some files. Please, check the data volume name."
+            )
         else:
             raise ExitCodeNonZeroException(container_returns)
 

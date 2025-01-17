@@ -77,15 +77,6 @@ services:
     depends_on:
       - db
       - redis
-      - sensiml.databse.initalize
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-    depends_on:
-      - sensiml.cloud      
   sensiml.pipelines:
     #mem_limit: "2000M"
     image: sensiml/base
