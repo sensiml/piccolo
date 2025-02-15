@@ -1,0 +1,65 @@
+- fields:
+    uuid: c2dd2830-1271-40d7-8652-76e4b427479e
+    name: eFabless EVB
+    description: Efables EVB chipignite Development platorm
+    processors: [b7af771c-2edf-4601-9391-645db9558298]
+    can_build_binary: false
+    codegen_file_location: ["effabless-chetah"]
+    permissions: { "developer": true, "enterprise": true, "starter": true }
+    supported_source_drivers: {}
+    codegen_parameters:
+      {
+        "codegen_class": "RISCVGenericCodeGenerator",
+        "uses_simple_streaming": True,
+        "uses_sensiml_interface": False,
+        "app_environment":
+          {
+            "EXTRA_LIBS_DIR": "/build",
+            "SML_KP_DIR": "/build/libsensiml",
+            "SML_KP_OUTPUT_DIR": "/build/libsensiml/_build",
+            "SML_APP_BUILD_DIR": "/build/",
+          },
+      }
+    supported_compilers: [051b4875-063c-43a8-ad4c-b3aa602f4516]
+    hardware_accelerators:
+      {
+        "cpu_only":
+          {
+            "display_name": "CPU Only",
+            "kernel": "",
+            "description": "Use CPU based ops only",
+          },
+        "nn_accelerator":
+          {
+            "display_name": "Efabless Accelerator",
+            "kernel": "nn_accelerator",
+            "description": "Use the NN Accelerator library intrinsic functions to accelerate ops",
+          },
+      }
+    default_selections:
+      {
+        "compiler": "051b4875-063c-43a8-ad4c-b3aa602f4516",
+        "processor": "b7af771c-2edf-4601-9391-645db9558298",
+      }
+    applications:
+      {
+        "AI Model Runner":
+          {
+            "description": "Example application which feeds sensor data into a Knowledge Pack model and reports the result.",
+            "supported_outputs": [["Serial"]],
+            "codegen_app_name": "recognition_run",
+            "codegen_app_location": "platforms/cheetah",
+          },
+      }
+    nn_inference_engines:
+      {
+        "nnom":
+          {
+            "value": "nnom",
+            "display_name": "Neural Network on Microcontrollers",
+          },
+      }
+    platform_type: "devkit"
+    documentation: "https://sensiml.com/documentation/firmware/arduino-nicla-sense-me/arduino-nicla-sense-me.html"
+    manufacturer: eFabless
+  model: library.PlatformDescriptionVersion2

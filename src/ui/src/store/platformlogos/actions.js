@@ -21,6 +21,7 @@ import microchipLogo from "assets/images/microchip-logo.png";
 import espressifLogo from "assets/images/espressif-logo.png";
 import armLogo from "assets/images/arm-logo.png";
 import arduinoLogo from "assets/images/arduino-logo.png";
+import efablessLogo from "assets/images/efabless-logo.png";
 import infineonLogo from "assets/images/infineon-logo.png";
 import m5stackLogo from "assets/images/m5stack-logo.png";
 import nordicSemiconductorLogo from "assets/images/nordic-semiconductor-logo.png";
@@ -56,6 +57,7 @@ export const loadPlatformLogos = () => {
       "x86 GCC": x86GCCLogo,
       MinGW: minGWLogo,
       Google: androidLogo,
+      eFabless: efablessLogo,
     },
   };
 };
