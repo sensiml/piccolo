@@ -67,11 +67,12 @@ services:
     environment:
       - DJANGO_ENV=docker
       - DJANGO_ENV_PATH=/home/sml-app/install/config/env
-      - DJANGO_DEBUGGER=True
+      - DEBUG=True
       - PORT_PTVSD=8005
-    #command: python manage.py runserver 0.0.0.0:8000 --noreload
-    # --workers 4 
-    command:  gunicorn --bind 0.0.0.0:8000 --timeout 3600 --max-requests 250 --reload server.wsgi:application
+    command: python manage.py runserver 0.0.0.0:8000 --noreload
+    # --workers 4
+    # for gunicorn TODO need additionally serve static files
+    # command:  gunicorn --bind 0.0.0.0:8000 --timeout 3600 --max-requests 250 --reload server.wsgi:application
     ports:
       - "8000:8000"
     depends_on:
@@ -99,7 +100,7 @@ services:
         target: /var/run/docker.sock
     environment:
       - DJANGO_ENV=docker
-      - DJANGO_DEBUGGER=True
+      - DEBUG=True
       - PORT_PTVSD=6902
       - CELERY_RDB_PORT=6900
       - CELERY_RDB_HOST=0.0.0.0
